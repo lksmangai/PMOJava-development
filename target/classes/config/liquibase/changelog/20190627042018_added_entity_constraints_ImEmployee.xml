@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity ImEmployee.
+    -->
+    <changeSet id="20190627042018-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="qnow_user_id"
+                                 baseTableName="im_employee"
+                                 constraintName="fk_im_employee_qnow_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="qnow_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="employee_status_id"
+                                 baseTableName="im_employee"
+                                 constraintName="fk_im_employee_employee_status_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="employee_status"/>
+
+        <addForeignKeyConstraint baseColumnNames="department_id_id"
+                                 baseTableName="im_employee"
+                                 constraintName="fk_im_employee_department_id_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="department"/>
+
+        <addForeignKeyConstraint baseColumnNames="supervisor_id_id"
+                                 baseTableName="im_employee"
+                                 constraintName="fk_im_employee_supervisor_id_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="im_employee"/>
+
+        <addForeignKeyConstraint baseColumnNames="im_employee_id"
+                                 baseTableName="im_employee_user_contact"
+                                 constraintName="fk_im_employee_user_contact_im_employee_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="im_employee"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_contact_id"
+                                 baseTableName="im_employee_user_contact"
+                                 constraintName="fk_im_employee_user_contact_user_contact_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user_contact"/>
+        
+    </changeSet>
+</databaseChangeLog>

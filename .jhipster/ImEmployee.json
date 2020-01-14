@@ -1,0 +1,113 @@
+{
+    "name": "ImEmployee",
+    "fields": [
+        {
+            "fieldName": "jobTitle",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "jobDescription",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "availability",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "ssNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "salary",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "socialSecurity",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "insurance",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "otherCosts",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "currency",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dependantP",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "onlyJobP",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "marriedP",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "headOfHouseholdP",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "birthdate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "hourlyCost",
+            "fieldType": "BigDecimal"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "qnowUser",
+            "otherEntityRelationshipName": "imEmployee",
+            "relationshipName": "qnowUser",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "employeeStatus",
+            "otherEntityRelationshipName": "imEmployee",
+            "relationshipName": "employeeStatus",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "department",
+            "otherEntityRelationshipName": "imEmployee",
+            "relationshipName": "departmentId",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "imEmployee",
+            "otherEntityRelationshipName": "imEmployee",
+            "relationshipName": "supervisorId",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "userContact",
+            "otherEntityRelationshipName": "imEmployee",
+            "relationshipName": "userContact",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20190531134214",
+    "entityTableName": "im_employee",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

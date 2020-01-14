@@ -1,0 +1,23 @@
+{
+    "name": "SkillCategory",
+    "fields": [
+        {
+            "fieldName": "skillCategoryCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "skillCategoryName",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190531134218",
+    "entityTableName": "skill_category",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

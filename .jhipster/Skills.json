@@ -1,0 +1,38 @@
+{
+    "name": "Skills",
+    "fields": [
+        {
+            "fieldName": "skillCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "skillName",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "skills",
+            "otherEntityRelationshipName": "skills",
+            "relationshipName": "parentSkillsId",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "skillCategory",
+            "otherEntityRelationshipName": "skills",
+            "relationshipName": "skillCategoryId",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190531134216",
+    "entityTableName": "skills",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

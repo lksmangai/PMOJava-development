@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity ProjectTag.
+    -->
+    <changeSet id="20190627042047-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="tag_type_id"
+                                 baseTableName="project_tag"
+                                 constraintName="fk_project_tag_tag_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tag_type"/>
+
+        <addForeignKeyConstraint baseColumnNames="im_employee_id"
+                                 baseTableName="project_tag"
+                                 constraintName="fk_project_tag_im_employee_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="im_employee"/>
+
+        <addForeignKeyConstraint baseColumnNames="im_projects_id"
+                                 baseTableName="project_tag"
+                                 constraintName="fk_project_tag_im_projects_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="im_projects"/>
+
+    </changeSet>
+</databaseChangeLog>

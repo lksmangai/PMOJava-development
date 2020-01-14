@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity UserContact.
+    -->
+    <changeSet id="20190627042014-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="qnow_user_id"
+                                 baseTableName="user_contact"
+                                 constraintName="fk_user_contact_qnow_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="qnow_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="wa_city_id"
+                                 baseTableName="user_contact"
+                                 constraintName="fk_user_contact_wa_city_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="city"/>
+
+        <addForeignKeyConstraint baseColumnNames="ha_city_id"
+                                 baseTableName="user_contact"
+                                 constraintName="fk_user_contact_ha_city_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="city"/>
+
+        <addForeignKeyConstraint baseColumnNames="wa_state_id"
+                                 baseTableName="user_contact"
+                                 constraintName="fk_user_contact_wa_state_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="state_master"/>
+
+        <addForeignKeyConstraint baseColumnNames="ha_state_id"
+                                 baseTableName="user_contact"
+                                 constraintName="fk_user_contact_ha_state_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="state_master"/>
+
+        <addForeignKeyConstraint baseColumnNames="wa_country_id"
+                                 baseTableName="user_contact"
+                                 constraintName="fk_user_contact_wa_country_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="country"/>
+
+        <addForeignKeyConstraint baseColumnNames="ha_country_id"
+                                 baseTableName="user_contact"
+                                 constraintName="fk_user_contact_ha_country_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="country"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_contact_id"
+                                 baseTableName="user_contact_group_members"
+                                 constraintName="fk_user_contact_group_members_user_contact_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user_contact"/>
+
+        <addForeignKeyConstraint baseColumnNames="group_members_id"
+                                 baseTableName="user_contact_group_members"
+                                 constraintName="fk_user_contact_group_members_group_members_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="group_members"/>
+        
+    </changeSet>
+</databaseChangeLog>

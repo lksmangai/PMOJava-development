@@ -1,0 +1,472 @@
+{
+    "name": "ImProjects",
+    "fields": [
+        {
+            "fieldName": "projectName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "projectNr",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "projectPath",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "treeSortkey",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "maxChildSortkey",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "billingTypeId",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "note",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "requiresReportP",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "projectBudget",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "projectRisk",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "corporateSponsor",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "percentCompleted",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "projectBudgetHours",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "costQuotesCache",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "costInvoicesCache",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "costTimesheetPlannedCache",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "costPurchaseOrdersCache",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "costBillsCache",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "costTimesheetLoggedCache",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "endDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "startDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "templateP",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "sortOrder",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "reportedHoursCache",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "costExpensePlannedCache",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "costExpenseLoggedCache",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "confirmDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "costDeliveryNotesCache",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "costCacheDirty",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "milestoneP",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "releaseItemP",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "presalesProbability",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "presalesValue",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "reportedDaysCache",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "presalesValueCurrency",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "opportunitySalesStageId",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "opportunityCampaignId",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "scoreRevenue",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "scoreStrategic",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "scoreFinanceNpv",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "scoreCustomers",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "scoreFinanceCost",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "costBillsPlanned",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "costExpensesPlanned",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "scoreRisk",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "scoreCapabilities",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "scoreEinanceRoi",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "projectUserwiseBoard",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "projectBringNextday",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "projectBringSameboard",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "projectNewboardEverytime",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "projectUserwiseBoard2",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "projectBringSameboard2",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "projectNewboard2Everytime",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "projectNewboard2Always",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "projectReportWeekly",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "scoreGain",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "scoreLoss",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "scoreDelivery",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "scoreOperations",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "scoreWhy",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "javaServices",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "netServices",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "collectionLink",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "trainingLink",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "collectionName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "trainingName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "trainingDoc",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "testingRichtext",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "templateCategory",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dType",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "dOption",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "dFilter",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "dId",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "tType",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "tOption",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "tFilter",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "tId",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "risktype",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "riskimpact",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "riskprobability",
+            "fieldType": "Double"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "projectInitiativeId",
+            "otherEntityRelationshipName": "imProjects",
+            "relationshipName": "projectInitiativeId",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "projectBusinessgoalId",
+            "otherEntityRelationshipName": "imProjects",
+            "relationshipName": "projectBusinessgoalId",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "projectSubgoalId",
+            "otherEntityRelationshipName": "imProjects",
+            "relationshipName": "projectSubgoalId",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "projectMaingoalId",
+            "otherEntityRelationshipName": "imProjects",
+            "relationshipName": "projectMaingoalId",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "projectBucketId",
+            "otherEntityRelationshipName": "imProjects",
+            "relationshipName": "projectBucketId",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "projectCostCenterId",
+            "otherEntityRelationshipName": "imProjects",
+            "relationshipName": "projectCostCenterId",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "opportunityPriorityId",
+            "otherEntityRelationshipName": "imProjects",
+            "relationshipName": "opportunityPriorityId",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "backlogPractice",
+            "otherEntityRelationshipName": "imProjects",
+            "relationshipName": "backlogPractice",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "projectTheme",
+            "otherEntityRelationshipName": "imProjects",
+            "relationshipName": "projectTheme",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "projectClass",
+            "otherEntityRelationshipName": "imProjects",
+            "relationshipName": "projectClass",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "projectVertical",
+            "otherEntityRelationshipName": "imProjects",
+            "relationshipName": "projectVertical",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "projectBoardId",
+            "otherEntityRelationshipName": "imProjects",
+            "relationshipName": "projectBoardId",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "projectBoardId",
+            "otherEntityRelationshipName": "imProjects",
+            "relationshipName": "projectBoard2Id",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "projectStatusId",
+            "otherEntityRelationshipName": "imProjects",
+            "relationshipName": "projectStatusId",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "projectTypeId",
+            "otherEntityRelationshipName": "imProjects",
+            "relationshipName": "projectTypeId",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "imEmployee",
+            "otherEntityRelationshipName": "imProjects",
+            "relationshipName": "projectLeadId",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "imProjects",
+            "otherEntityRelationshipName": "imProjects",
+            "relationshipName": "parentId",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190531134219",
+    "entityTableName": "im_projects",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

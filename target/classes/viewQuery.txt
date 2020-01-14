@@ -1,0 +1,68 @@
+-- View: public.project_details
+
+-- DROP VIEW public.project_details;
+
+CREATE OR REPLACE VIEW public.project_details AS
+ SELECT ip.id, ip.project_name, ip.percent_completed, ip.project_budget_hours, 
+    ip.end_date, ip.start_date, ip.reported_hours_cache, ip.risktype, 
+    ip.riskimpact, ip.riskprobability, ip.training_link, ip.training_name, 
+    ip.training_doc, ip.sort_order, ip.parent_id_id, ip.project_status_id_id, 
+    psi.name AS project_status_id_name, ip.project_lead_id_id, 
+    ju.first_name AS project_lead_first_name, 
+    ju.last_name AS project_lead_last_name, ju.email AS project_lead_email, 
+    ip.opportunity_priority_id_id, opi.name AS opportunity_priority_name, 
+    ip.project_type_id_id, pti.name AS project_type_name, 
+    array_to_json(array_agg(row_to_json(( SELECT d.*::record AS d
+           FROM ( SELECT ad.id, ad.im_employee_id, ad.employee_first_name, 
+                    ad.employee_last_name, ad.employee_email) d))))::text AS allocation_record, 
+    ip.description
+   FROM im_projects ip
+   LEFT JOIN opportunity_priority_id opi ON opi.id = ip.opportunity_priority_id_id
+   LEFT JOIN im_employee ie ON ie.id = ip.project_lead_id_id
+   LEFT JOIN qnow_user qu ON ie.qnow_user_id = qu.id
+   LEFT JOIN jhi_user ju ON qu.user_id = ju.id
+   LEFT JOIN project_status_id psi ON psi.id = ip.project_status_id_id
+   LEFT JOIN project_type_id pti ON pti.id = ip.project_type_id_id
+   LEFT JOIN allocation_details ad ON ip.id = ad.im_projects_id
+  GROUP BY ip.id, psi.name, ju.first_name, ju.last_name, ju.email, opi.name, pti.name;
+
+ALTER TABLE public.project_details
+    OWNER TO projop;
+
+
+
+
+-- View: public.allocation_details
+
+-- DROP VIEW public.allocation_details;
+
+CREATE OR REPLACE VIEW public.allocation_details AS
+ SELECT pa.id, pa.im_employee_id, pa.im_projects_id, ip.parent_id_id, 
+    ip.project_name, ju.first_name AS employee_first_name, 
+    ju.last_name AS employee_last_name, ju.email AS employee_email
+   FROM project_allocation pa
+   LEFT JOIN im_projects ip ON pa.im_projects_id = ip.id
+   LEFT JOIN im_employee ie ON ie.id = pa.im_employee_id
+   LEFT JOIN qnow_user qu ON ie.qnow_user_id = qu.id
+   LEFT JOIN jhi_user ju ON qu.user_id = ju.id;
+
+ALTER TABLE public.allocation_details
+    OWNER TO projop;
+
+-- View: public.im_timesheet_details
+
+-- DROP VIEW public.im_timesheet_details;
+
+CREATE OR REPLACE VIEW public.im_timesheet_details AS
+ SELECT it.id, it.logdate, it.loghours, it.notes, it.im_employee_id, 
+    it.im_projects_id, it.logdate::date::text AS logday
+   FROM im_timesheet it;
+
+ALTER TABLE public.im_timesheet_details
+    OWNER TO projop;
+
+
+
+
+
+

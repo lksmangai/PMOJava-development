@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity ProjectAllocation.
+    -->
+    <changeSet id="20190627042036-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="im_employee_id"
+                                 baseTableName="project_allocation"
+                                 constraintName="fk_project_allocation_im_employee_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="im_employee"/>
+
+        <addForeignKeyConstraint baseColumnNames="im_projects_id"
+                                 baseTableName="project_allocation"
+                                 constraintName="fk_project_allocation_im_projects_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="im_projects"/>
+
+        <addForeignKeyConstraint baseColumnNames="project_roles_id"
+                                 baseTableName="project_allocation"
+                                 constraintName="fk_project_allocation_project_roles_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="project_roles"/>
+
+    </changeSet>
+</databaseChangeLog>
