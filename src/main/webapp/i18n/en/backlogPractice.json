@@ -1,0 +1,23 @@
+{
+  "App": {
+    "backlogPractice": {
+      "home": {
+        "title": "Backlog Practices",
+        "createLabel": "Create a new Backlog Practice",
+        "createOrEditLabel": "Create or edit a Backlog Practice"
+      },
+      "created": "A new Backlog Practice is created with identifier {{ param }}",
+      "updated": "A Backlog Practice is updated with identifier {{ param }}",
+      "deleted": "A Backlog Practice is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Backlog Practice {{ id }}?"
+      },
+      "detail": {
+        "title": "Backlog Practice"
+      },
+      "code": "Code",
+      "name": "Name",
+      "description": "Description"
+    }
+  }
+}

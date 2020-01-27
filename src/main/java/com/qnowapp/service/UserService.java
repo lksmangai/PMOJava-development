@@ -49,12 +49,7 @@ public class UserService {
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
     }
-//    public void DefaultPassword(String newPassword , User user) {
-//    	String encryptedPassword = passwordEncoder.encode(newPassword);
-//        user.setPassword(encryptedPassword);
-//        this.clearUserCaches(user);
-//        log.debug("Changed password for User: {}", user);	
-//    }
+
     public Optional<User> activateRegistration(String key) {
         log.debug("Activating user for activation key {}", key);
         return userRepository.findOneByActivationKey(key)
@@ -67,20 +62,7 @@ public class UserService {
                 return user;
             });
     }
-//    public Optional<User> DefaultPassword(Long id,String newPassword ) {
-//        log.debug("Reset user password for reset key {}" , id);
-//        User user = new User();
-//        String encryptedPassword = passwordEncoder.encode(newPassword);    
-//        return userRepository.findByid(id)
-//        		.filter(user -> user.getResetDate().isAfter(Instant.now().minusSeconds(86400)))
-//                .map(user -> {
-//				user.setPassword(encryptedPassword);
-//                user.setResetKey(null);
-//                user.setResetDate(null);
-//                this.clearUserCaches(user);
-//                });
-//       
-//    }
+
     public Optional<User> completePasswordReset(String newPassword, String key) {
         log.debug("Reset user password for reset key {}", key);
         return userRepository.findOneByResetKey(key)
@@ -88,7 +70,6 @@ public class UserService {
             .map(user -> {
                 user.setPassword(passwordEncoder.encode(newPassword));
                 user.setResetKey(null);
-                
                 user.setResetDate(null);
                 this.clearUserCaches(user);
                 return user;
@@ -96,20 +77,14 @@ public class UserService {
     }
 
     public Optional<User> requestPasswordReset(String mail) {
-    	System.out.println("requestPasswordReset 1"); 
         return userRepository.findOneByEmailIgnoreCase(mail)
             .filter(User::getActivated)
             .map(user -> {
-               	System.out.println("requestPasswordReset 2"); 
                 user.setResetKey(RandomUtil.generateResetKey());
-               	System.out.println("requestPasswordReset 3"); 
                 user.setResetDate(Instant.now());
-               	System.out.println("requestPasswordReset 4"); 
                 this.clearUserCaches(user);
-               	System.out.println("requestPasswordReset 5"); 
                 return user;
             });
-        
     }
 
     public User registerUser(UserDTO userDTO, String password) {
@@ -136,7 +111,7 @@ public class UserService {
         newUser.setImageUrl(userDTO.getImageUrl());
         newUser.setLangKey(userDTO.getLangKey());
         // new user is not active
-        newUser.setActivated(true);
+        newUser.setActivated(false);
         // new user gets registration key
         newUser.setActivationKey(RandomUtil.generateActivationKey());
         Set<Authority> authorities = new HashSet<>();

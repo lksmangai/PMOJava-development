@@ -1,0 +1,23 @@
+{
+  "App": {
+    "opportunityPriorityId": {
+      "home": {
+        "title": "Opportunity Priority Ids",
+        "createLabel": "Create a new Opportunity Priority Id",
+        "createOrEditLabel": "Create or edit a Opportunity Priority Id"
+      },
+      "created": "A new Opportunity Priority Id is created with identifier {{ param }}",
+      "updated": "A Opportunity Priority Id is updated with identifier {{ param }}",
+      "deleted": "A Opportunity Priority Id is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Opportunity Priority Id {{ id }}?"
+      },
+      "detail": {
+        "title": "Opportunity Priority Id"
+      },
+      "code": "Code",
+      "name": "Name",
+      "description": "Description"
+    }
+  }
+}

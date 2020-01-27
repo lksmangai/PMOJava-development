@@ -1,9 +1,11 @@
+
 package com.qnowapp.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -29,8 +31,11 @@ public class ImProjects implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @NotNull
-    @Column(name = "project_name", nullable = false)
+
+   @NotNull
+
+    @Column(name = "project_name",length = 1024 , nullable = false)
+    @Length(max = 1024)
     private String projectName;
 
     @NotNull
@@ -47,7 +52,10 @@ public class ImProjects implements Serializable {
     @Column(name = "max_child_sortkey")
     private String maxChildSortkey;
 
-    @Column(name = "description")
+
+   @Column(name = "description", length = 4096)
+
+    @Length(max = 4096)
     private String description;
 
     @Column(name = "billing_type_id")
@@ -922,7 +930,6 @@ public class ImProjects implements Serializable {
         this.costBillsPlanned = costBillsPlanned;
         return this;
     }
-
     public void setCostBillsPlanned(BigDecimal costBillsPlanned) {
         this.costBillsPlanned = costBillsPlanned;
     }

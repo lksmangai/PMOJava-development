@@ -1,8 +1,6 @@
 package com.qnowapp.repository;
 
 import com.qnowapp.domain.ImEmployee;
-import com.qnowapp.domain.QnowUser;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
@@ -27,8 +25,5 @@ public interface ImEmployeeRepository extends JpaRepository<ImEmployee, Long>, J
 
     @Query("select imEmployee from ImEmployee imEmployee left join fetch imEmployee.userContacts where imEmployee.id =:id")
     Optional<ImEmployee> findOneWithEagerRelationships(@Param("id") Long id);
-
-	ImEmployee findByqnowUser(QnowUser qnowUser);
-	
 
 }

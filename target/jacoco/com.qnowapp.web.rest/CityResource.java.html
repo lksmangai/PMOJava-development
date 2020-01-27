@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CityResource.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.web.rest</a> &gt; <span class="el_source">CityResource.java</span></div><h1>CityResource.java</h1><pre class="source lang-java linenums">package com.qnowapp.web.rest;
+
+import com.qnowapp.domain.City;
+import com.qnowapp.service.CityService;
+import com.qnowapp.web.rest.errors.BadRequestAlertException;
+import com.qnowapp.service.dto.CityCriteria;
+import com.qnowapp.service.CityQueryService;
+
+import io.github.jhipster.web.util.HeaderUtil;
+import io.github.jhipster.web.util.ResponseUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * REST controller for managing {@link com.qnowapp.domain.City}.
+ */
+@CrossOrigin(origins = &quot;*&quot;, allowedHeaders = &quot;*&quot;)
+@RestController
+@RequestMapping(&quot;/api&quot;)
+public class CityResource {
+
+<span class="nc" id="L31">    private final Logger log = LoggerFactory.getLogger(CityResource.class);</span>
+
+    private static final String ENTITY_NAME = &quot;city&quot;;
+
+    @Value(&quot;${jhipster.clientApp.name}&quot;)
+    private String applicationName;
+
+    private final CityService cityService;
+
+    private final CityQueryService cityQueryService;
+
+<span class="nc" id="L42">    public CityResource(CityService cityService, CityQueryService cityQueryService) {</span>
+<span class="nc" id="L43">        this.cityService = cityService;</span>
+<span class="nc" id="L44">        this.cityQueryService = cityQueryService;</span>
+<span class="nc" id="L45">    }</span>
+
+    /**
+     * {@code POST  /cities} : Create a new city.
+     *
+     * @param city the city to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new city, or with status {@code 400 (Bad Request)} if the city has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @CrossOrigin
+    @PostMapping(&quot;/cities&quot;)
+    public ResponseEntity&lt;City&gt; createCity(@RequestBody City city) throws URISyntaxException {
+<span class="nc" id="L57">        log.debug(&quot;REST request to save City : {}&quot;, city);</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">        if (city.getId() != null) {</span>
+<span class="nc" id="L59">            throw new BadRequestAlertException(&quot;A new city cannot already have an ID&quot;, ENTITY_NAME, &quot;idexists&quot;);</span>
+        }
+<span class="nc" id="L61">        City result = cityService.save(city);</span>
+<span class="nc" id="L62">        return ResponseEntity.created(new URI(&quot;/api/cities/&quot; + result.getId()))</span>
+<span class="nc" id="L63">            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))</span>
+<span class="nc" id="L64">            .body(result);</span>
+    }
+
+    /**
+     * {@code PUT  /cities} : Updates an existing city.
+     *
+     * @param city the city to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated city,
+     * or with status {@code 400 (Bad Request)} if the city is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the city couldn't be updated.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @CrossOrigin
+    @PutMapping(&quot;/cities&quot;)
+    public ResponseEntity&lt;City&gt; updateCity(@RequestBody City city) throws URISyntaxException {
+<span class="nc" id="L79">        log.debug(&quot;REST request to update City : {}&quot;, city);</span>
+<span class="nc bnc" id="L80" title="All 2 branches missed.">        if (city.getId() == null) {</span>
+<span class="nc" id="L81">            throw new BadRequestAlertException(&quot;Invalid id&quot;, ENTITY_NAME, &quot;idnull&quot;);</span>
+        }
+<span class="nc" id="L83">        City result = cityService.save(city);</span>
+<span class="nc" id="L84">        return ResponseEntity.ok()</span>
+<span class="nc" id="L85">            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, city.getId().toString()))</span>
+<span class="nc" id="L86">            .body(result);</span>
+    }
+
+    /**
+     * {@code GET  /cities} : get all the cities.
+     *
+     * @param criteria the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of cities in body.
+     */
+    @CrossOrigin
+    @GetMapping(&quot;/cities&quot;)
+    public ResponseEntity&lt;List&lt;City&gt;&gt; getAllCities(CityCriteria criteria) {
+<span class="nc" id="L98">        log.debug(&quot;REST request to get Cities by criteria: {}&quot;, criteria);</span>
+<span class="nc" id="L99">        List&lt;City&gt; entityList = cityQueryService.findByCriteria(criteria);</span>
+<span class="nc" id="L100">        return ResponseEntity.ok().body(entityList);</span>
+    }
+
+    /**
+    * {@code GET  /cities/count} : count all the cities.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @GetMapping(&quot;/cities/count&quot;)
+    public ResponseEntity&lt;Long&gt; countCities(CityCriteria criteria) {
+<span class="nc" id="L111">        log.debug(&quot;REST request to count Cities by criteria: {}&quot;, criteria);</span>
+<span class="nc" id="L112">        return ResponseEntity.ok().body(cityQueryService.countByCriteria(criteria));</span>
+    }
+
+    /**
+     * {@code GET  /cities/:id} : get the &quot;id&quot; city.
+     *
+     * @param id the id of the city to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the city, or with status {@code 404 (Not Found)}.
+     */
+    @CrossOrigin
+    @GetMapping(&quot;/cities/{id}&quot;)
+    public ResponseEntity&lt;City&gt; getCity(@PathVariable Long id) {
+<span class="nc" id="L124">        log.debug(&quot;REST request to get City : {}&quot;, id);</span>
+<span class="nc" id="L125">        Optional&lt;City&gt; city = cityService.findOne(id);</span>
+<span class="nc" id="L126">        return ResponseUtil.wrapOrNotFound(city);</span>
+    }
+
+    /**
+     * {@code DELETE  /cities/:id} : delete the &quot;id&quot; city.
+     *
+     * @param id the id of the city to delete.
+     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
+     */
+    @CrossOrigin
+    @DeleteMapping(&quot;/cities/{id}&quot;)
+    public ResponseEntity&lt;Void&gt; deleteCity(@PathVariable Long id) {
+<span class="nc" id="L138">        log.debug(&quot;REST request to delete City : {}&quot;, id);</span>
+<span class="nc" id="L139">        cityService.delete(id);</span>
+<span class="nc" id="L140">        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

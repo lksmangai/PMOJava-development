@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImEmployeeServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.service.impl</a> &gt; <span class="el_source">ImEmployeeServiceImpl.java</span></div><h1>ImEmployeeServiceImpl.java</h1><pre class="source lang-java linenums">package com.qnowapp.service.impl;
+
+import com.qnowapp.service.ImEmployeeService;
+import com.qnowapp.domain.ImEmployee;
+import com.qnowapp.repository.ImEmployeeRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * Service Implementation for managing {@link ImEmployee}.
+ */
+@Service
+@Transactional
+public class ImEmployeeServiceImpl implements ImEmployeeService {
+
+<span class="nc" id="L24">    private final Logger log = LoggerFactory.getLogger(ImEmployeeServiceImpl.class);</span>
+
+    private final ImEmployeeRepository imEmployeeRepository;
+
+<span class="nc" id="L28">    public ImEmployeeServiceImpl(ImEmployeeRepository imEmployeeRepository) {</span>
+<span class="nc" id="L29">        this.imEmployeeRepository = imEmployeeRepository;</span>
+<span class="nc" id="L30">    }</span>
+
+    /**
+     * Save a imEmployee.
+     *
+     * @param imEmployee the entity to save.
+     * @return the persisted entity.
+     */
+    @Override
+    public ImEmployee save(ImEmployee imEmployee) {
+<span class="nc" id="L40">        log.debug(&quot;Request to save ImEmployee : {}&quot;, imEmployee);</span>
+<span class="nc" id="L41">        return imEmployeeRepository.save(imEmployee);</span>
+    }
+
+    /**
+     * Get all the imEmployees.
+     *
+     * @return the list of entities.
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List&lt;ImEmployee&gt; findAll() {
+<span class="nc" id="L52">        log.debug(&quot;Request to get all ImEmployees&quot;);</span>
+<span class="nc" id="L53">        return imEmployeeRepository.findAllWithEagerRelationships();</span>
+    }
+
+    /**
+     * Get all the imEmployees with eager load of many-to-many relationships.
+     *
+     * @return the list of entities.
+     */
+    public Page&lt;ImEmployee&gt; findAllWithEagerRelationships(Pageable pageable) {
+<span class="nc" id="L62">        return imEmployeeRepository.findAllWithEagerRelationships(pageable);</span>
+    }
+    
+
+    /**
+     * Get one imEmployee by id.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Optional&lt;ImEmployee&gt; findOne(Long id) {
+<span class="nc" id="L75">        log.debug(&quot;Request to get ImEmployee : {}&quot;, id);</span>
+<span class="nc" id="L76">        return imEmployeeRepository.findOneWithEagerRelationships(id);</span>
+    }
+
+    /**
+     * Delete the imEmployee by id.
+     *
+     * @param id the id of the entity.
+     */
+    @Override
+    public void delete(Long id) {
+<span class="nc" id="L86">        log.debug(&quot;Request to delete ImEmployee : {}&quot;, id);</span>
+<span class="nc" id="L87">        imEmployeeRepository.deleteById(id);</span>
+<span class="nc" id="L88">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

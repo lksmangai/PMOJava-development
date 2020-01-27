@@ -16,7 +16,6 @@ public abstract class ImTimesheet_ {
 	public static volatile SingularAttribute<ImTimesheet, ImProjects> imProjects;
 	public static volatile SingularAttribute<ImTimesheet, Long> id;
 	public static volatile SingularAttribute<ImTimesheet, ImEmployee> imEmployee;
-	public static volatile SingularAttribute<ImTimesheet, String> logday;
 
 	public static final String BILLHOURS = "billhours";
 	public static final String NOTES = "notes";
@@ -25,7 +24,6 @@ public abstract class ImTimesheet_ {
 	public static final String IM_PROJECTS = "imProjects";
 	public static final String ID = "id";
 	public static final String IM_EMPLOYEE = "imEmployee";
-	public static final String LOGDAY = "logday";
 
 }
 

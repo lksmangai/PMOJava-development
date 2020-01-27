@@ -4,6 +4,7 @@ package com.qnowapp.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -37,7 +38,8 @@ public class ImTimesheet implements Serializable {
     @Column(name = "billhours")
     private Double billhours;
 
-    @Column(name = "notes")
+    @Column(name = "notes", length = 4096)
+    @Length(max = 4096)
     private String notes;
 
     @ManyToOne
@@ -47,9 +49,6 @@ public class ImTimesheet implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties("imTimesheets")
     private ImProjects imProjects;
-    
-    @Column(name = "logday")
-    private String logday;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -137,17 +136,9 @@ public class ImTimesheet implements Serializable {
     public void setImProjects(ImProjects imProjects) {
         this.imProjects = imProjects;
     }
-    
-    
-    public String getLogday() {
-		return logday;
-	}
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
-	public void setLogday(String logday) {
-		this.logday = logday;
-	}
-
-	@Override
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

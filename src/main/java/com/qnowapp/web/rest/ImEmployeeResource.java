@@ -1,10 +1,11 @@
 package com.qnowapp.web.rest;
 
 import com.qnowapp.domain.ImEmployee;
-
 import com.qnowapp.service.ImEmployeeService;
 import com.qnowapp.web.rest.errors.BadRequestAlertException;
 import com.qnowapp.service.dto.ImEmployeeCriteria;
+import com.qnowapp.service.ImEmployeeQueryService;
+
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -36,11 +37,11 @@ public class ImEmployeeResource {
 
     private final ImEmployeeService imEmployeeService;
 
+    private final ImEmployeeQueryService imEmployeeQueryService;
 
-
-    public ImEmployeeResource(ImEmployeeService imEmployeeService) {
+    public ImEmployeeResource(ImEmployeeService imEmployeeService, ImEmployeeQueryService imEmployeeQueryService) {
         this.imEmployeeService = imEmployeeService;
-       
+        this.imEmployeeQueryService = imEmployeeQueryService;
     }
 
     /**
@@ -93,13 +94,24 @@ public class ImEmployeeResource {
      */
     @CrossOrigin
     @GetMapping("/im-employees")
-    public ResponseEntity<List<ImEmployee>> getAllImEmployees( ) {
-        log.debug("REST request to get ImEmployees by criteria: {}");
-        List<ImEmployee> entityList = imEmployeeService.findAll();
+    public ResponseEntity<List<ImEmployee>> getAllImEmployees(ImEmployeeCriteria criteria) {
+        log.debug("REST request to get ImEmployees by criteria: {}", criteria);
+        List<ImEmployee> entityList = imEmployeeQueryService.findByCriteria(criteria);
         return ResponseEntity.ok().body(entityList);
     }
 
-
+    /**
+    * {@code GET  /im-employees/count} : count all the imEmployees.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping("/im-employees/count")
+    public ResponseEntity<Long> countImEmployees(ImEmployeeCriteria criteria) {
+        log.debug("REST request to count ImEmployees by criteria: {}", criteria);
+        return ResponseEntity.ok().body(imEmployeeQueryService.countByCriteria(criteria));
+    }
 
     /**
      * {@code GET  /im-employees/:id} : get the "id" imEmployee.

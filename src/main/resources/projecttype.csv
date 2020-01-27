@@ -1,0 +1,10 @@
+category_id;category;description;category_type;category_gif;enabled_p;parent_only_p;aux_int1;aux_int2;aux_string1;aux_string2;sort_order;visible_tcl
+10046314;Product Features;;Project Type;category;t;f;;;;;0;
+10046327;Action Follow-up Project;;Project Type;category;t;f;;;;;0;
+10046315;Compliance Project;;Project Type;category;t;f;;;;;0;
+10046326;Upgrade Project;;Project Type;category;t;f;;;;;0;
+10046316;Migration Project;;Project Type;category;t;f;;;;;0;
+10046317;Training;;Project Type;category;t;f;;;;;0;
+10046318;Implementation;;Project Type;category;t;f;;;;;0;
+10046319;Interface Project;;Project Type;category;t;f;;;;;0;
+10046313;Project Type;Classification of the Project category;Project Type;category;f;f;;;;;0;

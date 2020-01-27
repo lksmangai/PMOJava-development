@@ -1,0 +1,11 @@
+category_id;category;description;category_type;category_gif;enabled_p;parent_only_p;aux_int1;aux_int2;aux_string1;aux_string2;sort_order;visible_tcl
+10046408;0 - Quick Win;Quick Win to be taken immediately;Intranet Opportunity Priority;category;t;f;;;;;1;
+84000;1 - Highest Priority;;Intranet Opportunity Priority;category;t;f;;;;;0;
+84001;2 - Very High Priority;;Intranet Opportunity Priority;category;t;f;;;;;0;
+84002;3 - High Priority;;Intranet Opportunity Priority;category;t;f;;;;;0;
+84003;4 - Medium High Priority;;Intranet Opportunity Priority;category;t;f;;;;;0;
+84005;6 - Medium Low Priority;;Intranet Opportunity Priority;category;t;f;;;;;0;
+84006;7 - Low Priority;;Intranet Opportunity Priority;category;t;f;;;;;0;
+84007;8 - Very Low Priority;;Intranet Opportunity Priority;category;t;f;;;;;0;
+84008;9 - Lowest Priority;;Intranet Opportunity Priority;category;t;f;;;;;0;
+84004;5 - Medium Priority;;Intranet Opportunity Priority;category;t;f;;;;;0;

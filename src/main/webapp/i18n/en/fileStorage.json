@@ -1,0 +1,24 @@
+{
+  "App": {
+    "fileStorage": {
+      "home": {
+        "title": "File Storages",
+        "createLabel": "Create a new File Storage",
+        "createOrEditLabel": "Create or edit a File Storage"
+      },
+      "created": "A new File Storage is created with identifier {{ param }}",
+      "updated": "A File Storage is updated with identifier {{ param }}",
+      "deleted": "A File Storage is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete File Storage {{ id }}?"
+      },
+      "detail": {
+        "title": "File Storage"
+      },
+      "filename": "Filename",
+      "caption": "Caption",
+      "userContact": "User Contact",
+      "imProjects": "Im Projects"
+    }
+  }
+}

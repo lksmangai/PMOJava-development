@@ -1,10 +1,10 @@
 package com.qnowapp.web.rest;
 
 import com.qnowapp.domain.TagType;
-
 import com.qnowapp.service.TagTypeService;
 import com.qnowapp.web.rest.errors.BadRequestAlertException;
 import com.qnowapp.service.dto.TagTypeCriteria;
+import com.qnowapp.service.TagTypeQueryService;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -37,10 +37,11 @@ public class TagTypeResource {
 
     private final TagTypeService tagTypeService;
 
- 
-    public TagTypeResource(TagTypeService tagTypeService) {
+    private final TagTypeQueryService tagTypeQueryService;
+
+    public TagTypeResource(TagTypeService tagTypeService, TagTypeQueryService tagTypeQueryService) {
         this.tagTypeService = tagTypeService;
-       
+        this.tagTypeQueryService = tagTypeQueryService;
     }
 
     /**
@@ -93,12 +94,24 @@ public class TagTypeResource {
      */
     @CrossOrigin
     @GetMapping("/tag-types")
-    public ResponseEntity<List<TagType>> getAllTagTypes( ) {
-        log.debug("REST request to get TagTypes by criteria: {}");
-        List<TagType> entityList = tagTypeService.findAll();
+    public ResponseEntity<List<TagType>> getAllTagTypes(TagTypeCriteria criteria) {
+        log.debug("REST request to get TagTypes by criteria: {}", criteria);
+        List<TagType> entityList = tagTypeQueryService.findByCriteria(criteria);
         return ResponseEntity.ok().body(entityList);
     }
 
+    /**
+    * {@code GET  /tag-types/count} : count all the tagTypes.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping("/tag-types/count")
+    public ResponseEntity<Long> countTagTypes(TagTypeCriteria criteria) {
+        log.debug("REST request to count TagTypes by criteria: {}", criteria);
+        return ResponseEntity.ok().body(tagTypeQueryService.countByCriteria(criteria));
+    }
 
     /**
      * {@code GET  /tag-types/:id} : get the "id" tagType.

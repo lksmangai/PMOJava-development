@@ -1,0 +1,48 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-skills-heading" jhiTranslate="App.skills.home.createOrEditLabel">Create or edit a Skills</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!skills.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.skills.skillCode" for="field_skillCode">Skill Code</label>
+                    <input type="text" class="form-control" name="skillCode" id="field_skillCode"
+                           formControlName="skillCode"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.skills.skillName" for="field_skillName">Skill Name</label>
+                    <input type="text" class="form-control" name="skillName" id="field_skillName"
+                           formControlName="skillName"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.skills.parentSkillsId" for="field_parentSkillsId">Parent Skills Id</label>
+                    <select class="form-control" id="field_parentSkillsId" name="parentSkillsId" formControlName="parentSkillsId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="skillsOption.id === editForm.get('parentSkillsId').value?.id ? editForm.get('parentSkillsId').value : skillsOption" *ngFor="let skillsOption of skills; trackBy: trackSkillsById">{{skillsOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.skills.skillCategoryId" for="field_skillCategoryId">Skill Category Id</label>
+                    <select class="form-control" id="field_skillCategoryId" name="skillCategoryId" formControlName="skillCategoryId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="skillCategoryOption.id === editForm.get('skillCategoryId').value?.id ? editForm.get('skillCategoryId').value : skillCategoryOption" *ngFor="let skillCategoryOption of skillcategories; trackBy: trackSkillCategoryById">{{skillCategoryOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

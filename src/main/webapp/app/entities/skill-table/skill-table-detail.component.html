@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="skillTable">
+            <h2><span jhiTranslate="App.skillTable.detail.title">Skill Table</span> {{skillTable.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="App.skillTable.skillExpertise">Skill Expertise</span></dt>
+                <dd>
+                    <div *ngIf="skillTable.skillExpertise">
+                        <a [routerLink]="['/skill-expertise', skillTable.skillExpertise?.id, 'view']">{{skillTable.skillExpertise?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="App.skillTable.userContact">User Contact</span></dt>
+                <dd>
+                    <div *ngIf="skillTable.userContact">
+                        <a [routerLink]="['/user-contact', skillTable.userContact?.id, 'view']">{{skillTable.userContact?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="App.skillTable.imProjects">Im Projects</span></dt>
+                <dd>
+                    <div *ngIf="skillTable.imProjects">
+                        <a [routerLink]="['/im-projects', skillTable.imProjects?.id, 'view']">{{skillTable.imProjects?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="App.skillTable.skills">Skills</span></dt>
+                <dd>
+                    <div *ngIf="skillTable.skills">
+                        <a [routerLink]="['/skills', skillTable.skills?.id, 'view']">{{skillTable.skills?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/skill-table', skillTable.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

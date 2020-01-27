@@ -1,0 +1,23 @@
+{
+  "App": {
+    "projectTypeId": {
+      "home": {
+        "title": "Project Type Ids",
+        "createLabel": "Create a new Project Type Id",
+        "createOrEditLabel": "Create or edit a Project Type Id"
+      },
+      "created": "A new Project Type Id is created with identifier {{ param }}",
+      "updated": "A Project Type Id is updated with identifier {{ param }}",
+      "deleted": "A Project Type Id is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Project Type Id {{ id }}?"
+      },
+      "detail": {
+        "title": "Project Type Id"
+      },
+      "code": "Code",
+      "name": "Name",
+      "description": "Description"
+    }
+  }
+}

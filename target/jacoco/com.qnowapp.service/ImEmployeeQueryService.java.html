@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImEmployeeQueryService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.service</a> &gt; <span class="el_source">ImEmployeeQueryService.java</span></div><h1>ImEmployeeQueryService.java</h1><pre class="source lang-java linenums">package com.qnowapp.service;
+
+import java.util.List;
+
+import javax.persistence.criteria.JoinType;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import io.github.jhipster.service.QueryService;
+
+import com.qnowapp.domain.ImEmployee;
+import com.qnowapp.domain.*; // for static metamodels
+import com.qnowapp.repository.ImEmployeeRepository;
+import com.qnowapp.service.dto.ImEmployeeCriteria;
+
+/**
+ * Service for executing complex queries for {@link ImEmployee} entities in the database.
+ * The main input is a {@link ImEmployeeCriteria} which gets converted to {@link Specification},
+ * in a way that all the filters must apply.
+ * It returns a {@link List} of {@link ImEmployee} or a {@link Page} of {@link ImEmployee} which fulfills the criteria.
+ */
+@Service
+@Transactional(readOnly = true)
+public class ImEmployeeQueryService extends QueryService&lt;ImEmployee&gt; {
+
+<span class="nc" id="L32">    private final Logger log = LoggerFactory.getLogger(ImEmployeeQueryService.class);</span>
+
+    private final ImEmployeeRepository imEmployeeRepository;
+
+<span class="nc" id="L36">    public ImEmployeeQueryService(ImEmployeeRepository imEmployeeRepository) {</span>
+<span class="nc" id="L37">        this.imEmployeeRepository = imEmployeeRepository;</span>
+<span class="nc" id="L38">    }</span>
+
+    /**
+     * Return a {@link List} of {@link ImEmployee} which matches the criteria from the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @return the matching entities.
+     */
+    @Transactional(readOnly = true)
+    public List&lt;ImEmployee&gt; findByCriteria(ImEmployeeCriteria criteria) {
+<span class="nc" id="L47">        log.debug(&quot;find by criteria : {}&quot;, criteria);</span>
+<span class="nc" id="L48">        final Specification&lt;ImEmployee&gt; specification = createSpecification(criteria);</span>
+<span class="nc" id="L49">        return imEmployeeRepository.findAll(specification);</span>
+    }
+
+    /**
+     * Return a {@link Page} of {@link ImEmployee} which matches the criteria from the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @param page The page, which should be returned.
+     * @return the matching entities.
+     */
+    @Transactional(readOnly = true)
+    public Page&lt;ImEmployee&gt; findByCriteria(ImEmployeeCriteria criteria, Pageable page) {
+<span class="nc" id="L60">        log.debug(&quot;find by criteria : {}, page: {}&quot;, criteria, page);</span>
+<span class="nc" id="L61">        final Specification&lt;ImEmployee&gt; specification = createSpecification(criteria);</span>
+<span class="nc" id="L62">        return imEmployeeRepository.findAll(specification, page);</span>
+    }
+
+    /**
+     * Return the number of matching entities in the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @return the number of matching entities.
+     */
+    @Transactional(readOnly = true)
+    public long countByCriteria(ImEmployeeCriteria criteria) {
+<span class="nc" id="L72">        log.debug(&quot;count by criteria : {}&quot;, criteria);</span>
+<span class="nc" id="L73">        final Specification&lt;ImEmployee&gt; specification = createSpecification(criteria);</span>
+<span class="nc" id="L74">        return imEmployeeRepository.count(specification);</span>
+    }
+
+    /**
+     * Function to convert ImEmployeeCriteria to a {@link Specification}.
+     */
+    private Specification&lt;ImEmployee&gt; createSpecification(ImEmployeeCriteria criteria) {
+<span class="nc" id="L81">        Specification&lt;ImEmployee&gt; specification = Specification.where(null);</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">        if (criteria != null) {</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">            if (criteria.getId() != null) {</span>
+<span class="nc" id="L84">                specification = specification.and(buildSpecification(criteria.getId(), ImEmployee_.id));</span>
+            }
+<span class="nc bnc" id="L86" title="All 2 branches missed.">            if (criteria.getJobTitle() != null) {</span>
+<span class="nc" id="L87">                specification = specification.and(buildStringSpecification(criteria.getJobTitle(), ImEmployee_.jobTitle));</span>
+            }
+<span class="nc bnc" id="L89" title="All 2 branches missed.">            if (criteria.getJobDescription() != null) {</span>
+<span class="nc" id="L90">                specification = specification.and(buildStringSpecification(criteria.getJobDescription(), ImEmployee_.jobDescription));</span>
+            }
+<span class="nc bnc" id="L92" title="All 2 branches missed.">            if (criteria.getAvailability() != null) {</span>
+<span class="nc" id="L93">                specification = specification.and(buildRangeSpecification(criteria.getAvailability(), ImEmployee_.availability));</span>
+            }
+<span class="nc bnc" id="L95" title="All 2 branches missed.">            if (criteria.getSsNumber() != null) {</span>
+<span class="nc" id="L96">                specification = specification.and(buildStringSpecification(criteria.getSsNumber(), ImEmployee_.ssNumber));</span>
+            }
+<span class="nc bnc" id="L98" title="All 2 branches missed.">            if (criteria.getSalary() != null) {</span>
+<span class="nc" id="L99">                specification = specification.and(buildRangeSpecification(criteria.getSalary(), ImEmployee_.salary));</span>
+            }
+<span class="nc bnc" id="L101" title="All 2 branches missed.">            if (criteria.getSocialSecurity() != null) {</span>
+<span class="nc" id="L102">                specification = specification.and(buildRangeSpecification(criteria.getSocialSecurity(), ImEmployee_.socialSecurity));</span>
+            }
+<span class="nc bnc" id="L104" title="All 2 branches missed.">            if (criteria.getInsurance() != null) {</span>
+<span class="nc" id="L105">                specification = specification.and(buildRangeSpecification(criteria.getInsurance(), ImEmployee_.insurance));</span>
+            }
+<span class="nc bnc" id="L107" title="All 2 branches missed.">            if (criteria.getOtherCosts() != null) {</span>
+<span class="nc" id="L108">                specification = specification.and(buildRangeSpecification(criteria.getOtherCosts(), ImEmployee_.otherCosts));</span>
+            }
+<span class="nc bnc" id="L110" title="All 2 branches missed.">            if (criteria.getCurrency() != null) {</span>
+<span class="nc" id="L111">                specification = specification.and(buildStringSpecification(criteria.getCurrency(), ImEmployee_.currency));</span>
+            }
+<span class="nc bnc" id="L113" title="All 2 branches missed.">            if (criteria.getDependantP() != null) {</span>
+<span class="nc" id="L114">                specification = specification.and(buildStringSpecification(criteria.getDependantP(), ImEmployee_.dependantP));</span>
+            }
+<span class="nc bnc" id="L116" title="All 2 branches missed.">            if (criteria.getOnlyJobP() != null) {</span>
+<span class="nc" id="L117">                specification = specification.and(buildStringSpecification(criteria.getOnlyJobP(), ImEmployee_.onlyJobP));</span>
+            }
+<span class="nc bnc" id="L119" title="All 2 branches missed.">            if (criteria.getMarriedP() != null) {</span>
+<span class="nc" id="L120">                specification = specification.and(buildStringSpecification(criteria.getMarriedP(), ImEmployee_.marriedP));</span>
+            }
+<span class="nc bnc" id="L122" title="All 2 branches missed.">            if (criteria.getHeadOfHouseholdP() != null) {</span>
+<span class="nc" id="L123">                specification = specification.and(buildStringSpecification(criteria.getHeadOfHouseholdP(), ImEmployee_.headOfHouseholdP));</span>
+            }
+<span class="nc bnc" id="L125" title="All 2 branches missed.">            if (criteria.getBirthdate() != null) {</span>
+<span class="nc" id="L126">                specification = specification.and(buildRangeSpecification(criteria.getBirthdate(), ImEmployee_.birthdate));</span>
+            }
+<span class="nc bnc" id="L128" title="All 2 branches missed.">            if (criteria.getHourlyCost() != null) {</span>
+<span class="nc" id="L129">                specification = specification.and(buildRangeSpecification(criteria.getHourlyCost(), ImEmployee_.hourlyCost));</span>
+            }
+<span class="nc bnc" id="L131" title="All 2 branches missed.">            if (criteria.getQnowUserId() != null) {</span>
+<span class="nc" id="L132">                specification = specification.and(buildSpecification(criteria.getQnowUserId(),</span>
+<span class="nc" id="L133">                    root -&gt; root.join(ImEmployee_.qnowUser, JoinType.LEFT).get(QnowUser_.id)));</span>
+            }
+<span class="nc bnc" id="L135" title="All 2 branches missed.">            if (criteria.getEmployeeStatusId() != null) {</span>
+<span class="nc" id="L136">                specification = specification.and(buildSpecification(criteria.getEmployeeStatusId(),</span>
+<span class="nc" id="L137">                    root -&gt; root.join(ImEmployee_.employeeStatus, JoinType.LEFT).get(EmployeeStatus_.id)));</span>
+            }
+<span class="nc bnc" id="L139" title="All 2 branches missed.">            if (criteria.getDepartmentIdId() != null) {</span>
+<span class="nc" id="L140">                specification = specification.and(buildSpecification(criteria.getDepartmentIdId(),</span>
+<span class="nc" id="L141">                    root -&gt; root.join(ImEmployee_.departmentId, JoinType.LEFT).get(Department_.id)));</span>
+            }
+<span class="nc bnc" id="L143" title="All 2 branches missed.">            if (criteria.getSupervisorIdId() != null) {</span>
+<span class="nc" id="L144">                specification = specification.and(buildSpecification(criteria.getSupervisorIdId(),</span>
+<span class="nc" id="L145">                    root -&gt; root.join(ImEmployee_.supervisorId, JoinType.LEFT).get(ImEmployee_.id)));</span>
+            }
+<span class="nc bnc" id="L147" title="All 2 branches missed.">            if (criteria.getUserContactId() != null) {</span>
+<span class="nc" id="L148">                specification = specification.and(buildSpecification(criteria.getUserContactId(),</span>
+<span class="nc" id="L149">                    root -&gt; root.join(ImEmployee_.userContacts, JoinType.LEFT).get(UserContact_.id)));</span>
+            }
+        }
+<span class="nc" id="L152">        return specification;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

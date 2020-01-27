@@ -1,0 +1,134 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-im-employee-heading" jhiTranslate="App.imEmployee.home.createOrEditLabel">Create or edit a Im Employee</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!imEmployee.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imEmployee.jobTitle" for="field_jobTitle">Job Title</label>
+                    <input type="text" class="form-control" name="jobTitle" id="field_jobTitle"
+                           formControlName="jobTitle"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imEmployee.jobDescription" for="field_jobDescription">Job Description</label>
+                    <input type="text" class="form-control" name="jobDescription" id="field_jobDescription"
+                           formControlName="jobDescription"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imEmployee.availability" for="field_availability">Availability</label>
+                    <input type="number" class="form-control" name="availability" id="field_availability"
+                           formControlName="availability"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imEmployee.ssNumber" for="field_ssNumber">Ss Number</label>
+                    <input type="text" class="form-control" name="ssNumber" id="field_ssNumber"
+                           formControlName="ssNumber"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imEmployee.salary" for="field_salary">Salary</label>
+                    <input type="number" class="form-control" name="salary" id="field_salary"
+                           formControlName="salary"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imEmployee.socialSecurity" for="field_socialSecurity">Social Security</label>
+                    <input type="number" class="form-control" name="socialSecurity" id="field_socialSecurity"
+                           formControlName="socialSecurity"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imEmployee.insurance" for="field_insurance">Insurance</label>
+                    <input type="number" class="form-control" name="insurance" id="field_insurance"
+                           formControlName="insurance"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imEmployee.otherCosts" for="field_otherCosts">Other Costs</label>
+                    <input type="number" class="form-control" name="otherCosts" id="field_otherCosts"
+                           formControlName="otherCosts"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imEmployee.currency" for="field_currency">Currency</label>
+                    <input type="text" class="form-control" name="currency" id="field_currency"
+                           formControlName="currency"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imEmployee.dependantP" for="field_dependantP">Dependant P</label>
+                    <input type="text" class="form-control" name="dependantP" id="field_dependantP"
+                           formControlName="dependantP"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imEmployee.onlyJobP" for="field_onlyJobP">Only Job P</label>
+                    <input type="text" class="form-control" name="onlyJobP" id="field_onlyJobP"
+                           formControlName="onlyJobP"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imEmployee.marriedP" for="field_marriedP">Married P</label>
+                    <input type="text" class="form-control" name="marriedP" id="field_marriedP"
+                           formControlName="marriedP"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imEmployee.headOfHouseholdP" for="field_headOfHouseholdP">Head Of Household P</label>
+                    <input type="text" class="form-control" name="headOfHouseholdP" id="field_headOfHouseholdP"
+                           formControlName="headOfHouseholdP"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imEmployee.birthdate" for="field_birthdate">Birthdate</label>
+                    <div class="d-flex">
+                        <input id="field_birthdate" type="datetime-local" class="form-control" name="birthdate" formControlName="birthdate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imEmployee.hourlyCost" for="field_hourlyCost">Hourly Cost</label>
+                    <input type="number" class="form-control" name="hourlyCost" id="field_hourlyCost"
+                           formControlName="hourlyCost"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imEmployee.qnowUser" for="field_qnowUser">Qnow User</label>
+                    <select class="form-control" id="field_qnowUser" name="qnowUser" formControlName="qnowUser">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="qnowUserOption.id === editForm.get('qnowUser').value?.id ? editForm.get('qnowUser').value : qnowUserOption" *ngFor="let qnowUserOption of qnowusers; trackBy: trackQnowUserById">{{qnowUserOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imEmployee.employeeStatus" for="field_employeeStatus">Employee Status</label>
+                    <select class="form-control" id="field_employeeStatus" name="employeeStatus" formControlName="employeeStatus">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="employeeStatusOption.id === editForm.get('employeeStatus').value?.id ? editForm.get('employeeStatus').value : employeeStatusOption" *ngFor="let employeeStatusOption of employeestatuses; trackBy: trackEmployeeStatusById">{{employeeStatusOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imEmployee.departmentId" for="field_departmentId">Department Id</label>
+                    <select class="form-control" id="field_departmentId" name="departmentId" formControlName="departmentId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="departmentOption.id === editForm.get('departmentId').value?.id ? editForm.get('departmentId').value : departmentOption" *ngFor="let departmentOption of departments; trackBy: trackDepartmentById">{{departmentOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imEmployee.supervisorId" for="field_supervisorId">Supervisor Id</label>
+                    <select class="form-control" id="field_supervisorId" name="supervisorId" formControlName="supervisorId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="imEmployeeOption.id === editForm.get('supervisorId').value?.id ? editForm.get('supervisorId').value : imEmployeeOption" *ngFor="let imEmployeeOption of imemployees; trackBy: trackImEmployeeById">{{imEmployeeOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label jhiTranslate="App.imEmployee.userContact" for="field_userContacts">User Contact</label>
+                    <select class="form-control" id="field_userContacts" multiple name="userContacts" formControlName="userContacts">
+                        <option [ngValue]="getSelected(editForm.get('userContacts').value, userContactOption)" *ngFor="let userContactOption of usercontacts; trackBy: trackUserContactById">{{userContactOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

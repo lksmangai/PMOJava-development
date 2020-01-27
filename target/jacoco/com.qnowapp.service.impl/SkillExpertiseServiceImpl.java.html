@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SkillExpertiseServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.service.impl</a> &gt; <span class="el_source">SkillExpertiseServiceImpl.java</span></div><h1>SkillExpertiseServiceImpl.java</h1><pre class="source lang-java linenums">package com.qnowapp.service.impl;
+
+import com.qnowapp.service.SkillExpertiseService;
+import com.qnowapp.domain.SkillExpertise;
+import com.qnowapp.repository.SkillExpertiseRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * Service Implementation for managing {@link SkillExpertise}.
+ */
+@Service
+@Transactional
+public class SkillExpertiseServiceImpl implements SkillExpertiseService {
+
+<span class="nc" id="L22">    private final Logger log = LoggerFactory.getLogger(SkillExpertiseServiceImpl.class);</span>
+
+    private final SkillExpertiseRepository skillExpertiseRepository;
+
+<span class="nc" id="L26">    public SkillExpertiseServiceImpl(SkillExpertiseRepository skillExpertiseRepository) {</span>
+<span class="nc" id="L27">        this.skillExpertiseRepository = skillExpertiseRepository;</span>
+<span class="nc" id="L28">    }</span>
+
+    /**
+     * Save a skillExpertise.
+     *
+     * @param skillExpertise the entity to save.
+     * @return the persisted entity.
+     */
+    @Override
+    public SkillExpertise save(SkillExpertise skillExpertise) {
+<span class="nc" id="L38">        log.debug(&quot;Request to save SkillExpertise : {}&quot;, skillExpertise);</span>
+<span class="nc" id="L39">        return skillExpertiseRepository.save(skillExpertise);</span>
+    }
+
+    /**
+     * Get all the skillExpertises.
+     *
+     * @return the list of entities.
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List&lt;SkillExpertise&gt; findAll() {
+<span class="nc" id="L50">        log.debug(&quot;Request to get all SkillExpertises&quot;);</span>
+<span class="nc" id="L51">        return skillExpertiseRepository.findAll();</span>
+    }
+
+
+    /**
+     * Get one skillExpertise by id.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Optional&lt;SkillExpertise&gt; findOne(Long id) {
+<span class="nc" id="L64">        log.debug(&quot;Request to get SkillExpertise : {}&quot;, id);</span>
+<span class="nc" id="L65">        return skillExpertiseRepository.findById(id);</span>
+    }
+
+    /**
+     * Delete the skillExpertise by id.
+     *
+     * @param id the id of the entity.
+     */
+    @Override
+    public void delete(Long id) {
+<span class="nc" id="L75">        log.debug(&quot;Request to delete SkillExpertise : {}&quot;, id);</span>
+<span class="nc" id="L76">        skillExpertiseRepository.deleteById(id);</span>
+<span class="nc" id="L77">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

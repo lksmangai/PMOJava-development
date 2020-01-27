@@ -1,0 +1,24 @@
+{
+  "App": {
+    "projectCostCenterId": {
+      "home": {
+        "title": "Project Cost Center Ids",
+        "createLabel": "Create a new Project Cost Center Id",
+        "createOrEditLabel": "Create or edit a Project Cost Center Id"
+      },
+      "created": "A new Project Cost Center Id is created with identifier {{ param }}",
+      "updated": "A Project Cost Center Id is updated with identifier {{ param }}",
+      "deleted": "A Project Cost Center Id is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Project Cost Center Id {{ id }}?"
+      },
+      "detail": {
+        "title": "Project Cost Center Id"
+      },
+      "code": "Code",
+      "name": "Name",
+      "description": "Description",
+      "company": "Company"
+    }
+  }
+}

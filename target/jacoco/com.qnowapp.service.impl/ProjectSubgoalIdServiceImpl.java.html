@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProjectSubgoalIdServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.service.impl</a> &gt; <span class="el_source">ProjectSubgoalIdServiceImpl.java</span></div><h1>ProjectSubgoalIdServiceImpl.java</h1><pre class="source lang-java linenums">package com.qnowapp.service.impl;
+
+import com.qnowapp.service.ProjectSubgoalIdService;
+import com.qnowapp.domain.ProjectSubgoalId;
+import com.qnowapp.repository.ProjectSubgoalIdRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * Service Implementation for managing {@link ProjectSubgoalId}.
+ */
+@Service
+@Transactional
+public class ProjectSubgoalIdServiceImpl implements ProjectSubgoalIdService {
+
+<span class="nc" id="L22">    private final Logger log = LoggerFactory.getLogger(ProjectSubgoalIdServiceImpl.class);</span>
+
+    private final ProjectSubgoalIdRepository projectSubgoalIdRepository;
+
+<span class="nc" id="L26">    public ProjectSubgoalIdServiceImpl(ProjectSubgoalIdRepository projectSubgoalIdRepository) {</span>
+<span class="nc" id="L27">        this.projectSubgoalIdRepository = projectSubgoalIdRepository;</span>
+<span class="nc" id="L28">    }</span>
+
+    /**
+     * Save a projectSubgoalId.
+     *
+     * @param projectSubgoalId the entity to save.
+     * @return the persisted entity.
+     */
+    @Override
+    public ProjectSubgoalId save(ProjectSubgoalId projectSubgoalId) {
+<span class="nc" id="L38">        log.debug(&quot;Request to save ProjectSubgoalId : {}&quot;, projectSubgoalId);</span>
+<span class="nc" id="L39">        return projectSubgoalIdRepository.save(projectSubgoalId);</span>
+    }
+
+    /**
+     * Get all the projectSubgoalIds.
+     *
+     * @return the list of entities.
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List&lt;ProjectSubgoalId&gt; findAll() {
+<span class="nc" id="L50">        log.debug(&quot;Request to get all ProjectSubgoalIds&quot;);</span>
+<span class="nc" id="L51">        return projectSubgoalIdRepository.findAll();</span>
+    }
+
+
+    /**
+     * Get one projectSubgoalId by id.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Optional&lt;ProjectSubgoalId&gt; findOne(Long id) {
+<span class="nc" id="L64">        log.debug(&quot;Request to get ProjectSubgoalId : {}&quot;, id);</span>
+<span class="nc" id="L65">        return projectSubgoalIdRepository.findById(id);</span>
+    }
+
+    /**
+     * Delete the projectSubgoalId by id.
+     *
+     * @param id the id of the entity.
+     */
+    @Override
+    public void delete(Long id) {
+<span class="nc" id="L75">        log.debug(&quot;Request to delete ProjectSubgoalId : {}&quot;, id);</span>
+<span class="nc" id="L76">        projectSubgoalIdRepository.deleteById(id);</span>
+<span class="nc" id="L77">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

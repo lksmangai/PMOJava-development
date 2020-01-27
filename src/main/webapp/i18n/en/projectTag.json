@@ -1,0 +1,28 @@
+{
+  "App": {
+    "projectTag": {
+      "home": {
+        "title": "Project Tags",
+        "createLabel": "Create a new Project Tag",
+        "createOrEditLabel": "Create or edit a Project Tag"
+      },
+      "created": "A new Project Tag is created with identifier {{ param }}",
+      "updated": "A Project Tag is updated with identifier {{ param }}",
+      "deleted": "A Project Tag is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Project Tag {{ id }}?"
+      },
+      "detail": {
+        "title": "Project Tag"
+      },
+      "code": "Code",
+      "name": "Name",
+      "description": "Description",
+      "flag": "Flag",
+      "color": "Color",
+      "tagType": "Tag Type",
+      "imEmployee": "Im Employee",
+      "imProjects": "Im Projects"
+    }
+  }
+}

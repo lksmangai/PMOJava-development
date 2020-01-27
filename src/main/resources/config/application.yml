@@ -56,7 +56,7 @@ management:
 
 spring:
   application:
-    name: PMO1
+    name: Qnow1
   profiles:
     # The commented value for `active` can be replaced with valid Spring profiles to load.
     # Otherwise, it will be filled in by maven when building the JAR file
@@ -86,13 +86,13 @@ spring:
       enabled: false
   task:
     execution:
-      thread-name-prefix: pmo-1-task-
+      thread-name-prefix: qnow-1-task-
       pool:
         core-size: 2
         max-size: 50
         queue-capacity: 10000
     scheduling:
-      thread-name-prefix: pmo-1-scheduling-
+      thread-name-prefix: qnow-1-scheduling-
       pool:
         size: 2
   thymeleaf:
@@ -117,7 +117,7 @@ info:
 
 jhipster:
   clientApp:
-    name: 'pmo1App'
+    name: 'qnow1App'
   # By default CORS is disabled. Uncomment to enable.
   # cors:
   #     allowed-origins: "*"
@@ -127,11 +127,11 @@ jhipster:
   #     allow-credentials: true
   #     max-age: 1800
   mail:
-    from: PMO1@localhost
+    from: Qnow1@localhost
   swagger:
     default-include-pattern: /api/.*
-    title: PMO1 API
-    description: PMO1 API documentation
+    title: Qnow1 API
+    description: Qnow1 API documentation
     version: 0.0.1
     terms-of-service-url:
     contact-name:

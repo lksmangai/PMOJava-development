@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProjectVerticalResource.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.web.rest</a> &gt; <span class="el_source">ProjectVerticalResource.java</span></div><h1>ProjectVerticalResource.java</h1><pre class="source lang-java linenums">package com.qnowapp.web.rest;
+
+import com.qnowapp.domain.ProjectInitiativeId;
+import com.qnowapp.domain.ProjectVertical;
+import com.qnowapp.repository.ProjectVerticalRepository;
+import com.qnowapp.service.ProjectVerticalQueryService;
+import com.qnowapp.service.ProjectVerticalService;
+import com.qnowapp.service.dto.ProjectVerticalCriteria;
+import com.qnowapp.web.rest.errors.BadRequestAlertException;
+
+import io.github.jhipster.web.util.HeaderUtil;
+import io.github.jhipster.web.util.ResponseUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * REST controller for managing {@link com.qnowapp.domain.ProjectVertical}.
+ */
+@CrossOrigin(origins = &quot;*&quot;, allowedHeaders = &quot;*&quot;)
+@RestController
+@RequestMapping(&quot;/api&quot;)
+public class ProjectVerticalResource {
+
+<span class="nc" id="L36">    private final Logger log = LoggerFactory.getLogger(ProjectVerticalResource.class);</span>
+
+    private static final String ENTITY_NAME = &quot;projectVertical&quot;;
+
+    @Value(&quot;${jhipster.clientApp.name}&quot;)
+    private String applicationName;
+    @Autowired
+ ProjectVerticalRepository projectVerticalRepository;
+<span class="nc" id="L44">    private static Boolean fromTesting = true;</span>
+
+
+
+   
+    private final ProjectVerticalService projectVerticalService;
+
+    private final ProjectVerticalQueryService projectVerticalQueryService;
+
+<span class="nc" id="L53">    public ProjectVerticalResource(ProjectVerticalService projectVerticalService, ProjectVerticalQueryService projectVerticalQueryService) {</span>
+<span class="nc" id="L54">        this.projectVerticalService = projectVerticalService;</span>
+<span class="nc" id="L55">        this.projectVerticalQueryService = projectVerticalQueryService;</span>
+
+<span class="nc" id="L57">    }</span>
+    public static void setFromTesting(Boolean bState) {
+<span class="nc" id="L59">        fromTesting = bState;</span>
+<span class="nc" id="L60">    }</span>
+
+    /**
+     * {@code POST  /project-verticals} : Create a new projectVertical.
+     *
+     * @param projectVertical the projectVertical to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new projectVertical, or with status {@code 400 (Bad Request)} if the projectVertical has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @CrossOrigin
+    @PostMapping(&quot;/project-verticals&quot;)
+    public ResponseEntity&lt;ProjectVertical&gt; createProjectVertical(@RequestBody ProjectVertical projectVertical) throws URISyntaxException {
+<span class="nc" id="L72">        log.debug(&quot;REST request to save ProjectVertical : {}&quot;, projectVertical);</span>
+<span class="nc bnc" id="L73" title="All 2 branches missed.">        if (projectVertical.getId() != null) {</span>
+<span class="nc" id="L74">            throw new BadRequestAlertException(&quot;A new projectVertical cannot already have an ID&quot;, ENTITY_NAME, &quot;idexists&quot;);</span>
+        }else {
+  
+<span class="nc" id="L77">            ProjectVertical result = projectVerticalRepository.save(projectVertical);</span>
+<span class="nc" id="L78">            ResponseEntity&lt;ProjectVertical&gt; a = ResponseEntity.created(new URI(&quot;/api/project-initiative-ids/&quot; + result.getId()))</span>
+<span class="nc" id="L79">                    .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))</span>
+<span class="nc" id="L80">                    .body(result);</span>
+
+<span class="nc bnc" id="L82" title="All 2 branches missed.">            if (fromTesting == false) {</span>
+<span class="nc" id="L83">                System.out.println(projectVertical.getName());</span>
+<span class="nc" id="L84">                String csvFile1 = &quot;src\\main\\resources\\vertical.csv&quot;;</span>
+<span class="nc" id="L85">                BufferedReader br = null;</span>
+<span class="nc" id="L86">                String line = &quot;&quot;;</span>
+<span class="nc" id="L87">                String cvsSplitBy = &quot;;&quot;;</span>
+
+                try {
+<span class="nc" id="L90">                    br = new BufferedReader(new FileReader(csvFile1));</span>
+<span class="nc" id="L91">                    int count = 0;</span>
+<span class="nc bnc" id="L92" title="All 2 branches missed.">                    while ((line = br.readLine()) != null) {</span>
+<span class="nc" id="L93">                        count++;</span>
+<span class="nc" id="L94">                        System.out.println(+count);</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">                        if (count == 1)</span>
+<span class="nc" id="L96">                            continue;</span>
+<span class="nc" id="L97">                        String[] country = line.split(cvsSplitBy);</span>
+                        try {
+<span class="nc bnc" id="L99" title="All 2 branches missed.">                            if (country.length &gt; 3 ) {</span>
+<span class="nc" id="L100">                                System.out.println(&quot;1&quot;);</span>
+<span class="nc" id="L101">                                projectVertical.setId(null);</span>
+<span class="nc" id="L102">                                projectVertical.setCode(country[0]);</span>
+<span class="nc" id="L103">                                System.out.println(&quot;2&quot;);</span>
+<span class="nc" id="L104">                                projectVertical.setName(country[1]);</span>
+<span class="nc" id="L105">                                System.out.println(&quot;3&quot;);</span>
+<span class="nc" id="L106">                                projectVertical.setDescription(country[2]);</span>
+<span class="nc" id="L107">                                ProjectVertical result2 = projectVerticalRepository.save(projectVertical);  </span>
+<span class="nc" id="L108">                                System.out.println(result2.getId());</span>
+<span class="nc" id="L109">                                System.out.println(projectVertical + &quot;new project created&quot;);</span>
+                            }
+<span class="nc" id="L111">                        } catch (Exception e) {</span>
+<span class="nc" id="L112">                        }</span>
+<span class="nc" id="L113">                    }</span>
+<span class="nc" id="L114">                } catch (Exception e) {</span>
+                    // TODO: handle exception
+                } finally {
+<span class="nc bnc" id="L117" title="All 2 branches missed.">                    if (br != null) {</span>
+                        try {
+<span class="nc" id="L119">                            br.close();</span>
+<span class="nc" id="L120">                        } catch (Exception e) {</span>
+<span class="nc" id="L121">                            System.out.println(e);</span>
+<span class="nc" id="L122">                        }</span>
+                    
+                    }
+                }
+            }
+<span class="nc" id="L127">        return a;</span>
+        }
+
+    }
+
+    /**
+     * {@code PUT  /project-verticals} : Updates an existing projectVertical.
+     *
+     * @param projectVertical the projectVertical to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated projectVertical,
+     * or with status {@code 400 (Bad Request)} if the projectVertical is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the projectVertical couldn't be updated.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @CrossOrigin
+    @PutMapping(&quot;/project-verticals&quot;)
+    public ResponseEntity&lt;ProjectVertical&gt; updateProjectVertical(@RequestBody ProjectVertical projectVertical) throws URISyntaxException {
+<span class="nc" id="L144">        log.debug(&quot;REST request to update ProjectVertical : {}&quot;, projectVertical);</span>
+<span class="nc bnc" id="L145" title="All 2 branches missed.">        if (projectVertical.getId() == null) {</span>
+<span class="nc" id="L146">            throw new BadRequestAlertException(&quot;Invalid id&quot;, ENTITY_NAME, &quot;idnull&quot;);</span>
+        }
+<span class="nc" id="L148">        ProjectVertical result = projectVerticalService.save(projectVertical);</span>
+<span class="nc" id="L149">        return ResponseEntity.ok()</span>
+<span class="nc" id="L150">            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, projectVertical.getId().toString()))</span>
+<span class="nc" id="L151">            .body(result);</span>
+    }
+
+    /**
+     * {@code GET  /project-verticals} : get all the projectVerticals.
+     *
+     * @param criteria the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of projectVerticals in body.
+     */
+    @CrossOrigin
+    @GetMapping(&quot;/project-verticals&quot;)
+    public ResponseEntity&lt;List&lt;ProjectVertical&gt;&gt; getAllProjectVerticals(ProjectVerticalCriteria criteria) {
+<span class="nc" id="L163">        log.debug(&quot;REST request to get ProjectVerticals by criteria: {}&quot;, criteria);</span>
+<span class="nc" id="L164">        List&lt;ProjectVertical&gt; entityList = projectVerticalQueryService.findByCriteria(criteria);</span>
+<span class="nc" id="L165">        return ResponseEntity.ok().body(entityList);</span>
+    }
+
+    /**
+    * {@code GET  /project-verticals/count} : count all the projectVerticals.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping(&quot;/project-verticals/count&quot;)
+    public ResponseEntity&lt;Long&gt; countProjectVerticals(ProjectVerticalCriteria criteria) {
+<span class="nc" id="L177">        log.debug(&quot;REST request to count ProjectVerticals by criteria: {}&quot;, criteria);</span>
+<span class="nc" id="L178">        return ResponseEntity.ok().body(projectVerticalQueryService.countByCriteria(criteria));</span>
+    }
+
+    /**
+     * {@code GET  /project-verticals/:id} : get the &quot;id&quot; projectVertical.
+     *
+     * @param id the id of the projectVertical to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the projectVertical, or with status {@code 404 (Not Found)}.
+     */
+    @CrossOrigin
+    @GetMapping(&quot;/project-verticals/{id}&quot;)
+    public ResponseEntity&lt;ProjectVertical&gt; getProjectVertical(@PathVariable Long id) {
+<span class="nc" id="L190">        log.debug(&quot;REST request to get ProjectVertical : {}&quot;, id);</span>
+<span class="nc" id="L191">        Optional&lt;ProjectVertical&gt; projectVertical = projectVerticalService.findOne(id);</span>
+<span class="nc" id="L192">        return ResponseUtil.wrapOrNotFound(projectVertical);</span>
+    }
+
+    /**
+     * {@code DELETE  /project-verticals/:id} : delete the &quot;id&quot; projectVertical.
+     *
+     * @param id the id of the projectVertical to delete.
+     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
+     */
+    @CrossOrigin
+    @DeleteMapping(&quot;/project-verticals/{id}&quot;)
+    public ResponseEntity&lt;Void&gt; deleteProjectVertical(@PathVariable Long id) {
+<span class="nc" id="L204">        log.debug(&quot;REST request to delete ProjectVertical : {}&quot;, id);</span>
+<span class="nc" id="L205">        projectVerticalService.delete(id);</span>
+<span class="nc" id="L206">        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

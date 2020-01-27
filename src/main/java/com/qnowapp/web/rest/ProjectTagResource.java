@@ -1,11 +1,10 @@
 package com.qnowapp.web.rest;
 
 import com.qnowapp.domain.ProjectTag;
-
 import com.qnowapp.service.ProjectTagService;
 import com.qnowapp.web.rest.errors.BadRequestAlertException;
 import com.qnowapp.service.dto.ProjectTagCriteria;
-
+import com.qnowapp.service.ProjectTagQueryService;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -38,11 +37,11 @@ public class ProjectTagResource {
 
     private final ProjectTagService projectTagService;
 
-   
+    private final ProjectTagQueryService projectTagQueryService;
 
-    public ProjectTagResource(ProjectTagService projectTagService) {
+    public ProjectTagResource(ProjectTagService projectTagService, ProjectTagQueryService projectTagQueryService) {
         this.projectTagService = projectTagService;
-
+        this.projectTagQueryService = projectTagQueryService;
     }
 
     /**
@@ -95,12 +94,24 @@ public class ProjectTagResource {
      */
     @CrossOrigin
     @GetMapping("/project-tags")
-    public ResponseEntity<List<ProjectTag>> getAllProjectTags( ) {
-        log.debug("REST request to get ProjectTags by criteria: {}");
-        List<ProjectTag> entityList = projectTagService.findAll();
+    public ResponseEntity<List<ProjectTag>> getAllProjectTags(ProjectTagCriteria criteria) {
+        log.debug("REST request to get ProjectTags by criteria: {}", criteria);
+        List<ProjectTag> entityList = projectTagQueryService.findByCriteria(criteria);
         return ResponseEntity.ok().body(entityList);
     }
 
+    /**
+    * {@code GET  /project-tags/count} : count all the projectTags.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping("/project-tags/count")
+    public ResponseEntity<Long> countProjectTags(ProjectTagCriteria criteria) {
+        log.debug("REST request to count ProjectTags by criteria: {}", criteria);
+        return ResponseEntity.ok().body(projectTagQueryService.countByCriteria(criteria));
+    }
 
     /**
      * {@code GET  /project-tags/:id} : get the "id" projectTag.

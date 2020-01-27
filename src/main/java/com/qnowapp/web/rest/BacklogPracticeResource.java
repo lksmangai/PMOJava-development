@@ -1,9 +1,9 @@
 package com.qnowapp.web.rest;
 
 import com.qnowapp.domain.BacklogPractice;
-
 import com.qnowapp.domain.ProjectInitiativeId;
 import com.qnowapp.repository.BacklogPracticeRepository;
+import com.qnowapp.service.BacklogPracticeQueryService;
 import com.qnowapp.service.BacklogPracticeService;
 import com.qnowapp.service.dto.BacklogPracticeCriteria;
 import com.qnowapp.web.rest.errors.BadRequestAlertException;
@@ -45,11 +45,11 @@ public class BacklogPracticeResource {
     private static Boolean fromTesting = true;
    
 
-
-    public BacklogPracticeResource(BacklogPracticeService backlogPracticeService) {
+    private final BacklogPracticeQueryService backlogPracticeQueryService;
+    public BacklogPracticeResource(BacklogPracticeService backlogPracticeService, BacklogPracticeQueryService backlogPracticeQueryService ) {
      
         this.backlogPracticeService = backlogPracticeService;
-       
+        this.backlogPracticeQueryService = backlogPracticeQueryService;
     }
     public static void setFromTesting(Boolean bState) {
         fromTesting = bState;
@@ -75,7 +75,7 @@ public class BacklogPracticeResource {
                     .body(result);
 
             if (fromTesting == false) {
-               
+                System.out.println(backlogPractice.getName());
                 String csvFile1 = "src\\main\\resources\\backlog.csv";
                 BufferedReader br = null;
                 String line = "";
@@ -86,21 +86,22 @@ public class BacklogPracticeResource {
                     int count = 0;
                     while ((line = br.readLine()) != null) {
                         count++;
-                       
+                        System.out.println(+count);
                         if (count == 1)
                             continue;
                         String[] country = line.split(cvsSplitBy);
                         try {
                             if (country.length > 3 ) {
-                                
+                                System.out.println("1");
                                 backlogPractice.setId(null);
                                 backlogPractice.setCode(country[0]);
-                                
+                                System.out.println("2");
                                 backlogPractice.setName(country[1]);
-                               
+                                System.out.println("3");
                                 backlogPractice.setDescription(country[2]);
                                 BacklogPractice result2 = backlogPracticeService.save(backlogPractice);  
-                               
+                                System.out.println(result2.getId());
+                                System.out.println(backlogPractice + "new project created");
                             }
                         } catch (Exception e) {
                         }
@@ -155,11 +156,22 @@ public class BacklogPracticeResource {
     @GetMapping("/backlog-practices")
     public ResponseEntity<List<BacklogPractice>> getAllBacklogPractices(BacklogPracticeCriteria criteria) {
         log.debug("REST request to get BacklogPractices by criteria: {}", criteria);
-        List<BacklogPractice> entityList = backlogPracticeService.findAll();
+        List<BacklogPractice> entityList = backlogPracticeQueryService.findByCriteria(criteria);
         return ResponseEntity.ok().body(entityList);
     }
 
-
+    /**
+    * {@code GET  /backlog-practices/count} : count all the backlogPractices.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping("/backlog-practices/count")
+    public ResponseEntity<Long> countBacklogPractices(BacklogPracticeCriteria criteria) {
+        log.debug("REST request to count BacklogPractices by criteria: {}", criteria);
+        return ResponseEntity.ok().body(backlogPracticeQueryService.countByCriteria(criteria));
+    }
 
     /**
      * {@code GET  /backlog-practices/:id} : get the "id" backlogPractice.

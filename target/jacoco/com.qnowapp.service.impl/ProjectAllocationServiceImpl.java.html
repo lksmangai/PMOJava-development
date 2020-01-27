@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProjectAllocationServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.service.impl</a> &gt; <span class="el_source">ProjectAllocationServiceImpl.java</span></div><h1>ProjectAllocationServiceImpl.java</h1><pre class="source lang-java linenums">package com.qnowapp.service.impl;
+
+import com.qnowapp.service.ProjectAllocationService;
+import com.qnowapp.domain.ProjectAllocation;
+import com.qnowapp.repository.ProjectAllocationRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * Service Implementation for managing {@link ProjectAllocation}.
+ */
+@Service
+@Transactional
+public class ProjectAllocationServiceImpl implements ProjectAllocationService {
+
+<span class="nc" id="L22">    private final Logger log = LoggerFactory.getLogger(ProjectAllocationServiceImpl.class);</span>
+
+    private final ProjectAllocationRepository projectAllocationRepository;
+
+<span class="nc" id="L26">    public ProjectAllocationServiceImpl(ProjectAllocationRepository projectAllocationRepository) {</span>
+<span class="nc" id="L27">        this.projectAllocationRepository = projectAllocationRepository;</span>
+<span class="nc" id="L28">    }</span>
+
+    /**
+     * Save a projectAllocation.
+     *
+     * @param projectAllocation the entity to save.
+     * @return the persisted entity.
+     */
+    @Override
+    public ProjectAllocation save(ProjectAllocation projectAllocation) {
+<span class="nc" id="L38">        log.debug(&quot;Request to save ProjectAllocation : {}&quot;, projectAllocation);</span>
+<span class="nc" id="L39">        return projectAllocationRepository.save(projectAllocation);</span>
+    }
+
+    /**
+     * Get all the projectAllocations.
+     *
+     * @return the list of entities.
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List&lt;ProjectAllocation&gt; findAll() {
+<span class="nc" id="L50">        log.debug(&quot;Request to get all ProjectAllocations&quot;);</span>
+<span class="nc" id="L51">        return projectAllocationRepository.findAll();</span>
+    }
+
+
+    /**
+     * Get one projectAllocation by id.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Optional&lt;ProjectAllocation&gt; findOne(Long id) {
+<span class="nc" id="L64">        log.debug(&quot;Request to get ProjectAllocation : {}&quot;, id);</span>
+<span class="nc" id="L65">        return projectAllocationRepository.findById(id);</span>
+    }
+
+    /**
+     * Delete the projectAllocation by id.
+     *
+     * @param id the id of the entity.
+     */
+    @Override
+    public void delete(Long id) {
+<span class="nc" id="L75">        log.debug(&quot;Request to delete ProjectAllocation : {}&quot;, id);</span>
+<span class="nc" id="L76">        projectAllocationRepository.deleteById(id);</span>
+<span class="nc" id="L77">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

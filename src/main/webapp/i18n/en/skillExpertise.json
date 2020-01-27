@@ -1,0 +1,23 @@
+{
+  "App": {
+    "skillExpertise": {
+      "home": {
+        "title": "Skill Expertises",
+        "createLabel": "Create a new Skill Expertise",
+        "createOrEditLabel": "Create or edit a Skill Expertise"
+      },
+      "created": "A new Skill Expertise is created with identifier {{ param }}",
+      "updated": "A Skill Expertise is updated with identifier {{ param }}",
+      "deleted": "A Skill Expertise is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Skill Expertise {{ id }}?"
+      },
+      "detail": {
+        "title": "Skill Expertise"
+      },
+      "code": "Code",
+      "name": "Name",
+      "description": "Description"
+    }
+  }
+}

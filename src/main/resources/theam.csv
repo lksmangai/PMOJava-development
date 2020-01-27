@@ -1,0 +1,7 @@
+category_id;category;description;category_type;category_gif;enabled_p;parent_only_p;aux_int1;aux_int2;aux_string1;aux_string2;sort_order;visible_tcl
+10046320;Project Theme;Theme for 2019 strategy;Project Theme;category;f;f;;;;;0;
+10046325;Platform and Process;;Project Theme;category;t;f;;;;;0;
+10046321;Value Based Care;;Project Theme;category;t;f;;;;;0;
+10046322;Team Based Care;;Project Theme;category;t;f;;;;;0;
+10046323;Data and Analytics;;Project Theme;category;t;f;;;;;0;
+10046324;Automation;;Project Theme;category;t;f;;;;;0;

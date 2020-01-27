@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OpportunityPriorityIdResource.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.web.rest</a> &gt; <span class="el_source">OpportunityPriorityIdResource.java</span></div><h1>OpportunityPriorityIdResource.java</h1><pre class="source lang-java linenums">package com.qnowapp.web.rest;
+
+import com.qnowapp.domain.OpportunityPriorityId;
+import com.qnowapp.domain.ProjectInitiativeId;
+import com.qnowapp.repository.OpportunityPriorityIdRepository;
+import com.qnowapp.service.OpportunityPriorityIdQueryService;
+import com.qnowapp.service.OpportunityPriorityIdService;
+import com.qnowapp.service.dto.OpportunityPriorityIdCriteria;
+import com.qnowapp.web.rest.errors.BadRequestAlertException;
+
+import io.github.jhipster.web.util.HeaderUtil;
+import io.github.jhipster.web.util.ResponseUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * REST controller for managing {@link com.qnowapp.domain.OpportunityPriorityId}.
+ */
+@CrossOrigin(origins = &quot;*&quot;, allowedHeaders = &quot;*&quot;)
+@RestController
+@RequestMapping(&quot;/api&quot;)
+public class OpportunityPriorityIdResource {
+
+<span class="nc" id="L36">    private final Logger log = LoggerFactory.getLogger(OpportunityPriorityIdResource.class);</span>
+
+    private static final String ENTITY_NAME = &quot;opportunityPriorityId&quot;;
+
+    @Value(&quot;${jhipster.clientApp.name}&quot;)
+    private String applicationName;
+    @Autowired
+    OpportunityPriorityIdRepository opportunityPriorityIdRepository;
+<span class="nc" id="L44">    private static Boolean fromTesting = true;</span>
+
+
+    
+    private final OpportunityPriorityIdService opportunityPriorityIdService;
+
+    private final OpportunityPriorityIdQueryService opportunityPriorityIdQueryService;
+
+<span class="nc" id="L52">    public OpportunityPriorityIdResource( OpportunityPriorityIdService opportunityPriorityIdService, OpportunityPriorityIdQueryService opportunityPriorityIdQueryService) {</span>
+<span class="nc" id="L53">        this.opportunityPriorityIdService = opportunityPriorityIdService;</span>
+<span class="nc" id="L54">        this.opportunityPriorityIdQueryService = opportunityPriorityIdQueryService;</span>
+       
+<span class="nc" id="L56">    }</span>
+ 
+    public static void setFromTesting(Boolean bState) {
+<span class="nc" id="L59">        fromTesting = bState;</span>
+<span class="nc" id="L60">    }</span>
+    /**
+     * {@code POST  /opportunity-priority-ids} : Create a new opportunityPriorityId.
+     *
+     * @param opportunityPriorityId the opportunityPriorityId to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new opportunityPriorityId, or with status {@code 400 (Bad Request)} if the opportunityPriorityId has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @CrossOrigin
+    @PostMapping(&quot;/opportunity-priority-ids&quot;)
+    public ResponseEntity&lt;OpportunityPriorityId&gt; createOpportunityPriorityId(@RequestBody OpportunityPriorityId opportunityPriorityId) throws URISyntaxException {
+<span class="nc" id="L71">        log.debug(&quot;REST request to save OpportunityPriorityId : {}&quot;, opportunityPriorityId);</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">        if (opportunityPriorityId.getId() != null) {</span>
+<span class="nc" id="L73">            throw new BadRequestAlertException(&quot;A new opportunityPriorityId cannot already have an ID&quot;, ENTITY_NAME, &quot;idexists&quot;);</span>
+        }else {
+
+<span class="nc" id="L76">            OpportunityPriorityId result = opportunityPriorityIdRepository.save(opportunityPriorityId);</span>
+<span class="nc" id="L77">            ResponseEntity&lt;OpportunityPriorityId&gt; a = ResponseEntity.created(new URI(&quot;/api/project-initiative-ids/&quot; + result.getId()))</span>
+<span class="nc" id="L78">                    .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))</span>
+<span class="nc" id="L79">                    .body(result);</span>
+
+<span class="nc bnc" id="L81" title="All 2 branches missed.">            if (fromTesting == false) {</span>
+<span class="nc" id="L82">                System.out.println(opportunityPriorityId.getName());</span>
+<span class="nc" id="L83">                String csvFile1 = &quot;src\\main\\resources\\priority.csv&quot;;</span>
+<span class="nc" id="L84">                BufferedReader br = null;</span>
+<span class="nc" id="L85">                String line = &quot;&quot;;</span>
+<span class="nc" id="L86">                String cvsSplitBy = &quot;;&quot;;</span>
+
+                try {
+<span class="nc" id="L89">                    br = new BufferedReader(new FileReader(csvFile1));</span>
+<span class="nc" id="L90">                    int count = 0;</span>
+<span class="nc bnc" id="L91" title="All 2 branches missed.">                    while ((line = br.readLine()) != null) {</span>
+<span class="nc" id="L92">                        count++;</span>
+<span class="nc" id="L93">                        System.out.println(+count);</span>
+<span class="nc bnc" id="L94" title="All 2 branches missed.">                        if (count == 1)</span>
+<span class="nc" id="L95">                            continue;</span>
+<span class="nc" id="L96">                        String[] country = line.split(cvsSplitBy);</span>
+                        try {
+<span class="nc bnc" id="L98" title="All 2 branches missed.">                            if (country.length &gt; 3 ) {</span>
+<span class="nc" id="L99">                                System.out.println(&quot;1&quot;);</span>
+<span class="nc" id="L100">                                opportunityPriorityId.setId(null);</span>
+<span class="nc" id="L101">                                opportunityPriorityId.setCode(country[0]);</span>
+<span class="nc" id="L102">                                System.out.println(&quot;2&quot;);</span>
+<span class="nc" id="L103">                                opportunityPriorityId.setName(country[1]);</span>
+<span class="nc" id="L104">                                System.out.println(&quot;3&quot;);</span>
+<span class="nc" id="L105">                                opportunityPriorityId.setDescription(country[2]);</span>
+<span class="nc" id="L106">                                OpportunityPriorityId result2 = opportunityPriorityIdRepository.save(opportunityPriorityId);    </span>
+<span class="nc" id="L107">                                System.out.println(result2.getId());</span>
+<span class="nc" id="L108">                                System.out.println(opportunityPriorityId + &quot;new project created&quot;);</span>
+                            }
+<span class="nc" id="L110">                        } catch (Exception e) {</span>
+<span class="nc" id="L111">                        }</span>
+<span class="nc" id="L112">                    }</span>
+<span class="nc" id="L113">                } catch (Exception e) {</span>
+                    // TODO: handle exception
+                } finally {
+<span class="nc bnc" id="L116" title="All 2 branches missed.">                    if (br != null) {</span>
+                        try {
+<span class="nc" id="L118">                            br.close();</span>
+<span class="nc" id="L119">                        } catch (Exception e) {</span>
+<span class="nc" id="L120">                            System.out.println(e);</span>
+<span class="nc" id="L121">                        }</span>
+                    
+                    }
+                }
+            }
+<span class="nc" id="L126">        return a;</span>
+        }
+
+
+    }
+
+    @CrossOrigin
+    @PutMapping(&quot;/opportunity-priority-ids&quot;)
+    public ResponseEntity&lt;OpportunityPriorityId&gt; updateOpportunityPriorityId(@RequestBody OpportunityPriorityId opportunityPriorityId) throws URISyntaxException {
+<span class="nc" id="L135">        log.debug(&quot;REST request to update OpportunityPriorityId : {}&quot;, opportunityPriorityId);</span>
+<span class="nc bnc" id="L136" title="All 2 branches missed.">        if (opportunityPriorityId.getId() == null) {</span>
+<span class="nc" id="L137">            throw new BadRequestAlertException(&quot;Invalid id&quot;, ENTITY_NAME, &quot;idnull&quot;);</span>
+        }
+<span class="nc" id="L139">        OpportunityPriorityId result = opportunityPriorityIdService.save(opportunityPriorityId);</span>
+<span class="nc" id="L140">        return ResponseEntity.ok()</span>
+<span class="nc" id="L141">            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, opportunityPriorityId.getId().toString()))</span>
+<span class="nc" id="L142">            .body(result);</span>
+    }
+
+    /**
+     * {@code GET  /opportunity-priority-ids} : get all the opportunityPriorityIds.
+     *
+     * @param criteria the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of opportunityPriorityIds in body.
+     */
+    @CrossOrigin
+    @GetMapping(&quot;/opportunity-priority-ids&quot;)
+    public ResponseEntity&lt;List&lt;OpportunityPriorityId&gt;&gt; getAllOpportunityPriorityIds(OpportunityPriorityIdCriteria criteria) {
+<span class="nc" id="L154">        log.debug(&quot;REST request to get OpportunityPriorityIds by criteria: {}&quot;, criteria);</span>
+<span class="nc" id="L155">        List&lt;OpportunityPriorityId&gt; entityList = opportunityPriorityIdQueryService.findByCriteria(criteria);</span>
+<span class="nc" id="L156">        return ResponseEntity.ok().body(entityList);</span>
+    }
+
+  
+    @CrossOrigin
+    @GetMapping(&quot;/opportunity-priority-ids/count&quot;)
+    public ResponseEntity&lt;Long&gt; countOpportunityPriorityIds(OpportunityPriorityIdCriteria criteria) {
+<span class="nc" id="L163">        log.debug(&quot;REST request to count OpportunityPriorityIds by criteria: {}&quot;, criteria);</span>
+<span class="nc" id="L164">        return ResponseEntity.ok().body(opportunityPriorityIdQueryService.countByCriteria(criteria));</span>
+    }
+
+    
+
+    @CrossOrigin
+    @GetMapping(&quot;/opportunity-priority-ids/{id}&quot;)
+    public ResponseEntity&lt;OpportunityPriorityId&gt; getOpportunityPriorityId(@PathVariable Long id) {
+<span class="nc" id="L172">        log.debug(&quot;REST request to get OpportunityPriorityId : {}&quot;, id);</span>
+<span class="nc" id="L173">        Optional&lt;OpportunityPriorityId&gt; opportunityPriorityId = opportunityPriorityIdService.findOne(id);</span>
+<span class="nc" id="L174">        return ResponseUtil.wrapOrNotFound(opportunityPriorityId);</span>
+    }
+
+
+    @CrossOrigin
+    @DeleteMapping(&quot;/opportunity-priority-ids/{id}&quot;)
+    public ResponseEntity&lt;Void&gt; deleteOpportunityPriorityId(@PathVariable Long id) {
+<span class="nc" id="L181">        log.debug(&quot;REST request to delete OpportunityPriorityId : {}&quot;, id);</span>
+<span class="nc" id="L182">        opportunityPriorityIdService.delete(id);</span>
+<span class="nc" id="L183">        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

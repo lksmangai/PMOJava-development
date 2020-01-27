@@ -1,0 +1,23 @@
+{
+  "App": {
+    "projectBoardId": {
+      "home": {
+        "title": "Project Board Ids",
+        "createLabel": "Create a new Project Board Id",
+        "createOrEditLabel": "Create or edit a Project Board Id"
+      },
+      "created": "A new Project Board Id is created with identifier {{ param }}",
+      "updated": "A Project Board Id is updated with identifier {{ param }}",
+      "deleted": "A Project Board Id is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Project Board Id {{ id }}?"
+      },
+      "detail": {
+        "title": "Project Board Id"
+      },
+      "code": "Code",
+      "name": "Name",
+      "description": "Description"
+    }
+  }
+}

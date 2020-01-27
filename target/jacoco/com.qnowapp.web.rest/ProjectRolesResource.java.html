@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProjectRolesResource.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.web.rest</a> &gt; <span class="el_source">ProjectRolesResource.java</span></div><h1>ProjectRolesResource.java</h1><pre class="source lang-java linenums">package com.qnowapp.web.rest;
+
+import com.qnowapp.domain.ProjectClass;
+import com.qnowapp.domain.ProjectRoles;
+import com.qnowapp.repository.ProjectRolesRepository;
+import com.qnowapp.service.ProjectRolesQueryService;
+import com.qnowapp.service.ProjectRolesService;
+import com.qnowapp.service.dto.ProjectRolesCriteria;
+import com.qnowapp.web.rest.errors.BadRequestAlertException;
+
+import io.github.jhipster.web.util.HeaderUtil;
+import io.github.jhipster.web.util.ResponseUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * REST controller for managing {@link com.qnowapp.domain.ProjectRoles}.
+ */
+@CrossOrigin(origins = &quot;*&quot;, allowedHeaders = &quot;*&quot;)
+@RestController
+@RequestMapping(&quot;/api&quot;)
+public class ProjectRolesResource {
+
+<span class="nc" id="L36">    private final Logger log = LoggerFactory.getLogger(ProjectRolesResource.class);</span>
+
+    private static final String ENTITY_NAME = &quot;projectRoles&quot;;
+
+    @Value(&quot;${jhipster.clientApp.name}&quot;)
+    private String applicationName;
+    @Autowired
+    ProjectRolesRepository projectRolesRepository;
+<span class="nc" id="L44">    private static Boolean fromTesting = true;</span>
+
+
+
+
+    private final ProjectRolesService projectRolesService;
+
+    private final ProjectRolesQueryService projectRolesQueryService;
+
+<span class="nc" id="L53">    public ProjectRolesResource(ProjectRolesService projectRolesService, ProjectRolesQueryService projectRolesQueryService) {</span>
+<span class="nc" id="L54">        this.projectRolesService = projectRolesService;</span>
+<span class="nc" id="L55">        this.projectRolesQueryService = projectRolesQueryService;</span>
+     
+<span class="nc" id="L57">    }</span>
+    /**
+     * {@code POST  /project-roles} : Create a new projectRoles.
+     *
+     * @param projectRoles the projectRoles to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new projectRoles, or with status {@code 400 (Bad Request)} if the projectRoles has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @CrossOrigin
+    @PostMapping(&quot;/project-roles&quot;)
+    public ResponseEntity&lt;ProjectRoles&gt; createProjectRoles(@RequestBody ProjectRoles projectRoles) throws URISyntaxException {
+<span class="nc" id="L68">        log.debug(&quot;REST request to save ProjectRoles : {}&quot;, projectRoles);</span>
+<span class="nc bnc" id="L69" title="All 2 branches missed.">        if (projectRoles.getId() != null) {</span>
+<span class="nc" id="L70">            throw new BadRequestAlertException(&quot;A new projectRoles cannot already have an ID&quot;, ENTITY_NAME, &quot;idexists&quot;);</span>
+        }else {
+  
+<span class="nc" id="L73">            ProjectRoles result = projectRolesRepository.save(projectRoles);</span>
+<span class="nc" id="L74">            ResponseEntity&lt;ProjectRoles&gt; a = ResponseEntity.created(new URI(&quot;/api/project-initiative-ids/&quot; + result.getId()))</span>
+<span class="nc" id="L75">                    .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))</span>
+<span class="nc" id="L76">                    .body(result);</span>
+
+<span class="nc bnc" id="L78" title="All 2 branches missed.">            if (fromTesting == false) {</span>
+<span class="nc" id="L79">                System.out.println(projectRoles.getName());</span>
+<span class="nc" id="L80">                String csvFile1 = &quot;src\\main\\resources\\roles.csv&quot;;</span>
+<span class="nc" id="L81">                BufferedReader br = null;</span>
+<span class="nc" id="L82">                String line = &quot;&quot;;</span>
+<span class="nc" id="L83">                String cvsSplitBy = &quot;;&quot;;</span>
+
+                try {
+<span class="nc" id="L86">                    br = new BufferedReader(new FileReader(csvFile1));</span>
+<span class="nc" id="L87">                    int count = 0;</span>
+<span class="nc bnc" id="L88" title="All 2 branches missed.">                    while ((line = br.readLine()) != null) {</span>
+<span class="nc" id="L89">                        count++;</span>
+<span class="nc" id="L90">                        System.out.println(+count);</span>
+<span class="nc bnc" id="L91" title="All 2 branches missed.">                        if (count == 1)</span>
+<span class="nc" id="L92">                            continue;</span>
+<span class="nc" id="L93">                        String[] country = line.split(cvsSplitBy);</span>
+                        try {
+<span class="nc bnc" id="L95" title="All 2 branches missed.">                            if (country.length &gt; 3 ) {</span>
+<span class="nc" id="L96">                                System.out.println(&quot;1&quot;);</span>
+<span class="nc" id="L97">                                projectRoles.setId(null);</span>
+<span class="nc" id="L98">                                projectRoles.setCode(country[0]);</span>
+<span class="nc" id="L99">                                System.out.println(&quot;2&quot;);</span>
+<span class="nc" id="L100">                                projectRoles.setName(country[1]);</span>
+<span class="nc" id="L101">                                System.out.println(&quot;3&quot;);</span>
+<span class="nc" id="L102">                                projectRoles.setDescription(country[2]);</span>
+<span class="nc" id="L103">                                ProjectRoles result2 = projectRolesRepository.save(projectRoles);   </span>
+<span class="nc" id="L104">                                System.out.println(result2.getId());</span>
+<span class="nc" id="L105">                                System.out.println(projectRoles + &quot;new project created&quot;);</span>
+                            }
+<span class="nc" id="L107">                        } catch (Exception e) {</span>
+<span class="nc" id="L108">                        }</span>
+<span class="nc" id="L109">                    }</span>
+<span class="nc" id="L110">                } catch (Exception e) {</span>
+                    // TODO: handle exception
+                } finally {
+<span class="nc bnc" id="L113" title="All 2 branches missed.">                    if (br != null) {</span>
+                        try {
+<span class="nc" id="L115">                            br.close();</span>
+<span class="nc" id="L116">                        } catch (Exception e) {</span>
+<span class="nc" id="L117">                            System.out.println(e);</span>
+<span class="nc" id="L118">                        }</span>
+                    
+                    }
+                }
+            }
+<span class="nc" id="L123">        return a;</span>
+        }
+
+    }
+
+    /**
+     * {@code PUT  /project-roles} : Updates an existing projectRoles.
+     *
+     * @param projectRoles the projectRoles to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated projectRoles,
+     * or with status {@code 400 (Bad Request)} if the projectRoles is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the projectRoles couldn't be updated.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @CrossOrigin
+    @PutMapping(&quot;/project-roles&quot;)
+    public ResponseEntity&lt;ProjectRoles&gt; updateProjectRoles(@RequestBody ProjectRoles projectRoles) throws URISyntaxException {
+<span class="nc" id="L140">        log.debug(&quot;REST request to update ProjectRoles : {}&quot;, projectRoles);</span>
+<span class="nc bnc" id="L141" title="All 2 branches missed.">        if (projectRoles.getId() == null) {</span>
+<span class="nc" id="L142">            throw new BadRequestAlertException(&quot;Invalid id&quot;, ENTITY_NAME, &quot;idnull&quot;);</span>
+        }
+<span class="nc" id="L144">        ProjectRoles result = projectRolesService.save(projectRoles);</span>
+<span class="nc" id="L145">        return ResponseEntity.ok()</span>
+<span class="nc" id="L146">            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, projectRoles.getId().toString()))</span>
+<span class="nc" id="L147">            .body(result);</span>
+    }
+
+    /**
+     * {@code GET  /project-roles} : get all the projectRoles.
+     *
+     * @param criteria the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of projectRoles in body.
+     */
+    @CrossOrigin
+    @GetMapping(&quot;/project-roles&quot;)
+    public ResponseEntity&lt;List&lt;ProjectRoles&gt;&gt; getAllProjectRoles(ProjectRolesCriteria criteria) {
+<span class="nc" id="L159">        log.debug(&quot;REST request to get ProjectRoles by criteria: {}&quot;, criteria);</span>
+<span class="nc" id="L160">        List&lt;ProjectRoles&gt; entityList = projectRolesQueryService.findByCriteria(criteria);</span>
+<span class="nc" id="L161">        return ResponseEntity.ok().body(entityList);</span>
+    }
+
+    /**
+    * {@code GET  /project-roles/count} : count all the projectRoles.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping(&quot;/project-roles/count&quot;)
+    public ResponseEntity&lt;Long&gt; countProjectRoles(ProjectRolesCriteria criteria) {
+<span class="nc" id="L173">        log.debug(&quot;REST request to count ProjectRoles by criteria: {}&quot;, criteria);</span>
+<span class="nc" id="L174">        return ResponseEntity.ok().body(projectRolesQueryService.countByCriteria(criteria));</span>
+    }
+
+    /**
+     * {@code GET  /project-roles/:id} : get the &quot;id&quot; projectRoles.
+     *
+     * @param id the id of the projectRoles to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the projectRoles, or with status {@code 404 (Not Found)}.
+     */
+    @CrossOrigin
+    @GetMapping(&quot;/project-roles/{id}&quot;)
+    public ResponseEntity&lt;ProjectRoles&gt; getProjectRoles(@PathVariable Long id) {
+<span class="nc" id="L186">        log.debug(&quot;REST request to get ProjectRoles : {}&quot;, id);</span>
+<span class="nc" id="L187">        Optional&lt;ProjectRoles&gt; projectRoles = projectRolesService.findOne(id);</span>
+<span class="nc" id="L188">        return ResponseUtil.wrapOrNotFound(projectRoles);</span>
+    }
+
+    /**
+     * {@code DELETE  /project-roles/:id} : delete the &quot;id&quot; projectRoles.
+     *
+     * @param id the id of the projectRoles to delete.
+     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
+     */
+    @CrossOrigin
+    @DeleteMapping(&quot;/project-roles/{id}&quot;)
+    public ResponseEntity&lt;Void&gt; deleteProjectRoles(@PathVariable Long id) {
+<span class="nc" id="L200">        log.debug(&quot;REST request to delete ProjectRoles : {}&quot;, id);</span>
+<span class="nc" id="L201">        projectRolesService.delete(id);</span>
+<span class="nc" id="L202">        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

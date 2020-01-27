@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImEmployee.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.domain</a> &gt; <span class="el_source">ImEmployee.java</span></div><h1>ImEmployee.java</h1><pre class="source lang-java linenums">package com.qnowapp.domain;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import javax.persistence.*;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.ZonedDateTime;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Objects;
+
+/**
+ * A ImEmployee.
+ */
+@Entity
+@Table(name = &quot;im_employee&quot;)
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+<span class="nc" id="L23">public class ImEmployee implements Serializable {</span>
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = &quot;sequenceGenerator&quot;)
+    @SequenceGenerator(name = &quot;sequenceGenerator&quot;)
+    private Long id;
+
+    @Column(name = &quot;job_title&quot;)
+    private String jobTitle;
+
+    @Column(name = &quot;job_description&quot;)
+    private String jobDescription;
+
+    @Column(name = &quot;availability&quot;)
+    private Integer availability;
+
+    @Column(name = &quot;ss_number&quot;)
+    private String ssNumber;
+
+    @Column(name = &quot;salary&quot;, precision = 21, scale = 2)
+    private BigDecimal salary;
+
+    @Column(name = &quot;social_security&quot;)
+    private Integer socialSecurity;
+
+    @Column(name = &quot;insurance&quot;)
+    private Integer insurance;
+
+    @Column(name = &quot;other_costs&quot;)
+    private Integer otherCosts;
+
+    @Column(name = &quot;currency&quot;)
+    private String currency;
+
+    @Column(name = &quot;dependant_p&quot;)
+    private String dependantP;
+
+    @Column(name = &quot;only_job_p&quot;)
+    private String onlyJobP;
+
+    @Column(name = &quot;married_p&quot;)
+    private String marriedP;
+
+    @Column(name = &quot;head_of_household_p&quot;)
+    private String headOfHouseholdP;
+
+    @Column(name = &quot;birthdate&quot;)
+    private ZonedDateTime birthdate;
+
+    @Column(name = &quot;hourly_cost&quot;, precision = 21, scale = 2)
+    private BigDecimal hourlyCost;
+
+    @OneToOne
+    @JoinColumn(unique = true)
+    private QnowUser qnowUser;
+
+    @ManyToOne
+    @JsonIgnoreProperties(&quot;imEmployees&quot;)
+    private EmployeeStatus employeeStatus;
+
+    @ManyToOne
+    @JsonIgnoreProperties(&quot;imEmployees&quot;)
+    private Department departmentId;
+
+    @ManyToOne
+    @JsonIgnoreProperties(&quot;imEmployees&quot;)
+    private ImEmployee supervisorId;
+
+<span class="nc" id="L93">    @ManyToMany</span>
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = &quot;im_employee_user_contact&quot;,
+               joinColumns = @JoinColumn(name = &quot;im_employee_id&quot;, referencedColumnName = &quot;id&quot;),
+               inverseJoinColumns = @JoinColumn(name = &quot;user_contact_id&quot;, referencedColumnName = &quot;id&quot;))
+    private Set&lt;UserContact&gt; userContacts = new HashSet&lt;&gt;();
+
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    public Long getId() {
+<span class="nc" id="L102">        return id;</span>
+    }
+
+    public void setId(Long id) {
+<span class="nc" id="L106">        this.id = id;</span>
+<span class="nc" id="L107">    }</span>
+
+    public String getJobTitle() {
+<span class="nc" id="L110">        return jobTitle;</span>
+    }
+
+    public ImEmployee jobTitle(String jobTitle) {
+<span class="nc" id="L114">        this.jobTitle = jobTitle;</span>
+<span class="nc" id="L115">        return this;</span>
+    }
+
+    public void setJobTitle(String jobTitle) {
+<span class="nc" id="L119">        this.jobTitle = jobTitle;</span>
+<span class="nc" id="L120">    }</span>
+
+    public String getJobDescription() {
+<span class="nc" id="L123">        return jobDescription;</span>
+    }
+
+    public ImEmployee jobDescription(String jobDescription) {
+<span class="nc" id="L127">        this.jobDescription = jobDescription;</span>
+<span class="nc" id="L128">        return this;</span>
+    }
+
+    public void setJobDescription(String jobDescription) {
+<span class="nc" id="L132">        this.jobDescription = jobDescription;</span>
+<span class="nc" id="L133">    }</span>
+
+    public Integer getAvailability() {
+<span class="nc" id="L136">        return availability;</span>
+    }
+
+    public ImEmployee availability(Integer availability) {
+<span class="nc" id="L140">        this.availability = availability;</span>
+<span class="nc" id="L141">        return this;</span>
+    }
+
+    public void setAvailability(Integer availability) {
+<span class="nc" id="L145">        this.availability = availability;</span>
+<span class="nc" id="L146">    }</span>
+
+    public String getSsNumber() {
+<span class="nc" id="L149">        return ssNumber;</span>
+    }
+
+    public ImEmployee ssNumber(String ssNumber) {
+<span class="nc" id="L153">        this.ssNumber = ssNumber;</span>
+<span class="nc" id="L154">        return this;</span>
+    }
+
+    public void setSsNumber(String ssNumber) {
+<span class="nc" id="L158">        this.ssNumber = ssNumber;</span>
+<span class="nc" id="L159">    }</span>
+
+    public BigDecimal getSalary() {
+<span class="nc" id="L162">        return salary;</span>
+    }
+
+    public ImEmployee salary(BigDecimal salary) {
+<span class="nc" id="L166">        this.salary = salary;</span>
+<span class="nc" id="L167">        return this;</span>
+    }
+
+    public void setSalary(BigDecimal salary) {
+<span class="nc" id="L171">        this.salary = salary;</span>
+<span class="nc" id="L172">    }</span>
+
+    public Integer getSocialSecurity() {
+<span class="nc" id="L175">        return socialSecurity;</span>
+    }
+
+    public ImEmployee socialSecurity(Integer socialSecurity) {
+<span class="nc" id="L179">        this.socialSecurity = socialSecurity;</span>
+<span class="nc" id="L180">        return this;</span>
+    }
+
+    public void setSocialSecurity(Integer socialSecurity) {
+<span class="nc" id="L184">        this.socialSecurity = socialSecurity;</span>
+<span class="nc" id="L185">    }</span>
+
+    public Integer getInsurance() {
+<span class="nc" id="L188">        return insurance;</span>
+    }
+
+    public ImEmployee insurance(Integer insurance) {
+<span class="nc" id="L192">        this.insurance = insurance;</span>
+<span class="nc" id="L193">        return this;</span>
+    }
+
+    public void setInsurance(Integer insurance) {
+<span class="nc" id="L197">        this.insurance = insurance;</span>
+<span class="nc" id="L198">    }</span>
+
+    public Integer getOtherCosts() {
+<span class="nc" id="L201">        return otherCosts;</span>
+    }
+
+    public ImEmployee otherCosts(Integer otherCosts) {
+<span class="nc" id="L205">        this.otherCosts = otherCosts;</span>
+<span class="nc" id="L206">        return this;</span>
+    }
+
+    public void setOtherCosts(Integer otherCosts) {
+<span class="nc" id="L210">        this.otherCosts = otherCosts;</span>
+<span class="nc" id="L211">    }</span>
+
+    public String getCurrency() {
+<span class="nc" id="L214">        return currency;</span>
+    }
+
+    public ImEmployee currency(String currency) {
+<span class="nc" id="L218">        this.currency = currency;</span>
+<span class="nc" id="L219">        return this;</span>
+    }
+
+    public void setCurrency(String currency) {
+<span class="nc" id="L223">        this.currency = currency;</span>
+<span class="nc" id="L224">    }</span>
+
+    public String getDependantP() {
+<span class="nc" id="L227">        return dependantP;</span>
+    }
+
+    public ImEmployee dependantP(String dependantP) {
+<span class="nc" id="L231">        this.dependantP = dependantP;</span>
+<span class="nc" id="L232">        return this;</span>
+    }
+
+    public void setDependantP(String dependantP) {
+<span class="nc" id="L236">        this.dependantP = dependantP;</span>
+<span class="nc" id="L237">    }</span>
+
+    public String getOnlyJobP() {
+<span class="nc" id="L240">        return onlyJobP;</span>
+    }
+
+    public ImEmployee onlyJobP(String onlyJobP) {
+<span class="nc" id="L244">        this.onlyJobP = onlyJobP;</span>
+<span class="nc" id="L245">        return this;</span>
+    }
+
+    public void setOnlyJobP(String onlyJobP) {
+<span class="nc" id="L249">        this.onlyJobP = onlyJobP;</span>
+<span class="nc" id="L250">    }</span>
+
+    public String getMarriedP() {
+<span class="nc" id="L253">        return marriedP;</span>
+    }
+
+    public ImEmployee marriedP(String marriedP) {
+<span class="nc" id="L257">        this.marriedP = marriedP;</span>
+<span class="nc" id="L258">        return this;</span>
+    }
+
+    public void setMarriedP(String marriedP) {
+<span class="nc" id="L262">        this.marriedP = marriedP;</span>
+<span class="nc" id="L263">    }</span>
+
+    public String getHeadOfHouseholdP() {
+<span class="nc" id="L266">        return headOfHouseholdP;</span>
+    }
+
+    public ImEmployee headOfHouseholdP(String headOfHouseholdP) {
+<span class="nc" id="L270">        this.headOfHouseholdP = headOfHouseholdP;</span>
+<span class="nc" id="L271">        return this;</span>
+    }
+
+    public void setHeadOfHouseholdP(String headOfHouseholdP) {
+<span class="nc" id="L275">        this.headOfHouseholdP = headOfHouseholdP;</span>
+<span class="nc" id="L276">    }</span>
+
+    public ZonedDateTime getBirthdate() {
+<span class="nc" id="L279">        return birthdate;</span>
+    }
+
+    public ImEmployee birthdate(ZonedDateTime birthdate) {
+<span class="nc" id="L283">        this.birthdate = birthdate;</span>
+<span class="nc" id="L284">        return this;</span>
+    }
+
+    public void setBirthdate(ZonedDateTime birthdate) {
+<span class="nc" id="L288">        this.birthdate = birthdate;</span>
+<span class="nc" id="L289">    }</span>
+
+    public BigDecimal getHourlyCost() {
+<span class="nc" id="L292">        return hourlyCost;</span>
+    }
+
+    public ImEmployee hourlyCost(BigDecimal hourlyCost) {
+<span class="nc" id="L296">        this.hourlyCost = hourlyCost;</span>
+<span class="nc" id="L297">        return this;</span>
+    }
+
+    public void setHourlyCost(BigDecimal hourlyCost) {
+<span class="nc" id="L301">        this.hourlyCost = hourlyCost;</span>
+<span class="nc" id="L302">    }</span>
+
+    public QnowUser getQnowUser() {
+<span class="nc" id="L305">        return qnowUser;</span>
+    }
+
+    public ImEmployee qnowUser(QnowUser qnowUser) {
+<span class="nc" id="L309">        this.qnowUser = qnowUser;</span>
+<span class="nc" id="L310">        return this;</span>
+    }
+
+    public void setQnowUser(QnowUser qnowUser) {
+<span class="nc" id="L314">        this.qnowUser = qnowUser;</span>
+<span class="nc" id="L315">    }</span>
+
+    public EmployeeStatus getEmployeeStatus() {
+<span class="nc" id="L318">        return employeeStatus;</span>
+    }
+
+    public ImEmployee employeeStatus(EmployeeStatus employeeStatus) {
+<span class="nc" id="L322">        this.employeeStatus = employeeStatus;</span>
+<span class="nc" id="L323">        return this;</span>
+    }
+
+    public void setEmployeeStatus(EmployeeStatus employeeStatus) {
+<span class="nc" id="L327">        this.employeeStatus = employeeStatus;</span>
+<span class="nc" id="L328">    }</span>
+
+    public Department getDepartmentId() {
+<span class="nc" id="L331">        return departmentId;</span>
+    }
+
+    public ImEmployee departmentId(Department department) {
+<span class="nc" id="L335">        this.departmentId = department;</span>
+<span class="nc" id="L336">        return this;</span>
+    }
+
+    public void setDepartmentId(Department department) {
+<span class="nc" id="L340">        this.departmentId = department;</span>
+<span class="nc" id="L341">    }</span>
+
+    public ImEmployee getSupervisorId() {
+<span class="nc" id="L344">        return supervisorId;</span>
+    }
+
+    public ImEmployee supervisorId(ImEmployee imEmployee) {
+<span class="nc" id="L348">        this.supervisorId = imEmployee;</span>
+<span class="nc" id="L349">        return this;</span>
+    }
+
+    public void setSupervisorId(ImEmployee imEmployee) {
+<span class="nc" id="L353">        this.supervisorId = imEmployee;</span>
+<span class="nc" id="L354">    }</span>
+
+    public Set&lt;UserContact&gt; getUserContacts() {
+<span class="nc" id="L357">        return userContacts;</span>
+    }
+
+    public ImEmployee userContacts(Set&lt;UserContact&gt; userContacts) {
+<span class="nc" id="L361">        this.userContacts = userContacts;</span>
+<span class="nc" id="L362">        return this;</span>
+    }
+
+    public ImEmployee addUserContact(UserContact userContact) {
+<span class="nc" id="L366">        this.userContacts.add(userContact);</span>
+<span class="nc" id="L367">        userContact.getImEmployees().add(this);</span>
+<span class="nc" id="L368">        return this;</span>
+    }
+
+    public ImEmployee removeUserContact(UserContact userContact) {
+<span class="nc" id="L372">        this.userContacts.remove(userContact);</span>
+<span class="nc" id="L373">        userContact.getImEmployees().remove(this);</span>
+<span class="nc" id="L374">        return this;</span>
+    }
+
+    public void setUserContacts(Set&lt;UserContact&gt; userContacts) {
+<span class="nc" id="L378">        this.userContacts = userContacts;</span>
+<span class="nc" id="L379">    }</span>
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
+    @Override
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L384" title="All 2 branches missed.">        if (this == o) {</span>
+<span class="nc" id="L385">            return true;</span>
+        }
+<span class="nc bnc" id="L387" title="All 2 branches missed.">        if (!(o instanceof ImEmployee)) {</span>
+<span class="nc" id="L388">            return false;</span>
+        }
+<span class="nc bnc" id="L390" title="All 4 branches missed.">        return id != null &amp;&amp; id.equals(((ImEmployee) o).id);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L395">        return 31;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L400">        return &quot;ImEmployee{&quot; +</span>
+<span class="nc" id="L401">            &quot;id=&quot; + getId() +</span>
+<span class="nc" id="L402">            &quot;, jobTitle='&quot; + getJobTitle() + &quot;'&quot; +</span>
+<span class="nc" id="L403">            &quot;, jobDescription='&quot; + getJobDescription() + &quot;'&quot; +</span>
+<span class="nc" id="L404">            &quot;, availability=&quot; + getAvailability() +</span>
+<span class="nc" id="L405">            &quot;, ssNumber='&quot; + getSsNumber() + &quot;'&quot; +</span>
+<span class="nc" id="L406">            &quot;, salary=&quot; + getSalary() +</span>
+<span class="nc" id="L407">            &quot;, socialSecurity=&quot; + getSocialSecurity() +</span>
+<span class="nc" id="L408">            &quot;, insurance=&quot; + getInsurance() +</span>
+<span class="nc" id="L409">            &quot;, otherCosts=&quot; + getOtherCosts() +</span>
+<span class="nc" id="L410">            &quot;, currency='&quot; + getCurrency() + &quot;'&quot; +</span>
+<span class="nc" id="L411">            &quot;, dependantP='&quot; + getDependantP() + &quot;'&quot; +</span>
+<span class="nc" id="L412">            &quot;, onlyJobP='&quot; + getOnlyJobP() + &quot;'&quot; +</span>
+<span class="nc" id="L413">            &quot;, marriedP='&quot; + getMarriedP() + &quot;'&quot; +</span>
+<span class="nc" id="L414">            &quot;, headOfHouseholdP='&quot; + getHeadOfHouseholdP() + &quot;'&quot; +</span>
+<span class="nc" id="L415">            &quot;, birthdate='&quot; + getBirthdate() + &quot;'&quot; +</span>
+<span class="nc" id="L416">            &quot;, hourlyCost=&quot; + getHourlyCost() +</span>
+            &quot;}&quot;;
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

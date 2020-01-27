@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProjectThemeResource.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.web.rest</a> &gt; <span class="el_source">ProjectThemeResource.java</span></div><h1>ProjectThemeResource.java</h1><pre class="source lang-java linenums">package com.qnowapp.web.rest;
+
+import com.qnowapp.domain.ProjectInitiativeId;
+import com.qnowapp.domain.ProjectTheme;
+import com.qnowapp.repository.ProjectThemeRepository;
+import com.qnowapp.service.ProjectThemeQueryService;
+import com.qnowapp.service.ProjectThemeService;
+import com.qnowapp.service.dto.ProjectThemeCriteria;
+import com.qnowapp.web.rest.errors.BadRequestAlertException;
+
+import io.github.jhipster.web.util.HeaderUtil;
+import io.github.jhipster.web.util.ResponseUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * REST controller for managing {@link com.qnowapp.domain.ProjectTheme}.
+ */
+@CrossOrigin(origins = &quot;*&quot;, allowedHeaders = &quot;*&quot;)
+@RestController
+@RequestMapping(&quot;/api&quot;)
+public class ProjectThemeResource {
+
+<span class="nc" id="L36">    private final Logger log = LoggerFactory.getLogger(ProjectThemeResource.class);</span>
+
+    private static final String ENTITY_NAME = &quot;projectTheme&quot;;
+
+    @Value(&quot;${jhipster.clientApp.name}&quot;)
+    private String applicationName;
+    @Autowired
+   ProjectThemeRepository projectThemeRepository;
+<span class="nc" id="L44">    private static Boolean fromTesting = true;</span>
+   
+    private final ProjectThemeService projectThemeService;
+
+  
+    private final ProjectThemeQueryService projectThemeQueryService;
+
+<span class="nc" id="L51">    public ProjectThemeResource( ProjectThemeService projectThemeService, ProjectThemeQueryService projectThemeQueryService) {</span>
+<span class="nc" id="L52">        this.projectThemeService = projectThemeService;</span>
+<span class="nc" id="L53">        this.projectThemeQueryService = projectThemeQueryService;</span>
+       
+
+<span class="nc" id="L56">    }</span>
+    public static void setFromTesting(Boolean bState) {
+<span class="nc" id="L58">        fromTesting = bState;</span>
+<span class="nc" id="L59">    }</span>
+    /**
+     * {@code POST  /project-themes} : Create a new projectTheme.
+     *
+     * @param projectTheme the projectTheme to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new projectTheme, or with status {@code 400 (Bad Request)} if the projectTheme has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @CrossOrigin
+    @PostMapping(&quot;/project-themes&quot;)
+    public ResponseEntity&lt;ProjectTheme&gt; createProjectTheme(@RequestBody ProjectTheme projectTheme) throws URISyntaxException {
+<span class="nc" id="L70">        log.debug(&quot;REST request to save ProjectTheme : {}&quot;, projectTheme);</span>
+<span class="nc bnc" id="L71" title="All 2 branches missed.">        if (projectTheme.getId() != null) {</span>
+<span class="nc" id="L72">            throw new BadRequestAlertException(&quot;A new projectTheme cannot already have an ID&quot;, ENTITY_NAME, &quot;idexists&quot;);</span>
+        }else {
+
+<span class="nc" id="L75">            ProjectTheme result = projectThemeRepository.save(projectTheme);</span>
+<span class="nc" id="L76">            ResponseEntity&lt;ProjectTheme&gt; a = ResponseEntity.created(new URI(&quot;/api/project-initiative-ids/&quot; + result.getId()))</span>
+<span class="nc" id="L77">                    .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))</span>
+<span class="nc" id="L78">                    .body(result);</span>
+
+
+<span class="nc bnc" id="L81" title="All 2 branches missed.">            if (fromTesting == false) {</span>
+<span class="nc" id="L82">                System.out.println(projectTheme.getName());</span>
+<span class="nc" id="L83">                String csvFile1 = &quot;src\\main\\resources\\theam.csv&quot;;</span>
+<span class="nc" id="L84">                BufferedReader br = null;</span>
+<span class="nc" id="L85">                String line = &quot;&quot;;</span>
+<span class="nc" id="L86">                String cvsSplitBy = &quot;;&quot;;</span>
+
+                try {
+<span class="nc" id="L89">                    br = new BufferedReader(new FileReader(csvFile1));</span>
+<span class="nc" id="L90">                    int count = 0;</span>
+<span class="nc bnc" id="L91" title="All 2 branches missed.">                    while ((line = br.readLine()) != null) {</span>
+<span class="nc" id="L92">                        count++;</span>
+<span class="nc" id="L93">                        System.out.println(+count);</span>
+<span class="nc bnc" id="L94" title="All 2 branches missed.">                        if (count == 1)</span>
+<span class="nc" id="L95">                            continue;</span>
+<span class="nc" id="L96">                        String[] country = line.split(cvsSplitBy);</span>
+                        try {
+<span class="nc bnc" id="L98" title="All 2 branches missed.">                            if (country.length &gt; 3 ) {</span>
+<span class="nc" id="L99">                                System.out.println(&quot;1&quot;);</span>
+<span class="nc" id="L100">                                projectTheme.setId(null);</span>
+<span class="nc" id="L101">                                projectTheme.setCode(country[0]);</span>
+<span class="nc" id="L102">                                System.out.println(&quot;2&quot;);</span>
+<span class="nc" id="L103">                                projectTheme.setName(country[1]);</span>
+<span class="nc" id="L104">                                System.out.println(&quot;3&quot;);</span>
+<span class="nc" id="L105">                                projectTheme.setDescription(country[2]);</span>
+<span class="nc" id="L106">                                ProjectTheme result2 = projectThemeRepository.save(projectTheme);   </span>
+<span class="nc" id="L107">                                System.out.println(result2.getId());</span>
+<span class="nc" id="L108">                                System.out.println(projectTheme + &quot;new project created&quot;);</span>
+                            }
+<span class="nc" id="L110">                        } catch (Exception e) {</span>
+<span class="nc" id="L111">                        }</span>
+<span class="nc" id="L112">                    }</span>
+<span class="nc" id="L113">                } catch (Exception e) {</span>
+                    // TODO: handle exception
+                } finally {
+<span class="nc bnc" id="L116" title="All 2 branches missed.">                    if (br != null) {</span>
+                        try {
+<span class="nc" id="L118">                            br.close();</span>
+<span class="nc" id="L119">                        } catch (Exception e) {</span>
+<span class="nc" id="L120">                            System.out.println(e);</span>
+<span class="nc" id="L121">                        }</span>
+                    
+                    }
+                }
+            }
+<span class="nc" id="L126">        return a;</span>
+        }
+    }
+    /**
+     * {@code PUT  /project-themes} : Updates an existing projectTheme.
+     *
+     * @param projectTheme the projectTheme to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated projectTheme,
+     * or with status {@code 400 (Bad Request)} if the projectTheme is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the projectTheme couldn't be updated.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @CrossOrigin
+    @PutMapping(&quot;/project-themes&quot;)
+    public ResponseEntity&lt;ProjectTheme&gt; updateProjectTheme(@RequestBody ProjectTheme projectTheme) throws URISyntaxException {
+<span class="nc" id="L141">        log.debug(&quot;REST request to update ProjectTheme : {}&quot;, projectTheme);</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">        if (projectTheme.getId() == null) {</span>
+<span class="nc" id="L143">            throw new BadRequestAlertException(&quot;Invalid id&quot;, ENTITY_NAME, &quot;idnull&quot;);</span>
+        }
+<span class="nc" id="L145">        ProjectTheme result = projectThemeService.save(projectTheme);</span>
+<span class="nc" id="L146">        return ResponseEntity.ok()</span>
+<span class="nc" id="L147">            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, projectTheme.getId().toString()))</span>
+<span class="nc" id="L148">            .body(result);</span>
+    }
+
+    /**
+     * {@code GET  /project-themes} : get all the projectThemes.
+     *
+     * @param criteria the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of projectThemes in body.
+     */
+    @CrossOrigin
+    @GetMapping(&quot;/project-themes&quot;)
+    public ResponseEntity&lt;List&lt;ProjectTheme&gt;&gt; getAllProjectThemes(ProjectThemeCriteria criteria) {
+<span class="nc" id="L160">        log.debug(&quot;REST request to get ProjectThemes by criteria: {}&quot;, criteria);</span>
+<span class="nc" id="L161">        List&lt;ProjectTheme&gt; entityList = projectThemeQueryService.findByCriteria(criteria);</span>
+<span class="nc" id="L162">        return ResponseEntity.ok().body(entityList);</span>
+    }
+
+    /**
+    * {@code GET  /project-themes/count} : count all the projectThemes.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping(&quot;/project-themes/count&quot;)
+    public ResponseEntity&lt;Long&gt; countProjectThemes(ProjectThemeCriteria criteria) {
+<span class="nc" id="L174">        log.debug(&quot;REST request to count ProjectThemes by criteria: {}&quot;, criteria);</span>
+<span class="nc" id="L175">        return ResponseEntity.ok().body(projectThemeQueryService.countByCriteria(criteria));</span>
+    }
+
+    /**
+     * {@code GET  /project-themes/:id} : get the &quot;id&quot; projectTheme.
+     *
+     * @param id the id of the projectTheme to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the projectTheme, or with status {@code 404 (Not Found)}.
+     */
+    @CrossOrigin
+    @GetMapping(&quot;/project-themes/{id}&quot;)
+    public ResponseEntity&lt;ProjectTheme&gt; getProjectTheme(@PathVariable Long id) {
+<span class="nc" id="L187">        log.debug(&quot;REST request to get ProjectTheme : {}&quot;, id);</span>
+<span class="nc" id="L188">        Optional&lt;ProjectTheme&gt; projectTheme = projectThemeService.findOne(id);</span>
+<span class="nc" id="L189">        return ResponseUtil.wrapOrNotFound(projectTheme);</span>
+    }
+
+    /**
+     * {@code DELETE  /project-themes/:id} : delete the &quot;id&quot; projectTheme.
+     *
+     * @param id the id of the projectTheme to delete.
+     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
+     */
+    @CrossOrigin
+    @DeleteMapping(&quot;/project-themes/{id}&quot;)
+    public ResponseEntity&lt;Void&gt; deleteProjectTheme(@PathVariable Long id) {
+<span class="nc" id="L201">        log.debug(&quot;REST request to delete ProjectTheme : {}&quot;, id);</span>
+<span class="nc" id="L202">        projectThemeService.delete(id);</span>
+<span class="nc" id="L203">        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Skills.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.domain</a> &gt; <span class="el_source">Skills.java</span></div><h1>Skills.java</h1><pre class="source lang-java linenums">package com.qnowapp.domain;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import javax.persistence.*;
+
+import java.io.Serializable;
+import java.util.Objects;
+
+/**
+ * A Skills.
+ */
+@Entity
+@Table(name = &quot;skills&quot;)
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+<span class="nc" id="L19">public class Skills implements Serializable {</span>
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = &quot;sequenceGenerator&quot;)
+    @SequenceGenerator(name = &quot;sequenceGenerator&quot;)
+    private Long id;
+
+    @Column(name = &quot;skill_code&quot;)
+    private String skillCode;
+
+    @Column(name = &quot;skill_name&quot;)
+    private String skillName;
+
+    @ManyToOne
+    @JsonIgnoreProperties(&quot;skills&quot;)
+    private Skills parentSkillsId;
+
+    @ManyToOne
+    @JsonIgnoreProperties(&quot;skills&quot;)
+    private SkillCategory skillCategoryId;
+
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    public Long getId() {
+<span class="nc" id="L44">        return id;</span>
+    }
+
+    public void setId(Long id) {
+<span class="nc" id="L48">        this.id = id;</span>
+<span class="nc" id="L49">    }</span>
+
+    public String getSkillCode() {
+<span class="nc" id="L52">        return skillCode;</span>
+    }
+
+    public Skills skillCode(String skillCode) {
+<span class="nc" id="L56">        this.skillCode = skillCode;</span>
+<span class="nc" id="L57">        return this;</span>
+    }
+
+    public void setSkillCode(String skillCode) {
+<span class="nc" id="L61">        this.skillCode = skillCode;</span>
+<span class="nc" id="L62">    }</span>
+
+    public String getSkillName() {
+<span class="nc" id="L65">        return skillName;</span>
+    }
+
+    public Skills skillName(String skillName) {
+<span class="nc" id="L69">        this.skillName = skillName;</span>
+<span class="nc" id="L70">        return this;</span>
+    }
+
+    public void setSkillName(String skillName) {
+<span class="nc" id="L74">        this.skillName = skillName;</span>
+<span class="nc" id="L75">    }</span>
+
+    public Skills getParentSkillsId() {
+<span class="nc" id="L78">        return parentSkillsId;</span>
+    }
+
+    public Skills parentSkillsId(Skills skills) {
+<span class="nc" id="L82">        this.parentSkillsId = skills;</span>
+<span class="nc" id="L83">        return this;</span>
+    }
+
+    public void setParentSkillsId(Skills skills) {
+<span class="nc" id="L87">        this.parentSkillsId = skills;</span>
+<span class="nc" id="L88">    }</span>
+
+    public SkillCategory getSkillCategoryId() {
+<span class="nc" id="L91">        return skillCategoryId;</span>
+    }
+
+    public Skills skillCategoryId(SkillCategory skillCategory) {
+<span class="nc" id="L95">        this.skillCategoryId = skillCategory;</span>
+<span class="nc" id="L96">        return this;</span>
+    }
+
+    public void setSkillCategoryId(SkillCategory skillCategory) {
+<span class="nc" id="L100">        this.skillCategoryId = skillCategory;</span>
+<span class="nc" id="L101">    }</span>
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
+    @Override
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L106" title="All 2 branches missed.">        if (this == o) {</span>
+<span class="nc" id="L107">            return true;</span>
+        }
+<span class="nc bnc" id="L109" title="All 2 branches missed.">        if (!(o instanceof Skills)) {</span>
+<span class="nc" id="L110">            return false;</span>
+        }
+<span class="nc bnc" id="L112" title="All 4 branches missed.">        return id != null &amp;&amp; id.equals(((Skills) o).id);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L117">        return 31;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L122">        return &quot;Skills{&quot; +</span>
+<span class="nc" id="L123">            &quot;id=&quot; + getId() +</span>
+<span class="nc" id="L124">            &quot;, skillCode='&quot; + getSkillCode() + &quot;'&quot; +</span>
+<span class="nc" id="L125">            &quot;, skillName='&quot; + getSkillName() + &quot;'&quot; +</span>
+            &quot;}&quot;;
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

@@ -1,0 +1,6 @@
+category_id;category;description;category_type;category_gif;enabled_p;parent_only_p;aux_int1;aux_int2;aux_string1;aux_string2;sort_order;visible_tcl
+88323;BPIS;BPIS;Bucket;category;t;f;;;;;0;
+88292;QPT;QPT;Bucket;category;t;f;;;;;0;
+88293;OTC;OTC;Bucket;category;t;f;;;;;0;
+88324;HFA;HFA;Bucket;category;t;f;;;;;0;
+88425;All;All;Bucket;category;t;f;;;;;0;

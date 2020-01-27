@@ -1,10 +1,9 @@
 package com.qnowapp.web.rest;
 
 import com.qnowapp.domain.ProjectInitiativeId;
-
 import com.qnowapp.domain.ProjectMaingoalId;
 import com.qnowapp.repository.ProjectMaingoalIdRepository;
-
+import com.qnowapp.service.ProjectMaingoalIdQueryService;
 import com.qnowapp.service.ProjectMaingoalIdService;
 import com.qnowapp.service.dto.ProjectMaingoalIdCriteria;
 import com.qnowapp.web.rest.errors.BadRequestAlertException;
@@ -49,11 +48,11 @@ public class ProjectMaingoalIdResource {
     private final ProjectMaingoalIdService projectMaingoalIdService;
 
 
+    private final ProjectMaingoalIdQueryService projectMaingoalIdQueryService;
 
-
-    public ProjectMaingoalIdResource(ProjectMaingoalIdService projectMaingoalIdService) {
+    public ProjectMaingoalIdResource(ProjectMaingoalIdService projectMaingoalIdService, ProjectMaingoalIdQueryService projectMaingoalIdQueryService) {
         this.projectMaingoalIdService = projectMaingoalIdService;
-       
+        this.projectMaingoalIdQueryService = projectMaingoalIdQueryService;
         
     }
     public static void setFromTesting(Boolean bState) {
@@ -81,7 +80,7 @@ public class ProjectMaingoalIdResource {
                     .body(result);
 
             if (fromTesting == false) {
-                
+                System.out.println(projectMaingoalId.getName());
                 String csvFile1 = "src\\main\\resources\\maingoal.csv";
                 BufferedReader br = null;
                 String line = "";
@@ -92,27 +91,28 @@ public class ProjectMaingoalIdResource {
                     int count = 0;
                     while ((line = br.readLine()) != null) {
                         count++;
-                       
+                        System.out.println(+count);
                         if (count == 1)
                             continue;
                         String[] country = line.split(cvsSplitBy);
                         try {
                             if (country.length > 3 ) {
-                                
+                                System.out.println("1");
                                 projectMaingoalId.setId(null);
                                 projectMaingoalId.setCode(country[0]);
-                              
+                                System.out.println("2");
                                 projectMaingoalId.setName(country[1]);
-                              
+                                System.out.println("3");
                                 projectMaingoalId.setDescription(country[2]);
                                 ProjectMaingoalId result2 = projectMaingoalIdRepository.save(projectMaingoalId);    
-                              
+                                System.out.println(result2.getId());
+                                System.out.println(projectMaingoalId + "new project created");
                             }
                         } catch (Exception e) {
                         }
                     }
                 } catch (Exception e) {
-                   
+                    // TODO: handle exception
                 } finally {
                     if (br != null) {
                         try {
@@ -160,12 +160,24 @@ public class ProjectMaingoalIdResource {
      */
     @CrossOrigin
     @GetMapping("/project-maingoal-ids")
-    public ResponseEntity<List<ProjectMaingoalId>> getAllProjectMaingoalIds( ) {
-        log.debug("REST request to get ProjectMaingoalIds by criteria: {}");
-        List<ProjectMaingoalId> entityList = projectMaingoalIdService.findAll();
+    public ResponseEntity<List<ProjectMaingoalId>> getAllProjectMaingoalIds(ProjectMaingoalIdCriteria criteria) {
+        log.debug("REST request to get ProjectMaingoalIds by criteria: {}", criteria);
+        List<ProjectMaingoalId> entityList = projectMaingoalIdQueryService.findByCriteria(criteria);
         return ResponseEntity.ok().body(entityList);
     }
 
+    /**
+    * {@code GET  /project-maingoal-ids/count} : count all the projectMaingoalIds.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping("/project-maingoal-ids/count")
+    public ResponseEntity<Long> countProjectMaingoalIds(ProjectMaingoalIdCriteria criteria) {
+        log.debug("REST request to count ProjectMaingoalIds by criteria: {}", criteria);
+        return ResponseEntity.ok().body(projectMaingoalIdQueryService.countByCriteria(criteria));
+    }
 
     /**
      * {@code GET  /project-maingoal-ids/:id} : get the "id" projectMaingoalId.

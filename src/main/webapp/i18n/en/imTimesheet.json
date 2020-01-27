@@ -1,0 +1,26 @@
+{
+  "App": {
+    "imTimesheet": {
+      "home": {
+        "title": "Im Timesheets",
+        "createLabel": "Create a new Im Timesheet",
+        "createOrEditLabel": "Create or edit a Im Timesheet"
+      },
+      "created": "A new Im Timesheet is created with identifier {{ param }}",
+      "updated": "A Im Timesheet is updated with identifier {{ param }}",
+      "deleted": "A Im Timesheet is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Im Timesheet {{ id }}?"
+      },
+      "detail": {
+        "title": "Im Timesheet"
+      },
+      "logdate": "Logdate",
+      "loghours": "Loghours",
+      "billhours": "Billhours",
+      "notes": "Notes",
+      "imEmployee": "Im Employee",
+      "imProjects": "Im Projects"
+    }
+  }
+}

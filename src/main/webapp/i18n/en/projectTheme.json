@@ -1,0 +1,23 @@
+{
+  "App": {
+    "projectTheme": {
+      "home": {
+        "title": "Project Themes",
+        "createLabel": "Create a new Project Theme",
+        "createOrEditLabel": "Create or edit a Project Theme"
+      },
+      "created": "A new Project Theme is created with identifier {{ param }}",
+      "updated": "A Project Theme is updated with identifier {{ param }}",
+      "deleted": "A Project Theme is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Project Theme {{ id }}?"
+      },
+      "detail": {
+        "title": "Project Theme"
+      },
+      "code": "Code",
+      "name": "Name",
+      "description": "Description"
+    }
+  }
+}

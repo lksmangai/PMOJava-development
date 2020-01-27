@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProjectTypeIdResource.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.web.rest</a> &gt; <span class="el_source">ProjectTypeIdResource.java</span></div><h1>ProjectTypeIdResource.java</h1><pre class="source lang-java linenums">package com.qnowapp.web.rest;
+
+import com.qnowapp.domain.ProjectClass;
+import com.qnowapp.domain.ProjectInitiativeId;
+import com.qnowapp.domain.ProjectTypeId;
+import com.qnowapp.repository.ProjectTypeIdRepository;
+import com.qnowapp.service.ProjectTypeIdQueryService;
+import com.qnowapp.service.ProjectTypeIdService;
+import com.qnowapp.service.dto.ProjectTypeIdCriteria;
+import com.qnowapp.web.rest.errors.BadRequestAlertException;
+
+import io.github.jhipster.web.util.HeaderUtil;
+import io.github.jhipster.web.util.ResponseUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * REST controller for managing {@link com.qnowapp.domain.ProjectTypeId}.
+ */
+@CrossOrigin(origins = &quot;*&quot;, allowedHeaders = &quot;*&quot;)
+@RestController
+@RequestMapping(&quot;/api&quot;)
+public class ProjectTypeIdResource {
+
+<span class="nc" id="L37">    private final Logger log = LoggerFactory.getLogger(ProjectTypeIdResource.class);</span>
+
+    private static final String ENTITY_NAME = &quot;projectTypeId&quot;;
+
+    @Value(&quot;${jhipster.clientApp.name}&quot;)
+    private String applicationName;
+    @Autowired
+ ProjectTypeIdRepository projectTypeIdRepository;
+<span class="nc" id="L45">    private static Boolean fromTesting = true;</span>
+
+  
+    
+    private final ProjectTypeIdService projectTypeIdService;
+
+    private final ProjectTypeIdQueryService projectTypeIdQueryService;
+
+<span class="nc" id="L53">    public ProjectTypeIdResource( ProjectTypeIdService projectTypeIdService, ProjectTypeIdQueryService projectTypeIdQueryService) {</span>
+<span class="nc" id="L54">        this.projectTypeIdService = projectTypeIdService;</span>
+<span class="nc" id="L55">        this.projectTypeIdQueryService = projectTypeIdQueryService;</span>
+   
+
+<span class="nc" id="L58">    }</span>
+    public static void setFromTesting(Boolean bState) {
+<span class="nc" id="L60">        fromTesting = bState;</span>
+<span class="nc" id="L61">    }</span>
+    /**
+     * {@code POST  /project-type-ids} : Create a new projectTypeId.
+     *
+     * @param projectTypeId the projectTypeId to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new projectTypeId, or with status {@code 400 (Bad Request)} if the projectTypeId has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @CrossOrigin
+    @PostMapping(&quot;/project-type-ids&quot;)
+    public ResponseEntity&lt;ProjectTypeId&gt; createProjectTypeId(@RequestBody ProjectTypeId projectTypeId) throws URISyntaxException {
+<span class="nc" id="L72">        log.debug(&quot;REST request to save ProjectTypeId : {}&quot;, projectTypeId);</span>
+<span class="nc bnc" id="L73" title="All 2 branches missed.">        if (projectTypeId.getId() != null) {</span>
+<span class="nc" id="L74">            throw new BadRequestAlertException(&quot;A new projectTypeId cannot already have an ID&quot;, ENTITY_NAME, &quot;idexists&quot;);</span>
+        }else {
+  
+<span class="nc" id="L77">            ProjectTypeId result = projectTypeIdRepository.save(projectTypeId);</span>
+<span class="nc" id="L78">            ResponseEntity&lt;ProjectTypeId&gt; a = ResponseEntity.created(new URI(&quot;/api/project-initiative-ids/&quot; + result.getId()))</span>
+<span class="nc" id="L79">                    .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))</span>
+<span class="nc" id="L80">                    .body(result);</span>
+
+<span class="nc bnc" id="L82" title="All 2 branches missed.">            if (fromTesting == false) {</span>
+<span class="nc" id="L83">                System.out.println(projectTypeId.getName());</span>
+<span class="nc" id="L84">                String csvFile1 = &quot;src\\main\\resources\\projecttype.csv&quot;;</span>
+<span class="nc" id="L85">                BufferedReader br = null;</span>
+<span class="nc" id="L86">                String line = &quot;&quot;;</span>
+<span class="nc" id="L87">                String cvsSplitBy = &quot;;&quot;;</span>
+
+                try {
+<span class="nc" id="L90">                    br = new BufferedReader(new FileReader(csvFile1));</span>
+<span class="nc" id="L91">                    int count = 0;</span>
+<span class="nc bnc" id="L92" title="All 2 branches missed.">                    while ((line = br.readLine()) != null) {</span>
+<span class="nc" id="L93">                        count++;</span>
+<span class="nc" id="L94">                        System.out.println(+count);</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">                        if (count == 1)</span>
+<span class="nc" id="L96">                            continue;</span>
+<span class="nc" id="L97">                        String[] country = line.split(cvsSplitBy);</span>
+                        try {
+<span class="nc bnc" id="L99" title="All 2 branches missed.">                            if (country.length &gt; 3 ) {</span>
+<span class="nc" id="L100">                                System.out.println(&quot;1&quot;);</span>
+<span class="nc" id="L101">                                projectTypeId.setId(null);</span>
+<span class="nc" id="L102">                                projectTypeId.setCode(country[0]);</span>
+<span class="nc" id="L103">                                System.out.println(&quot;2&quot;);</span>
+<span class="nc" id="L104">                                projectTypeId.setName(country[1]);</span>
+<span class="nc" id="L105">                                System.out.println(&quot;3&quot;);</span>
+<span class="nc" id="L106">                                projectTypeId.setDescription(country[2]);</span>
+<span class="nc" id="L107">                                ProjectTypeId result2 = projectTypeIdRepository.save(projectTypeId);    </span>
+<span class="nc" id="L108">                                System.out.println(result2.getId());</span>
+<span class="nc" id="L109">                                System.out.println(projectTypeId + &quot;new project created&quot;);</span>
+                            }
+<span class="nc" id="L111">                        } catch (Exception e) {</span>
+<span class="nc" id="L112">                        }</span>
+<span class="nc" id="L113">                    }</span>
+<span class="nc" id="L114">                } catch (Exception e) {</span>
+                    // TODO: handle exception
+                } finally {
+<span class="nc bnc" id="L117" title="All 2 branches missed.">                    if (br != null) {</span>
+                        try {
+<span class="nc" id="L119">                            br.close();</span>
+<span class="nc" id="L120">                        } catch (Exception e) {</span>
+<span class="nc" id="L121">                            System.out.println(e);</span>
+<span class="nc" id="L122">                        }</span>
+                    
+                    }
+                }
+            }
+<span class="nc" id="L127">        return a;</span>
+        }
+                
+        
+
+    }
+
+    /**
+     * {@code PUT  /project-type-ids} : Updates an existing projectTypeId.
+     *
+     * @param projectTypeId the projectTypeId to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated projectTypeId,
+     * or with status {@code 400 (Bad Request)} if the projectTypeId is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the projectTypeId couldn't be updated.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @CrossOrigin
+    @PutMapping(&quot;/project-type-ids&quot;)
+    public ResponseEntity&lt;ProjectTypeId&gt; updateProjectTypeId(@RequestBody ProjectTypeId projectTypeId) throws URISyntaxException {
+<span class="nc" id="L146">        log.debug(&quot;REST request to update ProjectTypeId : {}&quot;, projectTypeId);</span>
+<span class="nc bnc" id="L147" title="All 2 branches missed.">        if (projectTypeId.getId() == null) {</span>
+<span class="nc" id="L148">            throw new BadRequestAlertException(&quot;Invalid id&quot;, ENTITY_NAME, &quot;idnull&quot;);</span>
+        }
+<span class="nc" id="L150">        ProjectTypeId result = projectTypeIdService.save(projectTypeId);</span>
+<span class="nc" id="L151">        return ResponseEntity.ok()</span>
+<span class="nc" id="L152">            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, projectTypeId.getId().toString()))</span>
+<span class="nc" id="L153">            .body(result);</span>
+    }
+
+    /**
+     * {@code GET  /project-type-ids} : get all the projectTypeIds.
+     *
+     * @param criteria the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of projectTypeIds in body.
+     */
+    @CrossOrigin
+    @GetMapping(&quot;/project-type-ids&quot;)
+    public ResponseEntity&lt;List&lt;ProjectTypeId&gt;&gt; getAllProjectTypeIds(ProjectTypeIdCriteria criteria) {
+<span class="nc" id="L165">        log.debug(&quot;REST request to get ProjectTypeIds by criteria: {}&quot;, criteria);</span>
+<span class="nc" id="L166">        List&lt;ProjectTypeId&gt; entityList = projectTypeIdQueryService.findByCriteria(criteria);</span>
+<span class="nc" id="L167">        return ResponseEntity.ok().body(entityList);</span>
+    }
+
+    /**
+    * {@code GET  /project-type-ids/count} : count all the projectTypeIds.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping(&quot;/project-type-ids/count&quot;)
+    public ResponseEntity&lt;Long&gt; countProjectTypeIds(ProjectTypeIdCriteria criteria) {
+<span class="nc" id="L179">        log.debug(&quot;REST request to count ProjectTypeIds by criteria: {}&quot;, criteria);</span>
+<span class="nc" id="L180">        return ResponseEntity.ok().body(projectTypeIdQueryService.countByCriteria(criteria));</span>
+    }
+
+    /**
+     * {@code GET  /project-type-ids/:id} : get the &quot;id&quot; projectTypeId.
+     *
+     * @param id the id of the projectTypeId to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the projectTypeId, or with status {@code 404 (Not Found)}.
+     */
+    @CrossOrigin
+    @GetMapping(&quot;/project-type-ids/{id}&quot;)
+    public ResponseEntity&lt;ProjectTypeId&gt; getProjectTypeId(@PathVariable Long id) {
+<span class="nc" id="L192">        log.debug(&quot;REST request to get ProjectTypeId : {}&quot;, id);</span>
+<span class="nc" id="L193">        Optional&lt;ProjectTypeId&gt; projectTypeId = projectTypeIdService.findOne(id);</span>
+<span class="nc" id="L194">        return ResponseUtil.wrapOrNotFound(projectTypeId);</span>
+    }
+
+    /**
+     * {@code DELETE  /project-type-ids/:id} : delete the &quot;id&quot; projectTypeId.
+     *
+     * @param id the id of the projectTypeId to delete.
+     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
+     */
+    @CrossOrigin
+    @DeleteMapping(&quot;/project-type-ids/{id}&quot;)
+    public ResponseEntity&lt;Void&gt; deleteProjectTypeId(@PathVariable Long id) {
+<span class="nc" id="L206">        log.debug(&quot;REST request to delete ProjectTypeId : {}&quot;, id);</span>
+<span class="nc" id="L207">        projectTypeIdService.delete(id);</span>
+<span class="nc" id="L208">        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

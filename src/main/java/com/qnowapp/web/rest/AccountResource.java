@@ -59,23 +59,6 @@ public class AccountResource {
      * @throws EmailAlreadyUsedException {@code 400 (Bad Request)} if the email is already used.
      * @throws LoginAlreadyUsedException {@code 400 (Bad Request)} if the login is already used.
      */
-    
-    
-    
-    
-    @CrossOrigin
-    @PostMapping("/registeraccount")
-    @ResponseStatus(HttpStatus.CREATED)
-    public User registermyAccount(@Valid @RequestBody ManagedUserVM managedUserVM) {
-        if (!checkPasswordLength(managedUserVM.getPassword())) {
-            throw new InvalidPasswordException();
-        }
-        User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
-       return user;
-    }
-    
-    
-    
     @CrossOrigin
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
@@ -176,12 +159,10 @@ public class AccountResource {
     @CrossOrigin
     @PostMapping(path = "/account/reset-password/init")
     public void requestPasswordReset(@RequestBody String mail) {
-    	
        mailService.sendPasswordResetMail(
            userService.requestPasswordReset(mail)
                .orElseThrow(EmailNotFoundException::new)
        );
-      
     }
 
     /**
@@ -195,15 +176,12 @@ public class AccountResource {
     @PostMapping(path = "/account/reset-password/finish")
     public void finishPasswordReset(@RequestBody KeyAndPasswordVM keyAndPassword) {
         if (!checkPasswordLength(keyAndPassword.getNewPassword())) {
-        	
             throw new InvalidPasswordException();
         }
-    	
         Optional<User> user =
             userService.completePasswordReset(keyAndPassword.getNewPassword(), keyAndPassword.getKey());
-    	
+
         if (!user.isPresent()) {
-        	
             throw new AccountResourceException("No user was found for this reset key");
         }
     }

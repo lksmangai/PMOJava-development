@@ -1,0 +1,45 @@
+{
+  "App": {
+    "userContact": {
+      "home": {
+        "title": "User Contacts",
+        "createLabel": "Create a new User Contact",
+        "createOrEditLabel": "Create or edit a User Contact"
+      },
+      "created": "A new User Contact is created with identifier {{ param }}",
+      "updated": "A User Contact is updated with identifier {{ param }}",
+      "deleted": "A User Contact is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete User Contact {{ id }}?"
+      },
+      "detail": {
+        "title": "User Contact"
+      },
+      "homePhone": "Home Phone",
+      "workPhone": "Work Phone",
+      "cellPhone": "Cell Phone",
+      "permentAddress": "Perment Address",
+      "haLine1": "Ha Line 1",
+      "haLine2": "Ha Line 2",
+      "haPostal": "Ha Postal",
+      "waLine1": "Wa Line 1",
+      "waLine2": "Wa Line 2",
+      "waPostal": "Wa Postal",
+      "ucNote": "Uc Note",
+      "primaryRole": "Primary Role",
+      "secondaryRole": "Secondary Role",
+      "initiative": "Initiative",
+      "technology": "Technology",
+      "teamName": "Team Name",
+      "qnowUser": "Qnow User",
+      "waCity": "Wa City",
+      "haCity": "Ha City",
+      "waState": "Wa State",
+      "haState": "Ha State",
+      "waCountry": "Wa Country",
+      "haCountry": "Ha Country",
+      "groupMembers": "Group Members",
+      "imEmployee": "Im Employee"
+    }
+  }
+}

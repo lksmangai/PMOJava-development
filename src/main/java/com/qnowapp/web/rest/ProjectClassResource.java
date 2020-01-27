@@ -1,10 +1,9 @@
 package com.qnowapp.web.rest;
 
 import com.qnowapp.domain.ProjectClass;
-
 import com.qnowapp.domain.ProjectInitiativeId;
 import com.qnowapp.repository.ProjectClassRepository;
-
+import com.qnowapp.service.ProjectClassQueryService;
 import com.qnowapp.service.ProjectClassService;
 import com.qnowapp.service.dto.ProjectClassCriteria;
 import com.qnowapp.web.rest.errors.BadRequestAlertException;
@@ -48,10 +47,11 @@ public class ProjectClassResource {
     private final ProjectClassService projectClassService;
 
 
-   
-    public ProjectClassResource( ProjectClassService projectClassService) {
-        this.projectClassService = projectClassService;
+    private final ProjectClassQueryService projectClassQueryService;
 
+    public ProjectClassResource( ProjectClassService projectClassService, ProjectClassQueryService projectClassQueryService) {
+        this.projectClassService = projectClassService;
+        this.projectClassQueryService = projectClassQueryService;
         
 
     }
@@ -80,7 +80,7 @@ public class ProjectClassResource {
                     .body(result);
 
             if (fromTesting == false) {
-             
+                System.out.println(projectClass.getName());
                 String csvFile1 = "src\\main\\resources\\projecttype.csv";
                 BufferedReader br = null;
                 String line = "";
@@ -91,21 +91,22 @@ public class ProjectClassResource {
                     int count = 0;
                     while ((line = br.readLine()) != null) {
                         count++;
-                 
+                        System.out.println(+count);
                         if (count == 1)
                             continue;
                         String[] country = line.split(cvsSplitBy);
                         try {
                             if (country.length > 3 ) {
-                           
+                                System.out.println("1");
                                 projectClass.setId(null);
                                 projectClass.setCode(country[0]);
-                      
+                                System.out.println("2");
                                 projectClass.setName(country[1]);
-                                
+                                System.out.println("3");
                                 projectClass.setDescription(country[2]);
                                 ProjectClass result2 = projectClassRepository.save(projectClass);   
-                              
+                                System.out.println(result2.getId());
+                                System.out.println(projectClass + "new project created");
                             }
                         } catch (Exception e) {
                         }
@@ -117,7 +118,7 @@ public class ProjectClassResource {
                         try {
                             br.close();
                         } catch (Exception e) {
-                        	System.out.println(e);
+                            System.out.println(e);
                         }
                     
                     }
@@ -160,12 +161,24 @@ public class ProjectClassResource {
      */
     @CrossOrigin
     @GetMapping("/project-classes")
-    public ResponseEntity<List<ProjectClass>> getAllProjectClasses( ) {
-        log.debug("REST request to get ProjectClasses by criteria: {}");
-        List<ProjectClass> entityList = projectClassService.findAll();
+    public ResponseEntity<List<ProjectClass>> getAllProjectClasses(ProjectClassCriteria criteria) {
+        log.debug("REST request to get ProjectClasses by criteria: {}", criteria);
+        List<ProjectClass> entityList = projectClassQueryService.findByCriteria(criteria);
         return ResponseEntity.ok().body(entityList);
     }
 
+    /**
+    * {@code GET  /project-classes/count} : count all the projectClasses.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping("/project-classes/count")
+    public ResponseEntity<Long> countProjectClasses(ProjectClassCriteria criteria) {
+        log.debug("REST request to count ProjectClasses by criteria: {}", criteria);
+        return ResponseEntity.ok().body(projectClassQueryService.countByCriteria(criteria));
+    }
 
     /**
      * {@code GET  /project-classes/:id} : get the "id" projectClass.

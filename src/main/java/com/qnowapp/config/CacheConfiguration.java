@@ -2,8 +2,6 @@ package com.qnowapp.config;
 
 import java.time.Duration;
 
-
-
 import org.ehcache.config.builders.*;
 import org.ehcache.jsr107.Eh107Configuration;
 
@@ -14,8 +12,6 @@ import org.springframework.boot.autoconfigure.cache.JCacheManagerCustomizer;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernatePropertiesCustomizer;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.*;
-
-import io.github.jhipster.config.JHipsterProperties;
 
 @Configuration
 @EnableCaching
@@ -91,7 +87,6 @@ public class CacheConfiguration {
             createCache(cm, com.qnowapp.domain.FileStorage.class.getName());
             createCache(cm, com.qnowapp.domain.ProjectTag.class.getName());
             createCache(cm, com.qnowapp.domain.TagType.class.getName());
-            // jhipster-needle-ehcache-add-entry
         };
     }
 

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImEmployeeResource.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.web.rest</a> &gt; <span class="el_source">ImEmployeeResource.java</span></div><h1>ImEmployeeResource.java</h1><pre class="source lang-java linenums">package com.qnowapp.web.rest;
+
+import com.qnowapp.domain.ImEmployee;
+import com.qnowapp.service.ImEmployeeService;
+import com.qnowapp.web.rest.errors.BadRequestAlertException;
+import com.qnowapp.service.dto.ImEmployeeCriteria;
+import com.qnowapp.service.ImEmployeeQueryService;
+
+import io.github.jhipster.web.util.HeaderUtil;
+import io.github.jhipster.web.util.ResponseUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * REST controller for managing {@link com.qnowapp.domain.ImEmployee}.
+ */
+@CrossOrigin(origins = &quot;*&quot;, allowedHeaders = &quot;*&quot;)
+@RestController
+@RequestMapping(&quot;/api&quot;)
+public class ImEmployeeResource {
+
+<span class="nc" id="L31">    private final Logger log = LoggerFactory.getLogger(ImEmployeeResource.class);</span>
+
+    private static final String ENTITY_NAME = &quot;imEmployee&quot;;
+
+    @Value(&quot;${jhipster.clientApp.name}&quot;)
+    private String applicationName;
+
+    private final ImEmployeeService imEmployeeService;
+
+    private final ImEmployeeQueryService imEmployeeQueryService;
+
+<span class="nc" id="L42">    public ImEmployeeResource(ImEmployeeService imEmployeeService, ImEmployeeQueryService imEmployeeQueryService) {</span>
+<span class="nc" id="L43">        this.imEmployeeService = imEmployeeService;</span>
+<span class="nc" id="L44">        this.imEmployeeQueryService = imEmployeeQueryService;</span>
+<span class="nc" id="L45">    }</span>
+
+    /**
+     * {@code POST  /im-employees} : Create a new imEmployee.
+     *
+     * @param imEmployee the imEmployee to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new imEmployee, or with status {@code 400 (Bad Request)} if the imEmployee has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @CrossOrigin
+    @PostMapping(&quot;/im-employees&quot;)
+    public ResponseEntity&lt;ImEmployee&gt; createImEmployee(@RequestBody ImEmployee imEmployee) throws URISyntaxException {
+<span class="nc" id="L57">        log.debug(&quot;REST request to save ImEmployee : {}&quot;, imEmployee);</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">        if (imEmployee.getId() != null) {</span>
+<span class="nc" id="L59">            throw new BadRequestAlertException(&quot;A new imEmployee cannot already have an ID&quot;, ENTITY_NAME, &quot;idexists&quot;);</span>
+        }
+<span class="nc" id="L61">        ImEmployee result = imEmployeeService.save(imEmployee);</span>
+<span class="nc" id="L62">        return ResponseEntity.created(new URI(&quot;/api/im-employees/&quot; + result.getId()))</span>
+<span class="nc" id="L63">            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))</span>
+<span class="nc" id="L64">            .body(result);</span>
+    }
+
+    /**
+     * {@code PUT  /im-employees} : Updates an existing imEmployee.
+     *
+     * @param imEmployee the imEmployee to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated imEmployee,
+     * or with status {@code 400 (Bad Request)} if the imEmployee is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the imEmployee couldn't be updated.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @CrossOrigin
+    @PutMapping(&quot;/im-employees&quot;)
+    public ResponseEntity&lt;ImEmployee&gt; updateImEmployee(@RequestBody ImEmployee imEmployee) throws URISyntaxException {
+<span class="nc" id="L79">        log.debug(&quot;REST request to update ImEmployee : {}&quot;, imEmployee);</span>
+<span class="nc bnc" id="L80" title="All 2 branches missed.">        if (imEmployee.getId() == null) {</span>
+<span class="nc" id="L81">            throw new BadRequestAlertException(&quot;Invalid id&quot;, ENTITY_NAME, &quot;idnull&quot;);</span>
+        }
+<span class="nc" id="L83">        ImEmployee result = imEmployeeService.save(imEmployee);</span>
+<span class="nc" id="L84">        return ResponseEntity.ok()</span>
+<span class="nc" id="L85">            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, imEmployee.getId().toString()))</span>
+<span class="nc" id="L86">            .body(result);</span>
+    }
+
+    /**
+     * {@code GET  /im-employees} : get all the imEmployees.
+     *
+     * @param criteria the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of imEmployees in body.
+     */
+    @CrossOrigin
+    @GetMapping(&quot;/im-employees&quot;)
+    public ResponseEntity&lt;List&lt;ImEmployee&gt;&gt; getAllImEmployees(ImEmployeeCriteria criteria) {
+<span class="nc" id="L98">        log.debug(&quot;REST request to get ImEmployees by criteria: {}&quot;, criteria);</span>
+<span class="nc" id="L99">        List&lt;ImEmployee&gt; entityList = imEmployeeQueryService.findByCriteria(criteria);</span>
+<span class="nc" id="L100">        return ResponseEntity.ok().body(entityList);</span>
+    }
+
+    /**
+    * {@code GET  /im-employees/count} : count all the imEmployees.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping(&quot;/im-employees/count&quot;)
+    public ResponseEntity&lt;Long&gt; countImEmployees(ImEmployeeCriteria criteria) {
+<span class="nc" id="L112">        log.debug(&quot;REST request to count ImEmployees by criteria: {}&quot;, criteria);</span>
+<span class="nc" id="L113">        return ResponseEntity.ok().body(imEmployeeQueryService.countByCriteria(criteria));</span>
+    }
+
+    /**
+     * {@code GET  /im-employees/:id} : get the &quot;id&quot; imEmployee.
+     *
+     * @param id the id of the imEmployee to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the imEmployee, or with status {@code 404 (Not Found)}.
+     */
+    @CrossOrigin
+    @GetMapping(&quot;/im-employees/{id}&quot;)
+    public ResponseEntity&lt;ImEmployee&gt; getImEmployee(@PathVariable Long id) {
+<span class="nc" id="L125">        log.debug(&quot;REST request to get ImEmployee : {}&quot;, id);</span>
+<span class="nc" id="L126">        Optional&lt;ImEmployee&gt; imEmployee = imEmployeeService.findOne(id);</span>
+<span class="nc" id="L127">        return ResponseUtil.wrapOrNotFound(imEmployee);</span>
+    }
+
+    /**
+     * {@code DELETE  /im-employees/:id} : delete the &quot;id&quot; imEmployee.
+     *
+     * @param id the id of the imEmployee to delete.
+     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
+     */
+    @CrossOrigin
+    @DeleteMapping(&quot;/im-employees/{id}&quot;)
+    public ResponseEntity&lt;Void&gt; deleteImEmployee(@PathVariable Long id) {
+<span class="nc" id="L139">        log.debug(&quot;REST request to delete ImEmployee : {}&quot;, id);</span>
+<span class="nc" id="L140">        imEmployeeService.delete(id);</span>
+<span class="nc" id="L141">        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

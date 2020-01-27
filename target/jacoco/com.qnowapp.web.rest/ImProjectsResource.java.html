@@ -1,0 +1,968 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImProjectsResource.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.web.rest</a> &gt; <span class="el_source">ImProjectsResource.java</span></div><h1>ImProjectsResource.java</h1><pre class="source lang-java linenums">package com.qnowapp.web.rest;
+
+import com.qnowapp.domain.BacklogPractice;
+
+import com.qnowapp.domain.ImEmployee;
+import com.qnowapp.domain.ImProjects;
+import com.qnowapp.domain.OpportunityPriorityId;
+import com.qnowapp.domain.ProjectBucketId;
+import com.qnowapp.domain.ProjectBusinessgoalId;
+import com.qnowapp.domain.ProjectClass;
+import com.qnowapp.domain.ProjectCostCenterId;
+import com.qnowapp.domain.ProjectInitiativeId;
+import com.qnowapp.domain.ProjectMaingoalId;
+import com.qnowapp.domain.ProjectStatusId;
+import com.qnowapp.domain.ProjectSubgoalId;
+import com.qnowapp.domain.ProjectTheme;
+import com.qnowapp.domain.ProjectTypeId;
+import com.qnowapp.domain.ProjectVertical;
+import com.qnowapp.domain.QnowUser;
+import com.qnowapp.domain.User;
+import com.qnowapp.repository.BacklogPracticeRepository;
+import com.qnowapp.repository.ImEmployeeRepository;
+import com.qnowapp.repository.ImProjectsRepository;
+import com.qnowapp.repository.OpportunityPriorityIdRepository;
+import com.qnowapp.repository.ProjectBucketIdRepository;
+import com.qnowapp.repository.ProjectBusinessgoalIdRepository;
+import com.qnowapp.repository.ProjectClassRepository;
+import com.qnowapp.repository.ProjectCostCenterIdRepository;
+import com.qnowapp.repository.ProjectInitiativeIdRepository;
+import com.qnowapp.repository.ProjectMaingoalIdRepository;
+import com.qnowapp.repository.ProjectStatusIdRepository;
+import com.qnowapp.repository.ProjectSubgoalIdRepository;
+import com.qnowapp.repository.ProjectThemeRepository;
+import com.qnowapp.repository.ProjectTypeIdRepository;
+import com.qnowapp.repository.ProjectVerticalRepository;
+import com.qnowapp.repository.QnowUserRepository;
+
+import com.qnowapp.service.ImProjectsQueryService;
+import com.qnowapp.service.ImProjectsService;
+import com.qnowapp.service.dto.ImProjectsCriteria;
+
+import com.qnowapp.web.rest.errors.BadRequestAlertException;
+
+import io.github.jhipster.web.util.HeaderUtil;
+import io.github.jhipster.web.util.ResponseUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.math.BigDecimal;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * REST controller for managing {@link com.qnowapp.domain.ImProjects}.
+ */
+@CrossOrigin(origins = &quot;*&quot;, allowedHeaders = &quot;*&quot;)
+@RestController
+@RequestMapping(&quot;/api&quot;)
+public class ImProjectsResource {
+
+
+<span class="nc" id="L79">    ProjectInitiativeId projectInitiativeId = new ProjectInitiativeId();</span>
+
+<span class="nc" id="L81">    ProjectBusinessgoalId projectBusinessgoalId = new ProjectBusinessgoalId();</span>
+
+<span class="nc" id="L83">    ProjectSubgoalId projectSubgoalId = new ProjectSubgoalId();</span>
+
+<span class="nc" id="L85">    ProjectMaingoalId projectMaingoalId = new ProjectMaingoalId();</span>
+
+<span class="nc" id="L87">    ProjectBucketId projectBucketId = new ProjectBucketId();</span>
+
+<span class="nc" id="L89">    ProjectCostCenterId projectCostCenterId = new ProjectCostCenterId();</span>
+
+<span class="nc" id="L91">    OpportunityPriorityId opportunityPriorityId = new OpportunityPriorityId();</span>
+
+<span class="nc" id="L93">    BacklogPractice backlogPractice = new BacklogPractice();</span>
+
+<span class="nc" id="L95">    ProjectStatusId projectStatusId = new ProjectStatusId();</span>
+
+<span class="nc" id="L97">    ProjectTypeId projectTypeId = new ProjectTypeId();</span>
+
+<span class="nc" id="L99">    ProjectClass projectClass = new ProjectClass();</span>
+
+<span class="nc" id="L101">    ProjectVertical projectVertical = new ProjectVertical();</span>
+
+<span class="nc" id="L103">    ProjectTheme projectTheme = new ProjectTheme();</span>
+
+<span class="nc" id="L105">    ImEmployee imEmployee = new ImEmployee();</span>
+    
+<span class="nc" id="L107">    HashMap&lt;String, ImProjects&gt; myhash = new HashMap&lt;String, ImProjects&gt;();</span>
+
+    @Autowired
+    ProjectInitiativeIdRepository projectInitiativeIdRepository;
+
+    @Autowired
+    ProjectBusinessgoalIdRepository projectBusinessgoalIdRepository;
+
+    @Autowired
+    ProjectSubgoalIdRepository projectSubgoalIdRepository;
+
+    @Autowired
+    ProjectMaingoalIdRepository projectMaingoalIdRepository;
+
+    @Autowired
+    ProjectBucketIdRepository projectBucketIdRepository;
+
+    @Autowired
+    ProjectCostCenterIdRepository projectCostCenterIdRepository;
+
+    @Autowired
+    OpportunityPriorityIdRepository opportunityPriorityIdRepository;
+
+    @Autowired
+    BacklogPracticeRepository backlogPracticerRepository;
+
+    @Autowired
+    ProjectStatusIdRepository projectStatusIdRepository;
+
+    @Autowired
+    ProjectTypeIdRepository projectTypeIdRepository;
+
+    @Autowired
+    ProjectClassRepository projectClassRepository;
+
+    @Autowired
+    ProjectVerticalRepository projectVerticalRepository;
+
+    @Autowired
+    ProjectThemeRepository projectThemeRepository;
+
+    @Autowired
+    ImEmployeeRepository imEmployeeRepository;
+
+    @Autowired
+    ImProjectsRepository imProjectsRepository;
+    
+    
+    
+<span class="nc" id="L156">    private final Logger log = LoggerFactory.getLogger(ImProjectsResource.class);</span>
+
+    private static final String ENTITY_NAME = &quot;imProjects&quot;;
+
+    @Value(&quot;${jhipster.clientApp.name}&quot;)
+    private String applicationName;
+
+
+<span class="nc" id="L164">    private static Boolean fromTesting = true;</span>
+    private final ImProjectsService imProjectsService;
+
+    private final ImProjectsQueryService imProjectsQueryService;
+<span class="nc" id="L168">	public ImProjectsResource( ImProjectsService imProjectsService, ImProjectsQueryService imProjectsQueryService) {</span>
+	
+<span class="nc" id="L170">		this.imProjectsService = imProjectsService;</span>
+<span class="nc" id="L171">        this.imProjectsQueryService = imProjectsQueryService;</span>
+<span class="nc" id="L172">	}</span>
+
+
+
+    public static void setFromTesting(Boolean bState) {
+<span class="nc" id="L177">        fromTesting = bState;</span>
+<span class="nc" id="L178">    }</span>
+
+    public String removeQuotes(String MyEmail) {
+<span class="nc bnc" id="L181" title="All 2 branches missed.">        if (MyEmail == null) {</span>
+<span class="nc" id="L182">            return null;</span>
+
+        }
+<span class="nc bnc" id="L185" title="All 2 branches missed.">        if (MyEmail.equals(&quot;&quot;)) {</span>
+<span class="nc" id="L186">            System.out.println(MyEmail);</span>
+<span class="nc" id="L187">            return MyEmail;</span>
+
+        }
+<span class="nc" id="L190">        String doubleQuote = &quot;\&quot;&quot;;</span>
+<span class="nc bnc" id="L191" title="All 2 branches missed.">        if (MyEmail.substring(0, 1).equals(doubleQuote)) {</span>
+<span class="nc" id="L192">            MyEmail = MyEmail.substring(1, MyEmail.length());</span>
+        }
+
+<span class="nc bnc" id="L195" title="All 2 branches missed.">        if (MyEmail.substring(MyEmail.length() - 1, MyEmail.length()).equals(doubleQuote)) {</span>
+
+<span class="nc" id="L197">            MyEmail = MyEmail.substring(0, MyEmail.length() - 1);</span>
+
+        }
+<span class="nc" id="L200">        return MyEmail;</span>
+    }
+
+    public Integer convertToInteger(String integer) {
+
+<span class="nc bnc" id="L205" title="All 2 branches missed.">        if (integer.equals(&quot;&quot;)) {</span>
+<span class="nc" id="L206">            return 0;</span>
+        } else {
+            try {
+<span class="nc" id="L209">                Float fl = Float.parseFloat(integer);</span>
+<span class="nc" id="L210">                Integer i = Math.round(fl);</span>
+<span class="nc" id="L211">                return i;</span>
+<span class="nc" id="L212">            } catch (Exception e) {</span>
+<span class="nc" id="L213">                System.out.println(e);</span>
+            }
+
+        }
+<span class="nc" id="L217">        return 0;</span>
+
+    }
+
+    public BigDecimal convertToBigDecimal(String integer) {
+
+<span class="nc bnc" id="L223" title="All 2 branches missed.">        if (integer.equals(&quot;&quot;)) {</span>
+<span class="nc" id="L224">            return new BigDecimal(0);</span>
+        } else {
+            try {
+<span class="nc" id="L227">                Float fl = Float.parseFloat(integer);</span>
+
+<span class="nc" id="L229">                return new BigDecimal(fl);</span>
+<span class="nc" id="L230">            } catch (Exception e) {</span>
+<span class="nc" id="L231">                System.out.println(e);</span>
+            }
+
+        }
+<span class="nc" id="L235">        return new BigDecimal(0);</span>
+
+    }
+
+    public Double convertToDouble(String integer) {
+
+<span class="nc bnc" id="L241" title="All 4 branches missed.">        if (integer.equals(&quot;&quot;) || integer == null) {</span>
+<span class="nc" id="L242">            return new Double(0);</span>
+        } else {
+            try {
+<span class="nc" id="L245">                Float fl = Float.parseFloat(integer);</span>
+
+<span class="nc" id="L247">                return new Double(fl);</span>
+<span class="nc" id="L248">            } catch (Exception e) {</span>
+<span class="nc" id="L249">                System.out.println(e);</span>
+            }
+
+        }
+<span class="nc" id="L253">        return new Double(0);</span>
+
+    }
+
+    public ZonedDateTime convertToZonedDateTime(String integer) {
+
+<span class="nc bnc" id="L259" title="All 2 branches missed.">        if (integer.equals(&quot;&quot;)) {</span>
+<span class="nc" id="L260">            return null;</span>
+        } else {
+            try {
+<span class="nc" id="L263">                DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span>
+<span class="nc" id="L264">                LocalDateTime mydate = LocalDateTime.parse(integer.substring(0, 19), formatter1);</span>
+<span class="nc" id="L265">                ZonedDateTime resultado = ZonedDateTime.ofLocal(mydate, ZoneOffset.UTC, null);</span>
+<span class="nc" id="L266">                return resultado;</span>
+<span class="nc" id="L267">            } catch (Exception e) {</span>
+<span class="nc" id="L268">                System.out.println(e);</span>
+            }
+
+        }
+
+<span class="nc" id="L273">        return null;</span>
+    }
+
+    /*
+     * String a = &quot;2018-03-26 00:00:00-05&quot;; DateTimeFormatter formatter1 =
+     * DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd HH:mm:ss&quot;); LocalDateTime mydate =
+     * LocalDateTime.parse(a.substring(0, 19), formatter1); ZonedDateTime resultado
+     * = ZonedDateTime.ofLocal(mydate, ZoneOffset.UTC, null);
+     */
+    
+    @CrossOrigin
+    @PostMapping(&quot;/im-projects&quot;)
+    public ResponseEntity&lt;ImProjects&gt; createImProjects(@Valid @RequestBody ImProjects imProjects)
+            throws URISyntaxException {
+<span class="nc" id="L287">        log.debug(&quot;REST request to save ImProjects : {}&quot;, imProjects);</span>
+<span class="nc bnc" id="L288" title="All 2 branches missed.">        if (imProjects.getId() != null) {</span>
+<span class="nc" id="L289">            throw new BadRequestAlertException(&quot;A new imProjects cannot already have an ID&quot;, ENTITY_NAME, &quot;idexists&quot;);</span>
+        } else {
+
+<span class="nc" id="L292">            ImProjects result = imProjectsRepository.save(imProjects);</span>
+<span class="nc" id="L293">            ResponseEntity&lt;ImProjects&gt; returnObj = ResponseEntity</span>
+<span class="nc" id="L294">                    .created(new URI(&quot;/api/im-projects/&quot; + result.getId())).headers(HeaderUtil</span>
+<span class="nc" id="L295">                            .createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))</span>
+<span class="nc" id="L296">                    .body(result);</span>
+<span class="nc bnc" id="L297" title="All 2 branches missed.">            if (fromTesting == false) {</span>
+<span class="nc" id="L298">                List&lt;ProjectMaingoalId&gt; myMaingoal = projectMaingoalIdRepository.findAll();</span>
+<span class="nc" id="L299">                List&lt;ProjectSubgoalId&gt; mySubgoal = projectSubgoalIdRepository.findAll();</span>
+<span class="nc" id="L300">                List&lt;ImEmployee&gt; myEmployee = imEmployeeRepository.findAll();</span>
+<span class="nc" id="L301">                List&lt;ProjectTheme&gt; myTheme = projectThemeRepository.findAll();</span>
+<span class="nc" id="L302">                List&lt;ProjectVertical&gt; myVertical = projectVerticalRepository.findAll();</span>
+<span class="nc" id="L303">                List&lt;ProjectTypeId&gt; myType = projectTypeIdRepository.findAll();</span>
+<span class="nc" id="L304">                List&lt;BacklogPractice&gt; myBacklog = backlogPracticerRepository.findAll();</span>
+<span class="nc" id="L305">                List&lt;ProjectClass&gt; myClass = projectClassRepository.findAll();</span>
+<span class="nc" id="L306">                List&lt;ProjectStatusId&gt; myStatus = projectStatusIdRepository.findAll();</span>
+<span class="nc" id="L307">                List&lt;OpportunityPriorityId&gt; myPriority = opportunityPriorityIdRepository.findAll();</span>
+<span class="nc" id="L308">                List&lt;ProjectCostCenterId&gt; myCost = projectCostCenterIdRepository.findAll();</span>
+<span class="nc" id="L309">                List&lt;ProjectInitiativeId&gt; myInitiative = projectInitiativeIdRepository.findAll();</span>
+<span class="nc" id="L310">                List&lt;ProjectBucketId&gt; myBucket = projectBucketIdRepository.findAll();</span>
+<span class="nc" id="L311">                List&lt;ProjectBusinessgoalId&gt; myBusinessgoal = projectBusinessgoalIdRepository.findAll();</span>
+                
+<span class="nc" id="L313">                System.out.println(imProjects.getProjectName());</span>
+<span class="nc" id="L314">                String csvFile1 = &quot;src\\main\\resources\\pmqprojects.csv&quot;;</span>
+<span class="nc" id="L315">                BufferedReader br = null;</span>
+<span class="nc" id="L316">                String line = &quot;&quot;;</span>
+<span class="nc" id="L317">                String cvsSplitBy = &quot;;&quot;;</span>
+
+                try {
+<span class="nc" id="L320">                    br = new BufferedReader(new FileReader(csvFile1));</span>
+<span class="nc" id="L321">                    int count = 0;</span>
+<span class="nc bnc" id="L322" title="All 2 branches missed.">                    while ((line = br.readLine()) != null) {</span>
+<span class="nc" id="L323">                        count++;</span>
+<span class="nc" id="L324">                        System.out.println(&quot;hiii111111  &quot; + count);</span>
+<span class="nc bnc" id="L325" title="All 2 branches missed.">                        if (count == 1)</span>
+<span class="nc" id="L326">                            continue;</span>
+<span class="nc" id="L327">                        line = line + &quot;;test&quot;;</span>
+<span class="nc" id="L328">                        String[] country = line.split(cvsSplitBy);</span>
+<span class="nc" id="L329">                        System.out.println(line);</span>
+<span class="nc" id="L330">                        System.out.println(country.length);</span>
+                        try {
+<span class="nc bnc" id="L332" title="All 2 branches missed.">                            if (country.length &gt;= 117) {</span>
+<span class="nc" id="L333">                                System.out.println(&quot;1&quot;);</span>
+<span class="nc" id="L334">                                imProjects.setId(null);</span>
+<span class="nc" id="L335">                                String s1 = removeQuotes(country[1]);</span>
+<span class="nc" id="L336">                                String ProjectName = s1.replace(&quot;$&quot;, &quot;;&quot;);</span>
+<span class="nc" id="L337">                                imProjects.setProjectName(ProjectName);</span>
+
+<span class="nc" id="L339">                                System.out.println(&quot;2&quot;);</span>
+<span class="nc" id="L340">                                imProjects.setProjectNr(removeQuotes(country[2]));</span>
+
+<span class="nc" id="L342">                                System.out.println(&quot;3&quot;);</span>
+<span class="nc" id="L343">                                imProjects.setProjectPath(removeQuotes(country[4]));</span>
+
+<span class="nc" id="L345">                                System.out.println(&quot;4&quot;);</span>
+<span class="nc" id="L346">                                imProjects.setTreeSortkey(removeQuotes(country[6]));</span>
+
+<span class="nc" id="L348">                                System.out.println(&quot;5&quot;);</span>
+<span class="nc" id="L349">                                imProjects.setMaxChildSortkey(removeQuotes(country[7]));</span>
+
+<span class="nc" id="L351">                                System.out.println(&quot;6&quot;);</span>
+<span class="nc" id="L352">                                String s2 = removeQuotes(country[11]);</span>
+<span class="nc" id="L353">                                String description = s1.replace(&quot;$&quot;, &quot;;&quot;);</span>
+<span class="nc" id="L354">                                imProjects.setDescription(description);</span>
+
+<span class="nc" id="L356">                                System.out.println(&quot;7&quot;);</span>
+<span class="nc" id="L357">                                imProjects.setNote(removeQuotes(country[13]));</span>
+
+<span class="nc" id="L359">                                System.out.println(&quot;8&quot;);</span>
+<span class="nc" id="L360">                                imProjects.setMaxChildSortkey(removeQuotes(country[7]));</span>
+<span class="nc" id="L361">                                System.out.println(&quot;9&quot;);</span>
+
+<span class="nc" id="L363">                                System.out.println(&quot;10&quot;);</span>
+<span class="nc" id="L364">                                imProjects.setBillingTypeId(convertToInteger(removeQuotes(country[12])));</span>
+
+<span class="nc" id="L366">                                System.out.println(&quot;11&quot;);</span>
+<span class="nc" id="L367">                                imProjects.setNote(removeQuotes(country[3]));</span>
+
+<span class="nc" id="L369">                                System.out.println(&quot;12&quot;);</span>
+<span class="nc" id="L370">                                boolean b = Boolean.parseBoolean(removeQuotes(country[16]));</span>
+<span class="nc" id="L371">                                imProjects.setRequiresReportP(b);</span>
+
+<span class="nc" id="L373">                                System.out.println(&quot;13&quot;);</span>
+<span class="nc" id="L374">                                imProjects.setProjectBudget(convertToDouble(removeQuotes(country[17])));</span>
+
+<span class="nc" id="L376">                                System.out.println(&quot;14&quot;);</span>
+<span class="nc" id="L377">                                imProjects.setProjectRisk(removeQuotes(country[18]));</span>
+
+<span class="nc" id="L379">                                System.out.println(&quot;15&quot;);</span>
+<span class="nc" id="L380">                                imProjects.setCorporateSponsor(removeQuotes(country[19]));</span>
+
+<span class="nc" id="L382">                                System.out.println(&quot;16&quot;);</span>
+<span class="nc" id="L383">                                imProjects.setPercentCompleted(convertToDouble(country[21]));</span>
+
+<span class="nc" id="L385">                                System.out.println(&quot;17&quot;);</span>
+<span class="nc" id="L386">                                imProjects.setProjectBudgetHours(convertToDouble(removeQuotes(country[23])));</span>
+
+<span class="nc" id="L388">                                System.out.println(&quot;18&quot;);</span>
+<span class="nc" id="L389">                                imProjects.setCostQuotesCache(convertToBigDecimal(removeQuotes(country[24])));</span>
+
+<span class="nc" id="L391">                                System.out.println(&quot;19&quot;);</span>
+<span class="nc" id="L392">                                imProjects.setCostInvoicesCache(convertToInteger(removeQuotes(country[25])));</span>
+
+<span class="nc" id="L394">                                System.out.println(&quot;20&quot;);</span>
+<span class="nc" id="L395">                                imProjects.setCostTimesheetPlannedCache(convertToInteger(removeQuotes(country[26])));</span>
+
+<span class="nc" id="L397">                                System.out.println(&quot;21&quot;);</span>
+<span class="nc" id="L398">                                imProjects.setCostPurchaseOrdersCache(convertToInteger(removeQuotes(country[27])));</span>
+
+<span class="nc" id="L400">                                System.out.println(&quot;22&quot;);</span>
+<span class="nc" id="L401">                                imProjects.setCostBillsCache(convertToInteger(removeQuotes(country[28])));</span>
+
+<span class="nc" id="L403">                                System.out.println(&quot;23&quot;);</span>
+<span class="nc" id="L404">                                imProjects.setCostTimesheetLoggedCache(convertToInteger(removeQuotes(country[29])));</span>
+
+<span class="nc" id="L406">                                System.out.println(&quot;24&quot;);</span>
+<span class="nc" id="L407">                                imProjects.setEndDate(convertToZonedDateTime(removeQuotes(country[30])));</span>
+
+<span class="nc" id="L409">                                System.out.println(&quot;25&quot;);</span>
+<span class="nc" id="L410">                                imProjects.setStartDate(convertToZonedDateTime(removeQuotes(country[31])));</span>
+
+<span class="nc" id="L412">                                System.out.println(&quot;26&quot;);</span>
+<span class="nc" id="L413">                                boolean c = Boolean.parseBoolean(removeQuotes(country[32]));</span>
+<span class="nc" id="L414">                                imProjects.setTemplateP(c);</span>
+
+<span class="nc" id="L416">                                System.out.println(&quot;27&quot;);</span>
+<span class="nc" id="L417">                                imProjects.setSortOrder(convertToInteger(removeQuotes(country[33])));</span>
+
+<span class="nc" id="L419">                                System.out.println(&quot;28&quot;);</span>
+<span class="nc" id="L420">                                imProjects.setReportedHoursCache(convertToDouble(removeQuotes(country[34])));</span>
+
+<span class="nc" id="L422">                                System.out.println(&quot;29&quot;);</span>
+<span class="nc" id="L423">                                imProjects.setCostExpensePlannedCache(convertToInteger(removeQuotes(country[35])));</span>
+
+<span class="nc" id="L425">                                System.out.println(&quot;30&quot;);</span>
+<span class="nc" id="L426">                                imProjects.setCostExpenseLoggedCache(convertToInteger(removeQuotes(country[36])));</span>
+
+<span class="nc" id="L428">                                System.out.println(&quot;32&quot;);</span>
+<span class="nc" id="L429">                                imProjects.setCostDeliveryNotesCache(convertToBigDecimal(removeQuotes(country[38])));</span>
+
+<span class="nc" id="L431">                                System.out.println(&quot;34&quot;);</span>
+<span class="nc" id="L432">                                boolean d = Boolean.parseBoolean(removeQuotes(country[40]));</span>
+<span class="nc" id="L433">                                imProjects.setMilestoneP(d);</span>
+
+<span class="nc" id="L435">                                System.out.println(&quot;35&quot;);</span>
+<span class="nc" id="L436">                                imProjects.setReleaseItemP(removeQuotes(country[41]));</span>
+
+<span class="nc" id="L438">                                System.out.println(&quot;36&quot;);</span>
+<span class="nc" id="L439">                                imProjects.setPresalesProbability(convertToBigDecimal(removeQuotes(country[42])));</span>
+
+<span class="nc" id="L441">                                System.out.println(&quot;37&quot;);</span>
+<span class="nc" id="L442">                                imProjects.setPresalesValue(convertToBigDecimal(removeQuotes(country[43])));</span>
+
+<span class="nc" id="L444">                                System.out.println(&quot;38&quot;);</span>
+<span class="nc" id="L445">                                imProjects.setReportedDaysCache(convertToBigDecimal(removeQuotes(country[44])));</span>
+
+<span class="nc" id="L447">                                System.out.println(&quot;39&quot;);</span>
+<span class="nc" id="L448">                                imProjects.setPresalesValueCurrency(removeQuotes(country[50]));</span>
+
+<span class="nc" id="L450">                                System.out.println(&quot;40&quot;);</span>
+<span class="nc" id="L451">                                imProjects.setOpportunitySalesStageId(convertToInteger(removeQuotes(country[52])));</span>
+
+<span class="nc" id="L453">                                System.out.println(&quot;41&quot;);</span>
+<span class="nc" id="L454">                                imProjects.setOpportunityCampaignId(convertToInteger(removeQuotes(country[53])));</span>
+
+<span class="nc" id="L456">                                System.out.println(&quot;42&quot;);</span>
+<span class="nc" id="L457">                                imProjects.setScoreRevenue(convertToBigDecimal(removeQuotes(country[54])));</span>
+
+<span class="nc" id="L459">                                System.out.println(&quot;44&quot;);</span>
+<span class="nc" id="L460">                                imProjects.setScoreStrategic(convertToBigDecimal(removeQuotes(country[55])));</span>
+
+<span class="nc" id="L462">                                System.out.println(&quot;45&quot;);</span>
+<span class="nc" id="L463">                                imProjects.setScoreFinanceNpv(convertToBigDecimal(removeQuotes(country[56])));</span>
+
+<span class="nc" id="L465">                                System.out.println(&quot;46&quot;);</span>
+<span class="nc" id="L466">                                imProjects.setScoreCustomers(convertToBigDecimal(removeQuotes(country[57])));</span>
+
+<span class="nc" id="L468">                                System.out.println(&quot;47&quot;);</span>
+<span class="nc" id="L469">                                imProjects.setScoreFinanceCost(convertToBigDecimal(removeQuotes(country[58])));</span>
+
+<span class="nc" id="L471">                                System.out.println(&quot;48&quot;);</span>
+<span class="nc" id="L472">                                imProjects.setCostBillsPlanned(convertToBigDecimal(removeQuotes(country[53])));</span>
+
+<span class="nc" id="L474">                                System.out.println(&quot;49&quot;);</span>
+<span class="nc" id="L475">                                imProjects.setCostExpensesPlanned(convertToBigDecimal(removeQuotes(country[60])));</span>
+
+<span class="nc" id="L477">                                System.out.println(&quot;50&quot;);</span>
+<span class="nc" id="L478">                                imProjects.setScoreRisk(convertToBigDecimal(removeQuotes(country[61])));</span>
+
+<span class="nc" id="L480">                                System.out.println(&quot;51&quot;);</span>
+<span class="nc" id="L481">                                imProjects.setScoreCapabilities(convertToBigDecimal(removeQuotes(country[62])));</span>
+<span class="nc" id="L482">                                System.out.println(&quot;3&quot;);</span>
+<span class="nc" id="L483">                                imProjects.setScoreEinanceRoi(convertToBigDecimal(removeQuotes(country[63])));</span>
+
+<span class="nc" id="L485">                                System.out.println(&quot;52&quot;);</span>
+<span class="nc" id="L486">                                imProjects.setProjectUserwiseBoard(removeQuotes(country[77]));</span>
+
+<span class="nc" id="L488">                                System.out.println(&quot;53&quot;);</span>
+<span class="nc" id="L489">                                imProjects.setProjectBringNextday(convertToInteger(removeQuotes(country[78])));</span>
+
+<span class="nc" id="L491">                                System.out.println(&quot;54&quot;);</span>
+<span class="nc" id="L492">                                imProjects.setProjectBringSameboard(removeQuotes(country[79]));</span>
+
+<span class="nc" id="L494">                                System.out.println(&quot;55&quot;);</span>
+<span class="nc" id="L495">                                imProjects.setProjectNewboardEverytime(removeQuotes(country[80]));</span>
+
+<span class="nc" id="L497">                                System.out.println(&quot;56&quot;);</span>
+<span class="nc" id="L498">                                imProjects.setProjectUserwiseBoard2(removeQuotes(country[82]));</span>
+
+<span class="nc" id="L500">                                System.out.println(&quot;57&quot;);</span>
+<span class="nc" id="L501">                                imProjects.setProjectBringSameboard2(removeQuotes(country[83]));</span>
+
+<span class="nc" id="L503">                                System.out.println(&quot;58&quot;);</span>
+<span class="nc" id="L504">                                imProjects.setProjectNewboard2Everytime(convertToInteger(removeQuotes(country[84])));</span>
+
+<span class="nc" id="L506">                                System.out.println(&quot;59&quot;);</span>
+<span class="nc" id="L507">                                imProjects.setProjectNewboard2Always(removeQuotes(country[85]));</span>
+
+<span class="nc" id="L509">                                System.out.println(&quot;60&quot;);</span>
+<span class="nc" id="L510">                                imProjects.setProjectReportWeekly(removeQuotes(country[86]));</span>
+
+<span class="nc" id="L512">                                System.out.println(&quot;61&quot;);</span>
+<span class="nc" id="L513">                                imProjects.setScoreGain(convertToDouble(removeQuotes(country[88])));</span>
+
+<span class="nc" id="L515">                                System.out.println(&quot;62&quot;);</span>
+<span class="nc" id="L516">                                imProjects.setScoreLoss(convertToDouble(removeQuotes(country[89])));</span>
+
+<span class="nc" id="L518">                                System.out.println(&quot;63&quot;);</span>
+<span class="nc" id="L519">                                imProjects.setScoreDelivery(convertToDouble(removeQuotes(country[90])));</span>
+
+<span class="nc" id="L521">                                System.out.println(&quot;64&quot;);</span>
+<span class="nc" id="L522">                                imProjects.setScoreOperations(convertToDouble(removeQuotes(country[91])));</span>
+
+<span class="nc" id="L524">                                System.out.println(&quot;65&quot;);</span>
+<span class="nc" id="L525">                                imProjects.setScoreWhy(convertToInteger(removeQuotes(country[92])));</span>
+
+<span class="nc" id="L527">                                System.out.println(&quot;66&quot;);</span>
+<span class="nc" id="L528">                                imProjects.setNetServices(removeQuotes(country[97]));</span>
+
+<span class="nc" id="L530">                                System.out.println(&quot;67&quot;);</span>
+                                ;
+<span class="nc" id="L532">                                imProjects.setTrainingLink(removeQuotes(country[99]));</span>
+
+<span class="nc" id="L534">                                System.out.println(&quot;68&quot;);</span>
+<span class="nc" id="L535">                                imProjects.setCollectionName(removeQuotes(country[100]));</span>
+
+<span class="nc" id="L537">                                System.out.println(&quot;69&quot;);</span>
+<span class="nc" id="L538">                                imProjects.setTrainingName(removeQuotes(country[101]));</span>
+
+<span class="nc" id="L540">                                System.out.println(&quot;70&quot;);</span>
+<span class="nc" id="L541">                                imProjects.setTrainingDoc(removeQuotes(country[102]));</span>
+
+<span class="nc" id="L543">                                System.out.println(&quot;71&quot;);</span>
+<span class="nc" id="L544">                                imProjects.setTestingRichtext(convertToInteger(removeQuotes(country[103])));</span>
+
+<span class="nc" id="L546">                                System.out.println(&quot;72&quot;);</span>
+<span class="nc" id="L547">                                imProjects.setTemplateCategory(removeQuotes(country[104]));</span>
+
+<span class="nc" id="L549">                                System.out.println(&quot;73&quot;);</span>
+<span class="nc" id="L550">                                imProjects.setdType(convertToInteger(removeQuotes(country[105])));</span>
+
+<span class="nc" id="L552">                                System.out.println(&quot;74&quot;);</span>
+<span class="nc" id="L553">                                imProjects.setdOption(convertToInteger(removeQuotes(country[106])));</span>
+
+<span class="nc" id="L555">                                System.out.println(&quot;75&quot;);</span>
+<span class="nc" id="L556">                                imProjects.setdFilter(convertToInteger(removeQuotes(country[107])));</span>
+
+<span class="nc" id="L558">                                System.out.println(&quot;76&quot;);</span>
+<span class="nc" id="L559">                                imProjects.setdId(convertToInteger(removeQuotes(country[108])));</span>
+
+<span class="nc" id="L561">                                System.out.println(&quot;77&quot;);</span>
+<span class="nc" id="L562">                                imProjects.settType(convertToInteger(removeQuotes(country[109])));</span>
+
+<span class="nc" id="L564">                                System.out.println(&quot;78&quot;);</span>
+<span class="nc" id="L565">                                imProjects.settOption(convertToInteger(removeQuotes(country[110])));</span>
+
+<span class="nc" id="L567">                                System.out.println(&quot;79&quot;);</span>
+<span class="nc" id="L568">                                imProjects.settFilter(convertToInteger(removeQuotes(country[111])));</span>
+
+<span class="nc" id="L570">                                System.out.println(&quot;80&quot;);</span>
+<span class="nc" id="L571">                                imProjects.settId(convertToInteger(removeQuotes(country[112])));</span>
+
+<span class="nc" id="L573">                                System.out.println(&quot;81&quot;);</span>
+<span class="nc" id="L574">                                imProjects.setRisktype(removeQuotes(country[113]));</span>
+
+<span class="nc" id="L576">                                System.out.println(&quot;82&quot;);</span>
+<span class="nc" id="L577">                                imProjects.setRiskimpact(convertToDouble(removeQuotes(country[114])));</span>
+
+<span class="nc" id="L579">                                System.out.println(&quot;83&quot;);</span>
+<span class="nc" id="L580">                                String test = removeQuotes(country[115]);</span>
+<span class="nc" id="L581">                                System.out.println(&quot;83 .1 &quot; + test);</span>
+<span class="nc" id="L582">                                Double test2 = convertToDouble(test);</span>
+<span class="nc" id="L583">                                System.out.println(&quot;83 .2 &quot; + test2);</span>
+<span class="nc" id="L584">                                imProjects.setRiskprobability(test2);</span>
+
+<span class="nc" id="L586">                                System.out.println(&quot;83.3&quot;);</span>
+                                
+<span class="nc" id="L588">                                System.out.println(&quot;83.4&quot;);</span>
+<span class="nc" id="L589">                                Boolean found13 = false;</span>
+<span class="nc" id="L590">                                System.out.println(&quot;83.5&quot;);</span>
+<span class="nc" id="L591">                                String Initiative = removeQuotes(country[68]);</span>
+<span class="nc" id="L592">                                System.out.println(&quot;84.6&quot;);</span>
+<span class="nc" id="L593">                                imProjects.setProjectInitiativeId(null);</span>
+<span class="nc" id="L594">                                System.out.println(&quot;84.7&quot;);</span>
+<span class="nc bnc" id="L595" title="All 4 branches missed.">                                if (Initiative.equals(&quot;&quot;) == false &amp;&amp; Initiative != null) {</span>
+<span class="nc" id="L596">                                    System.out.println(&quot;84.8&quot;);</span>
+<span class="nc" id="L597">                                    myInitiative.forEach(item -&gt; {</span>
+<span class="nc" id="L598">                                        System.out.println(&quot;84.9&quot;);</span>
+<span class="nc" id="L599">                                        String myPath = item.getCode();</span>
+<span class="nc" id="L600">                                        System.out.println(&quot;84.10&quot;);</span>
+<span class="nc bnc" id="L601" title="All 2 branches missed.">                                        if (myPath.equals(Initiative)) {</span>
+<span class="nc" id="L602">                                            System.out.println(&quot;84&quot;);</span>
+<span class="nc" id="L603">                                            imProjects.setProjectInitiativeId(item); // 68</span>
+<span class="nc" id="L604">                                            System.out.println(&quot;84.111&quot;);</span>
+                                        }
+<span class="nc" id="L606">                                        System.out.println(&quot;84.12&quot;);</span>
+<span class="nc" id="L607">                                    });</span>
+                                }
+<span class="nc" id="L609">                                System.out.println(&quot;84.1&quot;);</span>
+<span class="nc" id="L610">                                Boolean found12 = false;</span>
+<span class="nc" id="L611">                                String Businessgoal = removeQuotes(country[67]);</span>
+<span class="nc" id="L612">                                imProjects.setProjectBusinessgoalId(null);</span>
+<span class="nc bnc" id="L613" title="All 4 branches missed.">                                if (Businessgoal.equals(&quot;&quot;) == false &amp;&amp; Businessgoal != null) {</span>
+<span class="nc" id="L614">                                    myBusinessgoal.forEach(item -&gt; {</span>
+<span class="nc" id="L615">                                        String myPath = item.getCode();</span>
+<span class="nc bnc" id="L616" title="All 2 branches missed.">                                        if (myPath.equals(Businessgoal)) {</span>
+<span class="nc" id="L617">                                            System.out.println(&quot;85&quot;);</span>
+<span class="nc" id="L618">                                            imProjects.setProjectBusinessgoalId(item); // 67</span>
+
+                                        }
+
+<span class="nc" id="L622">                                    });</span>
+                                }
+
+                                
+<span class="nc" id="L626">                                Boolean found11 = false;</span>
+<span class="nc" id="L627">                                String Subgoal = removeQuotes(country[66]);</span>
+<span class="nc" id="L628">                                imProjects.setProjectSubgoalId(null);</span>
+<span class="nc bnc" id="L629" title="All 4 branches missed.">                                if (Subgoal.equals(&quot;&quot;) == false &amp;&amp; Subgoal != null) {</span>
+<span class="nc" id="L630">                                    mySubgoal.forEach(item -&gt; {</span>
+<span class="nc" id="L631">                                        String myPath = item.getCode();</span>
+<span class="nc bnc" id="L632" title="All 2 branches missed.">                                        if (myPath.equals(Subgoal)) {</span>
+<span class="nc" id="L633">                                            System.out.println(&quot;86&quot;);</span>
+<span class="nc" id="L634">                                            imProjects.setProjectSubgoalId(item); // 66</span>
+                                        }
+
+<span class="nc" id="L637">                                    });</span>
+                                }
+
+                                
+<span class="nc" id="L641">                                Boolean found10 = false;</span>
+<span class="nc" id="L642">                                String Maingoal = removeQuotes(country[65]);</span>
+<span class="nc" id="L643">                                imProjects.setProjectMaingoalId(null);</span>
+<span class="nc bnc" id="L644" title="All 4 branches missed.">                                if (Maingoal.equals(&quot;&quot;) == false &amp;&amp; Maingoal != null) {</span>
+<span class="nc" id="L645">                                    myMaingoal.forEach(item -&gt; {</span>
+<span class="nc" id="L646">                                        String myPath = item.getCode();</span>
+<span class="nc bnc" id="L647" title="All 2 branches missed.">                                        if (myPath.equals(Maingoal)) {</span>
+<span class="nc" id="L648">                                            System.out.println(&quot;87&quot;);</span>
+<span class="nc" id="L649">                                            imProjects.setProjectMaingoalId(item); // 65</span>
+                                        }
+
+<span class="nc" id="L652">                                    });</span>
+                                }
+
+                                
+<span class="nc" id="L656">                                Boolean found9 = false;</span>
+<span class="nc" id="L657">                                String Bucket = removeQuotes(country[64]);</span>
+<span class="nc" id="L658">                                imProjects.setProjectBucketId(null);</span>
+<span class="nc bnc" id="L659" title="All 4 branches missed.">                                if (Bucket.equals(&quot;&quot;) == false &amp;&amp; Bucket != null) {</span>
+<span class="nc" id="L660">                                    myBucket.forEach(item -&gt; {</span>
+<span class="nc" id="L661">                                        String myPath = item.getCode();</span>
+<span class="nc bnc" id="L662" title="All 2 branches missed.">                                        if (myPath.equals(Bucket)) {</span>
+<span class="nc" id="L663">                                            System.out.println(&quot;88&quot;);</span>
+<span class="nc" id="L664">                                            imProjects.setProjectBucketId(item); // 64</span>
+                                        }
+
+<span class="nc" id="L667">                                    });</span>
+                                }
+
+                                
+<span class="nc" id="L671">                                Boolean found8 = false;</span>
+<span class="nc" id="L672">                                String Cost = removeQuotes(country[46]);</span>
+<span class="nc" id="L673">                                imProjects.setProjectCostCenterId(null);</span>
+<span class="nc bnc" id="L674" title="All 4 branches missed.">                                if (Cost.equals(&quot;&quot;) == false &amp;&amp; Cost != null) {</span>
+<span class="nc" id="L675">                                    myCost.forEach(item -&gt; {</span>
+<span class="nc" id="L676">                                        String myPath = item.getCode();</span>
+<span class="nc bnc" id="L677" title="All 2 branches missed.">                                        if (myPath.equals(Cost)) {</span>
+<span class="nc" id="L678">                                            System.out.println(&quot;89&quot;);</span>
+<span class="nc" id="L679">                                            imProjects.setProjectCostCenterId(item);// 46</span>
+                                        }
+
+<span class="nc" id="L682">                                    });</span>
+                                }
+
+                                
+<span class="nc" id="L686">                                Boolean found7 = false;</span>
+<span class="nc" id="L687">                                String Priority = removeQuotes(country[51]);</span>
+<span class="nc" id="L688">                                imProjects.setOpportunityPriorityId(null);</span>
+<span class="nc bnc" id="L689" title="All 4 branches missed.">                                if (Priority.equals(&quot;&quot;) == false &amp;&amp; Priority != null) {</span>
+<span class="nc" id="L690">                                    myPriority.forEach(item -&gt; {</span>
+<span class="nc" id="L691">                                        String myPath = item.getCode();</span>
+<span class="nc bnc" id="L692" title="All 2 branches missed.">                                        if (myPath.equals(Priority)) {</span>
+<span class="nc" id="L693">                                            System.out.println(&quot;90&quot;);</span>
+<span class="nc" id="L694">                                            imProjects.setOpportunityPriorityId(item); // 51</span>
+                                        }
+
+<span class="nc" id="L697">                                    });</span>
+                                }
+
+                                
+<span class="nc" id="L701">                                Boolean found6 = false;</span>
+<span class="nc" id="L702">                                String Backlog = removeQuotes(country[87]);</span>
+<span class="nc" id="L703">                                imProjects.setBacklogPractice(null);</span>
+<span class="nc bnc" id="L704" title="All 4 branches missed.">                                if (Backlog.equals(&quot;&quot;) == false &amp;&amp; Backlog != null) {</span>
+<span class="nc" id="L705">                                    myBacklog.forEach(item -&gt; {</span>
+<span class="nc" id="L706">                                        String myPath = item.getCode();</span>
+<span class="nc bnc" id="L707" title="All 2 branches missed.">                                        if (myPath.equals(Backlog)) {</span>
+<span class="nc" id="L708">                                            System.out.println(&quot;91&quot;);</span>
+<span class="nc" id="L709">                                            imProjects.setBacklogPractice(item);// 87</span>
+                                        }
+
+<span class="nc" id="L712">                                    });</span>
+                                }
+
+                                
+<span class="nc" id="L716">                                Boolean found5 = false;</span>
+<span class="nc" id="L717">                                String Status = removeQuotes(country[10]);</span>
+<span class="nc" id="L718">                                imProjects.setProjectStatusId(null);</span>
+<span class="nc bnc" id="L719" title="All 4 branches missed.">                                if (Status.equals(&quot;&quot;) == false &amp;&amp; Status != null) {</span>
+<span class="nc" id="L720">                                    myStatus.forEach(item -&gt; {</span>
+<span class="nc" id="L721">                                        String myPath = item.getCode();</span>
+<span class="nc bnc" id="L722" title="All 2 branches missed.">                                        if (myPath.equals(Status)) {</span>
+<span class="nc" id="L723">                                            System.out.println(&quot;92&quot;);</span>
+<span class="nc" id="L724">                                            imProjects.setProjectStatusId(item); // 10</span>
+                                        }
+
+<span class="nc" id="L727">                                    });</span>
+                                }
+
+
+<span class="nc" id="L731">                                Boolean found4 = false;</span>
+<span class="nc" id="L732">                                String Type = removeQuotes(country[9]);</span>
+<span class="nc" id="L733">                                imProjects.setProjectTypeId(null);</span>
+<span class="nc bnc" id="L734" title="All 4 branches missed.">                                if (Type.equals(&quot;&quot;) == false &amp;&amp; Type != null) {</span>
+<span class="nc" id="L735">                                    myType.forEach(item -&gt; {</span>
+<span class="nc" id="L736">                                        String myPath = item.getCode();</span>
+<span class="nc bnc" id="L737" title="All 2 branches missed.">                                        if (myPath.equals(Type)) {</span>
+<span class="nc" id="L738">                                            System.out.println(&quot;93&quot;);</span>
+<span class="nc" id="L739">                                            imProjects.setProjectTypeId(item); // 9</span>
+
+                                        }
+
+<span class="nc" id="L743">                                    });</span>
+                                }
+
+                                
+<span class="nc" id="L747">                                Boolean found3 = false;</span>
+<span class="nc" id="L748">                                String Class = removeQuotes(country[94]);</span>
+<span class="nc" id="L749">                                imProjects.setProjectClass(null);</span>
+<span class="nc bnc" id="L750" title="All 4 branches missed.">                                if (Class.equals(&quot;&quot;) == false &amp;&amp; Class != null) {</span>
+<span class="nc" id="L751">                                    myClass.forEach(item -&gt; {</span>
+<span class="nc" id="L752">                                        String myPath = item.getCode();</span>
+<span class="nc bnc" id="L753" title="All 2 branches missed.">                                        if (myPath.equals(Class)) {</span>
+<span class="nc" id="L754">                                            System.out.println(&quot;94&quot;);</span>
+<span class="nc" id="L755">                                            imProjects.setProjectClass(item); // 94</span>
+<span class="nc" id="L756">                                            System.out.println(&quot;94.1&quot;);</span>
+                                        }
+<span class="nc" id="L758">                                        System.out.println(&quot;94.2&quot;);</span>
+<span class="nc" id="L759">                                    });</span>
+<span class="nc" id="L760">                                    System.out.println(&quot;94.3&quot;);</span>
+                                }
+<span class="nc" id="L762">                                System.out.println(&quot;94.4&quot;);</span>
+                                
+<span class="nc" id="L764">                                Boolean found2 = false;</span>
+<span class="nc" id="L765">                                String vertical = removeQuotes(country[95]);</span>
+<span class="nc" id="L766">                                imProjects.setProjectVertical(null);</span>
+<span class="nc bnc" id="L767" title="All 4 branches missed.">                                if (vertical.equals(&quot;&quot;) == false &amp;&amp; vertical != null) {</span>
+<span class="nc" id="L768">                                    myVertical.forEach(item -&gt; {</span>
+<span class="nc" id="L769">                                        String myPath = item.getCode();</span>
+<span class="nc bnc" id="L770" title="All 2 branches missed.">                                        if (myPath.equals(vertical)) {</span>
+<span class="nc" id="L771">                                            System.out.println(&quot;95&quot;);</span>
+<span class="nc" id="L772">                                            imProjects.setProjectVertical(item); // 95</span>
+
+                                        }
+
+<span class="nc" id="L776">                                    });</span>
+                                }
+
+                                
+<span class="nc" id="L780">                                Boolean found1 = false;</span>
+<span class="nc" id="L781">                                String Theme = removeQuotes(country[93]);</span>
+<span class="nc" id="L782">                                imProjects.setProjectTheme(null);</span>
+<span class="nc bnc" id="L783" title="All 4 branches missed.">                                if (Theme.equals(&quot;&quot;) == false &amp;&amp; Theme != null) {</span>
+<span class="nc" id="L784">                                    myTheme.forEach(item -&gt; {</span>
+<span class="nc" id="L785">                                        String myPath = item.getCode();</span>
+<span class="nc bnc" id="L786" title="All 2 branches missed.">                                        if (myPath.equals(Theme)) {</span>
+<span class="nc" id="L787">                                            System.out.println(&quot;96&quot;);</span>
+<span class="nc" id="L788">                                            imProjects.setProjectTheme(item); // 93</span>
+
+                                        }
+
+<span class="nc" id="L792">                                    });</span>
+                                }
+
+                                
+<span class="nc" id="L796">                                Boolean founda = false;</span>
+<span class="nc" id="L797">                                System.out.println(&quot;96.1&quot;);</span>
+
+<span class="nc" id="L799">                                String Employee = removeQuotes(country[117]);</span>
+<span class="nc" id="L800">                                System.out.println(&quot;96.2&quot; + Employee);</span>
+<span class="nc" id="L801">                                imProjects.setProjectLeadId(null);</span>
+<span class="nc" id="L802">                                System.out.println(&quot;96.3&quot;);</span>
+<span class="nc bnc" id="L803" title="All 4 branches missed.">                                if (Employee.equals(&quot;&quot;) == false &amp;&amp; Employee != null) {</span>
+<span class="nc" id="L804">                                    System.out.println(&quot;96.4&quot;);</span>
+<span class="nc" id="L805">                                    myEmployee.forEach(item -&gt; {</span>
+<span class="nc" id="L806">                                        System.out.println(&quot;96.5&quot;);</span>
+<span class="nc" id="L807">                                        QnowUser QuserHere = item.getQnowUser();</span>
+<span class="nc" id="L808">                                        System.out.println(&quot;96.6&quot;);</span>
+<span class="nc bnc" id="L809" title="All 2 branches missed.">                                        if (QuserHere != null) {</span>
+<span class="nc" id="L810">                                            System.out.println(&quot;96.7&quot;);</span>
+<span class="nc" id="L811">                                            User userHere = QuserHere.getUser();</span>
+<span class="nc" id="L812">                                            System.out.println(&quot;96.8&quot;);</span>
+<span class="nc bnc" id="L813" title="All 2 branches missed.">                                            if (userHere != null) {</span>
+<span class="nc" id="L814">                                                System.out.println(&quot;96.9&quot;);</span>
+<span class="nc" id="L815">                                                String myEmailHere = userHere.getEmail();</span>
+<span class="nc" id="L816">                                                System.out.println(&quot;96.10&quot;);</span>
+<span class="nc bnc" id="L817" title="All 2 branches missed.">                                                if (myEmailHere.equals(Employee)) {</span>
+<span class="nc" id="L818">                                                    System.out.println(&quot;97&quot;);</span>
+<span class="nc" id="L819">                                                    imProjects.setProjectLeadId(item);// 117</span>
+<span class="nc" id="L820">                                                    System.out.println(&quot;96.11&quot;);</span>
+                                                }
+                                            }
+                                        }
+
+<span class="nc" id="L825">                                    });</span>
+                                }
+
+                                
+                                
+<span class="nc" id="L830">                                Boolean found = false;</span>
+<span class="nc" id="L831">                                String myParentId = removeQuotes(country[5]);</span>
+<span class="nc" id="L832">                                imProjects.setParentId(null);</span>
+<span class="nc bnc" id="L833" title="All 4 branches missed.">                                if (myParentId.equals(&quot;&quot;) == false &amp;&amp; myParentId!=null ) {</span>
+<span class="nc" id="L834">                                    System.out.println(&quot;setting 98.3&quot; );</span>
+<span class="nc" id="L835">                                    ImProjects value = myhash.get(myParentId);</span>
+<span class="nc" id="L836">                                    System.out.println(&quot;setting 98.4&quot; );</span>
+<span class="nc bnc" id="L837" title="All 2 branches missed.">                                    if (value == null)</span>
+                                    {
+<span class="nc" id="L839">                                    List&lt;ImProjects&gt; myProjects = imProjectsRepository.findAll();</span>
+<span class="nc" id="L840">                                    myProjects.forEach(item -&gt; {</span>
+<span class="nc" id="L841">                                        String myPath = item.getProjectPath();</span>
+<span class="nc bnc" id="L842" title="All 2 branches missed.">                                        if (myPath.equals(myParentId)) {</span>
+<span class="nc" id="L843">                                            System.out.println(&quot;98&quot;);</span>
+<span class="nc" id="L844">                                            imProjects.setParentId(item); // 5</span>
+<span class="nc" id="L845">                                            myhash.put(myParentId, item);</span>
+                                        }
+                                    
+<span class="nc" id="L848">                                    });</span>
+<span class="nc" id="L849">                                }else {</span>
+<span class="nc" id="L850">                                    System.out.println(&quot;setting 98.1&quot;  );</span>
+<span class="nc" id="L851">                                    imProjects.setParentId(value);</span>
+<span class="nc" id="L852">                                    System.out.println(&quot;setting 98.2&quot; );</span>
+                                }
+                                }
+<span class="nc" id="L855">                                System.out.println(&quot;99&quot;);</span>
+<span class="nc" id="L856">                                imProjects.setId(null);</span>
+<span class="nc" id="L857">                                ImProjects result2 = imProjectsRepository.save(imProjects);</span>
+
+<span class="nc" id="L859">                                System.out.println(&quot;100&quot;);</span>
+<span class="nc" id="L860">                                System.out.println(result2.getId());</span>
+
+<span class="nc" id="L862">                                System.out.println(imProjects + &quot;new project created&quot;);</span>
+                            }
+<span class="nc" id="L864">                        } catch (Exception e) {</span>
+<span class="nc" id="L865">                            System.out.println(e + &quot;e3&quot;);</span>
+<span class="nc" id="L866">                            return returnObj;</span>
+<span class="nc" id="L867">                        }</span>
+<span class="nc" id="L868">                    }</span>
+<span class="nc" id="L869">                } catch (Exception e) {</span>
+<span class="nc" id="L870">                    System.out.println(e + &quot;e2&quot;);</span>
+<span class="nc" id="L871">                    return returnObj;</span>
+                } finally {
+<span class="nc bnc" id="L873" title="All 2 branches missed.">                    if (br != null) {</span>
+                        try {
+<span class="nc" id="L875">                            br.close();</span>
+<span class="nc" id="L876">                        } catch (Exception e) {</span>
+<span class="nc" id="L877">                            System.out.println(e + &quot;e1&quot;);</span>
+<span class="nc" id="L878">                        }</span>
+                    }
+                }
+
+            }
+
+<span class="nc" id="L884">            return returnObj;</span>
+
+        }
+
+    }
+
+    /**
+     * {@code PUT  /im-projects} : Updates an existing imProjects.
+     *
+     * @param imProjects the imProjects to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated imProjects,
+     * or with status {@code 400 (Bad Request)} if the imProjects is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the imProjects couldn't be updated.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @CrossOrigin
+    @PutMapping(&quot;/im-projects&quot;)
+    public ResponseEntity&lt;ImProjects&gt; updateImProjects(@Valid @RequestBody ImProjects imProjects) throws URISyntaxException {
+<span class="nc" id="L902">        log.debug(&quot;REST request to update ImProjects : {}&quot;, imProjects);</span>
+<span class="nc bnc" id="L903" title="All 2 branches missed.">        if (imProjects.getId() == null) {</span>
+<span class="nc" id="L904">            throw new BadRequestAlertException(&quot;Invalid id&quot;, ENTITY_NAME, &quot;idnull&quot;);</span>
+        }
+<span class="nc" id="L906">        ImProjects result = imProjectsService.save(imProjects);</span>
+<span class="nc" id="L907">        return ResponseEntity.ok()</span>
+<span class="nc" id="L908">            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, imProjects.getId().toString()))</span>
+<span class="nc" id="L909">            .body(result);</span>
+    }
+
+    /**
+     * {@code GET  /im-projects} : get all the imProjects.
+     *
+     * @param criteria the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of imProjects in body.
+     */
+    @CrossOrigin
+    @GetMapping(&quot;/im-projects&quot;)
+    public ResponseEntity&lt;List&lt;ImProjects&gt;&gt; getAllImProjects(ImProjectsCriteria criteria) {
+<span class="nc" id="L921">        log.debug(&quot;REST request to get ImProjects by criteria: {}&quot;, criteria);</span>
+<span class="nc" id="L922">        List&lt;ImProjects&gt; entityList = imProjectsQueryService.findByCriteria(criteria);</span>
+<span class="nc" id="L923">        return ResponseEntity.ok().body(entityList);</span>
+    }
+
+    /**
+    * {@code GET  /im-projects/count} : count all the imProjects.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping(&quot;/im-projects/count&quot;)
+    public ResponseEntity&lt;Long&gt; countImProjects(ImProjectsCriteria criteria) {
+<span class="nc" id="L935">        log.debug(&quot;REST request to count ImProjects by criteria: {}&quot;, criteria);</span>
+<span class="nc" id="L936">        return ResponseEntity.ok().body(imProjectsQueryService.countByCriteria(criteria));</span>
+    }
+
+    /**
+     * {@code GET  /im-projects/:id} : get the &quot;id&quot; imProjects.
+     *
+     * @param id the id of the imProjects to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the imProjects, or with status {@code 404 (Not Found)}.
+     */
+    @CrossOrigin
+    @GetMapping(&quot;/im-projects/{id}&quot;)
+    public ResponseEntity&lt;ImProjects&gt; getImProjects(@PathVariable Long id) {
+<span class="nc" id="L948">        log.debug(&quot;REST request to get ImProjects : {}&quot;, id);</span>
+<span class="nc" id="L949">        Optional&lt;ImProjects&gt; imProjects = imProjectsService.findOne(id);</span>
+<span class="nc" id="L950">        return ResponseUtil.wrapOrNotFound(imProjects);</span>
+    }
+
+    /**
+     * {@code DELETE  /im-projects/:id} : delete the &quot;id&quot; imProjects.
+     *
+     * @param id the id of the imProjects to delete.
+     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
+     */
+    @CrossOrigin
+    @DeleteMapping(&quot;/im-projects/{id}&quot;)
+    public ResponseEntity&lt;Void&gt; deleteImProjects(@PathVariable Long id) {
+<span class="nc" id="L962">        log.debug(&quot;REST request to delete ImProjects : {}&quot;, id);</span>
+<span class="nc" id="L963">        imProjectsService.delete(id);</span>
+<span class="nc" id="L964">        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();</span>
+    }
+}
+	
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

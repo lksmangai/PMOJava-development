@@ -1,0 +1,23 @@
+{
+  "App": {
+    "projectBucketId": {
+      "home": {
+        "title": "Project Bucket Ids",
+        "createLabel": "Create a new Project Bucket Id",
+        "createOrEditLabel": "Create or edit a Project Bucket Id"
+      },
+      "created": "A new Project Bucket Id is created with identifier {{ param }}",
+      "updated": "A Project Bucket Id is updated with identifier {{ param }}",
+      "deleted": "A Project Bucket Id is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Project Bucket Id {{ id }}?"
+      },
+      "detail": {
+        "title": "Project Bucket Id"
+      },
+      "code": "Code",
+      "name": "Name",
+      "description": "Description"
+    }
+  }
+}

@@ -1,10 +1,10 @@
 package com.qnowapp.web.rest;
 
 import com.qnowapp.domain.Skills;
-
 import com.qnowapp.service.SkillsService;
 import com.qnowapp.web.rest.errors.BadRequestAlertException;
 import com.qnowapp.service.dto.SkillsCriteria;
+import com.qnowapp.service.SkillsQueryService;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -37,10 +37,11 @@ public class SkillsResource {
 
     private final SkillsService skillsService;
 
- 
-    public SkillsResource(SkillsService skillsService) {
-        this.skillsService = skillsService;
+    private final SkillsQueryService skillsQueryService;
 
+    public SkillsResource(SkillsService skillsService, SkillsQueryService skillsQueryService) {
+        this.skillsService = skillsService;
+        this.skillsQueryService = skillsQueryService;
     }
 
     /**
@@ -93,10 +94,23 @@ public class SkillsResource {
      */
     @CrossOrigin
     @GetMapping("/skills")
-    public ResponseEntity<List<Skills>> getAllSkills( ) {
-        log.debug("REST request to get Skills by criteria: {}");
-        List<Skills> entityList = skillsService.findAll();
+    public ResponseEntity<List<Skills>> getAllSkills(SkillsCriteria criteria) {
+        log.debug("REST request to get Skills by criteria: {}", criteria);
+        List<Skills> entityList = skillsQueryService.findByCriteria(criteria);
         return ResponseEntity.ok().body(entityList);
+    }
+
+    /**
+    * {@code GET  /skills/count} : count all the skills.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping("/skills/count")
+    public ResponseEntity<Long> countSkills(SkillsCriteria criteria) {
+        log.debug("REST request to count Skills by criteria: {}", criteria);
+        return ResponseEntity.ok().body(skillsQueryService.countByCriteria(criteria));
     }
 
     /**

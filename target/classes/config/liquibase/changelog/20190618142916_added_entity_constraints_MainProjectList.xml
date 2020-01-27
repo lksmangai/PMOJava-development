@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity MainProjectList.
+    -->
+    <changeSet id="20190618142916-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="im_projects_id"
+                                 baseTableName="main_project_list"
+                                 constraintName="fk_main_project_list_im_projects_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="im_projects"/>
+
+        <addForeignKeyConstraint baseColumnNames="main_project_list_id"
+                                 baseTableName="main_project_list_child_project"
+                                 constraintName="fk_main_project_list_child_project_main_project_list_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="main_project_list"/>
+
+        <addForeignKeyConstraint baseColumnNames="child_project_id"
+                                 baseTableName="main_project_list_child_project"
+                                 constraintName="fk_main_project_list_child_project_child_project_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="im_projects"/>
+        
+        <addForeignKeyConstraint baseColumnNames="main_project_list_id"
+                                 baseTableName="main_project_list_project_allocation"
+                                 constraintName="fk_main_project_list_project_allocation_main_project_list_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="main_project_list"/>
+
+        <addForeignKeyConstraint baseColumnNames="project_allocation_id"
+                                 baseTableName="main_project_list_project_allocation"
+                                 constraintName="fk_main_project_list_project_allocation_project_allocation_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="project_allocation"/>
+        
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,1467 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImProjectsCriteria.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.service.dto</a> &gt; <span class="el_source">ImProjectsCriteria.java</span></div><h1>ImProjectsCriteria.java</h1><pre class="source lang-java linenums">package com.qnowapp.service.dto;
+
+import java.io.Serializable;
+import java.util.Objects;
+import io.github.jhipster.service.Criteria;
+import io.github.jhipster.service.filter.BooleanFilter;
+import io.github.jhipster.service.filter.DoubleFilter;
+import io.github.jhipster.service.filter.Filter;
+import io.github.jhipster.service.filter.FloatFilter;
+import io.github.jhipster.service.filter.IntegerFilter;
+import io.github.jhipster.service.filter.LongFilter;
+import io.github.jhipster.service.filter.StringFilter;
+import io.github.jhipster.service.filter.BigDecimalFilter;
+import io.github.jhipster.service.filter.InstantFilter;
+import io.github.jhipster.service.filter.ZonedDateTimeFilter;
+
+/**
+ * Criteria class for the {@link com.qnowapp.domain.ImProjects} entity. This class is used
+ * in {@link com.qnowapp.web.rest.ImProjectsResource} to receive all the possible filtering options from
+ * the Http GET request parameters.
+ * For example the following could be a valid request:
+ * {@code /im-projects?id.greaterThan=5&amp;attr1.contains=something&amp;attr2.specified=false}
+ * As Spring is unable to properly convert the types, unless specific {@link Filter} class are used, we need to use
+ * fix type specific filters.
+ */
+public class ImProjectsCriteria implements Serializable, Criteria {
+
+    private static final long serialVersionUID = 1L;
+
+    private LongFilter id;
+
+    private StringFilter projectName;
+
+    private StringFilter projectNr;
+
+    private StringFilter projectPath;
+
+    private StringFilter treeSortkey;
+
+    private StringFilter maxChildSortkey;
+
+    private StringFilter description;
+
+    private IntegerFilter billingTypeId;
+
+    private StringFilter note;
+
+    private BooleanFilter requiresReportP;
+
+    private DoubleFilter projectBudget;
+
+    private StringFilter projectRisk;
+
+    private StringFilter corporateSponsor;
+
+    private DoubleFilter percentCompleted;
+
+    private DoubleFilter projectBudgetHours;
+
+    private BigDecimalFilter costQuotesCache;
+
+    private IntegerFilter costInvoicesCache;
+
+    private IntegerFilter costTimesheetPlannedCache;
+
+    private IntegerFilter costPurchaseOrdersCache;
+
+    private IntegerFilter costBillsCache;
+
+    private IntegerFilter costTimesheetLoggedCache;
+
+    private ZonedDateTimeFilter endDate;
+
+    private ZonedDateTimeFilter startDate;
+
+    private BooleanFilter templateP;
+
+    private IntegerFilter sortOrder;
+
+    private DoubleFilter reportedHoursCache;
+
+    private IntegerFilter costExpensePlannedCache;
+
+    private IntegerFilter costExpenseLoggedCache;
+
+    private InstantFilter confirmDate;
+
+    private BigDecimalFilter costDeliveryNotesCache;
+
+    private ZonedDateTimeFilter costCacheDirty;
+
+    private BooleanFilter milestoneP;
+
+    private StringFilter releaseItemP;
+
+    private BigDecimalFilter presalesProbability;
+
+    private BigDecimalFilter presalesValue;
+
+    private BigDecimalFilter reportedDaysCache;
+
+    private StringFilter presalesValueCurrency;
+
+    private IntegerFilter opportunitySalesStageId;
+
+    private IntegerFilter opportunityCampaignId;
+
+    private BigDecimalFilter scoreRevenue;
+
+    private BigDecimalFilter scoreStrategic;
+
+    private BigDecimalFilter scoreFinanceNpv;
+
+    private BigDecimalFilter scoreCustomers;
+
+    private BigDecimalFilter scoreFinanceCost;
+
+    private BigDecimalFilter costBillsPlanned;
+
+    private BigDecimalFilter costExpensesPlanned;
+
+    private BigDecimalFilter scoreRisk;
+
+    private BigDecimalFilter scoreCapabilities;
+
+    private BigDecimalFilter scoreEinanceRoi;
+
+    private StringFilter projectUserwiseBoard;
+
+    private IntegerFilter projectBringNextday;
+
+    private StringFilter projectBringSameboard;
+
+    private StringFilter projectNewboardEverytime;
+
+    private StringFilter projectUserwiseBoard2;
+
+    private StringFilter projectBringSameboard2;
+
+    private IntegerFilter projectNewboard2Everytime;
+
+    private StringFilter projectNewboard2Always;
+
+    private StringFilter projectReportWeekly;
+
+    private DoubleFilter scoreGain;
+
+    private DoubleFilter scoreLoss;
+
+    private DoubleFilter scoreDelivery;
+
+    private DoubleFilter scoreOperations;
+
+    private IntegerFilter scoreWhy;
+
+    private StringFilter javaServices;
+
+    private StringFilter netServices;
+
+    private StringFilter collectionLink;
+
+    private StringFilter trainingLink;
+
+    private StringFilter collectionName;
+
+    private StringFilter trainingName;
+
+    private StringFilter trainingDoc;
+
+    private IntegerFilter testingRichtext;
+
+    private StringFilter templateCategory;
+
+    private IntegerFilter dType;
+
+    private IntegerFilter dOption;
+
+    private IntegerFilter dFilter;
+
+    private IntegerFilter dId;
+
+    private IntegerFilter tType;
+
+    private IntegerFilter tOption;
+
+    private IntegerFilter tFilter;
+
+    private IntegerFilter tId;
+
+    private StringFilter risktype;
+
+    private DoubleFilter riskimpact;
+
+    private DoubleFilter riskprobability;
+
+    private LongFilter projectInitiativeIdId;
+
+    private LongFilter projectBusinessgoalIdId;
+
+    private LongFilter projectSubgoalIdId;
+
+    private LongFilter projectMaingoalIdId;
+
+    private LongFilter projectBucketIdId;
+
+    private LongFilter projectCostCenterIdId;
+
+    private LongFilter opportunityPriorityIdId;
+
+    private LongFilter backlogPracticeId;
+
+    private LongFilter projectThemeId;
+
+    private LongFilter projectClassId;
+
+    private LongFilter projectVerticalId;
+
+    private LongFilter projectBoardIdId;
+
+    private LongFilter projectBoard2IdId;
+
+    private LongFilter projectStatusIdId;
+
+    private LongFilter projectTypeIdId;
+
+    private LongFilter projectLeadIdId;
+
+    private LongFilter parentIdId;
+
+<span class="nc" id="L230">    public ImProjectsCriteria(){</span>
+<span class="nc" id="L231">    }</span>
+
+<span class="nc" id="L233">    public ImProjectsCriteria(ImProjectsCriteria other){</span>
+<span class="nc bnc" id="L234" title="All 2 branches missed.">        this.id = other.id == null ? null : other.id.copy();</span>
+<span class="nc bnc" id="L235" title="All 2 branches missed.">        this.projectName = other.projectName == null ? null : other.projectName.copy();</span>
+<span class="nc bnc" id="L236" title="All 2 branches missed.">        this.projectNr = other.projectNr == null ? null : other.projectNr.copy();</span>
+<span class="nc bnc" id="L237" title="All 2 branches missed.">        this.projectPath = other.projectPath == null ? null : other.projectPath.copy();</span>
+<span class="nc bnc" id="L238" title="All 2 branches missed.">        this.treeSortkey = other.treeSortkey == null ? null : other.treeSortkey.copy();</span>
+<span class="nc bnc" id="L239" title="All 2 branches missed.">        this.maxChildSortkey = other.maxChildSortkey == null ? null : other.maxChildSortkey.copy();</span>
+<span class="nc bnc" id="L240" title="All 2 branches missed.">        this.description = other.description == null ? null : other.description.copy();</span>
+<span class="nc bnc" id="L241" title="All 2 branches missed.">        this.billingTypeId = other.billingTypeId == null ? null : other.billingTypeId.copy();</span>
+<span class="nc bnc" id="L242" title="All 2 branches missed.">        this.note = other.note == null ? null : other.note.copy();</span>
+<span class="nc bnc" id="L243" title="All 2 branches missed.">        this.requiresReportP = other.requiresReportP == null ? null : other.requiresReportP.copy();</span>
+<span class="nc bnc" id="L244" title="All 2 branches missed.">        this.projectBudget = other.projectBudget == null ? null : other.projectBudget.copy();</span>
+<span class="nc bnc" id="L245" title="All 2 branches missed.">        this.projectRisk = other.projectRisk == null ? null : other.projectRisk.copy();</span>
+<span class="nc bnc" id="L246" title="All 2 branches missed.">        this.corporateSponsor = other.corporateSponsor == null ? null : other.corporateSponsor.copy();</span>
+<span class="nc bnc" id="L247" title="All 2 branches missed.">        this.percentCompleted = other.percentCompleted == null ? null : other.percentCompleted.copy();</span>
+<span class="nc bnc" id="L248" title="All 2 branches missed.">        this.projectBudgetHours = other.projectBudgetHours == null ? null : other.projectBudgetHours.copy();</span>
+<span class="nc bnc" id="L249" title="All 2 branches missed.">        this.costQuotesCache = other.costQuotesCache == null ? null : other.costQuotesCache.copy();</span>
+<span class="nc bnc" id="L250" title="All 2 branches missed.">        this.costInvoicesCache = other.costInvoicesCache == null ? null : other.costInvoicesCache.copy();</span>
+<span class="nc bnc" id="L251" title="All 2 branches missed.">        this.costTimesheetPlannedCache = other.costTimesheetPlannedCache == null ? null : other.costTimesheetPlannedCache.copy();</span>
+<span class="nc bnc" id="L252" title="All 2 branches missed.">        this.costPurchaseOrdersCache = other.costPurchaseOrdersCache == null ? null : other.costPurchaseOrdersCache.copy();</span>
+<span class="nc bnc" id="L253" title="All 2 branches missed.">        this.costBillsCache = other.costBillsCache == null ? null : other.costBillsCache.copy();</span>
+<span class="nc bnc" id="L254" title="All 2 branches missed.">        this.costTimesheetLoggedCache = other.costTimesheetLoggedCache == null ? null : other.costTimesheetLoggedCache.copy();</span>
+<span class="nc bnc" id="L255" title="All 2 branches missed.">        this.endDate = other.endDate == null ? null : other.endDate.copy();</span>
+<span class="nc bnc" id="L256" title="All 2 branches missed.">        this.startDate = other.startDate == null ? null : other.startDate.copy();</span>
+<span class="nc bnc" id="L257" title="All 2 branches missed.">        this.templateP = other.templateP == null ? null : other.templateP.copy();</span>
+<span class="nc bnc" id="L258" title="All 2 branches missed.">        this.sortOrder = other.sortOrder == null ? null : other.sortOrder.copy();</span>
+<span class="nc bnc" id="L259" title="All 2 branches missed.">        this.reportedHoursCache = other.reportedHoursCache == null ? null : other.reportedHoursCache.copy();</span>
+<span class="nc bnc" id="L260" title="All 2 branches missed.">        this.costExpensePlannedCache = other.costExpensePlannedCache == null ? null : other.costExpensePlannedCache.copy();</span>
+<span class="nc bnc" id="L261" title="All 2 branches missed.">        this.costExpenseLoggedCache = other.costExpenseLoggedCache == null ? null : other.costExpenseLoggedCache.copy();</span>
+<span class="nc bnc" id="L262" title="All 2 branches missed.">        this.confirmDate = other.confirmDate == null ? null : other.confirmDate.copy();</span>
+<span class="nc bnc" id="L263" title="All 2 branches missed.">        this.costDeliveryNotesCache = other.costDeliveryNotesCache == null ? null : other.costDeliveryNotesCache.copy();</span>
+<span class="nc bnc" id="L264" title="All 2 branches missed.">        this.costCacheDirty = other.costCacheDirty == null ? null : other.costCacheDirty.copy();</span>
+<span class="nc bnc" id="L265" title="All 2 branches missed.">        this.milestoneP = other.milestoneP == null ? null : other.milestoneP.copy();</span>
+<span class="nc bnc" id="L266" title="All 2 branches missed.">        this.releaseItemP = other.releaseItemP == null ? null : other.releaseItemP.copy();</span>
+<span class="nc bnc" id="L267" title="All 2 branches missed.">        this.presalesProbability = other.presalesProbability == null ? null : other.presalesProbability.copy();</span>
+<span class="nc bnc" id="L268" title="All 2 branches missed.">        this.presalesValue = other.presalesValue == null ? null : other.presalesValue.copy();</span>
+<span class="nc bnc" id="L269" title="All 2 branches missed.">        this.reportedDaysCache = other.reportedDaysCache == null ? null : other.reportedDaysCache.copy();</span>
+<span class="nc bnc" id="L270" title="All 2 branches missed.">        this.presalesValueCurrency = other.presalesValueCurrency == null ? null : other.presalesValueCurrency.copy();</span>
+<span class="nc bnc" id="L271" title="All 2 branches missed.">        this.opportunitySalesStageId = other.opportunitySalesStageId == null ? null : other.opportunitySalesStageId.copy();</span>
+<span class="nc bnc" id="L272" title="All 2 branches missed.">        this.opportunityCampaignId = other.opportunityCampaignId == null ? null : other.opportunityCampaignId.copy();</span>
+<span class="nc bnc" id="L273" title="All 2 branches missed.">        this.scoreRevenue = other.scoreRevenue == null ? null : other.scoreRevenue.copy();</span>
+<span class="nc bnc" id="L274" title="All 2 branches missed.">        this.scoreStrategic = other.scoreStrategic == null ? null : other.scoreStrategic.copy();</span>
+<span class="nc bnc" id="L275" title="All 2 branches missed.">        this.scoreFinanceNpv = other.scoreFinanceNpv == null ? null : other.scoreFinanceNpv.copy();</span>
+<span class="nc bnc" id="L276" title="All 2 branches missed.">        this.scoreCustomers = other.scoreCustomers == null ? null : other.scoreCustomers.copy();</span>
+<span class="nc bnc" id="L277" title="All 2 branches missed.">        this.scoreFinanceCost = other.scoreFinanceCost == null ? null : other.scoreFinanceCost.copy();</span>
+<span class="nc bnc" id="L278" title="All 2 branches missed.">        this.costBillsPlanned = other.costBillsPlanned == null ? null : other.costBillsPlanned.copy();</span>
+<span class="nc bnc" id="L279" title="All 2 branches missed.">        this.costExpensesPlanned = other.costExpensesPlanned == null ? null : other.costExpensesPlanned.copy();</span>
+<span class="nc bnc" id="L280" title="All 2 branches missed.">        this.scoreRisk = other.scoreRisk == null ? null : other.scoreRisk.copy();</span>
+<span class="nc bnc" id="L281" title="All 2 branches missed.">        this.scoreCapabilities = other.scoreCapabilities == null ? null : other.scoreCapabilities.copy();</span>
+<span class="nc bnc" id="L282" title="All 2 branches missed.">        this.scoreEinanceRoi = other.scoreEinanceRoi == null ? null : other.scoreEinanceRoi.copy();</span>
+<span class="nc bnc" id="L283" title="All 2 branches missed.">        this.projectUserwiseBoard = other.projectUserwiseBoard == null ? null : other.projectUserwiseBoard.copy();</span>
+<span class="nc bnc" id="L284" title="All 2 branches missed.">        this.projectBringNextday = other.projectBringNextday == null ? null : other.projectBringNextday.copy();</span>
+<span class="nc bnc" id="L285" title="All 2 branches missed.">        this.projectBringSameboard = other.projectBringSameboard == null ? null : other.projectBringSameboard.copy();</span>
+<span class="nc bnc" id="L286" title="All 2 branches missed.">        this.projectNewboardEverytime = other.projectNewboardEverytime == null ? null : other.projectNewboardEverytime.copy();</span>
+<span class="nc bnc" id="L287" title="All 2 branches missed.">        this.projectUserwiseBoard2 = other.projectUserwiseBoard2 == null ? null : other.projectUserwiseBoard2.copy();</span>
+<span class="nc bnc" id="L288" title="All 2 branches missed.">        this.projectBringSameboard2 = other.projectBringSameboard2 == null ? null : other.projectBringSameboard2.copy();</span>
+<span class="nc bnc" id="L289" title="All 2 branches missed.">        this.projectNewboard2Everytime = other.projectNewboard2Everytime == null ? null : other.projectNewboard2Everytime.copy();</span>
+<span class="nc bnc" id="L290" title="All 2 branches missed.">        this.projectNewboard2Always = other.projectNewboard2Always == null ? null : other.projectNewboard2Always.copy();</span>
+<span class="nc bnc" id="L291" title="All 2 branches missed.">        this.projectReportWeekly = other.projectReportWeekly == null ? null : other.projectReportWeekly.copy();</span>
+<span class="nc bnc" id="L292" title="All 2 branches missed.">        this.scoreGain = other.scoreGain == null ? null : other.scoreGain.copy();</span>
+<span class="nc bnc" id="L293" title="All 2 branches missed.">        this.scoreLoss = other.scoreLoss == null ? null : other.scoreLoss.copy();</span>
+<span class="nc bnc" id="L294" title="All 2 branches missed.">        this.scoreDelivery = other.scoreDelivery == null ? null : other.scoreDelivery.copy();</span>
+<span class="nc bnc" id="L295" title="All 2 branches missed.">        this.scoreOperations = other.scoreOperations == null ? null : other.scoreOperations.copy();</span>
+<span class="nc bnc" id="L296" title="All 2 branches missed.">        this.scoreWhy = other.scoreWhy == null ? null : other.scoreWhy.copy();</span>
+<span class="nc bnc" id="L297" title="All 2 branches missed.">        this.javaServices = other.javaServices == null ? null : other.javaServices.copy();</span>
+<span class="nc bnc" id="L298" title="All 2 branches missed.">        this.netServices = other.netServices == null ? null : other.netServices.copy();</span>
+<span class="nc bnc" id="L299" title="All 2 branches missed.">        this.collectionLink = other.collectionLink == null ? null : other.collectionLink.copy();</span>
+<span class="nc bnc" id="L300" title="All 2 branches missed.">        this.trainingLink = other.trainingLink == null ? null : other.trainingLink.copy();</span>
+<span class="nc bnc" id="L301" title="All 2 branches missed.">        this.collectionName = other.collectionName == null ? null : other.collectionName.copy();</span>
+<span class="nc bnc" id="L302" title="All 2 branches missed.">        this.trainingName = other.trainingName == null ? null : other.trainingName.copy();</span>
+<span class="nc bnc" id="L303" title="All 2 branches missed.">        this.trainingDoc = other.trainingDoc == null ? null : other.trainingDoc.copy();</span>
+<span class="nc bnc" id="L304" title="All 2 branches missed.">        this.testingRichtext = other.testingRichtext == null ? null : other.testingRichtext.copy();</span>
+<span class="nc bnc" id="L305" title="All 2 branches missed.">        this.templateCategory = other.templateCategory == null ? null : other.templateCategory.copy();</span>
+<span class="nc bnc" id="L306" title="All 2 branches missed.">        this.dType = other.dType == null ? null : other.dType.copy();</span>
+<span class="nc bnc" id="L307" title="All 2 branches missed.">        this.dOption = other.dOption == null ? null : other.dOption.copy();</span>
+<span class="nc bnc" id="L308" title="All 2 branches missed.">        this.dFilter = other.dFilter == null ? null : other.dFilter.copy();</span>
+<span class="nc bnc" id="L309" title="All 2 branches missed.">        this.dId = other.dId == null ? null : other.dId.copy();</span>
+<span class="nc bnc" id="L310" title="All 2 branches missed.">        this.tType = other.tType == null ? null : other.tType.copy();</span>
+<span class="nc bnc" id="L311" title="All 2 branches missed.">        this.tOption = other.tOption == null ? null : other.tOption.copy();</span>
+<span class="nc bnc" id="L312" title="All 2 branches missed.">        this.tFilter = other.tFilter == null ? null : other.tFilter.copy();</span>
+<span class="nc bnc" id="L313" title="All 2 branches missed.">        this.tId = other.tId == null ? null : other.tId.copy();</span>
+<span class="nc bnc" id="L314" title="All 2 branches missed.">        this.risktype = other.risktype == null ? null : other.risktype.copy();</span>
+<span class="nc bnc" id="L315" title="All 2 branches missed.">        this.riskimpact = other.riskimpact == null ? null : other.riskimpact.copy();</span>
+<span class="nc bnc" id="L316" title="All 2 branches missed.">        this.riskprobability = other.riskprobability == null ? null : other.riskprobability.copy();</span>
+<span class="nc bnc" id="L317" title="All 2 branches missed.">        this.projectInitiativeIdId = other.projectInitiativeIdId == null ? null : other.projectInitiativeIdId.copy();</span>
+<span class="nc bnc" id="L318" title="All 2 branches missed.">        this.projectBusinessgoalIdId = other.projectBusinessgoalIdId == null ? null : other.projectBusinessgoalIdId.copy();</span>
+<span class="nc bnc" id="L319" title="All 2 branches missed.">        this.projectSubgoalIdId = other.projectSubgoalIdId == null ? null : other.projectSubgoalIdId.copy();</span>
+<span class="nc bnc" id="L320" title="All 2 branches missed.">        this.projectMaingoalIdId = other.projectMaingoalIdId == null ? null : other.projectMaingoalIdId.copy();</span>
+<span class="nc bnc" id="L321" title="All 2 branches missed.">        this.projectBucketIdId = other.projectBucketIdId == null ? null : other.projectBucketIdId.copy();</span>
+<span class="nc bnc" id="L322" title="All 2 branches missed.">        this.projectCostCenterIdId = other.projectCostCenterIdId == null ? null : other.projectCostCenterIdId.copy();</span>
+<span class="nc bnc" id="L323" title="All 2 branches missed.">        this.opportunityPriorityIdId = other.opportunityPriorityIdId == null ? null : other.opportunityPriorityIdId.copy();</span>
+<span class="nc bnc" id="L324" title="All 2 branches missed.">        this.backlogPracticeId = other.backlogPracticeId == null ? null : other.backlogPracticeId.copy();</span>
+<span class="nc bnc" id="L325" title="All 2 branches missed.">        this.projectThemeId = other.projectThemeId == null ? null : other.projectThemeId.copy();</span>
+<span class="nc bnc" id="L326" title="All 2 branches missed.">        this.projectClassId = other.projectClassId == null ? null : other.projectClassId.copy();</span>
+<span class="nc bnc" id="L327" title="All 2 branches missed.">        this.projectVerticalId = other.projectVerticalId == null ? null : other.projectVerticalId.copy();</span>
+<span class="nc bnc" id="L328" title="All 2 branches missed.">        this.projectBoardIdId = other.projectBoardIdId == null ? null : other.projectBoardIdId.copy();</span>
+<span class="nc bnc" id="L329" title="All 2 branches missed.">        this.projectBoard2IdId = other.projectBoard2IdId == null ? null : other.projectBoard2IdId.copy();</span>
+<span class="nc bnc" id="L330" title="All 2 branches missed.">        this.projectStatusIdId = other.projectStatusIdId == null ? null : other.projectStatusIdId.copy();</span>
+<span class="nc bnc" id="L331" title="All 2 branches missed.">        this.projectTypeIdId = other.projectTypeIdId == null ? null : other.projectTypeIdId.copy();</span>
+<span class="nc bnc" id="L332" title="All 2 branches missed.">        this.projectLeadIdId = other.projectLeadIdId == null ? null : other.projectLeadIdId.copy();</span>
+<span class="nc bnc" id="L333" title="All 2 branches missed.">        this.parentIdId = other.parentIdId == null ? null : other.parentIdId.copy();</span>
+<span class="nc" id="L334">    }</span>
+
+    @Override
+    public ImProjectsCriteria copy() {
+<span class="nc" id="L338">        return new ImProjectsCriteria(this);</span>
+    }
+
+    public LongFilter getId() {
+<span class="nc" id="L342">        return id;</span>
+    }
+
+    public void setId(LongFilter id) {
+<span class="nc" id="L346">        this.id = id;</span>
+<span class="nc" id="L347">    }</span>
+
+    public StringFilter getProjectName() {
+<span class="nc" id="L350">        return projectName;</span>
+    }
+
+    public void setProjectName(StringFilter projectName) {
+<span class="nc" id="L354">        this.projectName = projectName;</span>
+<span class="nc" id="L355">    }</span>
+
+    public StringFilter getProjectNr() {
+<span class="nc" id="L358">        return projectNr;</span>
+    }
+
+    public void setProjectNr(StringFilter projectNr) {
+<span class="nc" id="L362">        this.projectNr = projectNr;</span>
+<span class="nc" id="L363">    }</span>
+
+    public StringFilter getProjectPath() {
+<span class="nc" id="L366">        return projectPath;</span>
+    }
+
+    public void setProjectPath(StringFilter projectPath) {
+<span class="nc" id="L370">        this.projectPath = projectPath;</span>
+<span class="nc" id="L371">    }</span>
+
+    public StringFilter getTreeSortkey() {
+<span class="nc" id="L374">        return treeSortkey;</span>
+    }
+
+    public void setTreeSortkey(StringFilter treeSortkey) {
+<span class="nc" id="L378">        this.treeSortkey = treeSortkey;</span>
+<span class="nc" id="L379">    }</span>
+
+    public StringFilter getMaxChildSortkey() {
+<span class="nc" id="L382">        return maxChildSortkey;</span>
+    }
+
+    public void setMaxChildSortkey(StringFilter maxChildSortkey) {
+<span class="nc" id="L386">        this.maxChildSortkey = maxChildSortkey;</span>
+<span class="nc" id="L387">    }</span>
+
+    public StringFilter getDescription() {
+<span class="nc" id="L390">        return description;</span>
+    }
+
+    public void setDescription(StringFilter description) {
+<span class="nc" id="L394">        this.description = description;</span>
+<span class="nc" id="L395">    }</span>
+
+    public IntegerFilter getBillingTypeId() {
+<span class="nc" id="L398">        return billingTypeId;</span>
+    }
+
+    public void setBillingTypeId(IntegerFilter billingTypeId) {
+<span class="nc" id="L402">        this.billingTypeId = billingTypeId;</span>
+<span class="nc" id="L403">    }</span>
+
+    public StringFilter getNote() {
+<span class="nc" id="L406">        return note;</span>
+    }
+
+    public void setNote(StringFilter note) {
+<span class="nc" id="L410">        this.note = note;</span>
+<span class="nc" id="L411">    }</span>
+
+    public BooleanFilter getRequiresReportP() {
+<span class="nc" id="L414">        return requiresReportP;</span>
+    }
+
+    public void setRequiresReportP(BooleanFilter requiresReportP) {
+<span class="nc" id="L418">        this.requiresReportP = requiresReportP;</span>
+<span class="nc" id="L419">    }</span>
+
+    public DoubleFilter getProjectBudget() {
+<span class="nc" id="L422">        return projectBudget;</span>
+    }
+
+    public void setProjectBudget(DoubleFilter projectBudget) {
+<span class="nc" id="L426">        this.projectBudget = projectBudget;</span>
+<span class="nc" id="L427">    }</span>
+
+    public StringFilter getProjectRisk() {
+<span class="nc" id="L430">        return projectRisk;</span>
+    }
+
+    public void setProjectRisk(StringFilter projectRisk) {
+<span class="nc" id="L434">        this.projectRisk = projectRisk;</span>
+<span class="nc" id="L435">    }</span>
+
+    public StringFilter getCorporateSponsor() {
+<span class="nc" id="L438">        return corporateSponsor;</span>
+    }
+
+    public void setCorporateSponsor(StringFilter corporateSponsor) {
+<span class="nc" id="L442">        this.corporateSponsor = corporateSponsor;</span>
+<span class="nc" id="L443">    }</span>
+
+    public DoubleFilter getPercentCompleted() {
+<span class="nc" id="L446">        return percentCompleted;</span>
+    }
+
+    public void setPercentCompleted(DoubleFilter percentCompleted) {
+<span class="nc" id="L450">        this.percentCompleted = percentCompleted;</span>
+<span class="nc" id="L451">    }</span>
+
+    public DoubleFilter getProjectBudgetHours() {
+<span class="nc" id="L454">        return projectBudgetHours;</span>
+    }
+
+    public void setProjectBudgetHours(DoubleFilter projectBudgetHours) {
+<span class="nc" id="L458">        this.projectBudgetHours = projectBudgetHours;</span>
+<span class="nc" id="L459">    }</span>
+
+    public BigDecimalFilter getCostQuotesCache() {
+<span class="nc" id="L462">        return costQuotesCache;</span>
+    }
+
+    public void setCostQuotesCache(BigDecimalFilter costQuotesCache) {
+<span class="nc" id="L466">        this.costQuotesCache = costQuotesCache;</span>
+<span class="nc" id="L467">    }</span>
+
+    public IntegerFilter getCostInvoicesCache() {
+<span class="nc" id="L470">        return costInvoicesCache;</span>
+    }
+
+    public void setCostInvoicesCache(IntegerFilter costInvoicesCache) {
+<span class="nc" id="L474">        this.costInvoicesCache = costInvoicesCache;</span>
+<span class="nc" id="L475">    }</span>
+
+    public IntegerFilter getCostTimesheetPlannedCache() {
+<span class="nc" id="L478">        return costTimesheetPlannedCache;</span>
+    }
+
+    public void setCostTimesheetPlannedCache(IntegerFilter costTimesheetPlannedCache) {
+<span class="nc" id="L482">        this.costTimesheetPlannedCache = costTimesheetPlannedCache;</span>
+<span class="nc" id="L483">    }</span>
+
+    public IntegerFilter getCostPurchaseOrdersCache() {
+<span class="nc" id="L486">        return costPurchaseOrdersCache;</span>
+    }
+
+    public void setCostPurchaseOrdersCache(IntegerFilter costPurchaseOrdersCache) {
+<span class="nc" id="L490">        this.costPurchaseOrdersCache = costPurchaseOrdersCache;</span>
+<span class="nc" id="L491">    }</span>
+
+    public IntegerFilter getCostBillsCache() {
+<span class="nc" id="L494">        return costBillsCache;</span>
+    }
+
+    public void setCostBillsCache(IntegerFilter costBillsCache) {
+<span class="nc" id="L498">        this.costBillsCache = costBillsCache;</span>
+<span class="nc" id="L499">    }</span>
+
+    public IntegerFilter getCostTimesheetLoggedCache() {
+<span class="nc" id="L502">        return costTimesheetLoggedCache;</span>
+    }
+
+    public void setCostTimesheetLoggedCache(IntegerFilter costTimesheetLoggedCache) {
+<span class="nc" id="L506">        this.costTimesheetLoggedCache = costTimesheetLoggedCache;</span>
+<span class="nc" id="L507">    }</span>
+
+    public ZonedDateTimeFilter getEndDate() {
+<span class="nc" id="L510">        return endDate;</span>
+    }
+
+    public void setEndDate(ZonedDateTimeFilter endDate) {
+<span class="nc" id="L514">        this.endDate = endDate;</span>
+<span class="nc" id="L515">    }</span>
+
+    public ZonedDateTimeFilter getStartDate() {
+<span class="nc" id="L518">        return startDate;</span>
+    }
+
+    public void setStartDate(ZonedDateTimeFilter startDate) {
+<span class="nc" id="L522">        this.startDate = startDate;</span>
+<span class="nc" id="L523">    }</span>
+
+    public BooleanFilter getTemplateP() {
+<span class="nc" id="L526">        return templateP;</span>
+    }
+
+    public void setTemplateP(BooleanFilter templateP) {
+<span class="nc" id="L530">        this.templateP = templateP;</span>
+<span class="nc" id="L531">    }</span>
+
+    public IntegerFilter getSortOrder() {
+<span class="nc" id="L534">        return sortOrder;</span>
+    }
+
+    public void setSortOrder(IntegerFilter sortOrder) {
+<span class="nc" id="L538">        this.sortOrder = sortOrder;</span>
+<span class="nc" id="L539">    }</span>
+
+    public DoubleFilter getReportedHoursCache() {
+<span class="nc" id="L542">        return reportedHoursCache;</span>
+    }
+
+    public void setReportedHoursCache(DoubleFilter reportedHoursCache) {
+<span class="nc" id="L546">        this.reportedHoursCache = reportedHoursCache;</span>
+<span class="nc" id="L547">    }</span>
+
+    public IntegerFilter getCostExpensePlannedCache() {
+<span class="nc" id="L550">        return costExpensePlannedCache;</span>
+    }
+
+    public void setCostExpensePlannedCache(IntegerFilter costExpensePlannedCache) {
+<span class="nc" id="L554">        this.costExpensePlannedCache = costExpensePlannedCache;</span>
+<span class="nc" id="L555">    }</span>
+
+    public IntegerFilter getCostExpenseLoggedCache() {
+<span class="nc" id="L558">        return costExpenseLoggedCache;</span>
+    }
+
+    public void setCostExpenseLoggedCache(IntegerFilter costExpenseLoggedCache) {
+<span class="nc" id="L562">        this.costExpenseLoggedCache = costExpenseLoggedCache;</span>
+<span class="nc" id="L563">    }</span>
+
+    public InstantFilter getConfirmDate() {
+<span class="nc" id="L566">        return confirmDate;</span>
+    }
+
+    public void setConfirmDate(InstantFilter confirmDate) {
+<span class="nc" id="L570">        this.confirmDate = confirmDate;</span>
+<span class="nc" id="L571">    }</span>
+
+    public BigDecimalFilter getCostDeliveryNotesCache() {
+<span class="nc" id="L574">        return costDeliveryNotesCache;</span>
+    }
+
+    public void setCostDeliveryNotesCache(BigDecimalFilter costDeliveryNotesCache) {
+<span class="nc" id="L578">        this.costDeliveryNotesCache = costDeliveryNotesCache;</span>
+<span class="nc" id="L579">    }</span>
+
+    public ZonedDateTimeFilter getCostCacheDirty() {
+<span class="nc" id="L582">        return costCacheDirty;</span>
+    }
+
+    public void setCostCacheDirty(ZonedDateTimeFilter costCacheDirty) {
+<span class="nc" id="L586">        this.costCacheDirty = costCacheDirty;</span>
+<span class="nc" id="L587">    }</span>
+
+    public BooleanFilter getMilestoneP() {
+<span class="nc" id="L590">        return milestoneP;</span>
+    }
+
+    public void setMilestoneP(BooleanFilter milestoneP) {
+<span class="nc" id="L594">        this.milestoneP = milestoneP;</span>
+<span class="nc" id="L595">    }</span>
+
+    public StringFilter getReleaseItemP() {
+<span class="nc" id="L598">        return releaseItemP;</span>
+    }
+
+    public void setReleaseItemP(StringFilter releaseItemP) {
+<span class="nc" id="L602">        this.releaseItemP = releaseItemP;</span>
+<span class="nc" id="L603">    }</span>
+
+    public BigDecimalFilter getPresalesProbability() {
+<span class="nc" id="L606">        return presalesProbability;</span>
+    }
+
+    public void setPresalesProbability(BigDecimalFilter presalesProbability) {
+<span class="nc" id="L610">        this.presalesProbability = presalesProbability;</span>
+<span class="nc" id="L611">    }</span>
+
+    public BigDecimalFilter getPresalesValue() {
+<span class="nc" id="L614">        return presalesValue;</span>
+    }
+
+    public void setPresalesValue(BigDecimalFilter presalesValue) {
+<span class="nc" id="L618">        this.presalesValue = presalesValue;</span>
+<span class="nc" id="L619">    }</span>
+
+    public BigDecimalFilter getReportedDaysCache() {
+<span class="nc" id="L622">        return reportedDaysCache;</span>
+    }
+
+    public void setReportedDaysCache(BigDecimalFilter reportedDaysCache) {
+<span class="nc" id="L626">        this.reportedDaysCache = reportedDaysCache;</span>
+<span class="nc" id="L627">    }</span>
+
+    public StringFilter getPresalesValueCurrency() {
+<span class="nc" id="L630">        return presalesValueCurrency;</span>
+    }
+
+    public void setPresalesValueCurrency(StringFilter presalesValueCurrency) {
+<span class="nc" id="L634">        this.presalesValueCurrency = presalesValueCurrency;</span>
+<span class="nc" id="L635">    }</span>
+
+    public IntegerFilter getOpportunitySalesStageId() {
+<span class="nc" id="L638">        return opportunitySalesStageId;</span>
+    }
+
+    public void setOpportunitySalesStageId(IntegerFilter opportunitySalesStageId) {
+<span class="nc" id="L642">        this.opportunitySalesStageId = opportunitySalesStageId;</span>
+<span class="nc" id="L643">    }</span>
+
+    public IntegerFilter getOpportunityCampaignId() {
+<span class="nc" id="L646">        return opportunityCampaignId;</span>
+    }
+
+    public void setOpportunityCampaignId(IntegerFilter opportunityCampaignId) {
+<span class="nc" id="L650">        this.opportunityCampaignId = opportunityCampaignId;</span>
+<span class="nc" id="L651">    }</span>
+
+    public BigDecimalFilter getScoreRevenue() {
+<span class="nc" id="L654">        return scoreRevenue;</span>
+    }
+
+    public void setScoreRevenue(BigDecimalFilter scoreRevenue) {
+<span class="nc" id="L658">        this.scoreRevenue = scoreRevenue;</span>
+<span class="nc" id="L659">    }</span>
+
+    public BigDecimalFilter getScoreStrategic() {
+<span class="nc" id="L662">        return scoreStrategic;</span>
+    }
+
+    public void setScoreStrategic(BigDecimalFilter scoreStrategic) {
+<span class="nc" id="L666">        this.scoreStrategic = scoreStrategic;</span>
+<span class="nc" id="L667">    }</span>
+
+    public BigDecimalFilter getScoreFinanceNpv() {
+<span class="nc" id="L670">        return scoreFinanceNpv;</span>
+    }
+
+    public void setScoreFinanceNpv(BigDecimalFilter scoreFinanceNpv) {
+<span class="nc" id="L674">        this.scoreFinanceNpv = scoreFinanceNpv;</span>
+<span class="nc" id="L675">    }</span>
+
+    public BigDecimalFilter getScoreCustomers() {
+<span class="nc" id="L678">        return scoreCustomers;</span>
+    }
+
+    public void setScoreCustomers(BigDecimalFilter scoreCustomers) {
+<span class="nc" id="L682">        this.scoreCustomers = scoreCustomers;</span>
+<span class="nc" id="L683">    }</span>
+
+    public BigDecimalFilter getScoreFinanceCost() {
+<span class="nc" id="L686">        return scoreFinanceCost;</span>
+    }
+
+    public void setScoreFinanceCost(BigDecimalFilter scoreFinanceCost) {
+<span class="nc" id="L690">        this.scoreFinanceCost = scoreFinanceCost;</span>
+<span class="nc" id="L691">    }</span>
+
+    public BigDecimalFilter getCostBillsPlanned() {
+<span class="nc" id="L694">        return costBillsPlanned;</span>
+    }
+
+    public void setCostBillsPlanned(BigDecimalFilter costBillsPlanned) {
+<span class="nc" id="L698">        this.costBillsPlanned = costBillsPlanned;</span>
+<span class="nc" id="L699">    }</span>
+
+    public BigDecimalFilter getCostExpensesPlanned() {
+<span class="nc" id="L702">        return costExpensesPlanned;</span>
+    }
+
+    public void setCostExpensesPlanned(BigDecimalFilter costExpensesPlanned) {
+<span class="nc" id="L706">        this.costExpensesPlanned = costExpensesPlanned;</span>
+<span class="nc" id="L707">    }</span>
+
+    public BigDecimalFilter getScoreRisk() {
+<span class="nc" id="L710">        return scoreRisk;</span>
+    }
+
+    public void setScoreRisk(BigDecimalFilter scoreRisk) {
+<span class="nc" id="L714">        this.scoreRisk = scoreRisk;</span>
+<span class="nc" id="L715">    }</span>
+
+    public BigDecimalFilter getScoreCapabilities() {
+<span class="nc" id="L718">        return scoreCapabilities;</span>
+    }
+
+    public void setScoreCapabilities(BigDecimalFilter scoreCapabilities) {
+<span class="nc" id="L722">        this.scoreCapabilities = scoreCapabilities;</span>
+<span class="nc" id="L723">    }</span>
+
+    public BigDecimalFilter getScoreEinanceRoi() {
+<span class="nc" id="L726">        return scoreEinanceRoi;</span>
+    }
+
+    public void setScoreEinanceRoi(BigDecimalFilter scoreEinanceRoi) {
+<span class="nc" id="L730">        this.scoreEinanceRoi = scoreEinanceRoi;</span>
+<span class="nc" id="L731">    }</span>
+
+    public StringFilter getProjectUserwiseBoard() {
+<span class="nc" id="L734">        return projectUserwiseBoard;</span>
+    }
+
+    public void setProjectUserwiseBoard(StringFilter projectUserwiseBoard) {
+<span class="nc" id="L738">        this.projectUserwiseBoard = projectUserwiseBoard;</span>
+<span class="nc" id="L739">    }</span>
+
+    public IntegerFilter getProjectBringNextday() {
+<span class="nc" id="L742">        return projectBringNextday;</span>
+    }
+
+    public void setProjectBringNextday(IntegerFilter projectBringNextday) {
+<span class="nc" id="L746">        this.projectBringNextday = projectBringNextday;</span>
+<span class="nc" id="L747">    }</span>
+
+    public StringFilter getProjectBringSameboard() {
+<span class="nc" id="L750">        return projectBringSameboard;</span>
+    }
+
+    public void setProjectBringSameboard(StringFilter projectBringSameboard) {
+<span class="nc" id="L754">        this.projectBringSameboard = projectBringSameboard;</span>
+<span class="nc" id="L755">    }</span>
+
+    public StringFilter getProjectNewboardEverytime() {
+<span class="nc" id="L758">        return projectNewboardEverytime;</span>
+    }
+
+    public void setProjectNewboardEverytime(StringFilter projectNewboardEverytime) {
+<span class="nc" id="L762">        this.projectNewboardEverytime = projectNewboardEverytime;</span>
+<span class="nc" id="L763">    }</span>
+
+    public StringFilter getProjectUserwiseBoard2() {
+<span class="nc" id="L766">        return projectUserwiseBoard2;</span>
+    }
+
+    public void setProjectUserwiseBoard2(StringFilter projectUserwiseBoard2) {
+<span class="nc" id="L770">        this.projectUserwiseBoard2 = projectUserwiseBoard2;</span>
+<span class="nc" id="L771">    }</span>
+
+    public StringFilter getProjectBringSameboard2() {
+<span class="nc" id="L774">        return projectBringSameboard2;</span>
+    }
+
+    public void setProjectBringSameboard2(StringFilter projectBringSameboard2) {
+<span class="nc" id="L778">        this.projectBringSameboard2 = projectBringSameboard2;</span>
+<span class="nc" id="L779">    }</span>
+
+    public IntegerFilter getProjectNewboard2Everytime() {
+<span class="nc" id="L782">        return projectNewboard2Everytime;</span>
+    }
+
+    public void setProjectNewboard2Everytime(IntegerFilter projectNewboard2Everytime) {
+<span class="nc" id="L786">        this.projectNewboard2Everytime = projectNewboard2Everytime;</span>
+<span class="nc" id="L787">    }</span>
+
+    public StringFilter getProjectNewboard2Always() {
+<span class="nc" id="L790">        return projectNewboard2Always;</span>
+    }
+
+    public void setProjectNewboard2Always(StringFilter projectNewboard2Always) {
+<span class="nc" id="L794">        this.projectNewboard2Always = projectNewboard2Always;</span>
+<span class="nc" id="L795">    }</span>
+
+    public StringFilter getProjectReportWeekly() {
+<span class="nc" id="L798">        return projectReportWeekly;</span>
+    }
+
+    public void setProjectReportWeekly(StringFilter projectReportWeekly) {
+<span class="nc" id="L802">        this.projectReportWeekly = projectReportWeekly;</span>
+<span class="nc" id="L803">    }</span>
+
+    public DoubleFilter getScoreGain() {
+<span class="nc" id="L806">        return scoreGain;</span>
+    }
+
+    public void setScoreGain(DoubleFilter scoreGain) {
+<span class="nc" id="L810">        this.scoreGain = scoreGain;</span>
+<span class="nc" id="L811">    }</span>
+
+    public DoubleFilter getScoreLoss() {
+<span class="nc" id="L814">        return scoreLoss;</span>
+    }
+
+    public void setScoreLoss(DoubleFilter scoreLoss) {
+<span class="nc" id="L818">        this.scoreLoss = scoreLoss;</span>
+<span class="nc" id="L819">    }</span>
+
+    public DoubleFilter getScoreDelivery() {
+<span class="nc" id="L822">        return scoreDelivery;</span>
+    }
+
+    public void setScoreDelivery(DoubleFilter scoreDelivery) {
+<span class="nc" id="L826">        this.scoreDelivery = scoreDelivery;</span>
+<span class="nc" id="L827">    }</span>
+
+    public DoubleFilter getScoreOperations() {
+<span class="nc" id="L830">        return scoreOperations;</span>
+    }
+
+    public void setScoreOperations(DoubleFilter scoreOperations) {
+<span class="nc" id="L834">        this.scoreOperations = scoreOperations;</span>
+<span class="nc" id="L835">    }</span>
+
+    public IntegerFilter getScoreWhy() {
+<span class="nc" id="L838">        return scoreWhy;</span>
+    }
+
+    public void setScoreWhy(IntegerFilter scoreWhy) {
+<span class="nc" id="L842">        this.scoreWhy = scoreWhy;</span>
+<span class="nc" id="L843">    }</span>
+
+    public StringFilter getJavaServices() {
+<span class="nc" id="L846">        return javaServices;</span>
+    }
+
+    public void setJavaServices(StringFilter javaServices) {
+<span class="nc" id="L850">        this.javaServices = javaServices;</span>
+<span class="nc" id="L851">    }</span>
+
+    public StringFilter getNetServices() {
+<span class="nc" id="L854">        return netServices;</span>
+    }
+
+    public void setNetServices(StringFilter netServices) {
+<span class="nc" id="L858">        this.netServices = netServices;</span>
+<span class="nc" id="L859">    }</span>
+
+    public StringFilter getCollectionLink() {
+<span class="nc" id="L862">        return collectionLink;</span>
+    }
+
+    public void setCollectionLink(StringFilter collectionLink) {
+<span class="nc" id="L866">        this.collectionLink = collectionLink;</span>
+<span class="nc" id="L867">    }</span>
+
+    public StringFilter getTrainingLink() {
+<span class="nc" id="L870">        return trainingLink;</span>
+    }
+
+    public void setTrainingLink(StringFilter trainingLink) {
+<span class="nc" id="L874">        this.trainingLink = trainingLink;</span>
+<span class="nc" id="L875">    }</span>
+
+    public StringFilter getCollectionName() {
+<span class="nc" id="L878">        return collectionName;</span>
+    }
+
+    public void setCollectionName(StringFilter collectionName) {
+<span class="nc" id="L882">        this.collectionName = collectionName;</span>
+<span class="nc" id="L883">    }</span>
+
+    public StringFilter getTrainingName() {
+<span class="nc" id="L886">        return trainingName;</span>
+    }
+
+    public void setTrainingName(StringFilter trainingName) {
+<span class="nc" id="L890">        this.trainingName = trainingName;</span>
+<span class="nc" id="L891">    }</span>
+
+    public StringFilter getTrainingDoc() {
+<span class="nc" id="L894">        return trainingDoc;</span>
+    }
+
+    public void setTrainingDoc(StringFilter trainingDoc) {
+<span class="nc" id="L898">        this.trainingDoc = trainingDoc;</span>
+<span class="nc" id="L899">    }</span>
+
+    public IntegerFilter getTestingRichtext() {
+<span class="nc" id="L902">        return testingRichtext;</span>
+    }
+
+    public void setTestingRichtext(IntegerFilter testingRichtext) {
+<span class="nc" id="L906">        this.testingRichtext = testingRichtext;</span>
+<span class="nc" id="L907">    }</span>
+
+    public StringFilter getTemplateCategory() {
+<span class="nc" id="L910">        return templateCategory;</span>
+    }
+
+    public void setTemplateCategory(StringFilter templateCategory) {
+<span class="nc" id="L914">        this.templateCategory = templateCategory;</span>
+<span class="nc" id="L915">    }</span>
+
+    public IntegerFilter getdType() {
+<span class="nc" id="L918">        return dType;</span>
+    }
+
+    public void setdType(IntegerFilter dType) {
+<span class="nc" id="L922">        this.dType = dType;</span>
+<span class="nc" id="L923">    }</span>
+
+    public IntegerFilter getdOption() {
+<span class="nc" id="L926">        return dOption;</span>
+    }
+
+    public void setdOption(IntegerFilter dOption) {
+<span class="nc" id="L930">        this.dOption = dOption;</span>
+<span class="nc" id="L931">    }</span>
+
+    public IntegerFilter getdFilter() {
+<span class="nc" id="L934">        return dFilter;</span>
+    }
+
+    public void setdFilter(IntegerFilter dFilter) {
+<span class="nc" id="L938">        this.dFilter = dFilter;</span>
+<span class="nc" id="L939">    }</span>
+
+    public IntegerFilter getdId() {
+<span class="nc" id="L942">        return dId;</span>
+    }
+
+    public void setdId(IntegerFilter dId) {
+<span class="nc" id="L946">        this.dId = dId;</span>
+<span class="nc" id="L947">    }</span>
+
+    public IntegerFilter gettType() {
+<span class="nc" id="L950">        return tType;</span>
+    }
+
+    public void settType(IntegerFilter tType) {
+<span class="nc" id="L954">        this.tType = tType;</span>
+<span class="nc" id="L955">    }</span>
+
+    public IntegerFilter gettOption() {
+<span class="nc" id="L958">        return tOption;</span>
+    }
+
+    public void settOption(IntegerFilter tOption) {
+<span class="nc" id="L962">        this.tOption = tOption;</span>
+<span class="nc" id="L963">    }</span>
+
+    public IntegerFilter gettFilter() {
+<span class="nc" id="L966">        return tFilter;</span>
+    }
+
+    public void settFilter(IntegerFilter tFilter) {
+<span class="nc" id="L970">        this.tFilter = tFilter;</span>
+<span class="nc" id="L971">    }</span>
+
+    public IntegerFilter gettId() {
+<span class="nc" id="L974">        return tId;</span>
+    }
+
+    public void settId(IntegerFilter tId) {
+<span class="nc" id="L978">        this.tId = tId;</span>
+<span class="nc" id="L979">    }</span>
+
+    public StringFilter getRisktype() {
+<span class="nc" id="L982">        return risktype;</span>
+    }
+
+    public void setRisktype(StringFilter risktype) {
+<span class="nc" id="L986">        this.risktype = risktype;</span>
+<span class="nc" id="L987">    }</span>
+
+    public DoubleFilter getRiskimpact() {
+<span class="nc" id="L990">        return riskimpact;</span>
+    }
+
+    public void setRiskimpact(DoubleFilter riskimpact) {
+<span class="nc" id="L994">        this.riskimpact = riskimpact;</span>
+<span class="nc" id="L995">    }</span>
+
+    public DoubleFilter getRiskprobability() {
+<span class="nc" id="L998">        return riskprobability;</span>
+    }
+
+    public void setRiskprobability(DoubleFilter riskprobability) {
+<span class="nc" id="L1002">        this.riskprobability = riskprobability;</span>
+<span class="nc" id="L1003">    }</span>
+
+    public LongFilter getProjectInitiativeIdId() {
+<span class="nc" id="L1006">        return projectInitiativeIdId;</span>
+    }
+
+    public void setProjectInitiativeIdId(LongFilter projectInitiativeIdId) {
+<span class="nc" id="L1010">        this.projectInitiativeIdId = projectInitiativeIdId;</span>
+<span class="nc" id="L1011">    }</span>
+
+    public LongFilter getProjectBusinessgoalIdId() {
+<span class="nc" id="L1014">        return projectBusinessgoalIdId;</span>
+    }
+
+    public void setProjectBusinessgoalIdId(LongFilter projectBusinessgoalIdId) {
+<span class="nc" id="L1018">        this.projectBusinessgoalIdId = projectBusinessgoalIdId;</span>
+<span class="nc" id="L1019">    }</span>
+
+    public LongFilter getProjectSubgoalIdId() {
+<span class="nc" id="L1022">        return projectSubgoalIdId;</span>
+    }
+
+    public void setProjectSubgoalIdId(LongFilter projectSubgoalIdId) {
+<span class="nc" id="L1026">        this.projectSubgoalIdId = projectSubgoalIdId;</span>
+<span class="nc" id="L1027">    }</span>
+
+    public LongFilter getProjectMaingoalIdId() {
+<span class="nc" id="L1030">        return projectMaingoalIdId;</span>
+    }
+
+    public void setProjectMaingoalIdId(LongFilter projectMaingoalIdId) {
+<span class="nc" id="L1034">        this.projectMaingoalIdId = projectMaingoalIdId;</span>
+<span class="nc" id="L1035">    }</span>
+
+    public LongFilter getProjectBucketIdId() {
+<span class="nc" id="L1038">        return projectBucketIdId;</span>
+    }
+
+    public void setProjectBucketIdId(LongFilter projectBucketIdId) {
+<span class="nc" id="L1042">        this.projectBucketIdId = projectBucketIdId;</span>
+<span class="nc" id="L1043">    }</span>
+
+    public LongFilter getProjectCostCenterIdId() {
+<span class="nc" id="L1046">        return projectCostCenterIdId;</span>
+    }
+
+    public void setProjectCostCenterIdId(LongFilter projectCostCenterIdId) {
+<span class="nc" id="L1050">        this.projectCostCenterIdId = projectCostCenterIdId;</span>
+<span class="nc" id="L1051">    }</span>
+
+    public LongFilter getOpportunityPriorityIdId() {
+<span class="nc" id="L1054">        return opportunityPriorityIdId;</span>
+    }
+
+    public void setOpportunityPriorityIdId(LongFilter opportunityPriorityIdId) {
+<span class="nc" id="L1058">        this.opportunityPriorityIdId = opportunityPriorityIdId;</span>
+<span class="nc" id="L1059">    }</span>
+
+    public LongFilter getBacklogPracticeId() {
+<span class="nc" id="L1062">        return backlogPracticeId;</span>
+    }
+
+    public void setBacklogPracticeId(LongFilter backlogPracticeId) {
+<span class="nc" id="L1066">        this.backlogPracticeId = backlogPracticeId;</span>
+<span class="nc" id="L1067">    }</span>
+
+    public LongFilter getProjectThemeId() {
+<span class="nc" id="L1070">        return projectThemeId;</span>
+    }
+
+    public void setProjectThemeId(LongFilter projectThemeId) {
+<span class="nc" id="L1074">        this.projectThemeId = projectThemeId;</span>
+<span class="nc" id="L1075">    }</span>
+
+    public LongFilter getProjectClassId() {
+<span class="nc" id="L1078">        return projectClassId;</span>
+    }
+
+    public void setProjectClassId(LongFilter projectClassId) {
+<span class="nc" id="L1082">        this.projectClassId = projectClassId;</span>
+<span class="nc" id="L1083">    }</span>
+
+    public LongFilter getProjectVerticalId() {
+<span class="nc" id="L1086">        return projectVerticalId;</span>
+    }
+
+    public void setProjectVerticalId(LongFilter projectVerticalId) {
+<span class="nc" id="L1090">        this.projectVerticalId = projectVerticalId;</span>
+<span class="nc" id="L1091">    }</span>
+
+    public LongFilter getProjectBoardIdId() {
+<span class="nc" id="L1094">        return projectBoardIdId;</span>
+    }
+
+    public void setProjectBoardIdId(LongFilter projectBoardIdId) {
+<span class="nc" id="L1098">        this.projectBoardIdId = projectBoardIdId;</span>
+<span class="nc" id="L1099">    }</span>
+
+    public LongFilter getProjectBoard2IdId() {
+<span class="nc" id="L1102">        return projectBoard2IdId;</span>
+    }
+
+    public void setProjectBoard2IdId(LongFilter projectBoard2IdId) {
+<span class="nc" id="L1106">        this.projectBoard2IdId = projectBoard2IdId;</span>
+<span class="nc" id="L1107">    }</span>
+
+    public LongFilter getProjectStatusIdId() {
+<span class="nc" id="L1110">        return projectStatusIdId;</span>
+    }
+
+    public void setProjectStatusIdId(LongFilter projectStatusIdId) {
+<span class="nc" id="L1114">        this.projectStatusIdId = projectStatusIdId;</span>
+<span class="nc" id="L1115">    }</span>
+
+    public LongFilter getProjectTypeIdId() {
+<span class="nc" id="L1118">        return projectTypeIdId;</span>
+    }
+
+    public void setProjectTypeIdId(LongFilter projectTypeIdId) {
+<span class="nc" id="L1122">        this.projectTypeIdId = projectTypeIdId;</span>
+<span class="nc" id="L1123">    }</span>
+
+    public LongFilter getProjectLeadIdId() {
+<span class="nc" id="L1126">        return projectLeadIdId;</span>
+    }
+
+    public void setProjectLeadIdId(LongFilter projectLeadIdId) {
+<span class="nc" id="L1130">        this.projectLeadIdId = projectLeadIdId;</span>
+<span class="nc" id="L1131">    }</span>
+
+    public LongFilter getParentIdId() {
+<span class="nc" id="L1134">        return parentIdId;</span>
+    }
+
+    public void setParentIdId(LongFilter parentIdId) {
+<span class="nc" id="L1138">        this.parentIdId = parentIdId;</span>
+<span class="nc" id="L1139">    }</span>
+
+
+    @Override
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L1144" title="All 2 branches missed.">        if (this == o) {</span>
+<span class="nc" id="L1145">            return true;</span>
+        }
+<span class="nc bnc" id="L1147" title="All 4 branches missed.">        if (o == null || getClass() != o.getClass()) {</span>
+<span class="nc" id="L1148">            return false;</span>
+        }
+<span class="nc" id="L1150">        final ImProjectsCriteria that = (ImProjectsCriteria) o;</span>
+<span class="nc" id="L1151">        return</span>
+<span class="nc bnc" id="L1152" title="All 2 branches missed.">            Objects.equals(id, that.id) &amp;&amp;</span>
+<span class="nc bnc" id="L1153" title="All 2 branches missed.">            Objects.equals(projectName, that.projectName) &amp;&amp;</span>
+<span class="nc bnc" id="L1154" title="All 2 branches missed.">            Objects.equals(projectNr, that.projectNr) &amp;&amp;</span>
+<span class="nc bnc" id="L1155" title="All 2 branches missed.">            Objects.equals(projectPath, that.projectPath) &amp;&amp;</span>
+<span class="nc bnc" id="L1156" title="All 2 branches missed.">            Objects.equals(treeSortkey, that.treeSortkey) &amp;&amp;</span>
+<span class="nc bnc" id="L1157" title="All 2 branches missed.">            Objects.equals(maxChildSortkey, that.maxChildSortkey) &amp;&amp;</span>
+<span class="nc bnc" id="L1158" title="All 2 branches missed.">            Objects.equals(description, that.description) &amp;&amp;</span>
+<span class="nc bnc" id="L1159" title="All 2 branches missed.">            Objects.equals(billingTypeId, that.billingTypeId) &amp;&amp;</span>
+<span class="nc bnc" id="L1160" title="All 2 branches missed.">            Objects.equals(note, that.note) &amp;&amp;</span>
+<span class="nc bnc" id="L1161" title="All 2 branches missed.">            Objects.equals(requiresReportP, that.requiresReportP) &amp;&amp;</span>
+<span class="nc bnc" id="L1162" title="All 2 branches missed.">            Objects.equals(projectBudget, that.projectBudget) &amp;&amp;</span>
+<span class="nc bnc" id="L1163" title="All 2 branches missed.">            Objects.equals(projectRisk, that.projectRisk) &amp;&amp;</span>
+<span class="nc bnc" id="L1164" title="All 2 branches missed.">            Objects.equals(corporateSponsor, that.corporateSponsor) &amp;&amp;</span>
+<span class="nc bnc" id="L1165" title="All 2 branches missed.">            Objects.equals(percentCompleted, that.percentCompleted) &amp;&amp;</span>
+<span class="nc bnc" id="L1166" title="All 2 branches missed.">            Objects.equals(projectBudgetHours, that.projectBudgetHours) &amp;&amp;</span>
+<span class="nc bnc" id="L1167" title="All 2 branches missed.">            Objects.equals(costQuotesCache, that.costQuotesCache) &amp;&amp;</span>
+<span class="nc bnc" id="L1168" title="All 2 branches missed.">            Objects.equals(costInvoicesCache, that.costInvoicesCache) &amp;&amp;</span>
+<span class="nc bnc" id="L1169" title="All 2 branches missed.">            Objects.equals(costTimesheetPlannedCache, that.costTimesheetPlannedCache) &amp;&amp;</span>
+<span class="nc bnc" id="L1170" title="All 2 branches missed.">            Objects.equals(costPurchaseOrdersCache, that.costPurchaseOrdersCache) &amp;&amp;</span>
+<span class="nc bnc" id="L1171" title="All 2 branches missed.">            Objects.equals(costBillsCache, that.costBillsCache) &amp;&amp;</span>
+<span class="nc bnc" id="L1172" title="All 2 branches missed.">            Objects.equals(costTimesheetLoggedCache, that.costTimesheetLoggedCache) &amp;&amp;</span>
+<span class="nc bnc" id="L1173" title="All 2 branches missed.">            Objects.equals(endDate, that.endDate) &amp;&amp;</span>
+<span class="nc bnc" id="L1174" title="All 2 branches missed.">            Objects.equals(startDate, that.startDate) &amp;&amp;</span>
+<span class="nc bnc" id="L1175" title="All 2 branches missed.">            Objects.equals(templateP, that.templateP) &amp;&amp;</span>
+<span class="nc bnc" id="L1176" title="All 2 branches missed.">            Objects.equals(sortOrder, that.sortOrder) &amp;&amp;</span>
+<span class="nc bnc" id="L1177" title="All 2 branches missed.">            Objects.equals(reportedHoursCache, that.reportedHoursCache) &amp;&amp;</span>
+<span class="nc bnc" id="L1178" title="All 2 branches missed.">            Objects.equals(costExpensePlannedCache, that.costExpensePlannedCache) &amp;&amp;</span>
+<span class="nc bnc" id="L1179" title="All 2 branches missed.">            Objects.equals(costExpenseLoggedCache, that.costExpenseLoggedCache) &amp;&amp;</span>
+<span class="nc bnc" id="L1180" title="All 2 branches missed.">            Objects.equals(confirmDate, that.confirmDate) &amp;&amp;</span>
+<span class="nc bnc" id="L1181" title="All 2 branches missed.">            Objects.equals(costDeliveryNotesCache, that.costDeliveryNotesCache) &amp;&amp;</span>
+<span class="nc bnc" id="L1182" title="All 2 branches missed.">            Objects.equals(costCacheDirty, that.costCacheDirty) &amp;&amp;</span>
+<span class="nc bnc" id="L1183" title="All 2 branches missed.">            Objects.equals(milestoneP, that.milestoneP) &amp;&amp;</span>
+<span class="nc bnc" id="L1184" title="All 2 branches missed.">            Objects.equals(releaseItemP, that.releaseItemP) &amp;&amp;</span>
+<span class="nc bnc" id="L1185" title="All 2 branches missed.">            Objects.equals(presalesProbability, that.presalesProbability) &amp;&amp;</span>
+<span class="nc bnc" id="L1186" title="All 2 branches missed.">            Objects.equals(presalesValue, that.presalesValue) &amp;&amp;</span>
+<span class="nc bnc" id="L1187" title="All 2 branches missed.">            Objects.equals(reportedDaysCache, that.reportedDaysCache) &amp;&amp;</span>
+<span class="nc bnc" id="L1188" title="All 2 branches missed.">            Objects.equals(presalesValueCurrency, that.presalesValueCurrency) &amp;&amp;</span>
+<span class="nc bnc" id="L1189" title="All 2 branches missed.">            Objects.equals(opportunitySalesStageId, that.opportunitySalesStageId) &amp;&amp;</span>
+<span class="nc bnc" id="L1190" title="All 2 branches missed.">            Objects.equals(opportunityCampaignId, that.opportunityCampaignId) &amp;&amp;</span>
+<span class="nc bnc" id="L1191" title="All 2 branches missed.">            Objects.equals(scoreRevenue, that.scoreRevenue) &amp;&amp;</span>
+<span class="nc bnc" id="L1192" title="All 2 branches missed.">            Objects.equals(scoreStrategic, that.scoreStrategic) &amp;&amp;</span>
+<span class="nc bnc" id="L1193" title="All 2 branches missed.">            Objects.equals(scoreFinanceNpv, that.scoreFinanceNpv) &amp;&amp;</span>
+<span class="nc bnc" id="L1194" title="All 2 branches missed.">            Objects.equals(scoreCustomers, that.scoreCustomers) &amp;&amp;</span>
+<span class="nc bnc" id="L1195" title="All 2 branches missed.">            Objects.equals(scoreFinanceCost, that.scoreFinanceCost) &amp;&amp;</span>
+<span class="nc bnc" id="L1196" title="All 2 branches missed.">            Objects.equals(costBillsPlanned, that.costBillsPlanned) &amp;&amp;</span>
+<span class="nc bnc" id="L1197" title="All 2 branches missed.">            Objects.equals(costExpensesPlanned, that.costExpensesPlanned) &amp;&amp;</span>
+<span class="nc bnc" id="L1198" title="All 2 branches missed.">            Objects.equals(scoreRisk, that.scoreRisk) &amp;&amp;</span>
+<span class="nc bnc" id="L1199" title="All 2 branches missed.">            Objects.equals(scoreCapabilities, that.scoreCapabilities) &amp;&amp;</span>
+<span class="nc bnc" id="L1200" title="All 2 branches missed.">            Objects.equals(scoreEinanceRoi, that.scoreEinanceRoi) &amp;&amp;</span>
+<span class="nc bnc" id="L1201" title="All 2 branches missed.">            Objects.equals(projectUserwiseBoard, that.projectUserwiseBoard) &amp;&amp;</span>
+<span class="nc bnc" id="L1202" title="All 2 branches missed.">            Objects.equals(projectBringNextday, that.projectBringNextday) &amp;&amp;</span>
+<span class="nc bnc" id="L1203" title="All 2 branches missed.">            Objects.equals(projectBringSameboard, that.projectBringSameboard) &amp;&amp;</span>
+<span class="nc bnc" id="L1204" title="All 2 branches missed.">            Objects.equals(projectNewboardEverytime, that.projectNewboardEverytime) &amp;&amp;</span>
+<span class="nc bnc" id="L1205" title="All 2 branches missed.">            Objects.equals(projectUserwiseBoard2, that.projectUserwiseBoard2) &amp;&amp;</span>
+<span class="nc bnc" id="L1206" title="All 2 branches missed.">            Objects.equals(projectBringSameboard2, that.projectBringSameboard2) &amp;&amp;</span>
+<span class="nc bnc" id="L1207" title="All 2 branches missed.">            Objects.equals(projectNewboard2Everytime, that.projectNewboard2Everytime) &amp;&amp;</span>
+<span class="nc bnc" id="L1208" title="All 2 branches missed.">            Objects.equals(projectNewboard2Always, that.projectNewboard2Always) &amp;&amp;</span>
+<span class="nc bnc" id="L1209" title="All 2 branches missed.">            Objects.equals(projectReportWeekly, that.projectReportWeekly) &amp;&amp;</span>
+<span class="nc bnc" id="L1210" title="All 2 branches missed.">            Objects.equals(scoreGain, that.scoreGain) &amp;&amp;</span>
+<span class="nc bnc" id="L1211" title="All 2 branches missed.">            Objects.equals(scoreLoss, that.scoreLoss) &amp;&amp;</span>
+<span class="nc bnc" id="L1212" title="All 2 branches missed.">            Objects.equals(scoreDelivery, that.scoreDelivery) &amp;&amp;</span>
+<span class="nc bnc" id="L1213" title="All 2 branches missed.">            Objects.equals(scoreOperations, that.scoreOperations) &amp;&amp;</span>
+<span class="nc bnc" id="L1214" title="All 2 branches missed.">            Objects.equals(scoreWhy, that.scoreWhy) &amp;&amp;</span>
+<span class="nc bnc" id="L1215" title="All 2 branches missed.">            Objects.equals(javaServices, that.javaServices) &amp;&amp;</span>
+<span class="nc bnc" id="L1216" title="All 2 branches missed.">            Objects.equals(netServices, that.netServices) &amp;&amp;</span>
+<span class="nc bnc" id="L1217" title="All 2 branches missed.">            Objects.equals(collectionLink, that.collectionLink) &amp;&amp;</span>
+<span class="nc bnc" id="L1218" title="All 2 branches missed.">            Objects.equals(trainingLink, that.trainingLink) &amp;&amp;</span>
+<span class="nc bnc" id="L1219" title="All 2 branches missed.">            Objects.equals(collectionName, that.collectionName) &amp;&amp;</span>
+<span class="nc bnc" id="L1220" title="All 2 branches missed.">            Objects.equals(trainingName, that.trainingName) &amp;&amp;</span>
+<span class="nc bnc" id="L1221" title="All 2 branches missed.">            Objects.equals(trainingDoc, that.trainingDoc) &amp;&amp;</span>
+<span class="nc bnc" id="L1222" title="All 2 branches missed.">            Objects.equals(testingRichtext, that.testingRichtext) &amp;&amp;</span>
+<span class="nc bnc" id="L1223" title="All 2 branches missed.">            Objects.equals(templateCategory, that.templateCategory) &amp;&amp;</span>
+<span class="nc bnc" id="L1224" title="All 2 branches missed.">            Objects.equals(dType, that.dType) &amp;&amp;</span>
+<span class="nc bnc" id="L1225" title="All 2 branches missed.">            Objects.equals(dOption, that.dOption) &amp;&amp;</span>
+<span class="nc bnc" id="L1226" title="All 2 branches missed.">            Objects.equals(dFilter, that.dFilter) &amp;&amp;</span>
+<span class="nc bnc" id="L1227" title="All 2 branches missed.">            Objects.equals(dId, that.dId) &amp;&amp;</span>
+<span class="nc bnc" id="L1228" title="All 2 branches missed.">            Objects.equals(tType, that.tType) &amp;&amp;</span>
+<span class="nc bnc" id="L1229" title="All 2 branches missed.">            Objects.equals(tOption, that.tOption) &amp;&amp;</span>
+<span class="nc bnc" id="L1230" title="All 2 branches missed.">            Objects.equals(tFilter, that.tFilter) &amp;&amp;</span>
+<span class="nc bnc" id="L1231" title="All 2 branches missed.">            Objects.equals(tId, that.tId) &amp;&amp;</span>
+<span class="nc bnc" id="L1232" title="All 2 branches missed.">            Objects.equals(risktype, that.risktype) &amp;&amp;</span>
+<span class="nc bnc" id="L1233" title="All 2 branches missed.">            Objects.equals(riskimpact, that.riskimpact) &amp;&amp;</span>
+<span class="nc bnc" id="L1234" title="All 2 branches missed.">            Objects.equals(riskprobability, that.riskprobability) &amp;&amp;</span>
+<span class="nc bnc" id="L1235" title="All 2 branches missed.">            Objects.equals(projectInitiativeIdId, that.projectInitiativeIdId) &amp;&amp;</span>
+<span class="nc bnc" id="L1236" title="All 2 branches missed.">            Objects.equals(projectBusinessgoalIdId, that.projectBusinessgoalIdId) &amp;&amp;</span>
+<span class="nc bnc" id="L1237" title="All 2 branches missed.">            Objects.equals(projectSubgoalIdId, that.projectSubgoalIdId) &amp;&amp;</span>
+<span class="nc bnc" id="L1238" title="All 2 branches missed.">            Objects.equals(projectMaingoalIdId, that.projectMaingoalIdId) &amp;&amp;</span>
+<span class="nc bnc" id="L1239" title="All 2 branches missed.">            Objects.equals(projectBucketIdId, that.projectBucketIdId) &amp;&amp;</span>
+<span class="nc bnc" id="L1240" title="All 2 branches missed.">            Objects.equals(projectCostCenterIdId, that.projectCostCenterIdId) &amp;&amp;</span>
+<span class="nc bnc" id="L1241" title="All 2 branches missed.">            Objects.equals(opportunityPriorityIdId, that.opportunityPriorityIdId) &amp;&amp;</span>
+<span class="nc bnc" id="L1242" title="All 2 branches missed.">            Objects.equals(backlogPracticeId, that.backlogPracticeId) &amp;&amp;</span>
+<span class="nc bnc" id="L1243" title="All 2 branches missed.">            Objects.equals(projectThemeId, that.projectThemeId) &amp;&amp;</span>
+<span class="nc bnc" id="L1244" title="All 2 branches missed.">            Objects.equals(projectClassId, that.projectClassId) &amp;&amp;</span>
+<span class="nc bnc" id="L1245" title="All 2 branches missed.">            Objects.equals(projectVerticalId, that.projectVerticalId) &amp;&amp;</span>
+<span class="nc bnc" id="L1246" title="All 2 branches missed.">            Objects.equals(projectBoardIdId, that.projectBoardIdId) &amp;&amp;</span>
+<span class="nc bnc" id="L1247" title="All 2 branches missed.">            Objects.equals(projectBoard2IdId, that.projectBoard2IdId) &amp;&amp;</span>
+<span class="nc bnc" id="L1248" title="All 2 branches missed.">            Objects.equals(projectStatusIdId, that.projectStatusIdId) &amp;&amp;</span>
+<span class="nc bnc" id="L1249" title="All 2 branches missed.">            Objects.equals(projectTypeIdId, that.projectTypeIdId) &amp;&amp;</span>
+<span class="nc bnc" id="L1250" title="All 2 branches missed.">            Objects.equals(projectLeadIdId, that.projectLeadIdId) &amp;&amp;</span>
+<span class="nc bnc" id="L1251" title="All 2 branches missed.">            Objects.equals(parentIdId, that.parentIdId);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L1256">        return Objects.hash(</span>
+        id,
+        projectName,
+        projectNr,
+        projectPath,
+        treeSortkey,
+        maxChildSortkey,
+        description,
+        billingTypeId,
+        note,
+        requiresReportP,
+        projectBudget,
+        projectRisk,
+        corporateSponsor,
+        percentCompleted,
+        projectBudgetHours,
+        costQuotesCache,
+        costInvoicesCache,
+        costTimesheetPlannedCache,
+        costPurchaseOrdersCache,
+        costBillsCache,
+        costTimesheetLoggedCache,
+        endDate,
+        startDate,
+        templateP,
+        sortOrder,
+        reportedHoursCache,
+        costExpensePlannedCache,
+        costExpenseLoggedCache,
+        confirmDate,
+        costDeliveryNotesCache,
+        costCacheDirty,
+        milestoneP,
+        releaseItemP,
+        presalesProbability,
+        presalesValue,
+        reportedDaysCache,
+        presalesValueCurrency,
+        opportunitySalesStageId,
+        opportunityCampaignId,
+        scoreRevenue,
+        scoreStrategic,
+        scoreFinanceNpv,
+        scoreCustomers,
+        scoreFinanceCost,
+        costBillsPlanned,
+        costExpensesPlanned,
+        scoreRisk,
+        scoreCapabilities,
+        scoreEinanceRoi,
+        projectUserwiseBoard,
+        projectBringNextday,
+        projectBringSameboard,
+        projectNewboardEverytime,
+        projectUserwiseBoard2,
+        projectBringSameboard2,
+        projectNewboard2Everytime,
+        projectNewboard2Always,
+        projectReportWeekly,
+        scoreGain,
+        scoreLoss,
+        scoreDelivery,
+        scoreOperations,
+        scoreWhy,
+        javaServices,
+        netServices,
+        collectionLink,
+        trainingLink,
+        collectionName,
+        trainingName,
+        trainingDoc,
+        testingRichtext,
+        templateCategory,
+        dType,
+        dOption,
+        dFilter,
+        dId,
+        tType,
+        tOption,
+        tFilter,
+        tId,
+        risktype,
+        riskimpact,
+        riskprobability,
+        projectInitiativeIdId,
+        projectBusinessgoalIdId,
+        projectSubgoalIdId,
+        projectMaingoalIdId,
+        projectBucketIdId,
+        projectCostCenterIdId,
+        opportunityPriorityIdId,
+        backlogPracticeId,
+        projectThemeId,
+        projectClassId,
+        projectVerticalId,
+        projectBoardIdId,
+        projectBoard2IdId,
+        projectStatusIdId,
+        projectTypeIdId,
+        projectLeadIdId,
+        parentIdId
+        );
+    }
+
+    @Override
+    public String toString() {
+<span class="nc bnc" id="L1362" title="All 200 branches missed.">        return &quot;ImProjectsCriteria{&quot; +</span>
+                (id != null ? &quot;id=&quot; + id + &quot;, &quot; : &quot;&quot;) +
+                (projectName != null ? &quot;projectName=&quot; + projectName + &quot;, &quot; : &quot;&quot;) +
+                (projectNr != null ? &quot;projectNr=&quot; + projectNr + &quot;, &quot; : &quot;&quot;) +
+                (projectPath != null ? &quot;projectPath=&quot; + projectPath + &quot;, &quot; : &quot;&quot;) +
+                (treeSortkey != null ? &quot;treeSortkey=&quot; + treeSortkey + &quot;, &quot; : &quot;&quot;) +
+                (maxChildSortkey != null ? &quot;maxChildSortkey=&quot; + maxChildSortkey + &quot;, &quot; : &quot;&quot;) +
+                (description != null ? &quot;description=&quot; + description + &quot;, &quot; : &quot;&quot;) +
+                (billingTypeId != null ? &quot;billingTypeId=&quot; + billingTypeId + &quot;, &quot; : &quot;&quot;) +
+                (note != null ? &quot;note=&quot; + note + &quot;, &quot; : &quot;&quot;) +
+                (requiresReportP != null ? &quot;requiresReportP=&quot; + requiresReportP + &quot;, &quot; : &quot;&quot;) +
+                (projectBudget != null ? &quot;projectBudget=&quot; + projectBudget + &quot;, &quot; : &quot;&quot;) +
+                (projectRisk != null ? &quot;projectRisk=&quot; + projectRisk + &quot;, &quot; : &quot;&quot;) +
+                (corporateSponsor != null ? &quot;corporateSponsor=&quot; + corporateSponsor + &quot;, &quot; : &quot;&quot;) +
+                (percentCompleted != null ? &quot;percentCompleted=&quot; + percentCompleted + &quot;, &quot; : &quot;&quot;) +
+                (projectBudgetHours != null ? &quot;projectBudgetHours=&quot; + projectBudgetHours + &quot;, &quot; : &quot;&quot;) +
+                (costQuotesCache != null ? &quot;costQuotesCache=&quot; + costQuotesCache + &quot;, &quot; : &quot;&quot;) +
+                (costInvoicesCache != null ? &quot;costInvoicesCache=&quot; + costInvoicesCache + &quot;, &quot; : &quot;&quot;) +
+                (costTimesheetPlannedCache != null ? &quot;costTimesheetPlannedCache=&quot; + costTimesheetPlannedCache + &quot;, &quot; : &quot;&quot;) +
+                (costPurchaseOrdersCache != null ? &quot;costPurchaseOrdersCache=&quot; + costPurchaseOrdersCache + &quot;, &quot; : &quot;&quot;) +
+                (costBillsCache != null ? &quot;costBillsCache=&quot; + costBillsCache + &quot;, &quot; : &quot;&quot;) +
+                (costTimesheetLoggedCache != null ? &quot;costTimesheetLoggedCache=&quot; + costTimesheetLoggedCache + &quot;, &quot; : &quot;&quot;) +
+                (endDate != null ? &quot;endDate=&quot; + endDate + &quot;, &quot; : &quot;&quot;) +
+                (startDate != null ? &quot;startDate=&quot; + startDate + &quot;, &quot; : &quot;&quot;) +
+                (templateP != null ? &quot;templateP=&quot; + templateP + &quot;, &quot; : &quot;&quot;) +
+                (sortOrder != null ? &quot;sortOrder=&quot; + sortOrder + &quot;, &quot; : &quot;&quot;) +
+                (reportedHoursCache != null ? &quot;reportedHoursCache=&quot; + reportedHoursCache + &quot;, &quot; : &quot;&quot;) +
+                (costExpensePlannedCache != null ? &quot;costExpensePlannedCache=&quot; + costExpensePlannedCache + &quot;, &quot; : &quot;&quot;) +
+                (costExpenseLoggedCache != null ? &quot;costExpenseLoggedCache=&quot; + costExpenseLoggedCache + &quot;, &quot; : &quot;&quot;) +
+                (confirmDate != null ? &quot;confirmDate=&quot; + confirmDate + &quot;, &quot; : &quot;&quot;) +
+                (costDeliveryNotesCache != null ? &quot;costDeliveryNotesCache=&quot; + costDeliveryNotesCache + &quot;, &quot; : &quot;&quot;) +
+                (costCacheDirty != null ? &quot;costCacheDirty=&quot; + costCacheDirty + &quot;, &quot; : &quot;&quot;) +
+                (milestoneP != null ? &quot;milestoneP=&quot; + milestoneP + &quot;, &quot; : &quot;&quot;) +
+                (releaseItemP != null ? &quot;releaseItemP=&quot; + releaseItemP + &quot;, &quot; : &quot;&quot;) +
+                (presalesProbability != null ? &quot;presalesProbability=&quot; + presalesProbability + &quot;, &quot; : &quot;&quot;) +
+                (presalesValue != null ? &quot;presalesValue=&quot; + presalesValue + &quot;, &quot; : &quot;&quot;) +
+                (reportedDaysCache != null ? &quot;reportedDaysCache=&quot; + reportedDaysCache + &quot;, &quot; : &quot;&quot;) +
+                (presalesValueCurrency != null ? &quot;presalesValueCurrency=&quot; + presalesValueCurrency + &quot;, &quot; : &quot;&quot;) +
+                (opportunitySalesStageId != null ? &quot;opportunitySalesStageId=&quot; + opportunitySalesStageId + &quot;, &quot; : &quot;&quot;) +
+                (opportunityCampaignId != null ? &quot;opportunityCampaignId=&quot; + opportunityCampaignId + &quot;, &quot; : &quot;&quot;) +
+                (scoreRevenue != null ? &quot;scoreRevenue=&quot; + scoreRevenue + &quot;, &quot; : &quot;&quot;) +
+                (scoreStrategic != null ? &quot;scoreStrategic=&quot; + scoreStrategic + &quot;, &quot; : &quot;&quot;) +
+                (scoreFinanceNpv != null ? &quot;scoreFinanceNpv=&quot; + scoreFinanceNpv + &quot;, &quot; : &quot;&quot;) +
+                (scoreCustomers != null ? &quot;scoreCustomers=&quot; + scoreCustomers + &quot;, &quot; : &quot;&quot;) +
+                (scoreFinanceCost != null ? &quot;scoreFinanceCost=&quot; + scoreFinanceCost + &quot;, &quot; : &quot;&quot;) +
+                (costBillsPlanned != null ? &quot;costBillsPlanned=&quot; + costBillsPlanned + &quot;, &quot; : &quot;&quot;) +
+                (costExpensesPlanned != null ? &quot;costExpensesPlanned=&quot; + costExpensesPlanned + &quot;, &quot; : &quot;&quot;) +
+                (scoreRisk != null ? &quot;scoreRisk=&quot; + scoreRisk + &quot;, &quot; : &quot;&quot;) +
+                (scoreCapabilities != null ? &quot;scoreCapabilities=&quot; + scoreCapabilities + &quot;, &quot; : &quot;&quot;) +
+                (scoreEinanceRoi != null ? &quot;scoreEinanceRoi=&quot; + scoreEinanceRoi + &quot;, &quot; : &quot;&quot;) +
+                (projectUserwiseBoard != null ? &quot;projectUserwiseBoard=&quot; + projectUserwiseBoard + &quot;, &quot; : &quot;&quot;) +
+                (projectBringNextday != null ? &quot;projectBringNextday=&quot; + projectBringNextday + &quot;, &quot; : &quot;&quot;) +
+                (projectBringSameboard != null ? &quot;projectBringSameboard=&quot; + projectBringSameboard + &quot;, &quot; : &quot;&quot;) +
+                (projectNewboardEverytime != null ? &quot;projectNewboardEverytime=&quot; + projectNewboardEverytime + &quot;, &quot; : &quot;&quot;) +
+                (projectUserwiseBoard2 != null ? &quot;projectUserwiseBoard2=&quot; + projectUserwiseBoard2 + &quot;, &quot; : &quot;&quot;) +
+                (projectBringSameboard2 != null ? &quot;projectBringSameboard2=&quot; + projectBringSameboard2 + &quot;, &quot; : &quot;&quot;) +
+                (projectNewboard2Everytime != null ? &quot;projectNewboard2Everytime=&quot; + projectNewboard2Everytime + &quot;, &quot; : &quot;&quot;) +
+                (projectNewboard2Always != null ? &quot;projectNewboard2Always=&quot; + projectNewboard2Always + &quot;, &quot; : &quot;&quot;) +
+                (projectReportWeekly != null ? &quot;projectReportWeekly=&quot; + projectReportWeekly + &quot;, &quot; : &quot;&quot;) +
+                (scoreGain != null ? &quot;scoreGain=&quot; + scoreGain + &quot;, &quot; : &quot;&quot;) +
+                (scoreLoss != null ? &quot;scoreLoss=&quot; + scoreLoss + &quot;, &quot; : &quot;&quot;) +
+                (scoreDelivery != null ? &quot;scoreDelivery=&quot; + scoreDelivery + &quot;, &quot; : &quot;&quot;) +
+                (scoreOperations != null ? &quot;scoreOperations=&quot; + scoreOperations + &quot;, &quot; : &quot;&quot;) +
+                (scoreWhy != null ? &quot;scoreWhy=&quot; + scoreWhy + &quot;, &quot; : &quot;&quot;) +
+                (javaServices != null ? &quot;javaServices=&quot; + javaServices + &quot;, &quot; : &quot;&quot;) +
+                (netServices != null ? &quot;netServices=&quot; + netServices + &quot;, &quot; : &quot;&quot;) +
+                (collectionLink != null ? &quot;collectionLink=&quot; + collectionLink + &quot;, &quot; : &quot;&quot;) +
+                (trainingLink != null ? &quot;trainingLink=&quot; + trainingLink + &quot;, &quot; : &quot;&quot;) +
+                (collectionName != null ? &quot;collectionName=&quot; + collectionName + &quot;, &quot; : &quot;&quot;) +
+                (trainingName != null ? &quot;trainingName=&quot; + trainingName + &quot;, &quot; : &quot;&quot;) +
+                (trainingDoc != null ? &quot;trainingDoc=&quot; + trainingDoc + &quot;, &quot; : &quot;&quot;) +
+                (testingRichtext != null ? &quot;testingRichtext=&quot; + testingRichtext + &quot;, &quot; : &quot;&quot;) +
+                (templateCategory != null ? &quot;templateCategory=&quot; + templateCategory + &quot;, &quot; : &quot;&quot;) +
+                (dType != null ? &quot;dType=&quot; + dType + &quot;, &quot; : &quot;&quot;) +
+                (dOption != null ? &quot;dOption=&quot; + dOption + &quot;, &quot; : &quot;&quot;) +
+                (dFilter != null ? &quot;dFilter=&quot; + dFilter + &quot;, &quot; : &quot;&quot;) +
+                (dId != null ? &quot;dId=&quot; + dId + &quot;, &quot; : &quot;&quot;) +
+                (tType != null ? &quot;tType=&quot; + tType + &quot;, &quot; : &quot;&quot;) +
+                (tOption != null ? &quot;tOption=&quot; + tOption + &quot;, &quot; : &quot;&quot;) +
+                (tFilter != null ? &quot;tFilter=&quot; + tFilter + &quot;, &quot; : &quot;&quot;) +
+                (tId != null ? &quot;tId=&quot; + tId + &quot;, &quot; : &quot;&quot;) +
+                (risktype != null ? &quot;risktype=&quot; + risktype + &quot;, &quot; : &quot;&quot;) +
+                (riskimpact != null ? &quot;riskimpact=&quot; + riskimpact + &quot;, &quot; : &quot;&quot;) +
+                (riskprobability != null ? &quot;riskprobability=&quot; + riskprobability + &quot;, &quot; : &quot;&quot;) +
+                (projectInitiativeIdId != null ? &quot;projectInitiativeIdId=&quot; + projectInitiativeIdId + &quot;, &quot; : &quot;&quot;) +
+                (projectBusinessgoalIdId != null ? &quot;projectBusinessgoalIdId=&quot; + projectBusinessgoalIdId + &quot;, &quot; : &quot;&quot;) +
+                (projectSubgoalIdId != null ? &quot;projectSubgoalIdId=&quot; + projectSubgoalIdId + &quot;, &quot; : &quot;&quot;) +
+                (projectMaingoalIdId != null ? &quot;projectMaingoalIdId=&quot; + projectMaingoalIdId + &quot;, &quot; : &quot;&quot;) +
+                (projectBucketIdId != null ? &quot;projectBucketIdId=&quot; + projectBucketIdId + &quot;, &quot; : &quot;&quot;) +
+                (projectCostCenterIdId != null ? &quot;projectCostCenterIdId=&quot; + projectCostCenterIdId + &quot;, &quot; : &quot;&quot;) +
+                (opportunityPriorityIdId != null ? &quot;opportunityPriorityIdId=&quot; + opportunityPriorityIdId + &quot;, &quot; : &quot;&quot;) +
+                (backlogPracticeId != null ? &quot;backlogPracticeId=&quot; + backlogPracticeId + &quot;, &quot; : &quot;&quot;) +
+                (projectThemeId != null ? &quot;projectThemeId=&quot; + projectThemeId + &quot;, &quot; : &quot;&quot;) +
+                (projectClassId != null ? &quot;projectClassId=&quot; + projectClassId + &quot;, &quot; : &quot;&quot;) +
+                (projectVerticalId != null ? &quot;projectVerticalId=&quot; + projectVerticalId + &quot;, &quot; : &quot;&quot;) +
+                (projectBoardIdId != null ? &quot;projectBoardIdId=&quot; + projectBoardIdId + &quot;, &quot; : &quot;&quot;) +
+                (projectBoard2IdId != null ? &quot;projectBoard2IdId=&quot; + projectBoard2IdId + &quot;, &quot; : &quot;&quot;) +
+                (projectStatusIdId != null ? &quot;projectStatusIdId=&quot; + projectStatusIdId + &quot;, &quot; : &quot;&quot;) +
+                (projectTypeIdId != null ? &quot;projectTypeIdId=&quot; + projectTypeIdId + &quot;, &quot; : &quot;&quot;) +
+                (projectLeadIdId != null ? &quot;projectLeadIdId=&quot; + projectLeadIdId + &quot;, &quot; : &quot;&quot;) +
+                (parentIdId != null ? &quot;parentIdId=&quot; + parentIdId + &quot;, &quot; : &quot;&quot;) +
+            &quot;}&quot;;
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

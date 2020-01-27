@@ -1,7 +1,6 @@
 package com.qnowapp.config;
 
 import io.github.jhipster.config.JHipsterConstants;
-
 import io.github.jhipster.config.liquibase.AsyncSpringLiquibase;
 import liquibase.integration.spring.SpringLiquibase;
 import org.slf4j.Logger;

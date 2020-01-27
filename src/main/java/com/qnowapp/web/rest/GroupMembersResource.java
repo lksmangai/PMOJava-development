@@ -1,10 +1,11 @@
 package com.qnowapp.web.rest;
 
 import com.qnowapp.domain.GroupMembers;
-
 import com.qnowapp.service.GroupMembersService;
 import com.qnowapp.web.rest.errors.BadRequestAlertException;
 import com.qnowapp.service.dto.GroupMembersCriteria;
+import com.qnowapp.service.GroupMembersQueryService;
+
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -36,11 +37,11 @@ public class GroupMembersResource {
 
     private final GroupMembersService groupMembersService;
 
+    private final GroupMembersQueryService groupMembersQueryService;
 
-
-    public GroupMembersResource(GroupMembersService groupMembersService) {
+    public GroupMembersResource(GroupMembersService groupMembersService, GroupMembersQueryService groupMembersQueryService) {
         this.groupMembersService = groupMembersService;
-       
+        this.groupMembersQueryService = groupMembersQueryService;
     }
 
     /**
@@ -93,13 +94,24 @@ public class GroupMembersResource {
      */
     @CrossOrigin
     @GetMapping("/group-members")
-    public ResponseEntity<List<GroupMembers>> getAllGroupMembers( ) {
-        log.debug("REST request to get GroupMembers by criteria: {}");
-        List<GroupMembers> entityList = groupMembersService.findAll();
+    public ResponseEntity<List<GroupMembers>> getAllGroupMembers(GroupMembersCriteria criteria) {
+        log.debug("REST request to get GroupMembers by criteria: {}", criteria);
+        List<GroupMembers> entityList = groupMembersQueryService.findByCriteria(criteria);
         return ResponseEntity.ok().body(entityList);
     }
 
- 
+    /**
+    * {@code GET  /group-members/count} : count all the groupMembers.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping("/group-members/count")
+    public ResponseEntity<Long> countGroupMembers(GroupMembersCriteria criteria) {
+        log.debug("REST request to count GroupMembers by criteria: {}", criteria);
+        return ResponseEntity.ok().body(groupMembersQueryService.countByCriteria(criteria));
+    }
 
     /**
      * {@code GET  /group-members/:id} : get the "id" groupMembers.

@@ -1,0 +1,318 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="App.imProjects.home.title">Im Projects</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-im-projects" [routerLink]="['/im-projects/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="App.imProjects.home.createLabel">
+            Create new Im Projects
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="imProjects">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="App.imProjects.projectName">Project Name</span></th>
+            <th><span jhiTranslate="App.imProjects.projectNr">Project Nr</span></th>
+            <th><span jhiTranslate="App.imProjects.projectPath">Project Path</span></th>
+            <th><span jhiTranslate="App.imProjects.treeSortkey">Tree Sortkey</span></th>
+            <th><span jhiTranslate="App.imProjects.maxChildSortkey">Max Child Sortkey</span></th>
+            <th><span jhiTranslate="App.imProjects.description">Description</span></th>
+            <th><span jhiTranslate="App.imProjects.billingTypeId">Billing Type Id</span></th>
+            <th><span jhiTranslate="App.imProjects.note">Note</span></th>
+            <th><span jhiTranslate="App.imProjects.requiresReportP">Requires Report P</span></th>
+            <th><span jhiTranslate="App.imProjects.projectBudget">Project Budget</span></th>
+            <th><span jhiTranslate="App.imProjects.projectRisk">Project Risk</span></th>
+            <th><span jhiTranslate="App.imProjects.corporateSponsor">Corporate Sponsor</span></th>
+            <th><span jhiTranslate="App.imProjects.percentCompleted">Percent Completed</span></th>
+            <th><span jhiTranslate="App.imProjects.projectBudgetHours">Project Budget Hours</span></th>
+            <th><span jhiTranslate="App.imProjects.costQuotesCache">Cost Quotes Cache</span></th>
+            <th><span jhiTranslate="App.imProjects.costInvoicesCache">Cost Invoices Cache</span></th>
+            <th><span jhiTranslate="App.imProjects.costTimesheetPlannedCache">Cost Timesheet Planned Cache</span></th>
+            <th><span jhiTranslate="App.imProjects.costPurchaseOrdersCache">Cost Purchase Orders Cache</span></th>
+            <th><span jhiTranslate="App.imProjects.costBillsCache">Cost Bills Cache</span></th>
+            <th><span jhiTranslate="App.imProjects.costTimesheetLoggedCache">Cost Timesheet Logged Cache</span></th>
+            <th><span jhiTranslate="App.imProjects.endDate">End Date</span></th>
+            <th><span jhiTranslate="App.imProjects.startDate">Start Date</span></th>
+            <th><span jhiTranslate="App.imProjects.templateP">Template P</span></th>
+            <th><span jhiTranslate="App.imProjects.sortOrder">Sort Order</span></th>
+            <th><span jhiTranslate="App.imProjects.reportedHoursCache">Reported Hours Cache</span></th>
+            <th><span jhiTranslate="App.imProjects.costExpensePlannedCache">Cost Expense Planned Cache</span></th>
+            <th><span jhiTranslate="App.imProjects.costExpenseLoggedCache">Cost Expense Logged Cache</span></th>
+            <th><span jhiTranslate="App.imProjects.confirmDate">Confirm Date</span></th>
+            <th><span jhiTranslate="App.imProjects.costDeliveryNotesCache">Cost Delivery Notes Cache</span></th>
+            <th><span jhiTranslate="App.imProjects.costCacheDirty">Cost Cache Dirty</span></th>
+            <th><span jhiTranslate="App.imProjects.milestoneP">Milestone P</span></th>
+            <th><span jhiTranslate="App.imProjects.releaseItemP">Release Item P</span></th>
+            <th><span jhiTranslate="App.imProjects.presalesProbability">Presales Probability</span></th>
+            <th><span jhiTranslate="App.imProjects.presalesValue">Presales Value</span></th>
+            <th><span jhiTranslate="App.imProjects.reportedDaysCache">Reported Days Cache</span></th>
+            <th><span jhiTranslate="App.imProjects.presalesValueCurrency">Presales Value Currency</span></th>
+            <th><span jhiTranslate="App.imProjects.opportunitySalesStageId">Opportunity Sales Stage Id</span></th>
+            <th><span jhiTranslate="App.imProjects.opportunityCampaignId">Opportunity Campaign Id</span></th>
+            <th><span jhiTranslate="App.imProjects.scoreRevenue">Score Revenue</span></th>
+            <th><span jhiTranslate="App.imProjects.scoreStrategic">Score Strategic</span></th>
+            <th><span jhiTranslate="App.imProjects.scoreFinanceNpv">Score Finance Npv</span></th>
+            <th><span jhiTranslate="App.imProjects.scoreCustomers">Score Customers</span></th>
+            <th><span jhiTranslate="App.imProjects.scoreFinanceCost">Score Finance Cost</span></th>
+            <th><span jhiTranslate="App.imProjects.costBillsPlanned">Cost Bills Planned</span></th>
+            <th><span jhiTranslate="App.imProjects.costExpensesPlanned">Cost Expenses Planned</span></th>
+            <th><span jhiTranslate="App.imProjects.scoreRisk">Score Risk</span></th>
+            <th><span jhiTranslate="App.imProjects.scoreCapabilities">Score Capabilities</span></th>
+            <th><span jhiTranslate="App.imProjects.scoreEinanceRoi">Score Einance Roi</span></th>
+            <th><span jhiTranslate="App.imProjects.projectUserwiseBoard">Project Userwise Board</span></th>
+            <th><span jhiTranslate="App.imProjects.projectBringNextday">Project Bring Nextday</span></th>
+            <th><span jhiTranslate="App.imProjects.projectBringSameboard">Project Bring Sameboard</span></th>
+            <th><span jhiTranslate="App.imProjects.projectNewboardEverytime">Project Newboard Everytime</span></th>
+            <th><span jhiTranslate="App.imProjects.projectUserwiseBoard2">Project Userwise Board 2</span></th>
+            <th><span jhiTranslate="App.imProjects.projectBringSameboard2">Project Bring Sameboard 2</span></th>
+            <th><span jhiTranslate="App.imProjects.projectNewboard2Everytime">Project Newboard 2 Everytime</span></th>
+            <th><span jhiTranslate="App.imProjects.projectNewboard2Always">Project Newboard 2 Always</span></th>
+            <th><span jhiTranslate="App.imProjects.projectReportWeekly">Project Report Weekly</span></th>
+            <th><span jhiTranslate="App.imProjects.scoreGain">Score Gain</span></th>
+            <th><span jhiTranslate="App.imProjects.scoreLoss">Score Loss</span></th>
+            <th><span jhiTranslate="App.imProjects.scoreDelivery">Score Delivery</span></th>
+            <th><span jhiTranslate="App.imProjects.scoreOperations">Score Operations</span></th>
+            <th><span jhiTranslate="App.imProjects.scoreWhy">Score Why</span></th>
+            <th><span jhiTranslate="App.imProjects.javaServices">Java Services</span></th>
+            <th><span jhiTranslate="App.imProjects.netServices">Net Services</span></th>
+            <th><span jhiTranslate="App.imProjects.collectionLink">Collection Link</span></th>
+            <th><span jhiTranslate="App.imProjects.trainingLink">Training Link</span></th>
+            <th><span jhiTranslate="App.imProjects.collectionName">Collection Name</span></th>
+            <th><span jhiTranslate="App.imProjects.trainingName">Training Name</span></th>
+            <th><span jhiTranslate="App.imProjects.trainingDoc">Training Doc</span></th>
+            <th><span jhiTranslate="App.imProjects.testingRichtext">Testing Richtext</span></th>
+            <th><span jhiTranslate="App.imProjects.templateCategory">Template Category</span></th>
+            <th><span jhiTranslate="App.imProjects.dType">D Type</span></th>
+            <th><span jhiTranslate="App.imProjects.dOption">D Option</span></th>
+            <th><span jhiTranslate="App.imProjects.dFilter">D Filter</span></th>
+            <th><span jhiTranslate="App.imProjects.dId">D Id</span></th>
+            <th><span jhiTranslate="App.imProjects.tType">T Type</span></th>
+            <th><span jhiTranslate="App.imProjects.tOption">T Option</span></th>
+            <th><span jhiTranslate="App.imProjects.tFilter">T Filter</span></th>
+            <th><span jhiTranslate="App.imProjects.tId">T Id</span></th>
+            <th><span jhiTranslate="App.imProjects.risktype">Risktype</span></th>
+            <th><span jhiTranslate="App.imProjects.riskimpact">Riskimpact</span></th>
+            <th><span jhiTranslate="App.imProjects.riskprobability">Riskprobability</span></th>
+            <th><span jhiTranslate="App.imProjects.projectInitiativeId">Project Initiative Id</span></th>
+            <th><span jhiTranslate="App.imProjects.projectBusinessgoalId">Project Businessgoal Id</span></th>
+            <th><span jhiTranslate="App.imProjects.projectSubgoalId">Project Subgoal Id</span></th>
+            <th><span jhiTranslate="App.imProjects.projectMaingoalId">Project Maingoal Id</span></th>
+            <th><span jhiTranslate="App.imProjects.projectBucketId">Project Bucket Id</span></th>
+            <th><span jhiTranslate="App.imProjects.projectCostCenterId">Project Cost Center Id</span></th>
+            <th><span jhiTranslate="App.imProjects.opportunityPriorityId">Opportunity Priority Id</span></th>
+            <th><span jhiTranslate="App.imProjects.backlogPractice">Backlog Practice</span></th>
+            <th><span jhiTranslate="App.imProjects.projectTheme">Project Theme</span></th>
+            <th><span jhiTranslate="App.imProjects.projectClass">Project Class</span></th>
+            <th><span jhiTranslate="App.imProjects.projectVertical">Project Vertical</span></th>
+            <th><span jhiTranslate="App.imProjects.projectBoardId">Project Board Id</span></th>
+            <th><span jhiTranslate="App.imProjects.projectBoard2Id">Project Board 2 Id</span></th>
+            <th><span jhiTranslate="App.imProjects.projectStatusId">Project Status Id</span></th>
+            <th><span jhiTranslate="App.imProjects.projectTypeId">Project Type Id</span></th>
+            <th><span jhiTranslate="App.imProjects.projectLeadId">Project Lead Id</span></th>
+            <th><span jhiTranslate="App.imProjects.parentId">Parent Id</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let imProjects of imProjects ;trackBy: trackId">
+                <td><a [routerLink]="['/im-projects', imProjects.id, 'view' ]">{{imProjects.id}}</a></td>
+                <td>{{imProjects.projectName}}</td>
+                <td>{{imProjects.projectNr}}</td>
+                <td>{{imProjects.projectPath}}</td>
+                <td>{{imProjects.treeSortkey}}</td>
+                <td>{{imProjects.maxChildSortkey}}</td>
+                <td>{{imProjects.description}}</td>
+                <td>{{imProjects.billingTypeId}}</td>
+                <td>{{imProjects.note}}</td>
+                <td>{{imProjects.requiresReportP}}</td>
+                <td>{{imProjects.projectBudget}}</td>
+                <td>{{imProjects.projectRisk}}</td>
+                <td>{{imProjects.corporateSponsor}}</td>
+                <td>{{imProjects.percentCompleted}}</td>
+                <td>{{imProjects.projectBudgetHours}}</td>
+                <td>{{imProjects.costQuotesCache}}</td>
+                <td>{{imProjects.costInvoicesCache}}</td>
+                <td>{{imProjects.costTimesheetPlannedCache}}</td>
+                <td>{{imProjects.costPurchaseOrdersCache}}</td>
+                <td>{{imProjects.costBillsCache}}</td>
+                <td>{{imProjects.costTimesheetLoggedCache}}</td>
+                <td>{{imProjects.endDate | date:'medium'}}</td>
+                <td>{{imProjects.startDate | date:'medium'}}</td>
+                <td>{{imProjects.templateP}}</td>
+                <td>{{imProjects.sortOrder}}</td>
+                <td>{{imProjects.reportedHoursCache}}</td>
+                <td>{{imProjects.costExpensePlannedCache}}</td>
+                <td>{{imProjects.costExpenseLoggedCache}}</td>
+                <td>{{imProjects.confirmDate | date:'medium'}}</td>
+                <td>{{imProjects.costDeliveryNotesCache}}</td>
+                <td>{{imProjects.costCacheDirty | date:'medium'}}</td>
+                <td>{{imProjects.milestoneP}}</td>
+                <td>{{imProjects.releaseItemP}}</td>
+                <td>{{imProjects.presalesProbability}}</td>
+                <td>{{imProjects.presalesValue}}</td>
+                <td>{{imProjects.reportedDaysCache}}</td>
+                <td>{{imProjects.presalesValueCurrency}}</td>
+                <td>{{imProjects.opportunitySalesStageId}}</td>
+                <td>{{imProjects.opportunityCampaignId}}</td>
+                <td>{{imProjects.scoreRevenue}}</td>
+                <td>{{imProjects.scoreStrategic}}</td>
+                <td>{{imProjects.scoreFinanceNpv}}</td>
+                <td>{{imProjects.scoreCustomers}}</td>
+                <td>{{imProjects.scoreFinanceCost}}</td>
+                <td>{{imProjects.costBillsPlanned}}</td>
+                <td>{{imProjects.costExpensesPlanned}}</td>
+                <td>{{imProjects.scoreRisk}}</td>
+                <td>{{imProjects.scoreCapabilities}}</td>
+                <td>{{imProjects.scoreEinanceRoi}}</td>
+                <td>{{imProjects.projectUserwiseBoard}}</td>
+                <td>{{imProjects.projectBringNextday}}</td>
+                <td>{{imProjects.projectBringSameboard}}</td>
+                <td>{{imProjects.projectNewboardEverytime}}</td>
+                <td>{{imProjects.projectUserwiseBoard2}}</td>
+                <td>{{imProjects.projectBringSameboard2}}</td>
+                <td>{{imProjects.projectNewboard2Everytime}}</td>
+                <td>{{imProjects.projectNewboard2Always}}</td>
+                <td>{{imProjects.projectReportWeekly}}</td>
+                <td>{{imProjects.scoreGain}}</td>
+                <td>{{imProjects.scoreLoss}}</td>
+                <td>{{imProjects.scoreDelivery}}</td>
+                <td>{{imProjects.scoreOperations}}</td>
+                <td>{{imProjects.scoreWhy}}</td>
+                <td>{{imProjects.javaServices}}</td>
+                <td>{{imProjects.netServices}}</td>
+                <td>{{imProjects.collectionLink}}</td>
+                <td>{{imProjects.trainingLink}}</td>
+                <td>{{imProjects.collectionName}}</td>
+                <td>{{imProjects.trainingName}}</td>
+                <td>{{imProjects.trainingDoc}}</td>
+                <td>{{imProjects.testingRichtext}}</td>
+                <td>{{imProjects.templateCategory}}</td>
+                <td>{{imProjects.dType}}</td>
+                <td>{{imProjects.dOption}}</td>
+                <td>{{imProjects.dFilter}}</td>
+                <td>{{imProjects.dId}}</td>
+                <td>{{imProjects.tType}}</td>
+                <td>{{imProjects.tOption}}</td>
+                <td>{{imProjects.tFilter}}</td>
+                <td>{{imProjects.tId}}</td>
+                <td>{{imProjects.risktype}}</td>
+                <td>{{imProjects.riskimpact}}</td>
+                <td>{{imProjects.riskprobability}}</td>
+                <td>
+                    <div *ngIf="imProjects.projectInitiativeId">
+                        <a [routerLink]="['../project-initiative-id', imProjects.projectInitiativeId?.id, 'view' ]" >{{imProjects.projectInitiativeId?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="imProjects.projectBusinessgoalId">
+                        <a [routerLink]="['../project-businessgoal-id', imProjects.projectBusinessgoalId?.id, 'view' ]" >{{imProjects.projectBusinessgoalId?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="imProjects.projectSubgoalId">
+                        <a [routerLink]="['../project-subgoal-id', imProjects.projectSubgoalId?.id, 'view' ]" >{{imProjects.projectSubgoalId?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="imProjects.projectMaingoalId">
+                        <a [routerLink]="['../project-maingoal-id', imProjects.projectMaingoalId?.id, 'view' ]" >{{imProjects.projectMaingoalId?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="imProjects.projectBucketId">
+                        <a [routerLink]="['../project-bucket-id', imProjects.projectBucketId?.id, 'view' ]" >{{imProjects.projectBucketId?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="imProjects.projectCostCenterId">
+                        <a [routerLink]="['../project-cost-center-id', imProjects.projectCostCenterId?.id, 'view' ]" >{{imProjects.projectCostCenterId?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="imProjects.opportunityPriorityId">
+                        <a [routerLink]="['../opportunity-priority-id', imProjects.opportunityPriorityId?.id, 'view' ]" >{{imProjects.opportunityPriorityId?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="imProjects.backlogPractice">
+                        <a [routerLink]="['../backlog-practice', imProjects.backlogPractice?.id, 'view' ]" >{{imProjects.backlogPractice?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="imProjects.projectTheme">
+                        <a [routerLink]="['../project-theme', imProjects.projectTheme?.id, 'view' ]" >{{imProjects.projectTheme?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="imProjects.projectClass">
+                        <a [routerLink]="['../project-class', imProjects.projectClass?.id, 'view' ]" >{{imProjects.projectClass?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="imProjects.projectVertical">
+                        <a [routerLink]="['../project-vertical', imProjects.projectVertical?.id, 'view' ]" >{{imProjects.projectVertical?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="imProjects.projectBoardId">
+                        <a [routerLink]="['../project-board-id', imProjects.projectBoardId?.id, 'view' ]" >{{imProjects.projectBoardId?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="imProjects.projectBoard2Id">
+                        <a [routerLink]="['../project-board-id', imProjects.projectBoard2Id?.id, 'view' ]" >{{imProjects.projectBoard2Id?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="imProjects.projectStatusId">
+                        <a [routerLink]="['../project-status-id', imProjects.projectStatusId?.id, 'view' ]" >{{imProjects.projectStatusId?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="imProjects.projectTypeId">
+                        <a [routerLink]="['../project-type-id', imProjects.projectTypeId?.id, 'view' ]" >{{imProjects.projectTypeId?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="imProjects.projectLeadId">
+                        <a [routerLink]="['../im-employee', imProjects.projectLeadId?.id, 'view' ]" >{{imProjects.projectLeadId?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="imProjects.parentId">
+                        <a [routerLink]="['../im-projects', imProjects.parentId?.id, 'view' ]" >{{imProjects.parentId?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/im-projects', imProjects.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/im-projects', imProjects.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'im-projects', { outlets: { popup: imProjects.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

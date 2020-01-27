@@ -1,0 +1,10 @@
+category_id;category;description;category_type;category_gif;enabled_p;parent_only_p;aux_int1;aux_int2;aux_string1;aux_string2;sort_order;visible_tcl
+1308;Be Informed;Be Informed;Intranet Biz Object Role;trainer;t;f;;;Be Infomed;;1308;
+1307;Consultant;Consultant;Intranet Biz Object Role;consultant;t;f;;;Consultant;;1307;
+1301;Project Manager;Project Manager;Intranet Biz Object Role;project-manager;t;f;;;Project Manager;;1301;
+1300;Full Member;Full Member;Intranet Biz Object Role;member;t;f;;;Full Member;;1300;
+1304;Practice Staff;Practice Staff;Intranet Biz Object Role;practice-staff;t;f;;;Practice Staff;;1304;
+1305;Generic Association;Generic Association;Intranet Biz Object Role;member;t;f;;;Generic Association;;1305;
+1302;Key Account;Key Account Manager;Intranet Biz Object Role;key-account;t;f;;;Key Account Manager;;1302;
+1306;Mail Association;Related Mail;Intranet Biz Object Role;member;t;f;;;Related Mail;;1306;
+1303;Practice Chambion;Practice Chambion;Intranet Biz Object Role;practice-chambion;t;f;;;Practice Chambion;;1303;

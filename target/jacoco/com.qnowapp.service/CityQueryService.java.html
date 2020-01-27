@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CityQueryService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.service</a> &gt; <span class="el_source">CityQueryService.java</span></div><h1>CityQueryService.java</h1><pre class="source lang-java linenums">package com.qnowapp.service;
+
+import java.util.List;
+
+
+import javax.persistence.criteria.JoinType;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import io.github.jhipster.service.QueryService;
+
+import com.qnowapp.domain.City;
+import com.qnowapp.domain.*; // for static metamodels
+import com.qnowapp.repository.CityRepository;
+import com.qnowapp.service.dto.CityCriteria;
+
+/**
+ * Service for executing complex queries for {@link City} entities in the database.
+ * The main input is a {@link CityCriteria} which gets converted to {@link Specification},
+ * in a way that all the filters must apply.
+ * It returns a {@link List} of {@link City} or a {@link Page} of {@link City} which fulfills the criteria.
+ */
+@Service
+@Transactional(readOnly = true)
+public class CityQueryService extends QueryService&lt;City&gt; {
+
+
+<span class="nc" id="L34">    private final Logger log = LoggerFactory.getLogger(CityQueryService.class);</span>
+
+    private final CityRepository cityRepository;
+
+<span class="nc" id="L38">    public CityQueryService(CityRepository cityRepository) {</span>
+<span class="nc" id="L39">        this.cityRepository = cityRepository;</span>
+<span class="nc" id="L40">    }</span>
+
+    /**
+     * Return a {@link List} of {@link City} which matches the criteria from the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @return the matching entities.
+     */
+    @Transactional(readOnly = true)
+    public List&lt;City&gt; findByCriteria(CityCriteria criteria) {
+<span class="nc" id="L49">        log.debug(&quot;find by criteria : {}&quot;, criteria);</span>
+<span class="nc" id="L50">        final Specification&lt;City&gt; specification = createSpecification(criteria);</span>
+<span class="nc" id="L51">        return cityRepository.findAll(specification);</span>
+    }
+
+    /**
+     * Return a {@link Page} of {@link City} which matches the criteria from the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @param page The page, which should be returned.
+     * @return the matching entities.
+     */
+    @Transactional(readOnly = true)
+    public Page&lt;City&gt; findByCriteria(CityCriteria criteria, Pageable page) {
+<span class="nc" id="L62">        log.debug(&quot;find by criteria : {}, page: {}&quot;, criteria, page);</span>
+<span class="nc" id="L63">        final Specification&lt;City&gt; specification = createSpecification(criteria);</span>
+<span class="nc" id="L64">        return cityRepository.findAll(specification, page);</span>
+    }
+
+    /**
+     * Return the number of matching entities in the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @return the number of matching entities.
+     */
+    @Transactional(readOnly = true)
+    public long countByCriteria(CityCriteria criteria) {
+<span class="nc" id="L74">        log.debug(&quot;count by criteria : {}&quot;, criteria);</span>
+<span class="nc" id="L75">        final Specification&lt;City&gt; specification = createSpecification(criteria);</span>
+<span class="nc" id="L76">        return cityRepository.count(specification);</span>
+    }
+
+    /**
+     * Function to convert CityCriteria to a {@link Specification}.
+     */
+    private Specification&lt;City&gt; createSpecification(CityCriteria criteria) {
+<span class="nc" id="L83">        Specification&lt;City&gt; specification = Specification.where(null);</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">        if (criteria != null) {</span>
+<span class="nc bnc" id="L85" title="All 2 branches missed.">            if (criteria.getId() != null) {</span>
+<span class="nc" id="L86">                specification = specification.and(buildSpecification(criteria.getId(), City_.id));</span>
+            }
+<span class="nc bnc" id="L88" title="All 2 branches missed.">            if (criteria.getCityCode() != null) {</span>
+<span class="nc" id="L89">                specification = specification.and(buildStringSpecification(criteria.getCityCode(), City_.cityCode));</span>
+            }
+<span class="nc bnc" id="L91" title="All 2 branches missed.">            if (criteria.getCityName() != null) {</span>
+<span class="nc" id="L92">                specification = specification.and(buildStringSpecification(criteria.getCityName(), City_.cityName));</span>
+            }
+        }
+<span class="nc" id="L95">        return specification;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

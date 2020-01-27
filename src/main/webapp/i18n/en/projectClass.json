@@ -1,0 +1,23 @@
+{
+  "App": {
+    "projectClass": {
+      "home": {
+        "title": "Project Classes",
+        "createLabel": "Create a new Project Class",
+        "createOrEditLabel": "Create or edit a Project Class"
+      },
+      "created": "A new Project Class is created with identifier {{ param }}",
+      "updated": "A Project Class is updated with identifier {{ param }}",
+      "deleted": "A Project Class is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Project Class {{ id }}?"
+      },
+      "detail": {
+        "title": "Project Class"
+      },
+      "code": "Code",
+      "name": "Name",
+      "description": "Description"
+    }
+  }
+}

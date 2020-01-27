@@ -1,11 +1,10 @@
 package com.qnowapp.web.rest;
 
 import com.qnowapp.domain.City;
-
 import com.qnowapp.service.CityService;
 import com.qnowapp.web.rest.errors.BadRequestAlertException;
 import com.qnowapp.service.dto.CityCriteria;
-
+import com.qnowapp.service.CityQueryService;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -38,28 +37,20 @@ public class CityResource {
 
     private final CityService cityService;
 
-    public CityResource(CityService cityService) {
+    private final CityQueryService cityQueryService;
+
+    public CityResource(CityService cityService, CityQueryService cityQueryService) {
         this.cityService = cityService;
-      
+        this.cityQueryService = cityQueryService;
     }
 
     /**
      * {@code POST  /cities} : Create a new city.
      *
      * @param city the city to create.
-     * @return 
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new city, or with status {@code 400 (Bad Request)} if the city has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @CrossOrigin
-    @GetMapping("/hello")
-    public String test () {
-    	return "hello";
-    }
-    
-    
-    
-    
     @CrossOrigin
     @PostMapping("/cities")
     public ResponseEntity<City> createCity(@RequestBody City city) throws URISyntaxException {
@@ -103,12 +94,23 @@ public class CityResource {
      */
     @CrossOrigin
     @GetMapping("/cities")
-    public ResponseEntity<List<City>> getAllCities() {
-        log.debug("REST request to get Cities by criteria: {}");
-        List<City> entityList = cityService.findAll();
+    public ResponseEntity<List<City>> getAllCities(CityCriteria criteria) {
+        log.debug("REST request to get Cities by criteria: {}", criteria);
+        List<City> entityList = cityQueryService.findByCriteria(criteria);
         return ResponseEntity.ok().body(entityList);
     }
 
+    /**
+    * {@code GET  /cities/count} : count all the cities.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @GetMapping("/cities/count")
+    public ResponseEntity<Long> countCities(CityCriteria criteria) {
+        log.debug("REST request to count Cities by criteria: {}", criteria);
+        return ResponseEntity.ok().body(cityQueryService.countByCriteria(criteria));
+    }
 
     /**
      * {@code GET  /cities/:id} : get the "id" city.

@@ -1,11 +1,10 @@
 package com.qnowapp.web.rest;
 
 import com.qnowapp.domain.QnowUser;
-
 import com.qnowapp.service.QnowUserService;
 import com.qnowapp.web.rest.errors.BadRequestAlertException;
 import com.qnowapp.service.dto.QnowUserCriteria;
-
+import com.qnowapp.service.QnowUserQueryService;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -38,10 +37,11 @@ public class QnowUserResource {
 
     private final QnowUserService qnowUserService;
 
+    private final QnowUserQueryService qnowUserQueryService;
 
-    public QnowUserResource(QnowUserService qnowUserService) {
+    public QnowUserResource(QnowUserService qnowUserService, QnowUserQueryService qnowUserQueryService) {
         this.qnowUserService = qnowUserService;
-      
+        this.qnowUserQueryService = qnowUserQueryService;
     }
 
     /**
@@ -94,13 +94,24 @@ public class QnowUserResource {
      */
     @CrossOrigin
     @GetMapping("/qnow-users")
-    public ResponseEntity<List<QnowUser>> getAllQnowUsers( ) {
-        log.debug("REST request to get QnowUsers by criteria: {}");
-        List<QnowUser> entityList = qnowUserService.findAll();
+    public ResponseEntity<List<QnowUser>> getAllQnowUsers(QnowUserCriteria criteria) {
+        log.debug("REST request to get QnowUsers by criteria: {}", criteria);
+        List<QnowUser> entityList = qnowUserQueryService.findByCriteria(criteria);
         return ResponseEntity.ok().body(entityList);
     }
 
-
+    /**
+    * {@code GET  /qnow-users/count} : count all the qnowUsers.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping("/qnow-users/count")
+    public ResponseEntity<Long> countQnowUsers(QnowUserCriteria criteria) {
+        log.debug("REST request to count QnowUsers by criteria: {}", criteria);
+        return ResponseEntity.ok().body(qnowUserQueryService.countByCriteria(criteria));
+    }
 
     /**
      * {@code GET  /qnow-users/:id} : get the "id" qnowUser.

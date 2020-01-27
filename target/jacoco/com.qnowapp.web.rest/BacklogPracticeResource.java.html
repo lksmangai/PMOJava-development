@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BacklogPracticeResource.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.web.rest</a> &gt; <span class="el_source">BacklogPracticeResource.java</span></div><h1>BacklogPracticeResource.java</h1><pre class="source lang-java linenums">package com.qnowapp.web.rest;
+
+import com.qnowapp.domain.BacklogPractice;
+import com.qnowapp.domain.ProjectInitiativeId;
+import com.qnowapp.repository.BacklogPracticeRepository;
+import com.qnowapp.service.BacklogPracticeQueryService;
+import com.qnowapp.service.BacklogPracticeService;
+import com.qnowapp.service.dto.BacklogPracticeCriteria;
+import com.qnowapp.web.rest.errors.BadRequestAlertException;
+
+import io.github.jhipster.web.util.HeaderUtil;
+import io.github.jhipster.web.util.ResponseUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * REST controller for managing {@link com.qnowapp.domain.BacklogPractice}.
+ */
+@CrossOrigin(origins = &quot;*&quot;, allowedHeaders = &quot;*&quot;)
+@RestController
+@RequestMapping(&quot;/api&quot;)
+public class BacklogPracticeResource {
+
+	@Autowired
+	BacklogPracticeService backlogPracticeService;
+<span class="nc" id="L38">    private final Logger log = LoggerFactory.getLogger(BacklogPracticeResource.class);</span>
+
+    private static final String ENTITY_NAME = &quot;backlogPractice&quot;;
+
+    @Value(&quot;${jhipster.clientApp.name}&quot;)
+    private String applicationName;
+
+<span class="nc" id="L45">    private static Boolean fromTesting = true;</span>
+   
+
+    private final BacklogPracticeQueryService backlogPracticeQueryService;
+<span class="nc" id="L49">    public BacklogPracticeResource(BacklogPracticeService backlogPracticeService, BacklogPracticeQueryService backlogPracticeQueryService ) {</span>
+     
+<span class="nc" id="L51">        this.backlogPracticeService = backlogPracticeService;</span>
+<span class="nc" id="L52">        this.backlogPracticeQueryService = backlogPracticeQueryService;</span>
+<span class="nc" id="L53">    }</span>
+    public static void setFromTesting(Boolean bState) {
+<span class="nc" id="L55">        fromTesting = bState;</span>
+<span class="nc" id="L56">    }</span>
+    /**
+     * {@code POST  /backlog-practices} : Create a new backlogPractice.
+     *
+     * @param backlogPractice the backlogPractice to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new backlogPractice, or with status {@code 400 (Bad Request)} if the backlogPractice has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @CrossOrigin
+    @PostMapping(&quot;/backlog-practices&quot;)
+    public ResponseEntity&lt;BacklogPractice&gt; createBacklogPractice(@RequestBody BacklogPractice backlogPractice) throws URISyntaxException {
+<span class="nc" id="L67">        log.debug(&quot;REST request to save BacklogPractice : {}&quot;, backlogPractice);</span>
+<span class="nc bnc" id="L68" title="All 2 branches missed.">        if (backlogPractice.getId() != null) {</span>
+<span class="nc" id="L69">            throw new BadRequestAlertException(&quot;A new backlogPractice cannot already have an ID&quot;, ENTITY_NAME, &quot;idexists&quot;);</span>
+        }else {
+
+<span class="nc" id="L72">            BacklogPractice result = backlogPracticeService.save(backlogPractice);</span>
+<span class="nc" id="L73">            ResponseEntity&lt;BacklogPractice&gt; a = ResponseEntity.created(new URI(&quot;/api/project-initiative-ids/&quot; + result.getId()))</span>
+<span class="nc" id="L74">                    .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))</span>
+<span class="nc" id="L75">                    .body(result);</span>
+
+<span class="nc bnc" id="L77" title="All 2 branches missed.">            if (fromTesting == false) {</span>
+<span class="nc" id="L78">                System.out.println(backlogPractice.getName());</span>
+<span class="nc" id="L79">                String csvFile1 = &quot;src\\main\\resources\\backlog.csv&quot;;</span>
+<span class="nc" id="L80">                BufferedReader br = null;</span>
+<span class="nc" id="L81">                String line = &quot;&quot;;</span>
+<span class="nc" id="L82">                String cvsSplitBy = &quot;;&quot;;</span>
+
+                try {
+<span class="nc" id="L85">                    br = new BufferedReader(new FileReader(csvFile1));</span>
+<span class="nc" id="L86">                    int count = 0;</span>
+<span class="nc bnc" id="L87" title="All 2 branches missed.">                    while ((line = br.readLine()) != null) {</span>
+<span class="nc" id="L88">                        count++;</span>
+<span class="nc" id="L89">                        System.out.println(+count);</span>
+<span class="nc bnc" id="L90" title="All 2 branches missed.">                        if (count == 1)</span>
+<span class="nc" id="L91">                            continue;</span>
+<span class="nc" id="L92">                        String[] country = line.split(cvsSplitBy);</span>
+                        try {
+<span class="nc bnc" id="L94" title="All 2 branches missed.">                            if (country.length &gt; 3 ) {</span>
+<span class="nc" id="L95">                                System.out.println(&quot;1&quot;);</span>
+<span class="nc" id="L96">                                backlogPractice.setId(null);</span>
+<span class="nc" id="L97">                                backlogPractice.setCode(country[0]);</span>
+<span class="nc" id="L98">                                System.out.println(&quot;2&quot;);</span>
+<span class="nc" id="L99">                                backlogPractice.setName(country[1]);</span>
+<span class="nc" id="L100">                                System.out.println(&quot;3&quot;);</span>
+<span class="nc" id="L101">                                backlogPractice.setDescription(country[2]);</span>
+<span class="nc" id="L102">                                BacklogPractice result2 = backlogPracticeService.save(backlogPractice);  </span>
+<span class="nc" id="L103">                                System.out.println(result2.getId());</span>
+<span class="nc" id="L104">                                System.out.println(backlogPractice + &quot;new project created&quot;);</span>
+                            }
+<span class="nc" id="L106">                        } catch (Exception e) {</span>
+<span class="nc" id="L107">                        }</span>
+<span class="nc" id="L108">                    }</span>
+<span class="nc" id="L109">                } catch (Exception e) {</span>
+                    // TODO: handle exception
+                } finally {
+<span class="nc bnc" id="L112" title="All 2 branches missed.">                    if (br != null) {</span>
+                        try {
+<span class="nc" id="L114">                            br.close();</span>
+<span class="nc" id="L115">                        } catch (Exception e) {</span>
+<span class="nc" id="L116">                            System.out.println(e);</span>
+<span class="nc" id="L117">                        }</span>
+                    
+                    }
+                }
+            }
+<span class="nc" id="L122">        return a;</span>
+        }
+
+    }
+
+    /**
+     * {@code PUT  /backlog-practices} : Updates an existing backlogPractice.
+     *
+     * @param backlogPractice the backlogPractice to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated backlogPractice,
+     * or with status {@code 400 (Bad Request)} if the backlogPractice is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the backlogPractice couldn't be updated.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @CrossOrigin
+    @PutMapping(&quot;/backlog-practices&quot;)
+    public ResponseEntity&lt;BacklogPractice&gt; updateBacklogPractice(@RequestBody BacklogPractice backlogPractice) throws URISyntaxException {
+<span class="nc" id="L139">        log.debug(&quot;REST request to update BacklogPractice : {}&quot;, backlogPractice);</span>
+<span class="nc bnc" id="L140" title="All 2 branches missed.">        if (backlogPractice.getId() == null) {</span>
+<span class="nc" id="L141">            throw new BadRequestAlertException(&quot;Invalid id&quot;, ENTITY_NAME, &quot;idnull&quot;);</span>
+        }
+<span class="nc" id="L143">        BacklogPractice result = backlogPracticeService.save(backlogPractice);</span>
+<span class="nc" id="L144">        return ResponseEntity.ok()</span>
+<span class="nc" id="L145">            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, backlogPractice.getId().toString()))</span>
+<span class="nc" id="L146">            .body(result);</span>
+    }
+
+    /**
+     * {@code GET  /backlog-practices} : get all the backlogPractices.
+     *
+     * @param criteria the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of backlogPractices in body.
+     */
+    @CrossOrigin
+    @GetMapping(&quot;/backlog-practices&quot;)
+    public ResponseEntity&lt;List&lt;BacklogPractice&gt;&gt; getAllBacklogPractices(BacklogPracticeCriteria criteria) {
+<span class="nc" id="L158">        log.debug(&quot;REST request to get BacklogPractices by criteria: {}&quot;, criteria);</span>
+<span class="nc" id="L159">        List&lt;BacklogPractice&gt; entityList = backlogPracticeQueryService.findByCriteria(criteria);</span>
+<span class="nc" id="L160">        return ResponseEntity.ok().body(entityList);</span>
+    }
+
+    /**
+    * {@code GET  /backlog-practices/count} : count all the backlogPractices.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping(&quot;/backlog-practices/count&quot;)
+    public ResponseEntity&lt;Long&gt; countBacklogPractices(BacklogPracticeCriteria criteria) {
+<span class="nc" id="L172">        log.debug(&quot;REST request to count BacklogPractices by criteria: {}&quot;, criteria);</span>
+<span class="nc" id="L173">        return ResponseEntity.ok().body(backlogPracticeQueryService.countByCriteria(criteria));</span>
+    }
+
+    /**
+     * {@code GET  /backlog-practices/:id} : get the &quot;id&quot; backlogPractice.
+     *
+     * @param id the id of the backlogPractice to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the backlogPractice, or with status {@code 404 (Not Found)}.
+     */
+    @CrossOrigin
+    @GetMapping(&quot;/backlog-practices/{id}&quot;)
+    public ResponseEntity&lt;BacklogPractice&gt; getBacklogPractice(@PathVariable Long id) {
+<span class="nc" id="L185">        log.debug(&quot;REST request to get BacklogPractice : {}&quot;, id);</span>
+<span class="nc" id="L186">        Optional&lt;BacklogPractice&gt; backlogPractice = backlogPracticeService.findOne(id);</span>
+<span class="nc" id="L187">        return ResponseUtil.wrapOrNotFound(backlogPractice);</span>
+    }
+
+    /**
+     * {@code DELETE  /backlog-practices/:id} : delete the &quot;id&quot; backlogPractice.
+     *
+     * @param id the id of the backlogPractice to delete.
+     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
+     */
+    @CrossOrigin
+    @DeleteMapping(&quot;/backlog-practices/{id}&quot;)
+    public ResponseEntity&lt;Void&gt; deleteBacklogPractice(@PathVariable Long id) {
+<span class="nc" id="L199">        log.debug(&quot;REST request to delete BacklogPractice : {}&quot;, id);</span>
+<span class="nc" id="L200">        backlogPracticeService.delete(id);</span>
+<span class="nc" id="L201">        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

@@ -1,0 +1,23 @@
+{
+  "App": {
+    "projectBusinessgoalId": {
+      "home": {
+        "title": "Project Businessgoal Ids",
+        "createLabel": "Create a new Project Businessgoal Id",
+        "createOrEditLabel": "Create or edit a Project Businessgoal Id"
+      },
+      "created": "A new Project Businessgoal Id is created with identifier {{ param }}",
+      "updated": "A Project Businessgoal Id is updated with identifier {{ param }}",
+      "deleted": "A Project Businessgoal Id is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Project Businessgoal Id {{ id }}?"
+      },
+      "detail": {
+        "title": "Project Businessgoal Id"
+      },
+      "code": "Code",
+      "name": "Name",
+      "description": "Description"
+    }
+  }
+}

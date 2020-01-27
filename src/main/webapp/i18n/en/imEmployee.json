@@ -1,0 +1,40 @@
+{
+  "App": {
+    "imEmployee": {
+      "home": {
+        "title": "Im Employees",
+        "createLabel": "Create a new Im Employee",
+        "createOrEditLabel": "Create or edit a Im Employee"
+      },
+      "created": "A new Im Employee is created with identifier {{ param }}",
+      "updated": "A Im Employee is updated with identifier {{ param }}",
+      "deleted": "A Im Employee is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Im Employee {{ id }}?"
+      },
+      "detail": {
+        "title": "Im Employee"
+      },
+      "jobTitle": "Job Title",
+      "jobDescription": "Job Description",
+      "availability": "Availability",
+      "ssNumber": "Ss Number",
+      "salary": "Salary",
+      "socialSecurity": "Social Security",
+      "insurance": "Insurance",
+      "otherCosts": "Other Costs",
+      "currency": "Currency",
+      "dependantP": "Dependant P",
+      "onlyJobP": "Only Job P",
+      "marriedP": "Married P",
+      "headOfHouseholdP": "Head Of Household P",
+      "birthdate": "Birthdate",
+      "hourlyCost": "Hourly Cost",
+      "qnowUser": "Qnow User",
+      "employeeStatus": "Employee Status",
+      "departmentId": "Department Id",
+      "supervisorId": "Supervisor Id",
+      "userContact": "User Contact"
+    }
+  }
+}

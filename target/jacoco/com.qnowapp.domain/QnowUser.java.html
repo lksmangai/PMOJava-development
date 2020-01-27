@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>QnowUser.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.domain</a> &gt; <span class="el_source">QnowUser.java</span></div><h1>QnowUser.java</h1><pre class="source lang-java linenums">package com.qnowapp.domain;
+
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import javax.persistence.*;
+
+import java.io.Serializable;
+import java.util.Objects;
+
+/**
+ * A QnowUser.
+ */
+@Entity
+@Table(name = &quot;qnow_user&quot;)
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+<span class="nc" id="L18">public class QnowUser implements Serializable {</span>
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = &quot;sequenceGenerator&quot;)
+    @SequenceGenerator(name = &quot;sequenceGenerator&quot;)
+    private Long id;
+
+    @OneToOne
+    @JoinColumn(unique = true)
+    private User user;
+
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    public Long getId() {
+<span class="nc" id="L33">        return id;</span>
+    }
+
+    public void setId(Long id) {
+<span class="nc" id="L37">        this.id = id;</span>
+<span class="nc" id="L38">    }</span>
+
+    public User getUser() {
+<span class="nc" id="L41">        return user;</span>
+    }
+
+    public QnowUser user(User user) {
+<span class="nc" id="L45">        this.user = user;</span>
+<span class="nc" id="L46">        return this;</span>
+    }
+
+    public void setUser(User user) {
+<span class="nc" id="L50">        this.user = user;</span>
+<span class="nc" id="L51">    }</span>
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
+    @Override
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L56" title="All 2 branches missed.">        if (this == o) {</span>
+<span class="nc" id="L57">            return true;</span>
+        }
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        if (!(o instanceof QnowUser)) {</span>
+<span class="nc" id="L60">            return false;</span>
+        }
+<span class="nc bnc" id="L62" title="All 4 branches missed.">        return id != null &amp;&amp; id.equals(((QnowUser) o).id);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L67">        return 31;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L72">        return &quot;QnowUser{&quot; +</span>
+<span class="nc" id="L73">            &quot;id=&quot; + getId() +</span>
+            &quot;}&quot;;
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

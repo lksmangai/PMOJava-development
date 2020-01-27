@@ -1,0 +1,35 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="backlogPractice">
+            <h2><span jhiTranslate="App.backlogPractice.detail.title">Backlog Practice</span> {{backlogPractice.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="App.backlogPractice.code">Code</span></dt>
+                <dd>
+                    <span>{{backlogPractice.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.backlogPractice.name">Name</span></dt>
+                <dd>
+                    <span>{{backlogPractice.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.backlogPractice.description">Description</span></dt>
+                <dd>
+                    <span>{{backlogPractice.description}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/backlog-practice', backlogPractice.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

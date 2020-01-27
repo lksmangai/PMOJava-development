@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>QnowUserResource.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.web.rest</a> &gt; <span class="el_source">QnowUserResource.java</span></div><h1>QnowUserResource.java</h1><pre class="source lang-java linenums">package com.qnowapp.web.rest;
+
+import com.qnowapp.domain.QnowUser;
+import com.qnowapp.service.QnowUserService;
+import com.qnowapp.web.rest.errors.BadRequestAlertException;
+import com.qnowapp.service.dto.QnowUserCriteria;
+import com.qnowapp.service.QnowUserQueryService;
+
+import io.github.jhipster.web.util.HeaderUtil;
+import io.github.jhipster.web.util.ResponseUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * REST controller for managing {@link com.qnowapp.domain.QnowUser}.
+ */
+@CrossOrigin(origins = &quot;*&quot;, allowedHeaders = &quot;*&quot;)
+@RestController
+@RequestMapping(&quot;/api&quot;)
+public class QnowUserResource {
+
+<span class="nc" id="L31">    private final Logger log = LoggerFactory.getLogger(QnowUserResource.class);</span>
+
+    private static final String ENTITY_NAME = &quot;qnowUser&quot;;
+
+    @Value(&quot;${jhipster.clientApp.name}&quot;)
+    private String applicationName;
+
+    private final QnowUserService qnowUserService;
+
+    private final QnowUserQueryService qnowUserQueryService;
+
+<span class="nc" id="L42">    public QnowUserResource(QnowUserService qnowUserService, QnowUserQueryService qnowUserQueryService) {</span>
+<span class="nc" id="L43">        this.qnowUserService = qnowUserService;</span>
+<span class="nc" id="L44">        this.qnowUserQueryService = qnowUserQueryService;</span>
+<span class="nc" id="L45">    }</span>
+
+    /**
+     * {@code POST  /qnow-users} : Create a new qnowUser.
+     *
+     * @param qnowUser the qnowUser to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new qnowUser, or with status {@code 400 (Bad Request)} if the qnowUser has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @CrossOrigin
+    @PostMapping(&quot;/qnow-users&quot;)
+    public ResponseEntity&lt;QnowUser&gt; createQnowUser(@RequestBody QnowUser qnowUser) throws URISyntaxException {
+<span class="nc" id="L57">        log.debug(&quot;REST request to save QnowUser : {}&quot;, qnowUser);</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">        if (qnowUser.getId() != null) {</span>
+<span class="nc" id="L59">            throw new BadRequestAlertException(&quot;A new qnowUser cannot already have an ID&quot;, ENTITY_NAME, &quot;idexists&quot;);</span>
+        }
+<span class="nc" id="L61">        QnowUser result = qnowUserService.save(qnowUser);</span>
+<span class="nc" id="L62">        return ResponseEntity.created(new URI(&quot;/api/qnow-users/&quot; + result.getId()))</span>
+<span class="nc" id="L63">            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))</span>
+<span class="nc" id="L64">            .body(result);</span>
+    }
+
+    /**
+     * {@code PUT  /qnow-users} : Updates an existing qnowUser.
+     *
+     * @param qnowUser the qnowUser to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated qnowUser,
+     * or with status {@code 400 (Bad Request)} if the qnowUser is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the qnowUser couldn't be updated.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @CrossOrigin
+    @PutMapping(&quot;/qnow-users&quot;)
+    public ResponseEntity&lt;QnowUser&gt; updateQnowUser(@RequestBody QnowUser qnowUser) throws URISyntaxException {
+<span class="nc" id="L79">        log.debug(&quot;REST request to update QnowUser : {}&quot;, qnowUser);</span>
+<span class="nc bnc" id="L80" title="All 2 branches missed.">        if (qnowUser.getId() == null) {</span>
+<span class="nc" id="L81">            throw new BadRequestAlertException(&quot;Invalid id&quot;, ENTITY_NAME, &quot;idnull&quot;);</span>
+        }
+<span class="nc" id="L83">        QnowUser result = qnowUserService.save(qnowUser);</span>
+<span class="nc" id="L84">        return ResponseEntity.ok()</span>
+<span class="nc" id="L85">            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, qnowUser.getId().toString()))</span>
+<span class="nc" id="L86">            .body(result);</span>
+    }
+
+    /**
+     * {@code GET  /qnow-users} : get all the qnowUsers.
+     *
+     * @param criteria the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of qnowUsers in body.
+     */
+    @CrossOrigin
+    @GetMapping(&quot;/qnow-users&quot;)
+    public ResponseEntity&lt;List&lt;QnowUser&gt;&gt; getAllQnowUsers(QnowUserCriteria criteria) {
+<span class="nc" id="L98">        log.debug(&quot;REST request to get QnowUsers by criteria: {}&quot;, criteria);</span>
+<span class="nc" id="L99">        List&lt;QnowUser&gt; entityList = qnowUserQueryService.findByCriteria(criteria);</span>
+<span class="nc" id="L100">        return ResponseEntity.ok().body(entityList);</span>
+    }
+
+    /**
+    * {@code GET  /qnow-users/count} : count all the qnowUsers.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping(&quot;/qnow-users/count&quot;)
+    public ResponseEntity&lt;Long&gt; countQnowUsers(QnowUserCriteria criteria) {
+<span class="nc" id="L112">        log.debug(&quot;REST request to count QnowUsers by criteria: {}&quot;, criteria);</span>
+<span class="nc" id="L113">        return ResponseEntity.ok().body(qnowUserQueryService.countByCriteria(criteria));</span>
+    }
+
+    /**
+     * {@code GET  /qnow-users/:id} : get the &quot;id&quot; qnowUser.
+     *
+     * @param id the id of the qnowUser to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the qnowUser, or with status {@code 404 (Not Found)}.
+     */
+    @CrossOrigin
+    @GetMapping(&quot;/qnow-users/{id}&quot;)
+    public ResponseEntity&lt;QnowUser&gt; getQnowUser(@PathVariable Long id) {
+<span class="nc" id="L125">        log.debug(&quot;REST request to get QnowUser : {}&quot;, id);</span>
+<span class="nc" id="L126">        Optional&lt;QnowUser&gt; qnowUser = qnowUserService.findOne(id);</span>
+<span class="nc" id="L127">        return ResponseUtil.wrapOrNotFound(qnowUser);</span>
+    }
+
+    /**
+     * {@code DELETE  /qnow-users/:id} : delete the &quot;id&quot; qnowUser.
+     *
+     * @param id the id of the qnowUser to delete.
+     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
+     */
+    @CrossOrigin
+    @DeleteMapping(&quot;/qnow-users/{id}&quot;)
+    public ResponseEntity&lt;Void&gt; deleteQnowUser(@PathVariable Long id) {
+<span class="nc" id="L139">        log.debug(&quot;REST request to delete QnowUser : {}&quot;, id);</span>
+<span class="nc" id="L140">        qnowUserService.delete(id);</span>
+<span class="nc" id="L141">        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

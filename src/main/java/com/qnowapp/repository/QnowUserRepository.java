@@ -1,8 +1,6 @@
 package com.qnowapp.repository;
 
 import com.qnowapp.domain.QnowUser;
-import com.qnowapp.domain.User;
-
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +11,5 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface QnowUserRepository extends JpaRepository<QnowUser, Long>, JpaSpecificationExecutor<QnowUser> {
-
-	QnowUser findByuser(User user);
 
 }

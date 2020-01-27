@@ -1,7 +1,5 @@
 package com.qnowapp.web.rest;
 
-import com.qnowapp.domain.Blank;
-
 import com.qnowapp.domain.ImEmployee;
 import com.qnowapp.domain.ImProjects;
 import com.qnowapp.domain.ProjectAllocation;
@@ -14,6 +12,7 @@ import com.qnowapp.repository.ImProjectsRepository;
 import com.qnowapp.repository.ProjectAllocationRepository;
 import com.qnowapp.repository.ProjectRolesRepository;
 
+import com.qnowapp.service.ProjectAllocationQueryService;
 import com.qnowapp.service.ProjectAllocationService;
 import com.qnowapp.service.dto.ProjectAllocationCriteria;
 
@@ -37,8 +36,6 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 /**
  * REST controller for managing {@link com.qnowapp.domain.ProjectAllocation}.
  */
@@ -56,7 +53,7 @@ public class ProjectAllocationResource {
     private String applicationName;
 
   
-    private static Boolean fromTesting = false;
+    private static Boolean fromTesting = true;
     
     
     @Autowired
@@ -80,11 +77,11 @@ public class ProjectAllocationResource {
     
     private final ProjectAllocationService projectAllocationService;
 
- 
+    private final ProjectAllocationQueryService projectAllocationQueryService;
 
-    public ProjectAllocationResource(ProjectAllocationService projectAllocationService) {
+    public ProjectAllocationResource(ProjectAllocationService projectAllocationService, ProjectAllocationQueryService projectAllocationQueryService) {
         this.projectAllocationService = projectAllocationService;
-      
+        this.projectAllocationQueryService = projectAllocationQueryService;
       
     }
     
@@ -105,7 +102,7 @@ public class ProjectAllocationResource {
 
         }
         if (MyEmail.equals("")) {
-          
+            System.out.println(MyEmail);
             return MyEmail;
 
         }
@@ -128,7 +125,7 @@ public class ProjectAllocationResource {
 
         }
         if (MyEmail.equals("")) {
-            
+            System.out.println(MyEmail);
             return MyEmail;
 
         }
@@ -151,7 +148,7 @@ public class ProjectAllocationResource {
 
         }
         if (MyEmail.equals("")) {
-           
+            System.out.println(MyEmail);
             return MyEmail;
 
         }
@@ -178,37 +175,26 @@ public class ProjectAllocationResource {
 
                 return new Double(fl);
             } catch (Exception e) {
-            	System.out.println(e);
+                System.out.println(e);
             }
 
         }
         return new Double(0);
 
     }
+
     @CrossOrigin
     @PostMapping("/project-allocations")
-    public ResponseEntity<ProjectAllocation> createProjectAllocation(@RequestBody ProjectAllocation projectAllocation) throws URISyntaxException {
+    public ResponseEntity<ProjectAllocation> createProjectAllocation(@RequestBody ProjectAllocation projectAllocation)
+            throws URISyntaxException {
         log.debug("REST request to save ProjectAllocation : {}", projectAllocation);
         if (projectAllocation.getId() != null) {
-            throw new BadRequestAlertException("A new projectAllocation cannot already have an ID", ENTITY_NAME, "idexists");
-        }
-        ProjectAllocation result = projectAllocationService.save(projectAllocation);
-        return ResponseEntity.created(new URI("/api/project-allocations/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-            .body(result);
-    } 
-    
-    @CrossOrigin
-    @PostMapping("/project-allocationscsv")
-    public ResponseEntity<ProjectAllocation> createProjectAllocationcsv(@Valid @RequestBody Blank blank)
-            throws URISyntaxException {
-      
-            ProjectAllocation result = new ProjectAllocation();
-            long aa=new Long(1);
-            result.setId(aa);
-            ProjectAllocation projectAllocation = new ProjectAllocation();
+            throw new BadRequestAlertException("A new projectAllocation cannot already have an ID", ENTITY_NAME,
+                    "idexists");
+        } else {
+            ProjectAllocation result = projectAllocationRepository.save(projectAllocation);
             ResponseEntity<ProjectAllocation> a = ResponseEntity
-                    .created(new URI("/api/project-allocationscsv/" + result.getId())).headers(HeaderUtil
+                    .created(new URI("/api/project-initiative-ids/" + result.getId())).headers(HeaderUtil
                             .createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
                     .body(result);
 
@@ -218,8 +204,8 @@ public class ProjectAllocationResource {
                 List<ImProjects> myProject = imProjectsRepository.findAll();
                 List<ProjectRoles> myRoles = projectRolesRepository.findAll();
                 
-              
-                String csvFile1 = "F:\\PMO1\\src\\main\\resources\\pmqprojects06Jul2019.csv";
+                System.out.println(projectAllocation.getId());
+                String csvFile1 = "src\\main\\resources\\pmqprojects.csv";
                 BufferedReader br = null;
                 String line = "";
                 String cvsSplitBy = ";";
@@ -229,12 +215,13 @@ public class ProjectAllocationResource {
                     int count = 0;
                     while ((line = br.readLine()) != null) {
                         count++;
-                     
+                        System.out.println(+count);
                         if (count == 1)
                             continue;
-                        line = line + ";test";
+                        //line = line + ";test";
                         String[] country = line.split(cvsSplitBy);
 
+                        
 
                         try {
                             if (country.length > 117) {
@@ -242,12 +229,14 @@ public class ProjectAllocationResource {
                                 String country2 =country1.replace("\"","");
                                 String country3 =country2.replace("{","");
                                 String country4 = country3.replace("}","");
-                               
+                                System.out.println(country4 + "country1");
                                 String[] tempArray;
                                 String delimiter = ",";
-                               
+                                //country1 = country1 + ",test1";
+                                
+                                System.out.println("country1 222" + country4);
                                 tempArray =country4.split(delimiter);
-                              
+                                System.out.println("country1 224" + country4);
                                 for (int i = 0; i < tempArray.length; i++)
 
                                 {
@@ -258,32 +247,40 @@ public class ProjectAllocationResource {
                                     //str = str + "#test";
                                     String[] allocation = str.split(delimiter1);
                                     if(allocation.length > 3) {
-                                       
+                                        System.out.println(allocation[0]);
+                                        System.out.println(allocation[1]);
+                                        System.out.println(allocation[2]);
+                                        System.out.println(allocation[3]);
+                                        System.out.println(country[4] + " ImProject");
+
                                             try {
+                                                 
+                                                    System.out.println("1");
+                                                    
                                                     Boolean founda = false;
-                                                   
+                                                    System.out.println("2");
                                                     String Employee = allocation[0];
-                                                    
+                                                    System.out.println("3" + Employee);
                                                     projectAllocation.setImEmployee(null);
-                                               
+                                                    System.out.println("4");
                                                     if (Employee.equals("") == false && Employee != null) {
-                                                    
+                                                        System.out.println("5");
                                                         myEmployee.forEach(item -> {
-                                                           
+                                                            System.out.println("6");
                                                             QnowUser QuserHere = item.getQnowUser();
-                                                        
+                                                            System.out.println("7");
                                                             if (QuserHere != null) {
-                                                             
+                                                                System.out.println("8");
                                                                 User userHere = QuserHere.getUser();
-                                                            
+                                                                System.out.println("9");
                                                                 if (userHere != null) {
-                                                                 
+                                                                    System.out.println("10");
                                                                     String myEmailHere = userHere.getEmail();
-                                                                   
+                                                                    System.out.println("11");
                                                                     if (myEmailHere.equals(Employee)) {
-                                                                  
+                                                                        System.out.println("12");
                                                                         projectAllocation.setImEmployee(item);
-                                                                      
+                                                                        System.out.println("13");
                                                                     }
                                                                 }
                                                             }
@@ -299,7 +296,7 @@ public class ProjectAllocationResource {
                                                         myProject.forEach(item -> {
                                                             String myPath = item.getProjectPath();
                                                             if (myPath.equals(Project)) {
-                                                              
+                                                                System.out.println("14");
                                                                 projectAllocation.setImProjects(item); 
 
                                                             }
@@ -315,21 +312,25 @@ public class ProjectAllocationResource {
                                                         myRoles.forEach(item -> {
                                                             String myPath = item.getCode();
                                                             if (myPath.equals(Roles)) {
-                                                            
+                                                                System.out.println("15");
                                                                 projectAllocation.setProjectRoles(item); // 93
 
                                                             }
 
                                                         });
                                                     }
-                                                  
+                                                    System.out.println("16");
                                                     projectAllocation.setPercentage(convertToDouble(allocation[3]));
-                                          
+                                                    
+                                                    System.out.println("17");
                                                     projectAllocation.setId(null);
                                                     ProjectAllocation result2 = projectAllocationRepository.save(projectAllocation);
-                                           
+                                                    System.out.println("18");
+                                                    System.out.println(result2.getId());
+                                                    System.out.println(projectAllocation + "new project created");
+                                                
                                             } catch (Exception e) {
-                                            	System.out.println(e + " e1 " + count + " " + line);
+                                                System.out.println(e + " e1 " + count + " " + line);
                                                 return a;
                                                 
                                             }
@@ -338,19 +339,19 @@ public class ProjectAllocationResource {
                                     }
                                     
                                 }
-                                
+                                System.out.println("country1 324" + country1);
                                 }
 
                                 
 
                             
                         } catch (Exception e) {
-                        	System.out.println(e + " e2 " + count + " " + line);
+                            System.out.println(e + " e2 " + count + " " + line);
                             return a;
                         }
                     }
                 } catch (Exception e) {
-                	System.out.println(e + " e3  "+ line);
+                    System.out.println(e + " e3  "+ line);
                     return a;
                     // TODO: handle exception
                 } finally {
@@ -358,7 +359,7 @@ public class ProjectAllocationResource {
                         try {
                             br.close();
                         } catch (Exception e) {
-                        	System.out.println(e);
+                            System.out.println(e);
                         }
 
                     }
@@ -366,7 +367,7 @@ public class ProjectAllocationResource {
             }
             return a;
         }
-  
+    }
     /**
      * {@code PUT  /project-allocations} : Updates an existing projectAllocation.
      *
@@ -397,14 +398,24 @@ public class ProjectAllocationResource {
      */
     @CrossOrigin
     @GetMapping("/project-allocations")
-    public ResponseEntity<List<ProjectAllocation>> getAllProjectAllocations( ) {
-        log.debug("REST request to get ProjectAllocations by criteria: {}");
-        List<ProjectAllocation> entityList = projectAllocationService.findAll();
-        
+    public ResponseEntity<List<ProjectAllocation>> getAllProjectAllocations(ProjectAllocationCriteria criteria) {
+        log.debug("REST request to get ProjectAllocations by criteria: {}", criteria);
+        List<ProjectAllocation> entityList = projectAllocationQueryService.findByCriteria(criteria);
         return ResponseEntity.ok().body(entityList);
     }
 
-
+    /**
+    * {@code GET  /project-allocations/count} : count all the projectAllocations.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping("/project-allocations/count")
+    public ResponseEntity<Long> countProjectAllocations(ProjectAllocationCriteria criteria) {
+        log.debug("REST request to count ProjectAllocations by criteria: {}", criteria);
+        return ResponseEntity.ok().body(projectAllocationQueryService.countByCriteria(criteria));
+    }
 
     /**
      * {@code GET  /project-allocations/:id} : get the "id" projectAllocation.

@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImTimesheetResource.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.web.rest</a> &gt; <span class="el_source">ImTimesheetResource.java</span></div><h1>ImTimesheetResource.java</h1><pre class="source lang-java linenums">package com.qnowapp.web.rest;
+
+
+import com.qnowapp.domain.ImEmployee;
+import com.qnowapp.domain.ImProjects;
+import com.qnowapp.domain.ImTimesheet;
+
+import com.qnowapp.domain.QnowUser;
+import com.qnowapp.domain.User;
+import com.qnowapp.repository.ImEmployeeRepository;
+import com.qnowapp.repository.ImProjectsRepository;
+import com.qnowapp.repository.ImTimesheetRepository;
+import com.qnowapp.service.ImTimesheetQueryService;
+import com.qnowapp.service.ImTimesheetService;
+import com.qnowapp.service.dto.ImTimesheetCriteria;
+import com.qnowapp.web.rest.errors.BadRequestAlertException;
+
+import io.github.jhipster.web.util.HeaderUtil;
+import io.github.jhipster.web.util.ResponseUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * REST controller for managing {@link com.qnowapp.domain.ImTimesheet}.
+ */
+@CrossOrigin(origins = &quot;*&quot;, allowedHeaders = &quot;*&quot;)
+@RestController
+@RequestMapping(&quot;/api&quot;)
+public class ImTimesheetResource {
+
+<span class="nc" id="L48">    private final Logger log = LoggerFactory.getLogger(ImTimesheetResource.class);</span>
+
+    private static final String ENTITY_NAME = &quot;imTimesheet&quot;;
+    
+<span class="nc" id="L52">    private static Boolean fromTesting = true;</span>
+    
+    @Autowired
+    ImEmployeeRepository imEmployeeRepository;
+    
+    
+    @Autowired
+    ImProjectsRepository imProjectsRepository;
+
+    @Autowired
+    ImTimesheetRepository imTimesheetRepository ;
+    
+<span class="nc" id="L64">    ImEmployee imEmployee = new ImEmployee();</span>
+
+<span class="nc" id="L66">    ImProjects imProjects = new ImProjects();</span>
+    
+    
+    @Value(&quot;${jhipster.clientApp.name}&quot;)
+    private String applicationName;
+
+
+    private final ImTimesheetService imTimesheetService;
+
+    private final ImTimesheetQueryService imTimesheetQueryService;
+<span class="nc" id="L76">    public ImTimesheetResource( ImTimesheetService imTimesheetService, ImTimesheetQueryService imTimesheetQueryService) {</span>
+      
+<span class="nc" id="L78">        this.imTimesheetService = imTimesheetService;</span>
+<span class="nc" id="L79">        this.imTimesheetQueryService = imTimesheetQueryService;</span>
+<span class="nc" id="L80">    }</span>
+    
+    public static void setFromTesting(Boolean bState) {
+<span class="nc" id="L83">        fromTesting = bState;</span>
+<span class="nc" id="L84">    }</span>
+
+    public String removeQuotes(String MyEmail) {
+<span class="nc bnc" id="L87" title="All 2 branches missed.">        if (MyEmail == null) {</span>
+<span class="nc" id="L88">            return null;</span>
+
+        }
+<span class="nc bnc" id="L91" title="All 2 branches missed.">        if (MyEmail.equals(&quot;&quot;)) {</span>
+<span class="nc" id="L92">            System.out.println(MyEmail);</span>
+<span class="nc" id="L93">            return MyEmail;</span>
+
+        }
+<span class="nc" id="L96">        String doubleQuote = &quot;\&quot;&quot;;</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">        if (MyEmail.substring(0, 1).equals(doubleQuote)) {</span>
+<span class="nc" id="L98">            MyEmail = MyEmail.substring(1, MyEmail.length());</span>
+        }
+
+<span class="nc bnc" id="L101" title="All 2 branches missed.">        if (MyEmail.substring(MyEmail.length() - 1, MyEmail.length()).equals(doubleQuote)) {</span>
+
+<span class="nc" id="L103">            MyEmail = MyEmail.substring(0, MyEmail.length() - 1);</span>
+
+        }
+<span class="nc" id="L106">        return MyEmail;</span>
+    }
+
+    public Double convertToDouble(String integer) {
+
+<span class="nc bnc" id="L111" title="All 4 branches missed.">        if (integer.equals(&quot;&quot;) || integer == null) {</span>
+<span class="nc" id="L112">            return new Double(0);</span>
+        } else {
+            try {
+<span class="nc" id="L115">                Float fl = Float.parseFloat(integer);</span>
+
+<span class="nc" id="L117">                return new Double(fl);</span>
+<span class="nc" id="L118">            } catch (Exception e) {</span>
+<span class="nc" id="L119">                System.out.println(e);</span>
+            }
+
+        }
+<span class="nc" id="L123">        return new Double(0);</span>
+
+    }
+
+    public ZonedDateTime convertToZonedDateTime(String integer) {
+
+<span class="nc bnc" id="L129" title="All 2 branches missed.">        if (integer.equals(&quot;&quot;)) {</span>
+<span class="nc" id="L130">            return null;</span>
+        } else {
+            try {
+<span class="nc" id="L133">                DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span>
+<span class="nc" id="L134">                LocalDateTime mydate = LocalDateTime.parse(integer.substring(0, 19), formatter1);</span>
+<span class="nc" id="L135">                ZonedDateTime resultado = ZonedDateTime.ofLocal(mydate, ZoneOffset.UTC, null);</span>
+<span class="nc" id="L136">                return resultado;</span>
+<span class="nc" id="L137">            } catch (Exception e) {</span>
+<span class="nc" id="L138">                System.out.println(e);</span>
+            }
+
+        }
+
+<span class="nc" id="L143">        return null;</span>
+    }
+
+    /*
+     * String a = &quot;2018-03-26 00:00:00-05&quot;; DateTimeFormatter formatter1 =
+     * DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd HH:mm:ss&quot;); LocalDateTime mydate =
+     * LocalDateTime.parse(a.substring(0, 19), formatter1); ZonedDateTime resultado
+     * = ZonedDateTime.ofLocal(mydate, ZoneOffset.UTC, null);
+     */
+    
+    @CrossOrigin
+    @PostMapping(&quot;/im-timesheets&quot;)
+    public ResponseEntity&lt;ImTimesheet&gt; createImTimesheet(@Valid @RequestBody ImTimesheet imTimesheet) throws URISyntaxException {
+<span class="nc" id="L156">        log.debug(&quot;REST request to save ImTimesheet : {}&quot;, imTimesheet);</span>
+<span class="nc bnc" id="L157" title="All 2 branches missed.">        if (imTimesheet.getId() != null) {</span>
+<span class="nc" id="L158">            throw new BadRequestAlertException(&quot;A new imTimesheet cannot already have an ID&quot;, ENTITY_NAME, &quot;idexists&quot;);</span>
+        }else {
+
+<span class="nc" id="L161">            ImTimesheet result = imTimesheetRepository.save(imTimesheet);</span>
+<span class="nc" id="L162">            ResponseEntity&lt;ImTimesheet&gt; returnObj = ResponseEntity</span>
+<span class="nc" id="L163">                    .created(new URI(&quot;/api/im-projects/&quot; + result.getId())).headers(HeaderUtil</span>
+<span class="nc" id="L164">                            .createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))</span>
+<span class="nc" id="L165">                    .body(result);</span>
+<span class="nc bnc" id="L166" title="All 2 branches missed.">            if (fromTesting == false) {</span>
+                
+<span class="nc" id="L168">                List&lt;ImEmployee&gt; myEmployee = imEmployeeRepository.findAll();</span>
+<span class="nc" id="L169">                List&lt;ImProjects&gt; myProject = imProjectsRepository.findAll();</span>
+                
+                
+                
+<span class="nc" id="L173">                String csvFile1 = &quot;src\\main\\resources\\pmqtimesheet.csv&quot;;</span>
+<span class="nc" id="L174">                BufferedReader br = null;</span>
+<span class="nc" id="L175">                String line = &quot;&quot;;</span>
+<span class="nc" id="L176">                String cvsSplitBy = &quot;;&quot;;</span>
+
+                try {
+<span class="nc" id="L179">                    br = new BufferedReader(new FileReader(csvFile1));</span>
+<span class="nc" id="L180">                    int count = 0;</span>
+<span class="nc bnc" id="L181" title="All 2 branches missed.">                    while ((line = br.readLine()) != null) {</span>
+<span class="nc" id="L182">                        count++;</span>
+<span class="nc" id="L183">                        System.out.println(&quot;hiii111111  &quot; + count);</span>
+<span class="nc bnc" id="L184" title="All 2 branches missed.">                        if (count == 1)</span>
+<span class="nc" id="L185">                            continue;</span>
+<span class="nc" id="L186">                        line = line + &quot;;test&quot;;</span>
+<span class="nc" id="L187">                        String[] country = line.split(cvsSplitBy);</span>
+<span class="nc" id="L188">                        System.out.println(line);</span>
+                        //System.out.println(country.length);
+                        try {
+<span class="nc bnc" id="L191" title="All 2 branches missed.">                            if (country.length &gt;= 4) {</span>
+<span class="nc" id="L192">                                System.out.println(&quot;1&quot;);</span>
+<span class="nc" id="L193">                                imTimesheet.setId(null);</span>
+                                
+<span class="nc" id="L195">                                System.out.println(&quot;country[3]) &quot; + country[3]);</span>
+<span class="nc" id="L196">                                imTimesheet.setLoghours(convertToDouble(removeQuotes(country[3])));</span>
+<span class="nc" id="L197">                                System.out.println(&quot;country[3]) &quot; + country[2]);</span>
+<span class="nc" id="L198">                                imTimesheet.setLogdate(convertToZonedDateTime(country[2]));</span>
+<span class="nc" id="L199">                                System.out.println(&quot;country[3]) &quot; + country[4]);</span>
+<span class="nc" id="L200">                                imTimesheet.setNotes(removeQuotes(country[4]));</span>
+                                
+
+<span class="nc" id="L203">                                Boolean founda = false;</span>
+<span class="nc" id="L204">                                System.out.println(&quot;2&quot;);</span>
+<span class="nc" id="L205">                                String Employee = removeQuotes(country[0]);</span>
+<span class="nc" id="L206">                                System.out.println(&quot;3&quot; + Employee);</span>
+<span class="nc" id="L207">                                imTimesheet.setImEmployee(null);</span>
+<span class="nc" id="L208">                                System.out.println(&quot;4&quot;);</span>
+<span class="nc bnc" id="L209" title="All 4 branches missed.">                                if (Employee.equals(&quot;&quot;) == false &amp;&amp; Employee != null) {</span>
+<span class="nc" id="L210">                                    System.out.println(&quot;5&quot;);</span>
+<span class="nc" id="L211">                                    myEmployee.forEach(item -&gt; {</span>
+<span class="nc" id="L212">                                        System.out.println(&quot;6&quot;);</span>
+<span class="nc" id="L213">                                        QnowUser QuserHere = item.getQnowUser();</span>
+<span class="nc" id="L214">                                        System.out.println(&quot;7&quot;);</span>
+<span class="nc bnc" id="L215" title="All 2 branches missed.">                                        if (QuserHere != null) {</span>
+<span class="nc" id="L216">                                            System.out.println(&quot;8&quot;);</span>
+<span class="nc" id="L217">                                            User userHere = QuserHere.getUser();</span>
+<span class="nc" id="L218">                                            System.out.println(&quot;9&quot;);</span>
+<span class="nc bnc" id="L219" title="All 2 branches missed.">                                            if (userHere != null) {</span>
+<span class="nc" id="L220">                                                System.out.println(&quot;10&quot;);</span>
+<span class="nc" id="L221">                                                String myEmailHere = userHere.getEmail();</span>
+<span class="nc" id="L222">                                                System.out.println(&quot;11&quot;);</span>
+<span class="nc bnc" id="L223" title="All 2 branches missed.">                                                if (myEmailHere.equals(Employee)) {</span>
+<span class="nc" id="L224">                                                    System.out.println(&quot;12&quot;);</span>
+<span class="nc" id="L225">                                                    imTimesheet.setImEmployee(item);</span>
+<span class="nc" id="L226">                                                    System.out.println(&quot;13&quot;);</span>
+                                                }
+                                            }
+                                        }
+
+<span class="nc" id="L231">                                    });</span>
+                                }
+                                
+                            
+<span class="nc" id="L235">                                Boolean found1 = false;</span>
+<span class="nc" id="L236">                                String Project = removeQuotes(country[1]);</span>
+<span class="nc" id="L237">                                imTimesheet.setImProjects(null);</span>
+<span class="nc bnc" id="L238" title="All 4 branches missed.">                                if (Project.equals(&quot;&quot;) == false &amp;&amp; Project != null) {</span>
+<span class="nc" id="L239">                                    myProject.forEach(item -&gt; {</span>
+<span class="nc" id="L240">                                        String myPath = item.getProjectPath();</span>
+<span class="nc bnc" id="L241" title="All 2 branches missed.">                                        if (myPath.equals(Project)) {</span>
+<span class="nc" id="L242">                                            System.out.println(&quot;14&quot;);</span>
+<span class="nc" id="L243">                                            imTimesheet.setImProjects(item); </span>
+
+                                        }
+
+<span class="nc" id="L247">                                    });</span>
+                                }
+                                }
+<span class="nc" id="L250">                            System.out.println(&quot;17&quot;);</span>
+<span class="nc" id="L251">                            imTimesheet.setId(null);</span>
+<span class="nc" id="L252">                            ImTimesheet result2 =imTimesheetRepository.save(imTimesheet);</span>
+<span class="nc" id="L253">                            System.out.println(&quot;18&quot;);</span>
+<span class="nc" id="L254">                            System.out.println(result2.getId());</span>
+<span class="nc" id="L255">                            System.out.println(imTimesheet + &quot;new project created&quot;);</span>
+                            
+<span class="nc" id="L257">                        } catch (Exception e) {</span>
+<span class="nc" id="L258">                            System.out.println(e + &quot;e3&quot;);</span>
+<span class="nc" id="L259">                            return returnObj;</span>
+<span class="nc" id="L260">                        }</span>
+<span class="nc" id="L261">                    }</span>
+                
+<span class="nc" id="L263">                } catch (Exception e) {</span>
+<span class="nc" id="L264">                    System.out.println(e + &quot;e2&quot;);</span>
+<span class="nc" id="L265">                    return returnObj;</span>
+                } finally {
+<span class="nc bnc" id="L267" title="All 2 branches missed.">                    if (br != null) {</span>
+                        try {
+<span class="nc" id="L269">                            br.close();</span>
+<span class="nc" id="L270">                        } catch (Exception e) {</span>
+<span class="nc" id="L271">                            System.out.println(e + &quot;e1&quot;);</span>
+<span class="nc" id="L272">                        }</span>
+                    }
+                }
+
+            }
+
+<span class="nc" id="L278">            return returnObj;</span>
+
+        }
+
+    }
+
+    /**
+     * {@code PUT  /im-timesheets} : Updates an existing imTimesheet.
+     *
+     * @param imTimesheet the imTimesheet to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated imTimesheet,
+     * or with status {@code 400 (Bad Request)} if the imTimesheet is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the imTimesheet couldn't be updated.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @CrossOrigin
+    @PutMapping(&quot;/im-timesheets&quot;)
+    public ResponseEntity&lt;ImTimesheet&gt; updateImTimesheet(@Valid @RequestBody ImTimesheet imTimesheet) throws URISyntaxException {
+<span class="nc" id="L296">        log.debug(&quot;REST request to update ImTimesheet : {}&quot;, imTimesheet);</span>
+<span class="nc bnc" id="L297" title="All 2 branches missed.">        if (imTimesheet.getId() == null) {</span>
+<span class="nc" id="L298">            throw new BadRequestAlertException(&quot;Invalid id&quot;, ENTITY_NAME, &quot;idnull&quot;);</span>
+        }
+<span class="nc" id="L300">        ImTimesheet result = imTimesheetService.save(imTimesheet);</span>
+<span class="nc" id="L301">        return ResponseEntity.ok()</span>
+<span class="nc" id="L302">            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, imTimesheet.getId().toString()))</span>
+<span class="nc" id="L303">            .body(result);</span>
+    }
+
+    /**
+     * {@code GET  /im-timesheets} : get all the imTimesheets.
+     *
+     * @param criteria the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of imTimesheets in body.
+     */
+    @CrossOrigin
+    @GetMapping(&quot;/im-timesheets&quot;)
+    public ResponseEntity&lt;List&lt;ImTimesheet&gt;&gt; getAllImTimesheets(ImTimesheetCriteria criteria) {
+<span class="nc" id="L315">        log.debug(&quot;REST request to get ImTimesheets by criteria: {}&quot;, criteria);</span>
+<span class="nc" id="L316">        List&lt;ImTimesheet&gt; entityList = imTimesheetQueryService.findByCriteria(criteria);</span>
+<span class="nc" id="L317">        return ResponseEntity.ok().body(entityList);</span>
+    }
+
+    /**
+    * {@code GET  /im-timesheets/count} : count all the imTimesheets.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping(&quot;/im-timesheets/count&quot;)
+    public ResponseEntity&lt;Long&gt; countImTimesheets(ImTimesheetCriteria criteria) {
+<span class="nc" id="L329">        log.debug(&quot;REST request to count ImTimesheets by criteria: {}&quot;, criteria);</span>
+<span class="nc" id="L330">        return ResponseEntity.ok().body(imTimesheetQueryService.countByCriteria(criteria));</span>
+    }
+
+    /**
+     * {@code GET  /im-timesheets/:id} : get the &quot;id&quot; imTimesheet.
+     *
+     * @param id the id of the imTimesheet to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the imTimesheet, or with status {@code 404 (Not Found)}.
+     */
+    @CrossOrigin
+    @GetMapping(&quot;/im-timesheets/{id}&quot;)
+    public ResponseEntity&lt;ImTimesheet&gt; getImTimesheet(@PathVariable Long id) {
+<span class="nc" id="L342">        log.debug(&quot;REST request to get ImTimesheet : {}&quot;, id);</span>
+<span class="nc" id="L343">        Optional&lt;ImTimesheet&gt; imTimesheet = imTimesheetService.findOne(id);</span>
+<span class="nc" id="L344">        return ResponseUtil.wrapOrNotFound(imTimesheet);</span>
+    }
+
+    /**
+     * {@code DELETE  /im-timesheets/:id} : delete the &quot;id&quot; imTimesheet.
+     *
+     * @param id the id of the imTimesheet to delete.
+     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
+     */
+    @CrossOrigin
+    @DeleteMapping(&quot;/im-timesheets/{id}&quot;)
+    public ResponseEntity&lt;Void&gt; deleteImTimesheet(@PathVariable Long id) {
+<span class="nc" id="L356">        log.debug(&quot;REST request to delete ImTimesheet : {}&quot;, id);</span>
+<span class="nc" id="L357">        imTimesheetService.delete(id);</span>
+<span class="nc" id="L358">        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

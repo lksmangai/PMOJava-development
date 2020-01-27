@@ -1,0 +1,159 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-user-contact-heading" jhiTranslate="App.userContact.home.createOrEditLabel">Create or edit a User Contact</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!userContact.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.userContact.homePhone" for="field_homePhone">Home Phone</label>
+                    <input type="text" class="form-control" name="homePhone" id="field_homePhone"
+                           formControlName="homePhone"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.userContact.workPhone" for="field_workPhone">Work Phone</label>
+                    <input type="text" class="form-control" name="workPhone" id="field_workPhone"
+                           formControlName="workPhone"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.userContact.cellPhone" for="field_cellPhone">Cell Phone</label>
+                    <input type="text" class="form-control" name="cellPhone" id="field_cellPhone"
+                           formControlName="cellPhone"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.userContact.permentAddress" for="field_permentAddress">Perment Address</label>
+                    <input type="text" class="form-control" name="permentAddress" id="field_permentAddress"
+                           formControlName="permentAddress"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.userContact.haLine1" for="field_haLine1">Ha Line 1</label>
+                    <input type="text" class="form-control" name="haLine1" id="field_haLine1"
+                           formControlName="haLine1"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.userContact.haLine2" for="field_haLine2">Ha Line 2</label>
+                    <input type="text" class="form-control" name="haLine2" id="field_haLine2"
+                           formControlName="haLine2"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.userContact.haPostal" for="field_haPostal">Ha Postal</label>
+                    <input type="text" class="form-control" name="haPostal" id="field_haPostal"
+                           formControlName="haPostal"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.userContact.waLine1" for="field_waLine1">Wa Line 1</label>
+                    <input type="text" class="form-control" name="waLine1" id="field_waLine1"
+                           formControlName="waLine1"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.userContact.waLine2" for="field_waLine2">Wa Line 2</label>
+                    <input type="text" class="form-control" name="waLine2" id="field_waLine2"
+                           formControlName="waLine2"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.userContact.waPostal" for="field_waPostal">Wa Postal</label>
+                    <input type="text" class="form-control" name="waPostal" id="field_waPostal"
+                           formControlName="waPostal"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.userContact.ucNote" for="field_ucNote">Uc Note</label>
+                    <input type="text" class="form-control" name="ucNote" id="field_ucNote"
+                           formControlName="ucNote"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.userContact.primaryRole" for="field_primaryRole">Primary Role</label>
+                    <input type="text" class="form-control" name="primaryRole" id="field_primaryRole"
+                           formControlName="primaryRole"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.userContact.secondaryRole" for="field_secondaryRole">Secondary Role</label>
+                    <input type="text" class="form-control" name="secondaryRole" id="field_secondaryRole"
+                           formControlName="secondaryRole"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.userContact.initiative" for="field_initiative">Initiative</label>
+                    <input type="text" class="form-control" name="initiative" id="field_initiative"
+                           formControlName="initiative"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.userContact.technology" for="field_technology">Technology</label>
+                    <input type="text" class="form-control" name="technology" id="field_technology"
+                           formControlName="technology"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.userContact.teamName" for="field_teamName">Team Name</label>
+                    <input type="text" class="form-control" name="teamName" id="field_teamName"
+                           formControlName="teamName"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.userContact.qnowUser" for="field_qnowUser">Qnow User</label>
+                    <select class="form-control" id="field_qnowUser" name="qnowUser" formControlName="qnowUser">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="qnowUserOption.id === editForm.get('qnowUser').value?.id ? editForm.get('qnowUser').value : qnowUserOption" *ngFor="let qnowUserOption of qnowusers; trackBy: trackQnowUserById">{{qnowUserOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.userContact.waCity" for="field_waCity">Wa City</label>
+                    <select class="form-control" id="field_waCity" name="waCity" formControlName="waCity">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="cityOption.id === editForm.get('waCity').value?.id ? editForm.get('waCity').value : cityOption" *ngFor="let cityOption of cities; trackBy: trackCityById">{{cityOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.userContact.haCity" for="field_haCity">Ha City</label>
+                    <select class="form-control" id="field_haCity" name="haCity" formControlName="haCity">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="cityOption.id === editForm.get('haCity').value?.id ? editForm.get('haCity').value : cityOption" *ngFor="let cityOption of cities; trackBy: trackCityById">{{cityOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.userContact.waState" for="field_waState">Wa State</label>
+                    <select class="form-control" id="field_waState" name="waState" formControlName="waState">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="stateMasterOption.id === editForm.get('waState').value?.id ? editForm.get('waState').value : stateMasterOption" *ngFor="let stateMasterOption of statemasters; trackBy: trackStateMasterById">{{stateMasterOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.userContact.haState" for="field_haState">Ha State</label>
+                    <select class="form-control" id="field_haState" name="haState" formControlName="haState">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="stateMasterOption.id === editForm.get('haState').value?.id ? editForm.get('haState').value : stateMasterOption" *ngFor="let stateMasterOption of statemasters; trackBy: trackStateMasterById">{{stateMasterOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.userContact.waCountry" for="field_waCountry">Wa Country</label>
+                    <select class="form-control" id="field_waCountry" name="waCountry" formControlName="waCountry">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="countryOption.id === editForm.get('waCountry').value?.id ? editForm.get('waCountry').value : countryOption" *ngFor="let countryOption of countries; trackBy: trackCountryById">{{countryOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.userContact.haCountry" for="field_haCountry">Ha Country</label>
+                    <select class="form-control" id="field_haCountry" name="haCountry" formControlName="haCountry">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="countryOption.id === editForm.get('haCountry').value?.id ? editForm.get('haCountry').value : countryOption" *ngFor="let countryOption of countries; trackBy: trackCountryById">{{countryOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label jhiTranslate="App.userContact.groupMembers" for="field_groupMembers">Group Members</label>
+                    <select class="form-control" id="field_groupMembers" multiple name="groupMembers" formControlName="groupMembers">
+                        <option [ngValue]="getSelected(editForm.get('groupMembers').value, groupMembersOption)" *ngFor="let groupMembersOption of groupmembers; trackBy: trackGroupMembersById">{{groupMembersOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

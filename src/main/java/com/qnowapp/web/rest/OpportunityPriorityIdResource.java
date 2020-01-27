@@ -1,10 +1,9 @@
 package com.qnowapp.web.rest;
 
 import com.qnowapp.domain.OpportunityPriorityId;
-
 import com.qnowapp.domain.ProjectInitiativeId;
 import com.qnowapp.repository.OpportunityPriorityIdRepository;
-
+import com.qnowapp.service.OpportunityPriorityIdQueryService;
 import com.qnowapp.service.OpportunityPriorityIdService;
 import com.qnowapp.service.dto.OpportunityPriorityIdCriteria;
 import com.qnowapp.web.rest.errors.BadRequestAlertException;
@@ -48,11 +47,11 @@ public class OpportunityPriorityIdResource {
     
     private final OpportunityPriorityIdService opportunityPriorityIdService;
 
-   
+    private final OpportunityPriorityIdQueryService opportunityPriorityIdQueryService;
 
-    public OpportunityPriorityIdResource( OpportunityPriorityIdService opportunityPriorityIdService) {
+    public OpportunityPriorityIdResource( OpportunityPriorityIdService opportunityPriorityIdService, OpportunityPriorityIdQueryService opportunityPriorityIdQueryService) {
         this.opportunityPriorityIdService = opportunityPriorityIdService;
-       
+        this.opportunityPriorityIdQueryService = opportunityPriorityIdQueryService;
        
     }
  
@@ -80,7 +79,7 @@ public class OpportunityPriorityIdResource {
                     .body(result);
 
             if (fromTesting == false) {
-                
+                System.out.println(opportunityPriorityId.getName());
                 String csvFile1 = "src\\main\\resources\\priority.csv";
                 BufferedReader br = null;
                 String line = "";
@@ -91,21 +90,22 @@ public class OpportunityPriorityIdResource {
                     int count = 0;
                     while ((line = br.readLine()) != null) {
                         count++;
-                        
+                        System.out.println(+count);
                         if (count == 1)
                             continue;
                         String[] country = line.split(cvsSplitBy);
                         try {
                             if (country.length > 3 ) {
-                                
+                                System.out.println("1");
                                 opportunityPriorityId.setId(null);
                                 opportunityPriorityId.setCode(country[0]);
-                                
+                                System.out.println("2");
                                 opportunityPriorityId.setName(country[1]);
-                              
+                                System.out.println("3");
                                 opportunityPriorityId.setDescription(country[2]);
                                 OpportunityPriorityId result2 = opportunityPriorityIdRepository.save(opportunityPriorityId);    
-                               
+                                System.out.println(result2.getId());
+                                System.out.println(opportunityPriorityId + "new project created");
                             }
                         } catch (Exception e) {
                         }
@@ -117,7 +117,7 @@ public class OpportunityPriorityIdResource {
                         try {
                             br.close();
                         } catch (Exception e) {
-                        	System.out.println(e);
+                            System.out.println(e);
                         }
                     
                     }
@@ -150,11 +150,21 @@ public class OpportunityPriorityIdResource {
      */
     @CrossOrigin
     @GetMapping("/opportunity-priority-ids")
-    public ResponseEntity<List<OpportunityPriorityId>> getAllOpportunityPriorityIds( ) {
-        log.debug("REST request to get OpportunityPriorityIds by criteria: {}");
-        List<OpportunityPriorityId> entityList = opportunityPriorityIdService.findAll();
+    public ResponseEntity<List<OpportunityPriorityId>> getAllOpportunityPriorityIds(OpportunityPriorityIdCriteria criteria) {
+        log.debug("REST request to get OpportunityPriorityIds by criteria: {}", criteria);
+        List<OpportunityPriorityId> entityList = opportunityPriorityIdQueryService.findByCriteria(criteria);
         return ResponseEntity.ok().body(entityList);
     }
+
+  
+    @CrossOrigin
+    @GetMapping("/opportunity-priority-ids/count")
+    public ResponseEntity<Long> countOpportunityPriorityIds(OpportunityPriorityIdCriteria criteria) {
+        log.debug("REST request to count OpportunityPriorityIds by criteria: {}", criteria);
+        return ResponseEntity.ok().body(opportunityPriorityIdQueryService.countByCriteria(criteria));
+    }
+
+    
 
     @CrossOrigin
     @GetMapping("/opportunity-priority-ids/{id}")

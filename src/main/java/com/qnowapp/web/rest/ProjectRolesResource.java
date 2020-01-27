@@ -1,10 +1,9 @@
 package com.qnowapp.web.rest;
 
 import com.qnowapp.domain.ProjectClass;
-
 import com.qnowapp.domain.ProjectRoles;
 import com.qnowapp.repository.ProjectRolesRepository;
-
+import com.qnowapp.service.ProjectRolesQueryService;
 import com.qnowapp.service.ProjectRolesService;
 import com.qnowapp.service.dto.ProjectRolesCriteria;
 import com.qnowapp.web.rest.errors.BadRequestAlertException;
@@ -49,10 +48,11 @@ public class ProjectRolesResource {
 
     private final ProjectRolesService projectRolesService;
 
-   
-    public ProjectRolesResource(ProjectRolesService projectRolesService) {
+    private final ProjectRolesQueryService projectRolesQueryService;
+
+    public ProjectRolesResource(ProjectRolesService projectRolesService, ProjectRolesQueryService projectRolesQueryService) {
         this.projectRolesService = projectRolesService;
-       
+        this.projectRolesQueryService = projectRolesQueryService;
      
     }
     /**
@@ -76,7 +76,7 @@ public class ProjectRolesResource {
                     .body(result);
 
             if (fromTesting == false) {
-               
+                System.out.println(projectRoles.getName());
                 String csvFile1 = "src\\main\\resources\\roles.csv";
                 BufferedReader br = null;
                 String line = "";
@@ -87,27 +87,28 @@ public class ProjectRolesResource {
                     int count = 0;
                     while ((line = br.readLine()) != null) {
                         count++;
-                        
+                        System.out.println(+count);
                         if (count == 1)
                             continue;
                         String[] country = line.split(cvsSplitBy);
                         try {
                             if (country.length > 3 ) {
-                               
+                                System.out.println("1");
                                 projectRoles.setId(null);
                                 projectRoles.setCode(country[0]);
-                              
+                                System.out.println("2");
                                 projectRoles.setName(country[1]);
-                              
+                                System.out.println("3");
                                 projectRoles.setDescription(country[2]);
                                 ProjectRoles result2 = projectRolesRepository.save(projectRoles);   
-                              
+                                System.out.println(result2.getId());
+                                System.out.println(projectRoles + "new project created");
                             }
                         } catch (Exception e) {
                         }
                     }
                 } catch (Exception e) {
-                   
+                    // TODO: handle exception
                 } finally {
                     if (br != null) {
                         try {
@@ -154,13 +155,24 @@ public class ProjectRolesResource {
      */
     @CrossOrigin
     @GetMapping("/project-roles")
-    public ResponseEntity<List<ProjectRoles>> getAllProjectRoles( ) {
-        log.debug("REST request to get ProjectRoles by criteria: {}");
-        List<ProjectRoles> entityList = projectRolesService.findAll();
+    public ResponseEntity<List<ProjectRoles>> getAllProjectRoles(ProjectRolesCriteria criteria) {
+        log.debug("REST request to get ProjectRoles by criteria: {}", criteria);
+        List<ProjectRoles> entityList = projectRolesQueryService.findByCriteria(criteria);
         return ResponseEntity.ok().body(entityList);
     }
 
- 
+    /**
+    * {@code GET  /project-roles/count} : count all the projectRoles.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping("/project-roles/count")
+    public ResponseEntity<Long> countProjectRoles(ProjectRolesCriteria criteria) {
+        log.debug("REST request to count ProjectRoles by criteria: {}", criteria);
+        return ResponseEntity.ok().body(projectRolesQueryService.countByCriteria(criteria));
+    }
 
     /**
      * {@code GET  /project-roles/:id} : get the "id" projectRoles.

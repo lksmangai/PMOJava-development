@@ -1,10 +1,10 @@
 package com.qnowapp.web.rest;
 
 import com.qnowapp.domain.SkillTable;
-
 import com.qnowapp.service.SkillTableService;
 import com.qnowapp.web.rest.errors.BadRequestAlertException;
 import com.qnowapp.service.dto.SkillTableCriteria;
+import com.qnowapp.service.SkillTableQueryService;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -37,10 +37,11 @@ public class SkillTableResource {
 
     private final SkillTableService skillTableService;
 
- 
-    public SkillTableResource(SkillTableService skillTableService) {
-        this.skillTableService = skillTableService;
+    private final SkillTableQueryService skillTableQueryService;
 
+    public SkillTableResource(SkillTableService skillTableService, SkillTableQueryService skillTableQueryService) {
+        this.skillTableService = skillTableService;
+        this.skillTableQueryService = skillTableQueryService;
     }
 
     /**
@@ -93,13 +94,24 @@ public class SkillTableResource {
      */
     @CrossOrigin
     @GetMapping("/skill-tables")
-    public ResponseEntity<List<SkillTable>> getAllSkillTables( ) {
-        log.debug("REST request to get SkillTables by criteria: {}");
-        List<SkillTable> entityList = skillTableService.findAll();
+    public ResponseEntity<List<SkillTable>> getAllSkillTables(SkillTableCriteria criteria) {
+        log.debug("REST request to get SkillTables by criteria: {}", criteria);
+        List<SkillTable> entityList = skillTableQueryService.findByCriteria(criteria);
         return ResponseEntity.ok().body(entityList);
     }
 
-
+    /**
+    * {@code GET  /skill-tables/count} : count all the skillTables.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping("/skill-tables/count")
+    public ResponseEntity<Long> countSkillTables(SkillTableCriteria criteria) {
+        log.debug("REST request to count SkillTables by criteria: {}", criteria);
+        return ResponseEntity.ok().body(skillTableQueryService.countByCriteria(criteria));
+    }
 
     /**
      * {@code GET  /skill-tables/:id} : get the "id" skillTable.

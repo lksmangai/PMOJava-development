@@ -1,10 +1,9 @@
 package com.qnowapp.web.rest;
 
 import com.qnowapp.domain.ProjectInitiativeId;
-
 import com.qnowapp.domain.ProjectTheme;
 import com.qnowapp.repository.ProjectThemeRepository;
-
+import com.qnowapp.service.ProjectThemeQueryService;
 import com.qnowapp.service.ProjectThemeService;
 import com.qnowapp.service.dto.ProjectThemeCriteria;
 import com.qnowapp.web.rest.errors.BadRequestAlertException;
@@ -47,10 +46,11 @@ public class ProjectThemeResource {
     private final ProjectThemeService projectThemeService;
 
   
-   
-    public ProjectThemeResource( ProjectThemeService projectThemeService) {
+    private final ProjectThemeQueryService projectThemeQueryService;
+
+    public ProjectThemeResource( ProjectThemeService projectThemeService, ProjectThemeQueryService projectThemeQueryService) {
         this.projectThemeService = projectThemeService;
-     
+        this.projectThemeQueryService = projectThemeQueryService;
        
 
     }
@@ -79,7 +79,7 @@ public class ProjectThemeResource {
 
 
             if (fromTesting == false) {
-               
+                System.out.println(projectTheme.getName());
                 String csvFile1 = "src\\main\\resources\\theam.csv";
                 BufferedReader br = null;
                 String line = "";
@@ -90,27 +90,28 @@ public class ProjectThemeResource {
                     int count = 0;
                     while ((line = br.readLine()) != null) {
                         count++;
-                        
+                        System.out.println(+count);
                         if (count == 1)
                             continue;
                         String[] country = line.split(cvsSplitBy);
                         try {
                             if (country.length > 3 ) {
-                               
+                                System.out.println("1");
                                 projectTheme.setId(null);
                                 projectTheme.setCode(country[0]);
-                              
+                                System.out.println("2");
                                 projectTheme.setName(country[1]);
-                               
+                                System.out.println("3");
                                 projectTheme.setDescription(country[2]);
                                 ProjectTheme result2 = projectThemeRepository.save(projectTheme);   
-                                
+                                System.out.println(result2.getId());
+                                System.out.println(projectTheme + "new project created");
                             }
                         } catch (Exception e) {
                         }
                     }
                 } catch (Exception e) {
-                    
+                    // TODO: handle exception
                 } finally {
                     if (br != null) {
                         try {
@@ -155,13 +156,24 @@ public class ProjectThemeResource {
      */
     @CrossOrigin
     @GetMapping("/project-themes")
-    public ResponseEntity<List<ProjectTheme>> getAllProjectThemes( ) {
-        log.debug("REST request to get ProjectThemes by criteria: {}");
-        List<ProjectTheme> entityList = projectThemeService.findAll();
+    public ResponseEntity<List<ProjectTheme>> getAllProjectThemes(ProjectThemeCriteria criteria) {
+        log.debug("REST request to get ProjectThemes by criteria: {}", criteria);
+        List<ProjectTheme> entityList = projectThemeQueryService.findByCriteria(criteria);
         return ResponseEntity.ok().body(entityList);
     }
 
-
+    /**
+    * {@code GET  /project-themes/count} : count all the projectThemes.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping("/project-themes/count")
+    public ResponseEntity<Long> countProjectThemes(ProjectThemeCriteria criteria) {
+        log.debug("REST request to count ProjectThemes by criteria: {}", criteria);
+        return ResponseEntity.ok().body(projectThemeQueryService.countByCriteria(criteria));
+    }
 
     /**
      * {@code GET  /project-themes/:id} : get the "id" projectTheme.

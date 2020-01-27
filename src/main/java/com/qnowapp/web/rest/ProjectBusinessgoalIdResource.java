@@ -1,10 +1,9 @@
 package com.qnowapp.web.rest;
 
 import com.qnowapp.domain.ProjectBusinessgoalId;
-
 import com.qnowapp.domain.ProjectInitiativeId;
 import com.qnowapp.repository.ProjectBusinessgoalIdRepository;
-
+import com.qnowapp.service.ProjectBusinessgoalIdQueryService;
 import com.qnowapp.service.ProjectBusinessgoalIdService;
 import com.qnowapp.service.dto.ProjectBusinessgoalIdCriteria;
 import com.qnowapp.web.rest.errors.BadRequestAlertException;
@@ -49,11 +48,11 @@ public class ProjectBusinessgoalIdResource {
     private final ProjectBusinessgoalIdService projectBusinessgoalIdService;
 
 
-    
+    private final ProjectBusinessgoalIdQueryService projectBusinessgoalIdQueryService;
 
-    public ProjectBusinessgoalIdResource(ProjectBusinessgoalIdService projectBusinessgoalIdService) {
+    public ProjectBusinessgoalIdResource(ProjectBusinessgoalIdService projectBusinessgoalIdService, ProjectBusinessgoalIdQueryService projectBusinessgoalIdQueryService) {
         this.projectBusinessgoalIdService = projectBusinessgoalIdService;
-      
+        this.projectBusinessgoalIdQueryService = projectBusinessgoalIdQueryService;
        
     }
    
@@ -82,7 +81,7 @@ public class ProjectBusinessgoalIdResource {
                     .body(result);
 
             if (fromTesting == false) {
-               
+                System.out.println(projectBusinessgoalId.getName());
                 String csvFile1 = "src\\main\\resources\\businessgoal.csv";
                 BufferedReader br = null;
                 String line = "";
@@ -93,21 +92,22 @@ public class ProjectBusinessgoalIdResource {
                     int count = 0;
                     while ((line = br.readLine()) != null) {
                         count++;
-                       
+                        System.out.println(+count);
                         if (count == 1)
                             continue;
                         String[] country = line.split(cvsSplitBy);
                         try {
                             if (country.length > 3 ) {
-                              
+                                System.out.println("1");
                                 projectBusinessgoalId.setId(null);
                                 projectBusinessgoalId.setCode(country[0]);
-                                
+                                System.out.println("2");
                                 projectBusinessgoalId.setName(country[1]);
-                                
+                                System.out.println("3");
                                 projectBusinessgoalId.setDescription(country[2]);
                                 ProjectBusinessgoalId result2 = projectBusinessgoalIdRepository.save(projectBusinessgoalId);    
-                                
+                                System.out.println(result2.getId());
+                                System.out.println(projectBusinessgoalId + "new project created");
                             }
                         } catch (Exception e) {
                         }
@@ -119,7 +119,7 @@ public class ProjectBusinessgoalIdResource {
                         try {
                             br.close();
                         } catch (Exception e) {
-                        	System.out.println(e);
+                            System.out.println(e);
                         }
                     
                     }
@@ -163,12 +163,24 @@ public class ProjectBusinessgoalIdResource {
      */
     @CrossOrigin
     @GetMapping("/project-businessgoal-ids")
-    public ResponseEntity<List<ProjectBusinessgoalId>> getAllProjectBusinessgoalIds( ) {
-        log.debug("REST request to get ProjectBusinessgoalIds by criteria: {}");
-        List<ProjectBusinessgoalId> entityList = projectBusinessgoalIdService.findAll();
+    public ResponseEntity<List<ProjectBusinessgoalId>> getAllProjectBusinessgoalIds(ProjectBusinessgoalIdCriteria criteria) {
+        log.debug("REST request to get ProjectBusinessgoalIds by criteria: {}", criteria);
+        List<ProjectBusinessgoalId> entityList = projectBusinessgoalIdQueryService.findByCriteria(criteria);
         return ResponseEntity.ok().body(entityList);
     }
 
+    /**
+    * {@code GET  /project-businessgoal-ids/count} : count all the projectBusinessgoalIds.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping("/project-businessgoal-ids/count")
+    public ResponseEntity<Long> countProjectBusinessgoalIds(ProjectBusinessgoalIdCriteria criteria) {
+        log.debug("REST request to count ProjectBusinessgoalIds by criteria: {}", criteria);
+        return ResponseEntity.ok().body(projectBusinessgoalIdQueryService.countByCriteria(criteria));
+    }
 
     /**
      * {@code GET  /project-businessgoal-ids/:id} : get the "id" projectBusinessgoalId.

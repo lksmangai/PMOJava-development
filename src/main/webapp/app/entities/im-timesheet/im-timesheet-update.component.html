@@ -1,0 +1,69 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-im-timesheet-heading" jhiTranslate="App.imTimesheet.home.createOrEditLabel">Create or edit a Im Timesheet</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!imTimesheet.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imTimesheet.logdate" for="field_logdate">Logdate</label>
+                    <div class="d-flex">
+                        <input id="field_logdate" type="datetime-local" class="form-control" name="logdate" formControlName="logdate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                    <div *ngIf="editForm.get('logdate').invalid && (editForm.get('logdate').dirty || editForm.get('logdate').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('logdate').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('logdate').errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imTimesheet.loghours" for="field_loghours">Loghours</label>
+                    <input type="number" class="form-control" name="loghours" id="field_loghours"
+                           formControlName="loghours"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imTimesheet.billhours" for="field_billhours">Billhours</label>
+                    <input type="number" class="form-control" name="billhours" id="field_billhours"
+                           formControlName="billhours"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imTimesheet.notes" for="field_notes">Notes</label>
+                    <input type="text" class="form-control" name="notes" id="field_notes"
+                           formControlName="notes"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imTimesheet.imEmployee" for="field_imEmployee">Im Employee</label>
+                    <select class="form-control" id="field_imEmployee" name="imEmployee" formControlName="imEmployee">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="imEmployeeOption.id === editForm.get('imEmployee').value?.id ? editForm.get('imEmployee').value : imEmployeeOption" *ngFor="let imEmployeeOption of imemployees; trackBy: trackImEmployeeById">{{imEmployeeOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imTimesheet.imProjects" for="field_imProjects">Im Projects</label>
+                    <select class="form-control" id="field_imProjects" name="imProjects" formControlName="imProjects">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="imProjectsOption.id === editForm.get('imProjects').value?.id ? editForm.get('imProjects').value : imProjectsOption" *ngFor="let imProjectsOption of improjects; trackBy: trackImProjectsById">{{imProjectsOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="skillExpertise">
+            <h2><span jhiTranslate="App.skillExpertise.detail.title">Skill Expertise</span> {{skillExpertise.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="App.skillExpertise.code">Code</span></dt>
+                <dd>
+                    <span>{{skillExpertise.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.skillExpertise.name">Name</span></dt>
+                <dd>
+                    <span>{{skillExpertise.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.skillExpertise.description">Description</span></dt>
+                <dd>
+                    <span>{{skillExpertise.description}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/skill-expertise', skillExpertise.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

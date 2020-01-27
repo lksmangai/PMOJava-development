@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FileStorage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.domain</a> &gt; <span class="el_source">FileStorage.java</span></div><h1>FileStorage.java</h1><pre class="source lang-java linenums">package com.qnowapp.domain;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import javax.persistence.*;
+
+import java.io.Serializable;
+import java.util.Objects;
+
+/**
+ * A FileStorage.
+ */
+@Entity
+@Table(name = &quot;file_storage&quot;)
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+<span class="nc" id="L19">public class FileStorage implements Serializable {</span>
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = &quot;sequenceGenerator&quot;)
+    @SequenceGenerator(name = &quot;sequenceGenerator&quot;)
+    private Long id;
+
+    @Column(name = &quot;filename&quot;)
+    private String filename;
+
+    @Column(name = &quot;caption&quot;)
+    private String caption;
+
+    @ManyToOne
+    @JsonIgnoreProperties(&quot;fileStorages&quot;)
+    private UserContact userContact;
+
+    @ManyToOne
+    @JsonIgnoreProperties(&quot;fileStorages&quot;)
+    private ImProjects imProjects;
+
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    public Long getId() {
+<span class="nc" id="L44">        return id;</span>
+    }
+
+    public void setId(Long id) {
+<span class="nc" id="L48">        this.id = id;</span>
+<span class="nc" id="L49">    }</span>
+
+    public String getFilename() {
+<span class="nc" id="L52">        return filename;</span>
+    }
+
+    public FileStorage filename(String filename) {
+<span class="nc" id="L56">        this.filename = filename;</span>
+<span class="nc" id="L57">        return this;</span>
+    }
+
+    public void setFilename(String filename) {
+<span class="nc" id="L61">        this.filename = filename;</span>
+<span class="nc" id="L62">    }</span>
+
+    public String getCaption() {
+<span class="nc" id="L65">        return caption;</span>
+    }
+
+    public FileStorage caption(String caption) {
+<span class="nc" id="L69">        this.caption = caption;</span>
+<span class="nc" id="L70">        return this;</span>
+    }
+
+    public void setCaption(String caption) {
+<span class="nc" id="L74">        this.caption = caption;</span>
+<span class="nc" id="L75">    }</span>
+
+    public UserContact getUserContact() {
+<span class="nc" id="L78">        return userContact;</span>
+    }
+
+    public FileStorage userContact(UserContact userContact) {
+<span class="nc" id="L82">        this.userContact = userContact;</span>
+<span class="nc" id="L83">        return this;</span>
+    }
+
+    public void setUserContact(UserContact userContact) {
+<span class="nc" id="L87">        this.userContact = userContact;</span>
+<span class="nc" id="L88">    }</span>
+
+    public ImProjects getImProjects() {
+<span class="nc" id="L91">        return imProjects;</span>
+    }
+
+    public FileStorage imProjects(ImProjects imProjects) {
+<span class="nc" id="L95">        this.imProjects = imProjects;</span>
+<span class="nc" id="L96">        return this;</span>
+    }
+
+    public void setImProjects(ImProjects imProjects) {
+<span class="nc" id="L100">        this.imProjects = imProjects;</span>
+<span class="nc" id="L101">    }</span>
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
+    @Override
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L106" title="All 2 branches missed.">        if (this == o) {</span>
+<span class="nc" id="L107">            return true;</span>
+        }
+<span class="nc bnc" id="L109" title="All 2 branches missed.">        if (!(o instanceof FileStorage)) {</span>
+<span class="nc" id="L110">            return false;</span>
+        }
+<span class="nc bnc" id="L112" title="All 4 branches missed.">        return id != null &amp;&amp; id.equals(((FileStorage) o).id);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L117">        return 31;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L122">        return &quot;FileStorage{&quot; +</span>
+<span class="nc" id="L123">            &quot;id=&quot; + getId() +</span>
+<span class="nc" id="L124">            &quot;, filename='&quot; + getFilename() + &quot;'&quot; +</span>
+<span class="nc" id="L125">            &quot;, caption='&quot; + getCaption() + &quot;'&quot; +</span>
+            &quot;}&quot;;
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

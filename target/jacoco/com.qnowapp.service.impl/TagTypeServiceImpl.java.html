@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TagTypeServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.service.impl</a> &gt; <span class="el_source">TagTypeServiceImpl.java</span></div><h1>TagTypeServiceImpl.java</h1><pre class="source lang-java linenums">package com.qnowapp.service.impl;
+
+import com.qnowapp.service.TagTypeService;
+import com.qnowapp.domain.TagType;
+import com.qnowapp.repository.TagTypeRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * Service Implementation for managing {@link TagType}.
+ */
+@Service
+@Transactional
+public class TagTypeServiceImpl implements TagTypeService {
+
+<span class="nc" id="L22">    private final Logger log = LoggerFactory.getLogger(TagTypeServiceImpl.class);</span>
+
+    private final TagTypeRepository tagTypeRepository;
+
+<span class="nc" id="L26">    public TagTypeServiceImpl(TagTypeRepository tagTypeRepository) {</span>
+<span class="nc" id="L27">        this.tagTypeRepository = tagTypeRepository;</span>
+<span class="nc" id="L28">    }</span>
+
+    /**
+     * Save a tagType.
+     *
+     * @param tagType the entity to save.
+     * @return the persisted entity.
+     */
+    @Override
+    public TagType save(TagType tagType) {
+<span class="nc" id="L38">        log.debug(&quot;Request to save TagType : {}&quot;, tagType);</span>
+<span class="nc" id="L39">        return tagTypeRepository.save(tagType);</span>
+    }
+
+    /**
+     * Get all the tagTypes.
+     *
+     * @return the list of entities.
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List&lt;TagType&gt; findAll() {
+<span class="nc" id="L50">        log.debug(&quot;Request to get all TagTypes&quot;);</span>
+<span class="nc" id="L51">        return tagTypeRepository.findAll();</span>
+    }
+
+
+    /**
+     * Get one tagType by id.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Optional&lt;TagType&gt; findOne(Long id) {
+<span class="nc" id="L64">        log.debug(&quot;Request to get TagType : {}&quot;, id);</span>
+<span class="nc" id="L65">        return tagTypeRepository.findById(id);</span>
+    }
+
+    /**
+     * Delete the tagType by id.
+     *
+     * @param id the id of the entity.
+     */
+    @Override
+    public void delete(Long id) {
+<span class="nc" id="L75">        log.debug(&quot;Request to delete TagType : {}&quot;, id);</span>
+<span class="nc" id="L76">        tagTypeRepository.deleteById(id);</span>
+<span class="nc" id="L77">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

@@ -2,10 +2,9 @@ package com.qnowapp.web.rest;
 
 import com.qnowapp.domain.ProjectCostCenterId;
 
-
 import com.qnowapp.domain.ProjectInitiativeId;
 import com.qnowapp.repository.ProjectCostCenterIdRepository;
-
+import com.qnowapp.service.ProjectCostCenterIdQueryService;
 import com.qnowapp.service.ProjectCostCenterIdService;
 import com.qnowapp.service.dto.ProjectCostCenterIdCriteria;
 import com.qnowapp.web.rest.errors.BadRequestAlertException;
@@ -49,10 +48,11 @@ public class ProjectCostCenterIdResource {
     private final ProjectCostCenterIdService projectCostCenterIdService;
 
 
-  
-    public ProjectCostCenterIdResource( ProjectCostCenterIdService projectCostCenterIdService) {
+    private final ProjectCostCenterIdQueryService projectCostCenterIdQueryService;
+
+    public ProjectCostCenterIdResource( ProjectCostCenterIdService projectCostCenterIdService, ProjectCostCenterIdQueryService projectCostCenterIdQueryService) {
         this.projectCostCenterIdService = projectCostCenterIdService;
-      
+        this.projectCostCenterIdQueryService = projectCostCenterIdQueryService;
        
     }
   
@@ -81,7 +81,7 @@ public class ProjectCostCenterIdResource {
                     .body(result);
 
             if (fromTesting == false) {
-               
+                System.out.println(projectCostCenterId.getName());
                 String csvFile1 = "src\\main\\resources\\vertical.csv";
                 BufferedReader br = null;
                 String line = "";
@@ -92,21 +92,22 @@ public class ProjectCostCenterIdResource {
                     int count = 0;
                     while ((line = br.readLine()) != null) {
                         count++;
-                    
+                        System.out.println(+count);
                         if (count == 1)
                             continue;
                         String[] country = line.split(cvsSplitBy);
                         try {
                             if (country.length > 3 ) {
-                               
+                                System.out.println("1");
                                 projectCostCenterId.setId(null);
                                 projectCostCenterId.setCode(country[0]);
-                               
+                                System.out.println("2");
                                 projectCostCenterId.setName(country[1]);
-                               
+                                System.out.println("3");
                                 projectCostCenterId.setDescription(country[2]);
                                 ProjectCostCenterId result2 = projectCostCenterIdRepository.save(projectCostCenterId);  
-                              
+                                System.out.println(result2.getId());
+                                System.out.println(projectCostCenterId + "new project created");
                             }
                         } catch (Exception e) {
                         }
@@ -118,7 +119,7 @@ public class ProjectCostCenterIdResource {
                         try {
                             br.close();
                         } catch (Exception e) {
-                        	System.out.println(e);
+                            System.out.println(e);
                         }
                     
                     }
@@ -159,10 +160,23 @@ public class ProjectCostCenterIdResource {
      */
     @CrossOrigin
     @GetMapping("/project-cost-center-ids")
-    public ResponseEntity<List<ProjectCostCenterId>> getAllProjectCostCenterIds( ) {
-        log.debug("REST request to get ProjectCostCenterIds by criteria: {}");
-        List<ProjectCostCenterId> entityList = projectCostCenterIdService.findAll();
+    public ResponseEntity<List<ProjectCostCenterId>> getAllProjectCostCenterIds(ProjectCostCenterIdCriteria criteria) {
+        log.debug("REST request to get ProjectCostCenterIds by criteria: {}", criteria);
+        List<ProjectCostCenterId> entityList = projectCostCenterIdQueryService.findByCriteria(criteria);
         return ResponseEntity.ok().body(entityList);
+    }
+
+    /**
+    * {@code GET  /project-cost-center-ids/count} : count all the projectCostCenterIds.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping("/project-cost-center-ids/count")
+    public ResponseEntity<Long> countProjectCostCenterIds(ProjectCostCenterIdCriteria criteria) {
+        log.debug("REST request to count ProjectCostCenterIds by criteria: {}", criteria);
+        return ResponseEntity.ok().body(projectCostCenterIdQueryService.countByCriteria(criteria));
     }
 
     /**

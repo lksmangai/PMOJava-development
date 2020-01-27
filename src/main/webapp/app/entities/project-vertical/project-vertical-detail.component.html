@@ -1,0 +1,35 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="projectVertical">
+            <h2><span jhiTranslate="App.projectVertical.detail.title">Project Vertical</span> {{projectVertical.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="App.projectVertical.code">Code</span></dt>
+                <dd>
+                    <span>{{projectVertical.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.projectVertical.name">Name</span></dt>
+                <dd>
+                    <span>{{projectVertical.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.projectVertical.description">Description</span></dt>
+                <dd>
+                    <span>{{projectVertical.description}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/project-vertical', projectVertical.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

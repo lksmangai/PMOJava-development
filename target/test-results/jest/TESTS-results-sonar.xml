@@ -1,0 +1,978 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\im-projects\im-projects.service.spec.ts">
+    <testCase name="Service Tests ImProjects Service Service methods should find an element" duration="143"/>
+    <testCase name="Service Tests ImProjects Service Service methods should create a ImProjects" duration="178"/>
+    <testCase name="Service Tests ImProjects Service Service methods should update a ImProjects" duration="57"/>
+    <testCase name="Service Tests ImProjects Service Service methods should return a list of ImProjects" duration="42"/>
+    <testCase name="Service Tests ImProjects Service Service methods should delete a ImProjects" duration="16"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\shared\login\login.component.spec.ts">
+    <testCase name="Component Tests LoginComponent should authenticate the user upon login when previous state was set" duration="269"/>
+    <testCase name="Component Tests LoginComponent should authenticate the user upon login when previous state was not set" duration="41"/>
+    <testCase name="Component Tests LoginComponent should empty the credentials upon cancel" duration="126"/>
+    <testCase name="Component Tests LoginComponent should redirect user when register" duration="38"/>
+    <testCase name="Component Tests LoginComponent should redirect user when request password" duration="51"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\admin\health\health.component.spec.ts">
+    <testCase name="Component Tests JhiHealthCheckComponent baseName and subSystemName should return the basename when it has no sub system" duration="132"/>
+    <testCase name="Component Tests JhiHealthCheckComponent baseName and subSystemName should return the basename when it has sub systems" duration="104"/>
+    <testCase name="Component Tests JhiHealthCheckComponent baseName and subSystemName should return the sub system name" duration="179"/>
+    <testCase name="Component Tests JhiHealthCheckComponent baseName and subSystemName should return the subsystem when it has multiple keys" duration="86"/>
+    <testCase name="Component Tests JhiHealthCheckComponent transformHealthData should flatten empty health data" duration="187"/>
+    <testCase name="Component Tests JhiHealthCheckComponent transformHealthData should flatten health data with no subsystems" duration="34"/>
+    <testCase name="Component Tests JhiHealthCheckComponent transformHealthData should flatten health data with subsystems at level 1, main system has no additional information" duration="27"/>
+    <testCase name="Component Tests JhiHealthCheckComponent transformHealthData should flatten health data with subsystems at level 1, main system has additional information" duration="28"/>
+    <testCase name="Component Tests JhiHealthCheckComponent transformHealthData should flatten health data with subsystems at level 1, main system has additional error" duration="31"/>
+    <testCase name="Component Tests JhiHealthCheckComponent getBadgeClass should get badge class" duration="55"/>
+    <testCase name="Component Tests JhiHealthCheckComponent refresh should call refresh on init" duration="71"/>
+    <testCase name="Component Tests JhiHealthCheckComponent refresh should handle a 503 on refreshing health data" duration="27"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\im-employee\im-employee.service.spec.ts">
+    <testCase name="Service Tests ImEmployee Service Service methods should find an element" duration="29"/>
+    <testCase name="Service Tests ImEmployee Service Service methods should create a ImEmployee" duration="21"/>
+    <testCase name="Service Tests ImEmployee Service Service methods should update a ImEmployee" duration="19"/>
+    <testCase name="Service Tests ImEmployee Service Service methods should return a list of ImEmployee" duration="33"/>
+    <testCase name="Service Tests ImEmployee Service Service methods should delete a ImEmployee" duration="17"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\shared\alert\alert-error.component.spec.ts">
+    <testCase name="Component Tests Alert Error Component Error Handling Should display an alert on status 0" duration="124">
+      <failure message="Error: expect(received).toBe(expected) // Object.is equality"><![CDATA[Error: expect(received).toBe(expected) // Object.is equality
+
+Expected: 1
+Received: 0
+    at it (F:\25june\PMQJava\src\test\javascript\spec\app\shared\alert\alert-error.component.spec.ts:43:36)
+    at ZoneDelegate.invoke (F:\25june\PMQJava\node_modules\zone.js\dist\zone.js:440:160)
+    at ProxyZoneSpec.onInvoke (F:\25june\PMQJava\node_modules\zone.js\dist\proxy.js:151:35)
+    at ZoneDelegate.invoke (F:\25june\PMQJava\node_modules\zone.js\dist\zone.js:440:48)
+    at Zone.run (F:\25june\PMQJava\node_modules\zone.js\dist\zone.js:167:37)
+    at Object.testBody.length (F:\25june\PMQJava\node_modules\jest-preset-angular\zone-patch\index.js:51:54)
+    at Object.asyncJestTest (F:\25june\PMQJava\node_modules\jest-jasmine2\build\jasmineAsyncInstall.js:102:37)
+    at resolve (F:\25june\PMQJava\node_modules\jest-jasmine2\build\queueRunner.js:43:12)
+    at new Promise (<anonymous>)
+    at mapper (F:\25june\PMQJava\node_modules\jest-jasmine2\build\queueRunner.js:26:19)
+    at promise.then (F:\25june\PMQJava\node_modules\jest-jasmine2\build\queueRunner.js:73:41)]]></failure>
+    </testCase>
+    <testCase name="Component Tests Alert Error Component Error Handling Should display an alert on status 404" duration="67">
+      <failure message="Error: expect(received).toBe(expected) // Object.is equality"><![CDATA[Error: expect(received).toBe(expected) // Object.is equality
+
+Expected: 1
+Received: 0
+    at it (F:\25june\PMQJava\src\test\javascript\spec\app\shared\alert\alert-error.component.spec.ts:50:36)
+    at ZoneDelegate.invoke (F:\25june\PMQJava\node_modules\zone.js\dist\zone.js:440:160)
+    at ProxyZoneSpec.onInvoke (F:\25june\PMQJava\node_modules\zone.js\dist\proxy.js:151:35)
+    at ZoneDelegate.invoke (F:\25june\PMQJava\node_modules\zone.js\dist\zone.js:440:48)
+    at Zone.run (F:\25june\PMQJava\node_modules\zone.js\dist\zone.js:167:37)
+    at Object.testBody.length (F:\25june\PMQJava\node_modules\jest-preset-angular\zone-patch\index.js:51:54)
+    at Object.asyncJestTest (F:\25june\PMQJava\node_modules\jest-jasmine2\build\jasmineAsyncInstall.js:102:37)
+    at resolve (F:\25june\PMQJava\node_modules\jest-jasmine2\build\queueRunner.js:43:12)
+    at new Promise (<anonymous>)
+    at mapper (F:\25june\PMQJava\node_modules\jest-jasmine2\build\queueRunner.js:26:19)
+    at promise.then (F:\25june\PMQJava\node_modules\jest-jasmine2\build\queueRunner.js:73:41)]]></failure>
+    </testCase>
+    <testCase name="Component Tests Alert Error Component Error Handling Should display an alert on generic error" duration="32">
+      <failure message="Error: expect(received).toBe(expected) // Object.is equality"><![CDATA[Error: expect(received).toBe(expected) // Object.is equality
+
+Expected: 2
+Received: 0
+    at it (F:\25june\PMQJava\src\test\javascript\spec\app\shared\alert\alert-error.component.spec.ts:58:36)
+    at ZoneDelegate.invoke (F:\25june\PMQJava\node_modules\zone.js\dist\zone.js:440:160)
+    at ProxyZoneSpec.onInvoke (F:\25june\PMQJava\node_modules\zone.js\dist\proxy.js:151:35)
+    at ZoneDelegate.invoke (F:\25june\PMQJava\node_modules\zone.js\dist\zone.js:440:48)
+    at Zone.run (F:\25june\PMQJava\node_modules\zone.js\dist\zone.js:167:37)
+    at Object.testBody.length (F:\25june\PMQJava\node_modules\jest-preset-angular\zone-patch\index.js:51:54)
+    at Object.asyncJestTest (F:\25june\PMQJava\node_modules\jest-jasmine2\build\jasmineAsyncInstall.js:102:37)
+    at resolve (F:\25june\PMQJava\node_modules\jest-jasmine2\build\queueRunner.js:43:12)
+    at new Promise (<anonymous>)
+    at mapper (F:\25june\PMQJava\node_modules\jest-jasmine2\build\queueRunner.js:26:19)
+    at promise.then (F:\25june\PMQJava\node_modules\jest-jasmine2\build\queueRunner.js:73:41)]]></failure>
+    </testCase>
+    <testCase name="Component Tests Alert Error Component Error Handling Should display an alert on status 400 for generic error" duration="46">
+      <failure message="Error: expect(received).toBe(expected) // Object.is equality"><![CDATA[Error: expect(received).toBe(expected) // Object.is equality
+
+Expected: 1
+Received: 0
+    at it (F:\25june\PMQJava\src\test\javascript\spec\app\shared\alert\alert-error.component.spec.ts:79:36)
+    at ZoneDelegate.invoke (F:\25june\PMQJava\node_modules\zone.js\dist\zone.js:440:160)
+    at ProxyZoneSpec.onInvoke (F:\25june\PMQJava\node_modules\zone.js\dist\proxy.js:151:35)
+    at ZoneDelegate.invoke (F:\25june\PMQJava\node_modules\zone.js\dist\zone.js:440:48)
+    at Zone.run (F:\25june\PMQJava\node_modules\zone.js\dist\zone.js:167:37)
+    at Object.testBody.length (F:\25june\PMQJava\node_modules\jest-preset-angular\zone-patch\index.js:51:54)
+    at Object.asyncJestTest (F:\25june\PMQJava\node_modules\jest-jasmine2\build\jasmineAsyncInstall.js:102:37)
+    at resolve (F:\25june\PMQJava\node_modules\jest-jasmine2\build\queueRunner.js:43:12)
+    at new Promise (<anonymous>)
+    at mapper (F:\25june\PMQJava\node_modules\jest-jasmine2\build\queueRunner.js:26:19)
+    at promise.then (F:\25june\PMQJava\node_modules\jest-jasmine2\build\queueRunner.js:73:41)]]></failure>
+    </testCase>
+    <testCase name="Component Tests Alert Error Component Error Handling Should display an alert on status 400 for generic error without message" duration="29">
+      <failure message="Error: expect(received).toBe(expected) // Object.is equality"><![CDATA[Error: expect(received).toBe(expected) // Object.is equality
+
+Expected: 1
+Received: 0
+    at it (F:\25june\PMQJava\src\test\javascript\spec\app\shared\alert\alert-error.component.spec.ts:92:36)
+    at ZoneDelegate.invoke (F:\25june\PMQJava\node_modules\zone.js\dist\zone.js:440:160)
+    at ProxyZoneSpec.onInvoke (F:\25june\PMQJava\node_modules\zone.js\dist\proxy.js:151:35)
+    at ZoneDelegate.invoke (F:\25june\PMQJava\node_modules\zone.js\dist\zone.js:440:48)
+    at Zone.run (F:\25june\PMQJava\node_modules\zone.js\dist\zone.js:167:37)
+    at Object.testBody.length (F:\25june\PMQJava\node_modules\jest-preset-angular\zone-patch\index.js:51:54)
+    at Object.asyncJestTest (F:\25june\PMQJava\node_modules\jest-jasmine2\build\jasmineAsyncInstall.js:102:37)
+    at resolve (F:\25june\PMQJava\node_modules\jest-jasmine2\build\queueRunner.js:43:12)
+    at new Promise (<anonymous>)
+    at mapper (F:\25june\PMQJava\node_modules\jest-jasmine2\build\queueRunner.js:26:19)
+    at promise.then (F:\25june\PMQJava\node_modules\jest-jasmine2\build\queueRunner.js:73:41)]]></failure>
+    </testCase>
+    <testCase name="Component Tests Alert Error Component Error Handling Should display an alert on status 400 for invalid parameters" duration="34">
+      <failure message="Error: expect(received).toBe(expected) // Object.is equality"><![CDATA[Error: expect(received).toBe(expected) // Object.is equality
+
+Expected: 1
+Received: 0
+    at it (F:\25june\PMQJava\src\test\javascript\spec\app\shared\alert\alert-error.component.spec.ts:113:36)
+    at ZoneDelegate.invoke (F:\25june\PMQJava\node_modules\zone.js\dist\zone.js:440:160)
+    at ProxyZoneSpec.onInvoke (F:\25june\PMQJava\node_modules\zone.js\dist\proxy.js:151:35)
+    at ZoneDelegate.invoke (F:\25june\PMQJava\node_modules\zone.js\dist\zone.js:440:48)
+    at Zone.run (F:\25june\PMQJava\node_modules\zone.js\dist\zone.js:167:37)
+    at Object.testBody.length (F:\25june\PMQJava\node_modules\jest-preset-angular\zone-patch\index.js:51:54)
+    at Object.asyncJestTest (F:\25june\PMQJava\node_modules\jest-jasmine2\build\jasmineAsyncInstall.js:102:37)
+    at resolve (F:\25june\PMQJava\node_modules\jest-jasmine2\build\queueRunner.js:43:12)
+    at new Promise (<anonymous>)
+    at mapper (F:\25june\PMQJava\node_modules\jest-jasmine2\build\queueRunner.js:26:19)
+    at promise.then (F:\25june\PMQJava\node_modules\jest-jasmine2\build\queueRunner.js:73:41)]]></failure>
+    </testCase>
+    <testCase name="Component Tests Alert Error Component Error Handling Should display an alert on status 400 for error headers" duration="48">
+      <failure message="Error: expect(received).toBe(expected) // Object.is equality"><![CDATA[Error: expect(received).toBe(expected) // Object.is equality
+
+Expected: 1
+Received: 0
+    at it (F:\25june\PMQJava\src\test\javascript\spec\app\shared\alert\alert-error.component.spec.ts:130:36)
+    at ZoneDelegate.invoke (F:\25june\PMQJava\node_modules\zone.js\dist\zone.js:440:160)
+    at ProxyZoneSpec.onInvoke (F:\25june\PMQJava\node_modules\zone.js\dist\proxy.js:151:35)
+    at ZoneDelegate.invoke (F:\25june\PMQJava\node_modules\zone.js\dist\zone.js:440:48)
+    at Zone.run (F:\25june\PMQJava\node_modules\zone.js\dist\zone.js:167:37)
+    at Object.testBody.length (F:\25june\PMQJava\node_modules\jest-preset-angular\zone-patch\index.js:51:54)
+    at Object.asyncJestTest (F:\25june\PMQJava\node_modules\jest-jasmine2\build\jasmineAsyncInstall.js:102:37)
+    at resolve (F:\25june\PMQJava\node_modules\jest-jasmine2\build\queueRunner.js:43:12)
+    at new Promise (<anonymous>)
+    at mapper (F:\25june\PMQJava\node_modules\jest-jasmine2\build\queueRunner.js:26:19)
+    at promise.then (F:\25june\PMQJava\node_modules\jest-jasmine2\build\queueRunner.js:73:41)]]></failure>
+    </testCase>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\user-contact\user-contact.service.spec.ts">
+    <testCase name="Service Tests UserContact Service Service methods should find an element" duration="26"/>
+    <testCase name="Service Tests UserContact Service Service methods should create a UserContact" duration="49"/>
+    <testCase name="Service Tests UserContact Service Service methods should update a UserContact" duration="21"/>
+    <testCase name="Service Tests UserContact Service Service methods should return a list of UserContact" duration="30"/>
+    <testCase name="Service Tests UserContact Service Service methods should delete a UserContact" duration="19"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\im-timesheet\im-timesheet.service.spec.ts">
+    <testCase name="Service Tests ImTimesheet Service Service methods should find an element" duration="38"/>
+    <testCase name="Service Tests ImTimesheet Service Service methods should create a ImTimesheet" duration="113"/>
+    <testCase name="Service Tests ImTimesheet Service Service methods should update a ImTimesheet" duration="33"/>
+    <testCase name="Service Tests ImTimesheet Service Service methods should return a list of ImTimesheet" duration="33"/>
+    <testCase name="Service Tests ImTimesheet Service Service methods should delete a ImTimesheet" duration="20"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\account\register\register.component.spec.ts">
+    <testCase name="Component Tests RegisterComponent should ensure the two passwords entered match" duration="51"/>
+    <testCase name="Component Tests RegisterComponent should update success to OK after creating an account" duration="45"/>
+    <testCase name="Component Tests RegisterComponent should notify of user existence upon 400/login already in use" duration="81"/>
+    <testCase name="Component Tests RegisterComponent should notify of email existence upon 400/email address already in use" duration="62"/>
+    <testCase name="Component Tests RegisterComponent should notify of generic error" duration="62"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\admin\audits\audits.component.spec.ts">
+    <testCase name="Component Tests AuditsComponent today function  should set toDate to current date" duration="62"/>
+    <testCase name="Component Tests AuditsComponent previousMonth function  should set fromDate to current date" duration="41"/>
+    <testCase name="Component Tests AuditsComponent By default, on init should set all default values correctly" duration="67"/>
+    <testCase name="Component Tests AuditsComponent OnInit Should call load all on init" duration="78"/>
+    <testCase name="Component Tests AuditsComponent Create sort object Should sort only by id asc" duration="34"/>
+    <testCase name="Component Tests AuditsComponent Create sort object Should sort by timestamp asc then by id" duration="59"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\opportunity-priority-id\opportunity-priority-id.service.spec.ts">
+    <testCase name="Service Tests OpportunityPriorityId Service Service methods should find an element" duration="27"/>
+    <testCase name="Service Tests OpportunityPriorityId Service Service methods should create a OpportunityPriorityId" duration="23"/>
+    <testCase name="Service Tests OpportunityPriorityId Service Service methods should update a OpportunityPriorityId" duration="26"/>
+    <testCase name="Service Tests OpportunityPriorityId Service Service methods should return a list of OpportunityPriorityId" duration="24"/>
+    <testCase name="Service Tests OpportunityPriorityId Service Service methods should delete a OpportunityPriorityId" duration="38"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-businessgoal-id\project-businessgoal-id.service.spec.ts">
+    <testCase name="Service Tests ProjectBusinessgoalId Service Service methods should find an element" duration="28"/>
+    <testCase name="Service Tests ProjectBusinessgoalId Service Service methods should create a ProjectBusinessgoalId" duration="27"/>
+    <testCase name="Service Tests ProjectBusinessgoalId Service Service methods should update a ProjectBusinessgoalId" duration="26"/>
+    <testCase name="Service Tests ProjectBusinessgoalId Service Service methods should return a list of ProjectBusinessgoalId" duration="60"/>
+    <testCase name="Service Tests ProjectBusinessgoalId Service Service methods should delete a ProjectBusinessgoalId" duration="18"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-cost-center-id\project-cost-center-id.service.spec.ts">
+    <testCase name="Service Tests ProjectCostCenterId Service Service methods should find an element" duration="28"/>
+    <testCase name="Service Tests ProjectCostCenterId Service Service methods should create a ProjectCostCenterId" duration="19"/>
+    <testCase name="Service Tests ProjectCostCenterId Service Service methods should update a ProjectCostCenterId" duration="20"/>
+    <testCase name="Service Tests ProjectCostCenterId Service Service methods should return a list of ProjectCostCenterId" duration="16"/>
+    <testCase name="Service Tests ProjectCostCenterId Service Service methods should delete a ProjectCostCenterId" duration="23"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-initiative-id\project-initiative-id.service.spec.ts">
+    <testCase name="Service Tests ProjectInitiativeId Service Service methods should find an element" duration="35"/>
+    <testCase name="Service Tests ProjectInitiativeId Service Service methods should create a ProjectInitiativeId" duration="21"/>
+    <testCase name="Service Tests ProjectInitiativeId Service Service methods should update a ProjectInitiativeId" duration="30"/>
+    <testCase name="Service Tests ProjectInitiativeId Service Service methods should return a list of ProjectInitiativeId" duration="18"/>
+    <testCase name="Service Tests ProjectInitiativeId Service Service methods should delete a ProjectInitiativeId" duration="25"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-tag\project-tag.service.spec.ts">
+    <testCase name="Service Tests ProjectTag Service Service methods should find an element" duration="27"/>
+    <testCase name="Service Tests ProjectTag Service Service methods should create a ProjectTag" duration="23"/>
+    <testCase name="Service Tests ProjectTag Service Service methods should update a ProjectTag" duration="20"/>
+    <testCase name="Service Tests ProjectTag Service Service methods should return a list of ProjectTag" duration="18"/>
+    <testCase name="Service Tests ProjectTag Service Service methods should delete a ProjectTag" duration="20"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\account\password-reset\finish\password-reset-finish.component.spec.ts">
+    <testCase name="Component Tests PasswordResetFinishComponent should define its initial state" duration="76"/>
+    <testCase name="Component Tests PasswordResetFinishComponent sets focus after the view has been initialized" duration="43"/>
+    <testCase name="Component Tests PasswordResetFinishComponent should ensure the two passwords entered match" duration="41"/>
+    <testCase name="Component Tests PasswordResetFinishComponent should update success to OK after resetting password" duration="30"/>
+    <testCase name="Component Tests PasswordResetFinishComponent should notify of generic error" duration="40"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-maingoal-id\project-maingoal-id.service.spec.ts">
+    <testCase name="Service Tests ProjectMaingoalId Service Service methods should find an element" duration="37"/>
+    <testCase name="Service Tests ProjectMaingoalId Service Service methods should create a ProjectMaingoalId" duration="50"/>
+    <testCase name="Service Tests ProjectMaingoalId Service Service methods should update a ProjectMaingoalId" duration="18"/>
+    <testCase name="Service Tests ProjectMaingoalId Service Service methods should return a list of ProjectMaingoalId" duration="21"/>
+    <testCase name="Service Tests ProjectMaingoalId Service Service methods should delete a ProjectMaingoalId" duration="23"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\account\password-reset\init\password-reset-init.component.spec.ts">
+    <testCase name="Component Tests PasswordResetInitComponent should define its initial state" duration="44"/>
+    <testCase name="Component Tests PasswordResetInitComponent sets focus after the view has been initialized" duration="30"/>
+    <testCase name="Component Tests PasswordResetInitComponent notifies of success upon successful requestReset" duration="41"/>
+    <testCase name="Component Tests PasswordResetInitComponent notifies of unknown email upon email address not registered/400" duration="48"/>
+    <testCase name="Component Tests PasswordResetInitComponent notifies of error upon error response" duration="55"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-subgoal-id\project-subgoal-id.service.spec.ts">
+    <testCase name="Service Tests ProjectSubgoalId Service Service methods should find an element" duration="27"/>
+    <testCase name="Service Tests ProjectSubgoalId Service Service methods should create a ProjectSubgoalId" duration="25"/>
+    <testCase name="Service Tests ProjectSubgoalId Service Service methods should update a ProjectSubgoalId" duration="23"/>
+    <testCase name="Service Tests ProjectSubgoalId Service Service methods should return a list of ProjectSubgoalId" duration="39"/>
+    <testCase name="Service Tests ProjectSubgoalId Service Service methods should delete a ProjectSubgoalId" duration="25"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-status-id\project-status-id.service.spec.ts">
+    <testCase name="Service Tests ProjectStatusId Service Service methods should find an element" duration="28"/>
+    <testCase name="Service Tests ProjectStatusId Service Service methods should create a ProjectStatusId" duration="22"/>
+    <testCase name="Service Tests ProjectStatusId Service Service methods should update a ProjectStatusId" duration="25"/>
+    <testCase name="Service Tests ProjectStatusId Service Service methods should return a list of ProjectStatusId" duration="22"/>
+    <testCase name="Service Tests ProjectStatusId Service Service methods should delete a ProjectStatusId" duration="41"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-bucket-id\project-bucket-id.service.spec.ts">
+    <testCase name="Service Tests ProjectBucketId Service Service methods should find an element" duration="28"/>
+    <testCase name="Service Tests ProjectBucketId Service Service methods should create a ProjectBucketId" duration="23"/>
+    <testCase name="Service Tests ProjectBucketId Service Service methods should update a ProjectBucketId" duration="20"/>
+    <testCase name="Service Tests ProjectBucketId Service Service methods should return a list of ProjectBucketId" duration="23"/>
+    <testCase name="Service Tests ProjectBucketId Service Service methods should delete a ProjectBucketId" duration="39"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\backlog-practice\backlog-practice.service.spec.ts">
+    <testCase name="Service Tests BacklogPractice Service Service methods should find an element" duration="32"/>
+    <testCase name="Service Tests BacklogPractice Service Service methods should create a BacklogPractice" duration="20"/>
+    <testCase name="Service Tests BacklogPractice Service Service methods should update a BacklogPractice" duration="17"/>
+    <testCase name="Service Tests BacklogPractice Service Service methods should return a list of BacklogPractice" duration="24"/>
+    <testCase name="Service Tests BacklogPractice Service Service methods should delete a BacklogPractice" duration="17"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-vertical\project-vertical.service.spec.ts">
+    <testCase name="Service Tests ProjectVertical Service Service methods should find an element" duration="27"/>
+    <testCase name="Service Tests ProjectVertical Service Service methods should create a ProjectVertical" duration="21"/>
+    <testCase name="Service Tests ProjectVertical Service Service methods should update a ProjectVertical" duration="17"/>
+    <testCase name="Service Tests ProjectVertical Service Service methods should return a list of ProjectVertical" duration="32"/>
+    <testCase name="Service Tests ProjectVertical Service Service methods should delete a ProjectVertical" duration="16"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-board-id\project-board-id.service.spec.ts">
+    <testCase name="Service Tests ProjectBoardId Service Service methods should find an element" duration="28"/>
+    <testCase name="Service Tests ProjectBoardId Service Service methods should create a ProjectBoardId" duration="21"/>
+    <testCase name="Service Tests ProjectBoardId Service Service methods should update a ProjectBoardId" duration="18"/>
+    <testCase name="Service Tests ProjectBoardId Service Service methods should return a list of ProjectBoardId" duration="19"/>
+    <testCase name="Service Tests ProjectBoardId Service Service methods should delete a ProjectBoardId" duration="19"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\skill-expertise\skill-expertise.service.spec.ts">
+    <testCase name="Service Tests SkillExpertise Service Service methods should find an element" duration="25"/>
+    <testCase name="Service Tests SkillExpertise Service Service methods should create a SkillExpertise" duration="21"/>
+    <testCase name="Service Tests SkillExpertise Service Service methods should update a SkillExpertise" duration="21"/>
+    <testCase name="Service Tests SkillExpertise Service Service methods should return a list of SkillExpertise" duration="31"/>
+    <testCase name="Service Tests SkillExpertise Service Service methods should delete a SkillExpertise" duration="22"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-type-id\project-type-id.service.spec.ts">
+    <testCase name="Service Tests ProjectTypeId Service Service methods should find an element" duration="34"/>
+    <testCase name="Service Tests ProjectTypeId Service Service methods should create a ProjectTypeId" duration="37"/>
+    <testCase name="Service Tests ProjectTypeId Service Service methods should update a ProjectTypeId" duration="23"/>
+    <testCase name="Service Tests ProjectTypeId Service Service methods should return a list of ProjectTypeId" duration="24"/>
+    <testCase name="Service Tests ProjectTypeId Service Service methods should delete a ProjectTypeId" duration="21"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-roles\project-roles.service.spec.ts">
+    <testCase name="Service Tests ProjectRoles Service Service methods should find an element" duration="29"/>
+    <testCase name="Service Tests ProjectRoles Service Service methods should create a ProjectRoles" duration="19"/>
+    <testCase name="Service Tests ProjectRoles Service Service methods should update a ProjectRoles" duration="32"/>
+    <testCase name="Service Tests ProjectRoles Service Service methods should return a list of ProjectRoles" duration="21"/>
+    <testCase name="Service Tests ProjectRoles Service Service methods should delete a ProjectRoles" duration="33"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-theme\project-theme.service.spec.ts">
+    <testCase name="Service Tests ProjectTheme Service Service methods should find an element" duration="46"/>
+    <testCase name="Service Tests ProjectTheme Service Service methods should create a ProjectTheme" duration="31"/>
+    <testCase name="Service Tests ProjectTheme Service Service methods should update a ProjectTheme" duration="37"/>
+    <testCase name="Service Tests ProjectTheme Service Service methods should return a list of ProjectTheme" duration="20"/>
+    <testCase name="Service Tests ProjectTheme Service Service methods should delete a ProjectTheme" duration="24"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\group-members\group-members.service.spec.ts">
+    <testCase name="Service Tests GroupMembers Service Service methods should find an element" duration="59"/>
+    <testCase name="Service Tests GroupMembers Service Service methods should create a GroupMembers" duration="22"/>
+    <testCase name="Service Tests GroupMembers Service Service methods should update a GroupMembers" duration="26"/>
+    <testCase name="Service Tests GroupMembers Service Service methods should return a list of GroupMembers" duration="28"/>
+    <testCase name="Service Tests GroupMembers Service Service methods should delete a GroupMembers" duration="20"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-class\project-class.service.spec.ts">
+    <testCase name="Service Tests ProjectClass Service Service methods should find an element" duration="26"/>
+    <testCase name="Service Tests ProjectClass Service Service methods should create a ProjectClass" duration="23"/>
+    <testCase name="Service Tests ProjectClass Service Service methods should update a ProjectClass" duration="25"/>
+    <testCase name="Service Tests ProjectClass Service Service methods should return a list of ProjectClass" duration="28"/>
+    <testCase name="Service Tests ProjectClass Service Service methods should delete a ProjectClass" duration="47"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\skill-category\skill-category.service.spec.ts">
+    <testCase name="Service Tests SkillCategory Service Service methods should find an element" duration="28"/>
+    <testCase name="Service Tests SkillCategory Service Service methods should create a SkillCategory" duration="40"/>
+    <testCase name="Service Tests SkillCategory Service Service methods should update a SkillCategory" duration="29"/>
+    <testCase name="Service Tests SkillCategory Service Service methods should return a list of SkillCategory" duration="17"/>
+    <testCase name="Service Tests SkillCategory Service Service methods should delete a SkillCategory" duration="19"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\employee-status\employee-status.service.spec.ts">
+    <testCase name="Service Tests EmployeeStatus Service Service methods should find an element" duration="31"/>
+    <testCase name="Service Tests EmployeeStatus Service Service methods should create a EmployeeStatus" duration="34"/>
+    <testCase name="Service Tests EmployeeStatus Service Service methods should update a EmployeeStatus" duration="19"/>
+    <testCase name="Service Tests EmployeeStatus Service Service methods should return a list of EmployeeStatus" duration="16"/>
+    <testCase name="Service Tests EmployeeStatus Service Service methods should delete a EmployeeStatus" duration="39"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\department\department.service.spec.ts">
+    <testCase name="Service Tests Department Service Service methods should find an element" duration="28"/>
+    <testCase name="Service Tests Department Service Service methods should create a Department" duration="25"/>
+    <testCase name="Service Tests Department Service Service methods should update a Department" duration="41"/>
+    <testCase name="Service Tests Department Service Service methods should return a list of Department" duration="24"/>
+    <testCase name="Service Tests Department Service Service methods should delete a Department" duration="18"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\state-master\state-master.service.spec.ts">
+    <testCase name="Service Tests StateMaster Service Service methods should find an element" duration="45"/>
+    <testCase name="Service Tests StateMaster Service Service methods should create a StateMaster" duration="20"/>
+    <testCase name="Service Tests StateMaster Service Service methods should update a StateMaster" duration="25"/>
+    <testCase name="Service Tests StateMaster Service Service methods should return a list of StateMaster" duration="16"/>
+    <testCase name="Service Tests StateMaster Service Service methods should delete a StateMaster" duration="17"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\tag-type\tag-type.service.spec.ts">
+    <testCase name="Service Tests TagType Service Service methods should find an element" duration="28"/>
+    <testCase name="Service Tests TagType Service Service methods should create a TagType" duration="22"/>
+    <testCase name="Service Tests TagType Service Service methods should update a TagType" duration="36"/>
+    <testCase name="Service Tests TagType Service Service methods should return a list of TagType" duration="22"/>
+    <testCase name="Service Tests TagType Service Service methods should delete a TagType" duration="19"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-allocation\project-allocation.service.spec.ts">
+    <testCase name="Service Tests ProjectAllocation Service Service methods should find an element" duration="26"/>
+    <testCase name="Service Tests ProjectAllocation Service Service methods should create a ProjectAllocation" duration="21"/>
+    <testCase name="Service Tests ProjectAllocation Service Service methods should update a ProjectAllocation" duration="19"/>
+    <testCase name="Service Tests ProjectAllocation Service Service methods should return a list of ProjectAllocation" duration="18"/>
+    <testCase name="Service Tests ProjectAllocation Service Service methods should delete a ProjectAllocation" duration="20"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\company\company.service.spec.ts">
+    <testCase name="Service Tests Company Service Service methods should find an element" duration="27"/>
+    <testCase name="Service Tests Company Service Service methods should create a Company" duration="20"/>
+    <testCase name="Service Tests Company Service Service methods should update a Company" duration="34"/>
+    <testCase name="Service Tests Company Service Service methods should return a list of Company" duration="17"/>
+    <testCase name="Service Tests Company Service Service methods should delete a Company" duration="18"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\file-storage\file-storage.service.spec.ts">
+    <testCase name="Service Tests FileStorage Service Service methods should find an element" duration="53"/>
+    <testCase name="Service Tests FileStorage Service Service methods should create a FileStorage" duration="20"/>
+    <testCase name="Service Tests FileStorage Service Service methods should update a FileStorage" duration="18"/>
+    <testCase name="Service Tests FileStorage Service Service methods should return a list of FileStorage" duration="23"/>
+    <testCase name="Service Tests FileStorage Service Service methods should delete a FileStorage" duration="18"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\roles\roles.service.spec.ts">
+    <testCase name="Service Tests Roles Service Service methods should find an element" duration="25"/>
+    <testCase name="Service Tests Roles Service Service methods should create a Roles" duration="19"/>
+    <testCase name="Service Tests Roles Service Service methods should update a Roles" duration="35"/>
+    <testCase name="Service Tests Roles Service Service methods should return a list of Roles" duration="40"/>
+    <testCase name="Service Tests Roles Service Service methods should delete a Roles" duration="19"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\country\country.service.spec.ts">
+    <testCase name="Service Tests Country Service Service methods should find an element" duration="31"/>
+    <testCase name="Service Tests Country Service Service methods should create a Country" duration="45"/>
+    <testCase name="Service Tests Country Service Service methods should update a Country" duration="26"/>
+    <testCase name="Service Tests Country Service Service methods should return a list of Country" duration="16"/>
+    <testCase name="Service Tests Country Service Service methods should delete a Country" duration="19"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\skills\skills.service.spec.ts">
+    <testCase name="Service Tests Skills Service Service methods should find an element" duration="33"/>
+    <testCase name="Service Tests Skills Service Service methods should create a Skills" duration="20"/>
+    <testCase name="Service Tests Skills Service Service methods should update a Skills" duration="17"/>
+    <testCase name="Service Tests Skills Service Service methods should return a list of Skills" duration="18"/>
+    <testCase name="Service Tests Skills Service Service methods should delete a Skills" duration="37"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\city\city.service.spec.ts">
+    <testCase name="Service Tests City Service Service methods should find an element" duration="28"/>
+    <testCase name="Service Tests City Service Service methods should create a City" duration="25"/>
+    <testCase name="Service Tests City Service Service methods should update a City" duration="42"/>
+    <testCase name="Service Tests City Service Service methods should return a list of City" duration="18"/>
+    <testCase name="Service Tests City Service Service methods should delete a City" duration="17"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\core\user\account.service.spec.ts">
+    <testCase name="Service Tests Account Service Service methods should call /account if user is undefined" duration="42"/>
+    <testCase name="Service Tests Account Service Service methods should call /account only once" duration="33"/>
+    <testCase name="Service Tests Account Service Service methods hasAuthority should return false if user is not logged" duration="18"/>
+    <testCase name="Service Tests Account Service Service methods hasAuthority should return false if user is logged and has not authority" duration="27"/>
+    <testCase name="Service Tests Account Service Service methods hasAuthority should return true if user is logged and has authority" duration="23"/>
+    <testCase name="Service Tests Account Service Service methods hasAnyAuthority should return false if user is not logged" duration="19"/>
+    <testCase name="Service Tests Account Service Service methods hasAnyAuthority should return false if user is logged and has not authority" duration="45"/>
+    <testCase name="Service Tests Account Service Service methods hasAnyAuthority should return true if user is logged and has authority" duration="28"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\skill-table\skill-table.service.spec.ts">
+    <testCase name="Service Tests SkillTable Service Service methods should find an element" duration="29"/>
+    <testCase name="Service Tests SkillTable Service Service methods should create a SkillTable" duration="21"/>
+    <testCase name="Service Tests SkillTable Service Service methods should update a SkillTable" duration="43"/>
+    <testCase name="Service Tests SkillTable Service Service methods should return a list of SkillTable" duration="16"/>
+    <testCase name="Service Tests SkillTable Service Service methods should delete a SkillTable" duration="28"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\qnow-user\qnow-user.service.spec.ts">
+    <testCase name="Service Tests QnowUser Service Service methods should find an element" duration="28"/>
+    <testCase name="Service Tests QnowUser Service Service methods should create a QnowUser" duration="21"/>
+    <testCase name="Service Tests QnowUser Service Service methods should update a QnowUser" duration="18"/>
+    <testCase name="Service Tests QnowUser Service Service methods should return a list of QnowUser" duration="18"/>
+    <testCase name="Service Tests QnowUser Service Service methods should delete a QnowUser" duration="55"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\admin\user-management\user-management-update.component.spec.ts">
+    <testCase name="Component Tests User Management Update Component OnInit Should load authorities and language on init" duration="280"/>
+    <testCase name="Component Tests User Management Update Component save Should call update service on save for existing user" duration="94"/>
+    <testCase name="Component Tests User Management Update Component save Should call create service on save for new user" duration="307"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\account\password\password.component.spec.ts">
+    <testCase name="Component Tests PasswordComponent should show error if passwords do not match" duration="131"/>
+    <testCase name="Component Tests PasswordComponent should call Auth.changePassword when passwords match" duration="33"/>
+    <testCase name="Component Tests PasswordComponent should set success to OK upon success" duration="171"/>
+    <testCase name="Component Tests PasswordComponent should notify of error if change password fails" duration="63"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\admin\user-management\user-management.component.spec.ts">
+    <testCase name="Component Tests User Management Component OnInit Should call load all on init" duration="282"/>
+    <testCase name="Component Tests User Management Component setActive Should update user and call load all" duration="174"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\admin\configuration\configuration.component.spec.ts">
+    <testCase name="Component Tests JhiConfigurationComponent OnInit should set all default values correctly" duration="89"/>
+    <testCase name="Component Tests JhiConfigurationComponent OnInit Should call load all on init" duration="34"/>
+    <testCase name="Component Tests JhiConfigurationComponent keys method should return the keys of an Object" duration="27"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\admin\logs\logs.component.spec.ts">
+    <testCase name="Component Tests LogsComponent OnInit should set all default values correctly" duration="59"/>
+    <testCase name="Component Tests LogsComponent OnInit Should call load all on init" duration="43"/>
+    <testCase name="Component Tests LogsComponent change log level should change log level correctly" duration="31"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\opportunity-priority-id\opportunity-priority-id-update.component.spec.ts">
+    <testCase name="Component Tests OpportunityPriorityId Management Update Component save Should call update service on save for existing entity" duration="96"/>
+    <testCase name="Component Tests OpportunityPriorityId Management Update Component save Should call create service on save for new entity" duration="67"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-businessgoal-id\project-businessgoal-id-update.component.spec.ts">
+    <testCase name="Component Tests ProjectBusinessgoalId Management Update Component save Should call update service on save for existing entity" duration="180"/>
+    <testCase name="Component Tests ProjectBusinessgoalId Management Update Component save Should call create service on save for new entity" duration="65"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-initiative-id\project-initiative-id-update.component.spec.ts">
+    <testCase name="Component Tests ProjectInitiativeId Management Update Component save Should call update service on save for existing entity" duration="79"/>
+    <testCase name="Component Tests ProjectInitiativeId Management Update Component save Should call create service on save for new entity" duration="104"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-cost-center-id\project-cost-center-id-update.component.spec.ts">
+    <testCase name="Component Tests ProjectCostCenterId Management Update Component save Should call update service on save for existing entity" duration="81"/>
+    <testCase name="Component Tests ProjectCostCenterId Management Update Component save Should call create service on save for new entity" duration="53"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-maingoal-id\project-maingoal-id-update.component.spec.ts">
+    <testCase name="Component Tests ProjectMaingoalId Management Update Component save Should call update service on save for existing entity" duration="79"/>
+    <testCase name="Component Tests ProjectMaingoalId Management Update Component save Should call create service on save for new entity" duration="50"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\account\settings\settings.component.spec.ts">
+    <testCase name="Component Tests SettingsComponent should send the current identity upon save" duration="71"/>
+    <testCase name="Component Tests SettingsComponent should notify of success upon successful save" duration="41"/>
+    <testCase name="Component Tests SettingsComponent should notify of error upon failed save" duration="50"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-subgoal-id\project-subgoal-id-update.component.spec.ts">
+    <testCase name="Component Tests ProjectSubgoalId Management Update Component save Should call update service on save for existing entity" duration="72"/>
+    <testCase name="Component Tests ProjectSubgoalId Management Update Component save Should call create service on save for new entity" duration="108"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-bucket-id\project-bucket-id-update.component.spec.ts">
+    <testCase name="Component Tests ProjectBucketId Management Update Component save Should call update service on save for existing entity" duration="93"/>
+    <testCase name="Component Tests ProjectBucketId Management Update Component save Should call create service on save for new entity" duration="68"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-status-id\project-status-id-update.component.spec.ts">
+    <testCase name="Component Tests ProjectStatusId Management Update Component save Should call update service on save for existing entity" duration="84"/>
+    <testCase name="Component Tests ProjectStatusId Management Update Component save Should call create service on save for new entity" duration="98"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-vertical\project-vertical-update.component.spec.ts">
+    <testCase name="Component Tests ProjectVertical Management Update Component save Should call update service on save for existing entity" duration="110"/>
+    <testCase name="Component Tests ProjectVertical Management Update Component save Should call create service on save for new entity" duration="68"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\backlog-practice\backlog-practice-update.component.spec.ts">
+    <testCase name="Component Tests BacklogPractice Management Update Component save Should call update service on save for existing entity" duration="80"/>
+    <testCase name="Component Tests BacklogPractice Management Update Component save Should call create service on save for new entity" duration="115"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-board-id\project-board-id-update.component.spec.ts">
+    <testCase name="Component Tests ProjectBoardId Management Update Component save Should call update service on save for existing entity" duration="92"/>
+    <testCase name="Component Tests ProjectBoardId Management Update Component save Should call create service on save for new entity" duration="71"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\employee-status\employee-status-update.component.spec.ts">
+    <testCase name="Component Tests EmployeeStatus Management Update Component save Should call update service on save for existing entity" duration="111"/>
+    <testCase name="Component Tests EmployeeStatus Management Update Component save Should call create service on save for new entity" duration="47"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\skill-expertise\skill-expertise-update.component.spec.ts">
+    <testCase name="Component Tests SkillExpertise Management Update Component save Should call update service on save for existing entity" duration="79"/>
+    <testCase name="Component Tests SkillExpertise Management Update Component save Should call create service on save for new entity" duration="132"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-type-id\project-type-id-update.component.spec.ts">
+    <testCase name="Component Tests ProjectTypeId Management Update Component save Should call update service on save for existing entity" duration="74"/>
+    <testCase name="Component Tests ProjectTypeId Management Update Component save Should call create service on save for new entity" duration="76"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\skill-category\skill-category-update.component.spec.ts">
+    <testCase name="Component Tests SkillCategory Management Update Component save Should call update service on save for existing entity" duration="250"/>
+    <testCase name="Component Tests SkillCategory Management Update Component save Should call create service on save for new entity" duration="69"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\group-members\group-members-update.component.spec.ts">
+    <testCase name="Component Tests GroupMembers Management Update Component save Should call update service on save for existing entity" duration="109"/>
+    <testCase name="Component Tests GroupMembers Management Update Component save Should call create service on save for new entity" duration="55"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-theme\project-theme-update.component.spec.ts">
+    <testCase name="Component Tests ProjectTheme Management Update Component save Should call update service on save for existing entity" duration="74"/>
+    <testCase name="Component Tests ProjectTheme Management Update Component save Should call create service on save for new entity" duration="89"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-roles\project-roles-update.component.spec.ts">
+    <testCase name="Component Tests ProjectRoles Management Update Component save Should call update service on save for existing entity" duration="85"/>
+    <testCase name="Component Tests ProjectRoles Management Update Component save Should call create service on save for new entity" duration="50"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-allocation\project-allocation-update.component.spec.ts">
+    <testCase name="Component Tests ProjectAllocation Management Update Component save Should call update service on save for existing entity" duration="72"/>
+    <testCase name="Component Tests ProjectAllocation Management Update Component save Should call create service on save for new entity" duration="45"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-class\project-class-update.component.spec.ts">
+    <testCase name="Component Tests ProjectClass Management Update Component save Should call update service on save for existing entity" duration="106"/>
+    <testCase name="Component Tests ProjectClass Management Update Component save Should call create service on save for new entity" duration="64"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\user-contact\user-contact-update.component.spec.ts">
+    <testCase name="Component Tests UserContact Management Update Component save Should call update service on save for existing entity" duration="122"/>
+    <testCase name="Component Tests UserContact Management Update Component save Should call create service on save for new entity" duration="69"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\file-storage\file-storage-update.component.spec.ts">
+    <testCase name="Component Tests FileStorage Management Update Component save Should call update service on save for existing entity" duration="207"/>
+    <testCase name="Component Tests FileStorage Management Update Component save Should call create service on save for new entity" duration="208"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\state-master\state-master-update.component.spec.ts">
+    <testCase name="Component Tests StateMaster Management Update Component save Should call update service on save for existing entity" duration="100"/>
+    <testCase name="Component Tests StateMaster Management Update Component save Should call create service on save for new entity" duration="55"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\im-timesheet\im-timesheet-update.component.spec.ts">
+    <testCase name="Component Tests ImTimesheet Management Update Component save Should call update service on save for existing entity" duration="154"/>
+    <testCase name="Component Tests ImTimesheet Management Update Component save Should call create service on save for new entity" duration="48"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\im-employee\im-employee-update.component.spec.ts">
+    <testCase name="Component Tests ImEmployee Management Update Component save Should call update service on save for existing entity" duration="83"/>
+    <testCase name="Component Tests ImEmployee Management Update Component save Should call create service on save for new entity" duration="66"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\im-projects\im-projects-update.component.spec.ts">
+    <testCase name="Component Tests ImProjects Management Update Component save Should call update service on save for existing entity" duration="91"/>
+    <testCase name="Component Tests ImProjects Management Update Component save Should call create service on save for new entity" duration="96"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-tag\project-tag-update.component.spec.ts">
+    <testCase name="Component Tests ProjectTag Management Update Component save Should call update service on save for existing entity" duration="70"/>
+    <testCase name="Component Tests ProjectTag Management Update Component save Should call create service on save for new entity" duration="71"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\department\department-update.component.spec.ts">
+    <testCase name="Component Tests Department Management Update Component save Should call update service on save for existing entity" duration="108"/>
+    <testCase name="Component Tests Department Management Update Component save Should call create service on save for new entity" duration="70"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\admin\configuration\configuration.service.spec.ts">
+    <testCase name="Service Tests Logs Service Service methods should call correct URL" duration="57"/>
+    <testCase name="Service Tests Logs Service Service methods should get the config" duration="24"/>
+    <testCase name="Service Tests Logs Service Service methods should get the env" duration="20"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\qnow-user\qnow-user-update.component.spec.ts">
+    <testCase name="Component Tests QnowUser Management Update Component save Should call update service on save for existing entity" duration="65"/>
+    <testCase name="Component Tests QnowUser Management Update Component save Should call create service on save for new entity" duration="61"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\skill-table\skill-table-update.component.spec.ts">
+    <testCase name="Component Tests SkillTable Management Update Component save Should call update service on save for existing entity" duration="78"/>
+    <testCase name="Component Tests SkillTable Management Update Component save Should call create service on save for new entity" duration="83"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\tag-type\tag-type-update.component.spec.ts">
+    <testCase name="Component Tests TagType Management Update Component save Should call update service on save for existing entity" duration="105"/>
+    <testCase name="Component Tests TagType Management Update Component save Should call create service on save for new entity" duration="50"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\company\company-update.component.spec.ts">
+    <testCase name="Component Tests Company Management Update Component save Should call update service on save for existing entity" duration="77"/>
+    <testCase name="Component Tests Company Management Update Component save Should call create service on save for new entity" duration="66"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\country\country-update.component.spec.ts">
+    <testCase name="Component Tests Country Management Update Component save Should call update service on save for existing entity" duration="101"/>
+    <testCase name="Component Tests Country Management Update Component save Should call create service on save for new entity" duration="59"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\core\user\user.service.spec.ts">
+    <testCase name="Service Tests User Service Service methods should call correct URL" duration="27"/>
+    <testCase name="Service Tests User Service Service methods should return User" duration="67"/>
+    <testCase name="Service Tests User Service Service methods should return Authorities" duration="22"/>
+    <testCase name="Service Tests User Service Service methods should propagate not found response" duration="32"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\skills\skills-update.component.spec.ts">
+    <testCase name="Component Tests Skills Management Update Component save Should call update service on save for existing entity" duration="84"/>
+    <testCase name="Component Tests Skills Management Update Component save Should call create service on save for new entity" duration="52"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\roles\roles-update.component.spec.ts">
+    <testCase name="Component Tests Roles Management Update Component save Should call update service on save for existing entity" duration="157"/>
+    <testCase name="Component Tests Roles Management Update Component save Should call create service on save for new entity" duration="77"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\city\city-update.component.spec.ts">
+    <testCase name="Component Tests City Management Update Component save Should call update service on save for existing entity" duration="235"/>
+    <testCase name="Component Tests City Management Update Component save Should call create service on save for new entity" duration="76"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\account\activate\activate.component.spec.ts">
+    <testCase name="Component Tests ActivateComponent calls activate.get with the key from params" duration="65"/>
+    <testCase name="Component Tests ActivateComponent should set set success to OK upon successful activation" duration="37"/>
+    <testCase name="Component Tests ActivateComponent should set set error to ERROR upon activation failure" duration="36"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-businessgoal-id\project-businessgoal-id-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests ProjectBusinessgoalId Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="348"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\opportunity-priority-id\opportunity-priority-id-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests OpportunityPriorityId Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="141"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-cost-center-id\project-cost-center-id-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests ProjectCostCenterId Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="119"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-initiative-id\project-initiative-id-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests ProjectInitiativeId Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="105"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-maingoal-id\project-maingoal-id-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests ProjectMaingoalId Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="95"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-allocation\project-allocation-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests ProjectAllocation Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="137"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-subgoal-id\project-subgoal-id-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests ProjectSubgoalId Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="125"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-status-id\project-status-id-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests ProjectStatusId Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="144"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-bucket-id\project-bucket-id-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests ProjectBucketId Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="70"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-vertical\project-vertical-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests ProjectVertical Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="81"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\backlog-practice\backlog-practice-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests BacklogPractice Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="115"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-board-id\project-board-id-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests ProjectBoardId Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="86"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\employee-status\employee-status-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests EmployeeStatus Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="72"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\skill-expertise\skill-expertise-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests SkillExpertise Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="79"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\account\password\password-strength-bar.component.spec.ts">
+    <testCase name="Component Tests PasswordStrengthBarComponent PasswordStrengthBarComponents should initialize with default values" duration="59"/>
+    <testCase name="Component Tests PasswordStrengthBarComponent PasswordStrengthBarComponents should increase strength upon password value change" duration="60"/>
+    <testCase name="Component Tests PasswordStrengthBarComponent PasswordStrengthBarComponents should change the color based on strength" duration="32"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-type-id\project-type-id-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests ProjectTypeId Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="275"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\skill-category\skill-category-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests SkillCategory Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="384"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-class\project-class-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests ProjectClass Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="76"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-theme\project-theme-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests ProjectTheme Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="71"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-roles\project-roles-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests ProjectRoles Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="101"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\group-members\group-members-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests GroupMembers Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="112"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\file-storage\file-storage-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests FileStorage Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="97"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\state-master\state-master-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests StateMaster Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="76"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\user-contact\user-contact-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests UserContact Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="64"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\im-timesheet\im-timesheet-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests ImTimesheet Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="85"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\im-projects\im-projects-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests ImProjects Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="70"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\im-employee\im-employee-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests ImEmployee Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="82"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-tag\project-tag-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests ProjectTag Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="111"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\skill-table\skill-table-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests SkillTable Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="109"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\department\department-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests Department Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="101"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\qnow-user\qnow-user-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests QnowUser Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="96"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\admin\audits\audits.service.spec.ts">
+    <testCase name="Service Tests Audits Service Service methods should call correct URL" duration="27"/>
+    <testCase name="Service Tests Audits Service Service methods should return Audits" duration="20"/>
+    <testCase name="Service Tests Audits Service Service methods should propagate not found response" duration="19"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\tag-type\tag-type-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests TagType Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="69"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\company\company-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests Company Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="64"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\country\country-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests Country Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="104"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\admin\user-management\user-management-detail.component.spec.ts">
+    <testCase name="Component Tests User Management Detail Component OnInit Should call load all on init" duration="58"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\admin\user-management\user-management-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests User Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="47"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\skills\skills-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests Skills Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="94"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\roles\roles-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests Roles Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="77"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\city\city-delete-dialog.component.spec.ts">
+    <testCase name="Component Tests City Management Delete Component confirmDelete Should call delete service on confirmDelete" duration="79"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-businessgoal-id\project-businessgoal-id.component.spec.ts">
+    <testCase name="Component Tests ProjectBusinessgoalId Management Component Should call load all on init" duration="108"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\opportunity-priority-id\opportunity-priority-id.component.spec.ts">
+    <testCase name="Component Tests OpportunityPriorityId Management Component Should call load all on init" duration="83"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-cost-center-id\project-cost-center-id.component.spec.ts">
+    <testCase name="Component Tests ProjectCostCenterId Management Component Should call load all on init" duration="79"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-initiative-id\project-initiative-id.component.spec.ts">
+    <testCase name="Component Tests ProjectInitiativeId Management Component Should call load all on init" duration="66"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-maingoal-id\project-maingoal-id.component.spec.ts">
+    <testCase name="Component Tests ProjectMaingoalId Management Component Should call load all on init" duration="103"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-allocation\project-allocation.component.spec.ts">
+    <testCase name="Component Tests ProjectAllocation Management Component Should call load all on init" duration="85"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-subgoal-id\project-subgoal-id.component.spec.ts">
+    <testCase name="Component Tests ProjectSubgoalId Management Component Should call load all on init" duration="74"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-status-id\project-status-id.component.spec.ts">
+    <testCase name="Component Tests ProjectStatusId Management Component Should call load all on init" duration="84"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-bucket-id\project-bucket-id.component.spec.ts">
+    <testCase name="Component Tests ProjectBucketId Management Component Should call load all on init" duration="66"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\admin\metrics\metrics.service.spec.ts">
+    <testCase name="Service Tests Logs Service Service methods should call correct URL" duration="32"/>
+    <testCase name="Service Tests Logs Service Service methods should return Metrics" duration="22"/>
+    <testCase name="Service Tests Logs Service Service methods should return Thread Dump" duration="23"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-vertical\project-vertical.component.spec.ts">
+    <testCase name="Component Tests ProjectVertical Management Component Should call load all on init" duration="76"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\backlog-practice\backlog-practice.component.spec.ts">
+    <testCase name="Component Tests BacklogPractice Management Component Should call load all on init" duration="94"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-board-id\project-board-id.component.spec.ts">
+    <testCase name="Component Tests ProjectBoardId Management Component Should call load all on init" duration="93"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\employee-status\employee-status.component.spec.ts">
+    <testCase name="Component Tests EmployeeStatus Management Component Should call load all on init" duration="75"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\skill-expertise\skill-expertise.component.spec.ts">
+    <testCase name="Component Tests SkillExpertise Management Component Should call load all on init" duration="103"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-type-id\project-type-id.component.spec.ts">
+    <testCase name="Component Tests ProjectTypeId Management Component Should call load all on init" duration="62"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\skill-category\skill-category.component.spec.ts">
+    <testCase name="Component Tests SkillCategory Management Component Should call load all on init" duration="71"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-class\project-class.component.spec.ts">
+    <testCase name="Component Tests ProjectClass Management Component Should call load all on init" duration="85"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-theme\project-theme.component.spec.ts">
+    <testCase name="Component Tests ProjectTheme Management Component Should call load all on init" duration="68"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\group-members\group-members.component.spec.ts">
+    <testCase name="Component Tests GroupMembers Management Component Should call load all on init" duration="67"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-roles\project-roles.component.spec.ts">
+    <testCase name="Component Tests ProjectRoles Management Component Should call load all on init" duration="96"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\admin\metrics\metrics.component.spec.ts">
+    <testCase name="Component Tests JhiMetricsMonitoringComponent refresh should call refresh on init" duration="44"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\user-contact\user-contact.component.spec.ts">
+    <testCase name="Component Tests UserContact Management Component Should call load all on init" duration="67"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\state-master\state-master.component.spec.ts">
+    <testCase name="Component Tests StateMaster Management Component Should call load all on init" duration="65"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\im-timesheet\im-timesheet.component.spec.ts">
+    <testCase name="Component Tests ImTimesheet Management Component Should call load all on init" duration="81"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\file-storage\file-storage.component.spec.ts">
+    <testCase name="Component Tests FileStorage Management Component Should call load all on init" duration="114"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\skill-table\skill-table.component.spec.ts">
+    <testCase name="Component Tests SkillTable Management Component Should call load all on init" duration="176"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-tag\project-tag.component.spec.ts">
+    <testCase name="Component Tests ProjectTag Management Component Should call load all on init" duration="104"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\im-employee\im-employee.component.spec.ts">
+    <testCase name="Component Tests ImEmployee Management Component Should call load all on init" duration="214"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\im-projects\im-projects.component.spec.ts">
+    <testCase name="Component Tests ImProjects Management Component Should call load all on init" duration="167"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\department\department.component.spec.ts">
+    <testCase name="Component Tests Department Management Component Should call load all on init" duration="139"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\qnow-user\qnow-user.component.spec.ts">
+    <testCase name="Component Tests QnowUser Management Component Should call load all on init" duration="152"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\tag-type\tag-type.component.spec.ts">
+    <testCase name="Component Tests TagType Management Component Should call load all on init" duration="131"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\company\company.component.spec.ts">
+    <testCase name="Component Tests Company Management Component Should call load all on init" duration="161"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\country\country.component.spec.ts">
+    <testCase name="Component Tests Country Management Component Should call load all on init" duration="122"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\skills\skills.component.spec.ts">
+    <testCase name="Component Tests Skills Management Component Should call load all on init" duration="97"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\roles\roles.component.spec.ts">
+    <testCase name="Component Tests Roles Management Component Should call load all on init" duration="123"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\city\city.component.spec.ts">
+    <testCase name="Component Tests City Management Component Should call load all on init" duration="105"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-businessgoal-id\project-businessgoal-id-detail.component.spec.ts">
+    <testCase name="Component Tests ProjectBusinessgoalId Management Detail Component OnInit Should call load all on init" duration="160"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\opportunity-priority-id\opportunity-priority-id-detail.component.spec.ts">
+    <testCase name="Component Tests OpportunityPriorityId Management Detail Component OnInit Should call load all on init" duration="113"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-cost-center-id\project-cost-center-id-detail.component.spec.ts">
+    <testCase name="Component Tests ProjectCostCenterId Management Detail Component OnInit Should call load all on init" duration="80"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-initiative-id\project-initiative-id-detail.component.spec.ts">
+    <testCase name="Component Tests ProjectInitiativeId Management Detail Component OnInit Should call load all on init" duration="141"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-maingoal-id\project-maingoal-id-detail.component.spec.ts">
+    <testCase name="Component Tests ProjectMaingoalId Management Detail Component OnInit Should call load all on init" duration="92"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-allocation\project-allocation-detail.component.spec.ts">
+    <testCase name="Component Tests ProjectAllocation Management Detail Component OnInit Should call load all on init" duration="133"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-subgoal-id\project-subgoal-id-detail.component.spec.ts">
+    <testCase name="Component Tests ProjectSubgoalId Management Detail Component OnInit Should call load all on init" duration="113"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-bucket-id\project-bucket-id-detail.component.spec.ts">
+    <testCase name="Component Tests ProjectBucketId Management Detail Component OnInit Should call load all on init" duration="158"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-status-id\project-status-id-detail.component.spec.ts">
+    <testCase name="Component Tests ProjectStatusId Management Detail Component OnInit Should call load all on init" duration="112"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-vertical\project-vertical-detail.component.spec.ts">
+    <testCase name="Component Tests ProjectVertical Management Detail Component OnInit Should call load all on init" duration="487"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\backlog-practice\backlog-practice-detail.component.spec.ts">
+    <testCase name="Component Tests BacklogPractice Management Detail Component OnInit Should call load all on init" duration="107"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\admin\logs\logs.service.spec.ts">
+    <testCase name="Service Tests Logs Service Service methods should call correct URL" duration="60"/>
+    <testCase name="Service Tests Logs Service Service methods should change log level" duration="30"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-board-id\project-board-id-detail.component.spec.ts">
+    <testCase name="Component Tests ProjectBoardId Management Detail Component OnInit Should call load all on init" duration="107"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\employee-status\employee-status-detail.component.spec.ts">
+    <testCase name="Component Tests EmployeeStatus Management Detail Component OnInit Should call load all on init" duration="118"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\skill-expertise\skill-expertise-detail.component.spec.ts">
+    <testCase name="Component Tests SkillExpertise Management Detail Component OnInit Should call load all on init" duration="210"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-type-id\project-type-id-detail.component.spec.ts">
+    <testCase name="Component Tests ProjectTypeId Management Detail Component OnInit Should call load all on init" duration="85"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\skill-category\skill-category-detail.component.spec.ts">
+    <testCase name="Component Tests SkillCategory Management Detail Component OnInit Should call load all on init" duration="154"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-theme\project-theme-detail.component.spec.ts">
+    <testCase name="Component Tests ProjectTheme Management Detail Component OnInit Should call load all on init" duration="150"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\group-members\group-members-detail.component.spec.ts">
+    <testCase name="Component Tests GroupMembers Management Detail Component OnInit Should call load all on init" duration="387"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-class\project-class-detail.component.spec.ts">
+    <testCase name="Component Tests ProjectClass Management Detail Component OnInit Should call load all on init" duration="125"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-roles\project-roles-detail.component.spec.ts">
+    <testCase name="Component Tests ProjectRoles Management Detail Component OnInit Should call load all on init" duration="105"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\state-master\state-master-detail.component.spec.ts">
+    <testCase name="Component Tests StateMaster Management Detail Component OnInit Should call load all on init" duration="86"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\user-contact\user-contact-detail.component.spec.ts">
+    <testCase name="Component Tests UserContact Management Detail Component OnInit Should call load all on init" duration="116"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\im-timesheet\im-timesheet-detail.component.spec.ts">
+    <testCase name="Component Tests ImTimesheet Management Detail Component OnInit Should call load all on init" duration="113"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\file-storage\file-storage-detail.component.spec.ts">
+    <testCase name="Component Tests FileStorage Management Detail Component OnInit Should call load all on init" duration="107"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\project-tag\project-tag-detail.component.spec.ts">
+    <testCase name="Component Tests ProjectTag Management Detail Component OnInit Should call load all on init" duration="114"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\im-projects\im-projects-detail.component.spec.ts">
+    <testCase name="Component Tests ImProjects Management Detail Component OnInit Should call load all on init" duration="114"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\skill-table\skill-table-detail.component.spec.ts">
+    <testCase name="Component Tests SkillTable Management Detail Component OnInit Should call load all on init" duration="118"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\im-employee\im-employee-detail.component.spec.ts">
+    <testCase name="Component Tests ImEmployee Management Detail Component OnInit Should call load all on init" duration="109"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\department\department-detail.component.spec.ts">
+    <testCase name="Component Tests Department Management Detail Component OnInit Should call load all on init" duration="69"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\qnow-user\qnow-user-detail.component.spec.ts">
+    <testCase name="Component Tests QnowUser Management Detail Component OnInit Should call load all on init" duration="143"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\tag-type\tag-type-detail.component.spec.ts">
+    <testCase name="Component Tests TagType Management Detail Component OnInit Should call load all on init" duration="91"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\country\country-detail.component.spec.ts">
+    <testCase name="Component Tests Country Management Detail Component OnInit Should call load all on init" duration="110"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\company\company-detail.component.spec.ts">
+    <testCase name="Component Tests Company Management Detail Component OnInit Should call load all on init" duration="101"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\skills\skills-detail.component.spec.ts">
+    <testCase name="Component Tests Skills Management Detail Component OnInit Should call load all on init" duration="165"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\roles\roles-detail.component.spec.ts">
+    <testCase name="Component Tests Roles Management Detail Component OnInit Should call load all on init" duration="120"/>
+  </file>
+  <file path="F:\25june\PMQJava\src\test\javascript\spec\app\entities\city\city-detail.component.spec.ts">
+    <testCase name="Component Tests City Management Detail Component OnInit Should call load all on init" duration="83"/>
+  </file>
+</testExecutions>

@@ -1,10 +1,11 @@
 package com.qnowapp.web.rest;
 
 import com.qnowapp.domain.FileStorage;
-
 import com.qnowapp.service.FileStorageService;
 import com.qnowapp.web.rest.errors.BadRequestAlertException;
 import com.qnowapp.service.dto.FileStorageCriteria;
+import com.qnowapp.service.FileStorageQueryService;
+
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -36,11 +37,11 @@ public class FileStorageResource {
 
     private final FileStorageService fileStorageService;
 
+    private final FileStorageQueryService fileStorageQueryService;
 
-
-    public FileStorageResource(FileStorageService fileStorageService) {
+    public FileStorageResource(FileStorageService fileStorageService, FileStorageQueryService fileStorageQueryService) {
         this.fileStorageService = fileStorageService;
-       
+        this.fileStorageQueryService = fileStorageQueryService;
     }
 
     /**
@@ -93,13 +94,24 @@ public class FileStorageResource {
      */
     @CrossOrigin
     @GetMapping("/file-storages")
-    public ResponseEntity<List<FileStorage>> getAllFileStorages( ) {
-        log.debug("REST request to get FileStorages by criteria: {}");
-        List<FileStorage> entityList = fileStorageService.findAll();
+    public ResponseEntity<List<FileStorage>> getAllFileStorages(FileStorageCriteria criteria) {
+        log.debug("REST request to get FileStorages by criteria: {}", criteria);
+        List<FileStorage> entityList = fileStorageQueryService.findByCriteria(criteria);
         return ResponseEntity.ok().body(entityList);
     }
 
-
+    /**
+    * {@code GET  /file-storages/count} : count all the fileStorages.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping("/file-storages/count")
+    public ResponseEntity<Long> countFileStorages(FileStorageCriteria criteria) {
+        log.debug("REST request to count FileStorages by criteria: {}", criteria);
+        return ResponseEntity.ok().body(fileStorageQueryService.countByCriteria(criteria));
+    }
 
     /**
      * {@code GET  /file-storages/:id} : get the "id" fileStorage.

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity ImProjects.
+    -->
+    <changeSet id="20190531134219-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="project_initiative_id_id"
+                                 baseTableName="im_projects"
+                                 constraintName="fk_im_projects_project_initiative_id_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="project_initiative_id"/>
+
+        <addForeignKeyConstraint baseColumnNames="project_businessgoal_id_id"
+                                 baseTableName="im_projects"
+                                 constraintName="fk_im_projects_project_businessgoal_id_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="project_businessgoal_id"/>
+
+        <addForeignKeyConstraint baseColumnNames="project_subgoal_id_id"
+                                 baseTableName="im_projects"
+                                 constraintName="fk_im_projects_project_subgoal_id_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="project_subgoal_id"/>
+
+        <addForeignKeyConstraint baseColumnNames="project_maingoal_id_id"
+                                 baseTableName="im_projects"
+                                 constraintName="fk_im_projects_project_maingoal_id_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="project_maingoal_id"/>
+
+        <addForeignKeyConstraint baseColumnNames="project_bucket_id_id"
+                                 baseTableName="im_projects"
+                                 constraintName="fk_im_projects_project_bucket_id_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="project_bucket_id"/>
+
+        <addForeignKeyConstraint baseColumnNames="project_cost_center_id_id"
+                                 baseTableName="im_projects"
+                                 constraintName="fk_im_projects_project_cost_center_id_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="project_cost_center_id"/>
+
+        <addForeignKeyConstraint baseColumnNames="opportunity_priority_id_id"
+                                 baseTableName="im_projects"
+                                 constraintName="fk_im_projects_opportunity_priority_id_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="opportunity_priority_id"/>
+
+        <addForeignKeyConstraint baseColumnNames="backlog_practice_id"
+                                 baseTableName="im_projects"
+                                 constraintName="fk_im_projects_backlog_practice_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="backlog_practice"/>
+
+        <addForeignKeyConstraint baseColumnNames="project_theme_id"
+                                 baseTableName="im_projects"
+                                 constraintName="fk_im_projects_project_theme_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="project_theme"/>
+
+        <addForeignKeyConstraint baseColumnNames="project_class_id"
+                                 baseTableName="im_projects"
+                                 constraintName="fk_im_projects_project_class_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="project_class"/>
+
+        <addForeignKeyConstraint baseColumnNames="project_vertical_id"
+                                 baseTableName="im_projects"
+                                 constraintName="fk_im_projects_project_vertical_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="project_vertical"/>
+
+        <addForeignKeyConstraint baseColumnNames="project_board_id_id"
+                                 baseTableName="im_projects"
+                                 constraintName="fk_im_projects_project_board_id_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="project_board_id"/>
+
+        <addForeignKeyConstraint baseColumnNames="project_board2id_id"
+                                 baseTableName="im_projects"
+                                 constraintName="fk_im_projects_project_board2id_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="project_board_id"/>
+
+        <addForeignKeyConstraint baseColumnNames="project_status_id_id"
+                                 baseTableName="im_projects"
+                                 constraintName="fk_im_projects_project_status_id_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="project_status_id"/>
+
+        <addForeignKeyConstraint baseColumnNames="project_type_id_id"
+                                 baseTableName="im_projects"
+                                 constraintName="fk_im_projects_project_type_id_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="project_type_id"/>
+
+        <addForeignKeyConstraint baseColumnNames="project_lead_id_id"
+                                 baseTableName="im_projects"
+                                 constraintName="fk_im_projects_project_lead_id_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="im_employee"/>
+
+        <addForeignKeyConstraint baseColumnNames="parent_id_id"
+                                 baseTableName="im_projects"
+                                 constraintName="fk_im_projects_parent_id_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="im_projects"/>
+
+    </changeSet>
+</databaseChangeLog>

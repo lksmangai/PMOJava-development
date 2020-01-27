@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProjectBusinessgoalIdResource.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.web.rest</a> &gt; <span class="el_source">ProjectBusinessgoalIdResource.java</span></div><h1>ProjectBusinessgoalIdResource.java</h1><pre class="source lang-java linenums">package com.qnowapp.web.rest;
+
+import com.qnowapp.domain.ProjectBusinessgoalId;
+import com.qnowapp.domain.ProjectInitiativeId;
+import com.qnowapp.repository.ProjectBusinessgoalIdRepository;
+import com.qnowapp.service.ProjectBusinessgoalIdQueryService;
+import com.qnowapp.service.ProjectBusinessgoalIdService;
+import com.qnowapp.service.dto.ProjectBusinessgoalIdCriteria;
+import com.qnowapp.web.rest.errors.BadRequestAlertException;
+
+import io.github.jhipster.web.util.HeaderUtil;
+import io.github.jhipster.web.util.ResponseUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * REST controller for managing {@link com.qnowapp.domain.ProjectBusinessgoalId}.
+ */
+@CrossOrigin(origins = &quot;*&quot;, allowedHeaders = &quot;*&quot;)
+@RestController
+@RequestMapping(&quot;/api&quot;)
+public class ProjectBusinessgoalIdResource {
+
+<span class="nc" id="L36">    private final Logger log = LoggerFactory.getLogger(ProjectBusinessgoalIdResource.class);</span>
+
+    private static final String ENTITY_NAME = &quot;projectBusinessgoalId&quot;;
+
+    @Value(&quot;${jhipster.clientApp.name}&quot;)
+    private String applicationName;
+    @Autowired
+   ProjectBusinessgoalIdRepository projectBusinessgoalIdRepository;
+<span class="nc" id="L44">    private static Boolean fromTesting = true;</span>
+
+
+    
+    private final ProjectBusinessgoalIdService projectBusinessgoalIdService;
+
+
+    private final ProjectBusinessgoalIdQueryService projectBusinessgoalIdQueryService;
+
+<span class="nc" id="L53">    public ProjectBusinessgoalIdResource(ProjectBusinessgoalIdService projectBusinessgoalIdService, ProjectBusinessgoalIdQueryService projectBusinessgoalIdQueryService) {</span>
+<span class="nc" id="L54">        this.projectBusinessgoalIdService = projectBusinessgoalIdService;</span>
+<span class="nc" id="L55">        this.projectBusinessgoalIdQueryService = projectBusinessgoalIdQueryService;</span>
+       
+<span class="nc" id="L57">    }</span>
+   
+    public static void setFromTesting(Boolean bState) {
+<span class="nc" id="L60">        fromTesting = bState;</span>
+<span class="nc" id="L61">    }</span>
+
+    /**
+     * {@code POST  /project-businessgoal-ids} : Create a new projectBusinessgoalId.
+     *
+     * @param projectBusinessgoalId the projectBusinessgoalId to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new projectBusinessgoalId, or with status {@code 400 (Bad Request)} if the projectBusinessgoalId has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @CrossOrigin
+    @PostMapping(&quot;/project-businessgoal-ids&quot;)
+    public ResponseEntity&lt;ProjectBusinessgoalId&gt; createProjectBusinessgoalId(@RequestBody ProjectBusinessgoalId projectBusinessgoalId) throws URISyntaxException {
+<span class="nc" id="L73">        log.debug(&quot;REST request to save ProjectBusinessgoalId : {}&quot;, projectBusinessgoalId);</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        if (projectBusinessgoalId.getId() != null) {</span>
+<span class="nc" id="L75">            throw new BadRequestAlertException(&quot;A new projectBusinessgoalId cannot already have an ID&quot;, ENTITY_NAME, &quot;idexists&quot;);</span>
+        }else {
+  
+<span class="nc" id="L78">            ProjectBusinessgoalId result = projectBusinessgoalIdRepository.save(projectBusinessgoalId);</span>
+<span class="nc" id="L79">            ResponseEntity&lt;ProjectBusinessgoalId&gt; a = ResponseEntity.created(new URI(&quot;/api/project-initiative-ids/&quot; + result.getId()))</span>
+<span class="nc" id="L80">                    .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))</span>
+<span class="nc" id="L81">                    .body(result);</span>
+
+<span class="nc bnc" id="L83" title="All 2 branches missed.">            if (fromTesting == false) {</span>
+<span class="nc" id="L84">                System.out.println(projectBusinessgoalId.getName());</span>
+<span class="nc" id="L85">                String csvFile1 = &quot;src\\main\\resources\\businessgoal.csv&quot;;</span>
+<span class="nc" id="L86">                BufferedReader br = null;</span>
+<span class="nc" id="L87">                String line = &quot;&quot;;</span>
+<span class="nc" id="L88">                String cvsSplitBy = &quot;;&quot;;</span>
+
+                try {
+<span class="nc" id="L91">                    br = new BufferedReader(new FileReader(csvFile1));</span>
+<span class="nc" id="L92">                    int count = 0;</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">                    while ((line = br.readLine()) != null) {</span>
+<span class="nc" id="L94">                        count++;</span>
+<span class="nc" id="L95">                        System.out.println(+count);</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">                        if (count == 1)</span>
+<span class="nc" id="L97">                            continue;</span>
+<span class="nc" id="L98">                        String[] country = line.split(cvsSplitBy);</span>
+                        try {
+<span class="nc bnc" id="L100" title="All 2 branches missed.">                            if (country.length &gt; 3 ) {</span>
+<span class="nc" id="L101">                                System.out.println(&quot;1&quot;);</span>
+<span class="nc" id="L102">                                projectBusinessgoalId.setId(null);</span>
+<span class="nc" id="L103">                                projectBusinessgoalId.setCode(country[0]);</span>
+<span class="nc" id="L104">                                System.out.println(&quot;2&quot;);</span>
+<span class="nc" id="L105">                                projectBusinessgoalId.setName(country[1]);</span>
+<span class="nc" id="L106">                                System.out.println(&quot;3&quot;);</span>
+<span class="nc" id="L107">                                projectBusinessgoalId.setDescription(country[2]);</span>
+<span class="nc" id="L108">                                ProjectBusinessgoalId result2 = projectBusinessgoalIdRepository.save(projectBusinessgoalId);    </span>
+<span class="nc" id="L109">                                System.out.println(result2.getId());</span>
+<span class="nc" id="L110">                                System.out.println(projectBusinessgoalId + &quot;new project created&quot;);</span>
+                            }
+<span class="nc" id="L112">                        } catch (Exception e) {</span>
+<span class="nc" id="L113">                        }</span>
+<span class="nc" id="L114">                    }</span>
+<span class="nc" id="L115">                } catch (Exception e) {</span>
+                    // TODO: handle exception
+                } finally {
+<span class="nc bnc" id="L118" title="All 2 branches missed.">                    if (br != null) {</span>
+                        try {
+<span class="nc" id="L120">                            br.close();</span>
+<span class="nc" id="L121">                        } catch (Exception e) {</span>
+<span class="nc" id="L122">                            System.out.println(e);</span>
+<span class="nc" id="L123">                        }</span>
+                    
+                    }
+                }
+            }
+<span class="nc" id="L128">        return a;</span>
+        }
+                
+        
+
+
+    }
+
+    /**
+     * {@code PUT  /project-businessgoal-ids} : Updates an existing projectBusinessgoalId.
+     *
+     * @param projectBusinessgoalId the projectBusinessgoalId to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated projectBusinessgoalId,
+     * or with status {@code 400 (Bad Request)} if the projectBusinessgoalId is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the projectBusinessgoalId couldn't be updated.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @CrossOrigin
+    @PutMapping(&quot;/project-businessgoal-ids&quot;)
+    public ResponseEntity&lt;ProjectBusinessgoalId&gt; updateProjectBusinessgoalId(@RequestBody ProjectBusinessgoalId projectBusinessgoalId) throws URISyntaxException {
+<span class="nc" id="L148">        log.debug(&quot;REST request to update ProjectBusinessgoalId : {}&quot;, projectBusinessgoalId);</span>
+<span class="nc bnc" id="L149" title="All 2 branches missed.">        if (projectBusinessgoalId.getId() == null) {</span>
+<span class="nc" id="L150">            throw new BadRequestAlertException(&quot;Invalid id&quot;, ENTITY_NAME, &quot;idnull&quot;);</span>
+        }
+<span class="nc" id="L152">        ProjectBusinessgoalId result = projectBusinessgoalIdService.save(projectBusinessgoalId);</span>
+<span class="nc" id="L153">        return ResponseEntity.ok()</span>
+<span class="nc" id="L154">            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, projectBusinessgoalId.getId().toString()))</span>
+<span class="nc" id="L155">            .body(result);</span>
+    }
+
+    /**
+     * {@code GET  /project-businessgoal-ids} : get all the projectBusinessgoalIds.
+     *
+     * @param criteria the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of projectBusinessgoalIds in body.
+     */
+    @CrossOrigin
+    @GetMapping(&quot;/project-businessgoal-ids&quot;)
+    public ResponseEntity&lt;List&lt;ProjectBusinessgoalId&gt;&gt; getAllProjectBusinessgoalIds(ProjectBusinessgoalIdCriteria criteria) {
+<span class="nc" id="L167">        log.debug(&quot;REST request to get ProjectBusinessgoalIds by criteria: {}&quot;, criteria);</span>
+<span class="nc" id="L168">        List&lt;ProjectBusinessgoalId&gt; entityList = projectBusinessgoalIdQueryService.findByCriteria(criteria);</span>
+<span class="nc" id="L169">        return ResponseEntity.ok().body(entityList);</span>
+    }
+
+    /**
+    * {@code GET  /project-businessgoal-ids/count} : count all the projectBusinessgoalIds.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping(&quot;/project-businessgoal-ids/count&quot;)
+    public ResponseEntity&lt;Long&gt; countProjectBusinessgoalIds(ProjectBusinessgoalIdCriteria criteria) {
+<span class="nc" id="L181">        log.debug(&quot;REST request to count ProjectBusinessgoalIds by criteria: {}&quot;, criteria);</span>
+<span class="nc" id="L182">        return ResponseEntity.ok().body(projectBusinessgoalIdQueryService.countByCriteria(criteria));</span>
+    }
+
+    /**
+     * {@code GET  /project-businessgoal-ids/:id} : get the &quot;id&quot; projectBusinessgoalId.
+     *
+     * @param id the id of the projectBusinessgoalId to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the projectBusinessgoalId, or with status {@code 404 (Not Found)}.
+     */
+    @CrossOrigin
+    @GetMapping(&quot;/project-businessgoal-ids/{id}&quot;)
+    public ResponseEntity&lt;ProjectBusinessgoalId&gt; getProjectBusinessgoalId(@PathVariable Long id) {
+<span class="nc" id="L194">        log.debug(&quot;REST request to get ProjectBusinessgoalId : {}&quot;, id);</span>
+<span class="nc" id="L195">        Optional&lt;ProjectBusinessgoalId&gt; projectBusinessgoalId = projectBusinessgoalIdService.findOne(id);</span>
+<span class="nc" id="L196">        return ResponseUtil.wrapOrNotFound(projectBusinessgoalId);</span>
+    }
+
+    /**
+     * {@code DELETE  /project-businessgoal-ids/:id} : delete the &quot;id&quot; projectBusinessgoalId.
+     *
+     * @param id the id of the projectBusinessgoalId to delete.
+     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
+     */
+    @CrossOrigin
+    @DeleteMapping(&quot;/project-businessgoal-ids/{id}&quot;)
+    public ResponseEntity&lt;Void&gt; deleteProjectBusinessgoalId(@PathVariable Long id) {
+<span class="nc" id="L208">        log.debug(&quot;REST request to delete ProjectBusinessgoalId : {}&quot;, id);</span>
+<span class="nc" id="L209">        projectBusinessgoalIdService.delete(id);</span>
+<span class="nc" id="L210">        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

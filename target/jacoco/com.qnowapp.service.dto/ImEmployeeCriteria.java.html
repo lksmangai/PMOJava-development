@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImEmployeeCriteria.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.service.dto</a> &gt; <span class="el_source">ImEmployeeCriteria.java</span></div><h1>ImEmployeeCriteria.java</h1><pre class="source lang-java linenums">package com.qnowapp.service.dto;
+
+import java.io.Serializable;
+import java.util.Objects;
+import io.github.jhipster.service.Criteria;
+import io.github.jhipster.service.filter.BooleanFilter;
+import io.github.jhipster.service.filter.DoubleFilter;
+import io.github.jhipster.service.filter.Filter;
+import io.github.jhipster.service.filter.FloatFilter;
+import io.github.jhipster.service.filter.IntegerFilter;
+import io.github.jhipster.service.filter.LongFilter;
+import io.github.jhipster.service.filter.StringFilter;
+import io.github.jhipster.service.filter.BigDecimalFilter;
+import io.github.jhipster.service.filter.ZonedDateTimeFilter;
+
+/**
+ * Criteria class for the {@link com.qnowapp.domain.ImEmployee} entity. This class is used
+ * in {@link com.qnowapp.web.rest.ImEmployeeResource} to receive all the possible filtering options from
+ * the Http GET request parameters.
+ * For example the following could be a valid request:
+ * {@code /im-employees?id.greaterThan=5&amp;attr1.contains=something&amp;attr2.specified=false}
+ * As Spring is unable to properly convert the types, unless specific {@link Filter} class are used, we need to use
+ * fix type specific filters.
+ */
+public class ImEmployeeCriteria implements Serializable, Criteria {
+
+    private static final long serialVersionUID = 1L;
+
+    private LongFilter id;
+
+    private StringFilter jobTitle;
+
+    private StringFilter jobDescription;
+
+    private IntegerFilter availability;
+
+    private StringFilter ssNumber;
+
+    private BigDecimalFilter salary;
+
+    private IntegerFilter socialSecurity;
+
+    private IntegerFilter insurance;
+
+    private IntegerFilter otherCosts;
+
+    private StringFilter currency;
+
+    private StringFilter dependantP;
+
+    private StringFilter onlyJobP;
+
+    private StringFilter marriedP;
+
+    private StringFilter headOfHouseholdP;
+
+    private ZonedDateTimeFilter birthdate;
+
+    private BigDecimalFilter hourlyCost;
+
+    private LongFilter qnowUserId;
+
+    private LongFilter employeeStatusId;
+
+    private LongFilter departmentIdId;
+
+    private LongFilter supervisorIdId;
+
+    private LongFilter userContactId;
+
+<span class="nc" id="L71">    public ImEmployeeCriteria(){</span>
+<span class="nc" id="L72">    }</span>
+
+<span class="nc" id="L74">    public ImEmployeeCriteria(ImEmployeeCriteria other){</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">        this.id = other.id == null ? null : other.id.copy();</span>
+<span class="nc bnc" id="L76" title="All 2 branches missed.">        this.jobTitle = other.jobTitle == null ? null : other.jobTitle.copy();</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">        this.jobDescription = other.jobDescription == null ? null : other.jobDescription.copy();</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">        this.availability = other.availability == null ? null : other.availability.copy();</span>
+<span class="nc bnc" id="L79" title="All 2 branches missed.">        this.ssNumber = other.ssNumber == null ? null : other.ssNumber.copy();</span>
+<span class="nc bnc" id="L80" title="All 2 branches missed.">        this.salary = other.salary == null ? null : other.salary.copy();</span>
+<span class="nc bnc" id="L81" title="All 2 branches missed.">        this.socialSecurity = other.socialSecurity == null ? null : other.socialSecurity.copy();</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">        this.insurance = other.insurance == null ? null : other.insurance.copy();</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">        this.otherCosts = other.otherCosts == null ? null : other.otherCosts.copy();</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">        this.currency = other.currency == null ? null : other.currency.copy();</span>
+<span class="nc bnc" id="L85" title="All 2 branches missed.">        this.dependantP = other.dependantP == null ? null : other.dependantP.copy();</span>
+<span class="nc bnc" id="L86" title="All 2 branches missed.">        this.onlyJobP = other.onlyJobP == null ? null : other.onlyJobP.copy();</span>
+<span class="nc bnc" id="L87" title="All 2 branches missed.">        this.marriedP = other.marriedP == null ? null : other.marriedP.copy();</span>
+<span class="nc bnc" id="L88" title="All 2 branches missed.">        this.headOfHouseholdP = other.headOfHouseholdP == null ? null : other.headOfHouseholdP.copy();</span>
+<span class="nc bnc" id="L89" title="All 2 branches missed.">        this.birthdate = other.birthdate == null ? null : other.birthdate.copy();</span>
+<span class="nc bnc" id="L90" title="All 2 branches missed.">        this.hourlyCost = other.hourlyCost == null ? null : other.hourlyCost.copy();</span>
+<span class="nc bnc" id="L91" title="All 2 branches missed.">        this.qnowUserId = other.qnowUserId == null ? null : other.qnowUserId.copy();</span>
+<span class="nc bnc" id="L92" title="All 2 branches missed.">        this.employeeStatusId = other.employeeStatusId == null ? null : other.employeeStatusId.copy();</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">        this.departmentIdId = other.departmentIdId == null ? null : other.departmentIdId.copy();</span>
+<span class="nc bnc" id="L94" title="All 2 branches missed.">        this.supervisorIdId = other.supervisorIdId == null ? null : other.supervisorIdId.copy();</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">        this.userContactId = other.userContactId == null ? null : other.userContactId.copy();</span>
+<span class="nc" id="L96">    }</span>
+
+    @Override
+    public ImEmployeeCriteria copy() {
+<span class="nc" id="L100">        return new ImEmployeeCriteria(this);</span>
+    }
+
+    public LongFilter getId() {
+<span class="nc" id="L104">        return id;</span>
+    }
+
+    public void setId(LongFilter id) {
+<span class="nc" id="L108">        this.id = id;</span>
+<span class="nc" id="L109">    }</span>
+
+    public StringFilter getJobTitle() {
+<span class="nc" id="L112">        return jobTitle;</span>
+    }
+
+    public void setJobTitle(StringFilter jobTitle) {
+<span class="nc" id="L116">        this.jobTitle = jobTitle;</span>
+<span class="nc" id="L117">    }</span>
+
+    public StringFilter getJobDescription() {
+<span class="nc" id="L120">        return jobDescription;</span>
+    }
+
+    public void setJobDescription(StringFilter jobDescription) {
+<span class="nc" id="L124">        this.jobDescription = jobDescription;</span>
+<span class="nc" id="L125">    }</span>
+
+    public IntegerFilter getAvailability() {
+<span class="nc" id="L128">        return availability;</span>
+    }
+
+    public void setAvailability(IntegerFilter availability) {
+<span class="nc" id="L132">        this.availability = availability;</span>
+<span class="nc" id="L133">    }</span>
+
+    public StringFilter getSsNumber() {
+<span class="nc" id="L136">        return ssNumber;</span>
+    }
+
+    public void setSsNumber(StringFilter ssNumber) {
+<span class="nc" id="L140">        this.ssNumber = ssNumber;</span>
+<span class="nc" id="L141">    }</span>
+
+    public BigDecimalFilter getSalary() {
+<span class="nc" id="L144">        return salary;</span>
+    }
+
+    public void setSalary(BigDecimalFilter salary) {
+<span class="nc" id="L148">        this.salary = salary;</span>
+<span class="nc" id="L149">    }</span>
+
+    public IntegerFilter getSocialSecurity() {
+<span class="nc" id="L152">        return socialSecurity;</span>
+    }
+
+    public void setSocialSecurity(IntegerFilter socialSecurity) {
+<span class="nc" id="L156">        this.socialSecurity = socialSecurity;</span>
+<span class="nc" id="L157">    }</span>
+
+    public IntegerFilter getInsurance() {
+<span class="nc" id="L160">        return insurance;</span>
+    }
+
+    public void setInsurance(IntegerFilter insurance) {
+<span class="nc" id="L164">        this.insurance = insurance;</span>
+<span class="nc" id="L165">    }</span>
+
+    public IntegerFilter getOtherCosts() {
+<span class="nc" id="L168">        return otherCosts;</span>
+    }
+
+    public void setOtherCosts(IntegerFilter otherCosts) {
+<span class="nc" id="L172">        this.otherCosts = otherCosts;</span>
+<span class="nc" id="L173">    }</span>
+
+    public StringFilter getCurrency() {
+<span class="nc" id="L176">        return currency;</span>
+    }
+
+    public void setCurrency(StringFilter currency) {
+<span class="nc" id="L180">        this.currency = currency;</span>
+<span class="nc" id="L181">    }</span>
+
+    public StringFilter getDependantP() {
+<span class="nc" id="L184">        return dependantP;</span>
+    }
+
+    public void setDependantP(StringFilter dependantP) {
+<span class="nc" id="L188">        this.dependantP = dependantP;</span>
+<span class="nc" id="L189">    }</span>
+
+    public StringFilter getOnlyJobP() {
+<span class="nc" id="L192">        return onlyJobP;</span>
+    }
+
+    public void setOnlyJobP(StringFilter onlyJobP) {
+<span class="nc" id="L196">        this.onlyJobP = onlyJobP;</span>
+<span class="nc" id="L197">    }</span>
+
+    public StringFilter getMarriedP() {
+<span class="nc" id="L200">        return marriedP;</span>
+    }
+
+    public void setMarriedP(StringFilter marriedP) {
+<span class="nc" id="L204">        this.marriedP = marriedP;</span>
+<span class="nc" id="L205">    }</span>
+
+    public StringFilter getHeadOfHouseholdP() {
+<span class="nc" id="L208">        return headOfHouseholdP;</span>
+    }
+
+    public void setHeadOfHouseholdP(StringFilter headOfHouseholdP) {
+<span class="nc" id="L212">        this.headOfHouseholdP = headOfHouseholdP;</span>
+<span class="nc" id="L213">    }</span>
+
+    public ZonedDateTimeFilter getBirthdate() {
+<span class="nc" id="L216">        return birthdate;</span>
+    }
+
+    public void setBirthdate(ZonedDateTimeFilter birthdate) {
+<span class="nc" id="L220">        this.birthdate = birthdate;</span>
+<span class="nc" id="L221">    }</span>
+
+    public BigDecimalFilter getHourlyCost() {
+<span class="nc" id="L224">        return hourlyCost;</span>
+    }
+
+    public void setHourlyCost(BigDecimalFilter hourlyCost) {
+<span class="nc" id="L228">        this.hourlyCost = hourlyCost;</span>
+<span class="nc" id="L229">    }</span>
+
+    public LongFilter getQnowUserId() {
+<span class="nc" id="L232">        return qnowUserId;</span>
+    }
+
+    public void setQnowUserId(LongFilter qnowUserId) {
+<span class="nc" id="L236">        this.qnowUserId = qnowUserId;</span>
+<span class="nc" id="L237">    }</span>
+
+    public LongFilter getEmployeeStatusId() {
+<span class="nc" id="L240">        return employeeStatusId;</span>
+    }
+
+    public void setEmployeeStatusId(LongFilter employeeStatusId) {
+<span class="nc" id="L244">        this.employeeStatusId = employeeStatusId;</span>
+<span class="nc" id="L245">    }</span>
+
+    public LongFilter getDepartmentIdId() {
+<span class="nc" id="L248">        return departmentIdId;</span>
+    }
+
+    public void setDepartmentIdId(LongFilter departmentIdId) {
+<span class="nc" id="L252">        this.departmentIdId = departmentIdId;</span>
+<span class="nc" id="L253">    }</span>
+
+    public LongFilter getSupervisorIdId() {
+<span class="nc" id="L256">        return supervisorIdId;</span>
+    }
+
+    public void setSupervisorIdId(LongFilter supervisorIdId) {
+<span class="nc" id="L260">        this.supervisorIdId = supervisorIdId;</span>
+<span class="nc" id="L261">    }</span>
+
+    public LongFilter getUserContactId() {
+<span class="nc" id="L264">        return userContactId;</span>
+    }
+
+    public void setUserContactId(LongFilter userContactId) {
+<span class="nc" id="L268">        this.userContactId = userContactId;</span>
+<span class="nc" id="L269">    }</span>
+
+
+    @Override
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L274" title="All 2 branches missed.">        if (this == o) {</span>
+<span class="nc" id="L275">            return true;</span>
+        }
+<span class="nc bnc" id="L277" title="All 4 branches missed.">        if (o == null || getClass() != o.getClass()) {</span>
+<span class="nc" id="L278">            return false;</span>
+        }
+<span class="nc" id="L280">        final ImEmployeeCriteria that = (ImEmployeeCriteria) o;</span>
+<span class="nc" id="L281">        return</span>
+<span class="nc bnc" id="L282" title="All 2 branches missed.">            Objects.equals(id, that.id) &amp;&amp;</span>
+<span class="nc bnc" id="L283" title="All 2 branches missed.">            Objects.equals(jobTitle, that.jobTitle) &amp;&amp;</span>
+<span class="nc bnc" id="L284" title="All 2 branches missed.">            Objects.equals(jobDescription, that.jobDescription) &amp;&amp;</span>
+<span class="nc bnc" id="L285" title="All 2 branches missed.">            Objects.equals(availability, that.availability) &amp;&amp;</span>
+<span class="nc bnc" id="L286" title="All 2 branches missed.">            Objects.equals(ssNumber, that.ssNumber) &amp;&amp;</span>
+<span class="nc bnc" id="L287" title="All 2 branches missed.">            Objects.equals(salary, that.salary) &amp;&amp;</span>
+<span class="nc bnc" id="L288" title="All 2 branches missed.">            Objects.equals(socialSecurity, that.socialSecurity) &amp;&amp;</span>
+<span class="nc bnc" id="L289" title="All 2 branches missed.">            Objects.equals(insurance, that.insurance) &amp;&amp;</span>
+<span class="nc bnc" id="L290" title="All 2 branches missed.">            Objects.equals(otherCosts, that.otherCosts) &amp;&amp;</span>
+<span class="nc bnc" id="L291" title="All 2 branches missed.">            Objects.equals(currency, that.currency) &amp;&amp;</span>
+<span class="nc bnc" id="L292" title="All 2 branches missed.">            Objects.equals(dependantP, that.dependantP) &amp;&amp;</span>
+<span class="nc bnc" id="L293" title="All 2 branches missed.">            Objects.equals(onlyJobP, that.onlyJobP) &amp;&amp;</span>
+<span class="nc bnc" id="L294" title="All 2 branches missed.">            Objects.equals(marriedP, that.marriedP) &amp;&amp;</span>
+<span class="nc bnc" id="L295" title="All 2 branches missed.">            Objects.equals(headOfHouseholdP, that.headOfHouseholdP) &amp;&amp;</span>
+<span class="nc bnc" id="L296" title="All 2 branches missed.">            Objects.equals(birthdate, that.birthdate) &amp;&amp;</span>
+<span class="nc bnc" id="L297" title="All 2 branches missed.">            Objects.equals(hourlyCost, that.hourlyCost) &amp;&amp;</span>
+<span class="nc bnc" id="L298" title="All 2 branches missed.">            Objects.equals(qnowUserId, that.qnowUserId) &amp;&amp;</span>
+<span class="nc bnc" id="L299" title="All 2 branches missed.">            Objects.equals(employeeStatusId, that.employeeStatusId) &amp;&amp;</span>
+<span class="nc bnc" id="L300" title="All 2 branches missed.">            Objects.equals(departmentIdId, that.departmentIdId) &amp;&amp;</span>
+<span class="nc bnc" id="L301" title="All 2 branches missed.">            Objects.equals(supervisorIdId, that.supervisorIdId) &amp;&amp;</span>
+<span class="nc bnc" id="L302" title="All 2 branches missed.">            Objects.equals(userContactId, that.userContactId);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L307">        return Objects.hash(</span>
+        id,
+        jobTitle,
+        jobDescription,
+        availability,
+        ssNumber,
+        salary,
+        socialSecurity,
+        insurance,
+        otherCosts,
+        currency,
+        dependantP,
+        onlyJobP,
+        marriedP,
+        headOfHouseholdP,
+        birthdate,
+        hourlyCost,
+        qnowUserId,
+        employeeStatusId,
+        departmentIdId,
+        supervisorIdId,
+        userContactId
+        );
+    }
+
+    @Override
+    public String toString() {
+<span class="nc bnc" id="L334" title="All 42 branches missed.">        return &quot;ImEmployeeCriteria{&quot; +</span>
+                (id != null ? &quot;id=&quot; + id + &quot;, &quot; : &quot;&quot;) +
+                (jobTitle != null ? &quot;jobTitle=&quot; + jobTitle + &quot;, &quot; : &quot;&quot;) +
+                (jobDescription != null ? &quot;jobDescription=&quot; + jobDescription + &quot;, &quot; : &quot;&quot;) +
+                (availability != null ? &quot;availability=&quot; + availability + &quot;, &quot; : &quot;&quot;) +
+                (ssNumber != null ? &quot;ssNumber=&quot; + ssNumber + &quot;, &quot; : &quot;&quot;) +
+                (salary != null ? &quot;salary=&quot; + salary + &quot;, &quot; : &quot;&quot;) +
+                (socialSecurity != null ? &quot;socialSecurity=&quot; + socialSecurity + &quot;, &quot; : &quot;&quot;) +
+                (insurance != null ? &quot;insurance=&quot; + insurance + &quot;, &quot; : &quot;&quot;) +
+                (otherCosts != null ? &quot;otherCosts=&quot; + otherCosts + &quot;, &quot; : &quot;&quot;) +
+                (currency != null ? &quot;currency=&quot; + currency + &quot;, &quot; : &quot;&quot;) +
+                (dependantP != null ? &quot;dependantP=&quot; + dependantP + &quot;, &quot; : &quot;&quot;) +
+                (onlyJobP != null ? &quot;onlyJobP=&quot; + onlyJobP + &quot;, &quot; : &quot;&quot;) +
+                (marriedP != null ? &quot;marriedP=&quot; + marriedP + &quot;, &quot; : &quot;&quot;) +
+                (headOfHouseholdP != null ? &quot;headOfHouseholdP=&quot; + headOfHouseholdP + &quot;, &quot; : &quot;&quot;) +
+                (birthdate != null ? &quot;birthdate=&quot; + birthdate + &quot;, &quot; : &quot;&quot;) +
+                (hourlyCost != null ? &quot;hourlyCost=&quot; + hourlyCost + &quot;, &quot; : &quot;&quot;) +
+                (qnowUserId != null ? &quot;qnowUserId=&quot; + qnowUserId + &quot;, &quot; : &quot;&quot;) +
+                (employeeStatusId != null ? &quot;employeeStatusId=&quot; + employeeStatusId + &quot;, &quot; : &quot;&quot;) +
+                (departmentIdId != null ? &quot;departmentIdId=&quot; + departmentIdId + &quot;, &quot; : &quot;&quot;) +
+                (supervisorIdId != null ? &quot;supervisorIdId=&quot; + supervisorIdId + &quot;, &quot; : &quot;&quot;) +
+                (userContactId != null ? &quot;userContactId=&quot; + userContactId + &quot;, &quot; : &quot;&quot;) +
+            &quot;}&quot;;
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

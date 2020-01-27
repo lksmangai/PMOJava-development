@@ -1,0 +1,453 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="imProjects">
+            <h2><span jhiTranslate="App.imProjects.detail.title">Im Projects</span> {{imProjects.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="App.imProjects.projectName">Project Name</span></dt>
+                <dd>
+                    <span>{{imProjects.projectName}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.projectNr">Project Nr</span></dt>
+                <dd>
+                    <span>{{imProjects.projectNr}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.projectPath">Project Path</span></dt>
+                <dd>
+                    <span>{{imProjects.projectPath}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.treeSortkey">Tree Sortkey</span></dt>
+                <dd>
+                    <span>{{imProjects.treeSortkey}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.maxChildSortkey">Max Child Sortkey</span></dt>
+                <dd>
+                    <span>{{imProjects.maxChildSortkey}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.description">Description</span></dt>
+                <dd>
+                    <span>{{imProjects.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.billingTypeId">Billing Type Id</span></dt>
+                <dd>
+                    <span>{{imProjects.billingTypeId}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.note">Note</span></dt>
+                <dd>
+                    <span>{{imProjects.note}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.requiresReportP">Requires Report P</span></dt>
+                <dd>
+                    <span>{{imProjects.requiresReportP}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.projectBudget">Project Budget</span></dt>
+                <dd>
+                    <span>{{imProjects.projectBudget}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.projectRisk">Project Risk</span></dt>
+                <dd>
+                    <span>{{imProjects.projectRisk}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.corporateSponsor">Corporate Sponsor</span></dt>
+                <dd>
+                    <span>{{imProjects.corporateSponsor}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.percentCompleted">Percent Completed</span></dt>
+                <dd>
+                    <span>{{imProjects.percentCompleted}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.projectBudgetHours">Project Budget Hours</span></dt>
+                <dd>
+                    <span>{{imProjects.projectBudgetHours}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.costQuotesCache">Cost Quotes Cache</span></dt>
+                <dd>
+                    <span>{{imProjects.costQuotesCache}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.costInvoicesCache">Cost Invoices Cache</span></dt>
+                <dd>
+                    <span>{{imProjects.costInvoicesCache}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.costTimesheetPlannedCache">Cost Timesheet Planned Cache</span></dt>
+                <dd>
+                    <span>{{imProjects.costTimesheetPlannedCache}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.costPurchaseOrdersCache">Cost Purchase Orders Cache</span></dt>
+                <dd>
+                    <span>{{imProjects.costPurchaseOrdersCache}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.costBillsCache">Cost Bills Cache</span></dt>
+                <dd>
+                    <span>{{imProjects.costBillsCache}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.costTimesheetLoggedCache">Cost Timesheet Logged Cache</span></dt>
+                <dd>
+                    <span>{{imProjects.costTimesheetLoggedCache}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.endDate">End Date</span></dt>
+                <dd>
+                    <span>{{imProjects.endDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.startDate">Start Date</span></dt>
+                <dd>
+                    <span>{{imProjects.startDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.templateP">Template P</span></dt>
+                <dd>
+                    <span>{{imProjects.templateP}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.sortOrder">Sort Order</span></dt>
+                <dd>
+                    <span>{{imProjects.sortOrder}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.reportedHoursCache">Reported Hours Cache</span></dt>
+                <dd>
+                    <span>{{imProjects.reportedHoursCache}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.costExpensePlannedCache">Cost Expense Planned Cache</span></dt>
+                <dd>
+                    <span>{{imProjects.costExpensePlannedCache}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.costExpenseLoggedCache">Cost Expense Logged Cache</span></dt>
+                <dd>
+                    <span>{{imProjects.costExpenseLoggedCache}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.confirmDate">Confirm Date</span></dt>
+                <dd>
+                    <span>{{imProjects.confirmDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.costDeliveryNotesCache">Cost Delivery Notes Cache</span></dt>
+                <dd>
+                    <span>{{imProjects.costDeliveryNotesCache}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.costCacheDirty">Cost Cache Dirty</span></dt>
+                <dd>
+                    <span>{{imProjects.costCacheDirty}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.milestoneP">Milestone P</span></dt>
+                <dd>
+                    <span>{{imProjects.milestoneP}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.releaseItemP">Release Item P</span></dt>
+                <dd>
+                    <span>{{imProjects.releaseItemP}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.presalesProbability">Presales Probability</span></dt>
+                <dd>
+                    <span>{{imProjects.presalesProbability}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.presalesValue">Presales Value</span></dt>
+                <dd>
+                    <span>{{imProjects.presalesValue}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.reportedDaysCache">Reported Days Cache</span></dt>
+                <dd>
+                    <span>{{imProjects.reportedDaysCache}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.presalesValueCurrency">Presales Value Currency</span></dt>
+                <dd>
+                    <span>{{imProjects.presalesValueCurrency}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.opportunitySalesStageId">Opportunity Sales Stage Id</span></dt>
+                <dd>
+                    <span>{{imProjects.opportunitySalesStageId}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.opportunityCampaignId">Opportunity Campaign Id</span></dt>
+                <dd>
+                    <span>{{imProjects.opportunityCampaignId}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.scoreRevenue">Score Revenue</span></dt>
+                <dd>
+                    <span>{{imProjects.scoreRevenue}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.scoreStrategic">Score Strategic</span></dt>
+                <dd>
+                    <span>{{imProjects.scoreStrategic}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.scoreFinanceNpv">Score Finance Npv</span></dt>
+                <dd>
+                    <span>{{imProjects.scoreFinanceNpv}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.scoreCustomers">Score Customers</span></dt>
+                <dd>
+                    <span>{{imProjects.scoreCustomers}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.scoreFinanceCost">Score Finance Cost</span></dt>
+                <dd>
+                    <span>{{imProjects.scoreFinanceCost}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.costBillsPlanned">Cost Bills Planned</span></dt>
+                <dd>
+                    <span>{{imProjects.costBillsPlanned}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.costExpensesPlanned">Cost Expenses Planned</span></dt>
+                <dd>
+                    <span>{{imProjects.costExpensesPlanned}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.scoreRisk">Score Risk</span></dt>
+                <dd>
+                    <span>{{imProjects.scoreRisk}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.scoreCapabilities">Score Capabilities</span></dt>
+                <dd>
+                    <span>{{imProjects.scoreCapabilities}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.scoreEinanceRoi">Score Einance Roi</span></dt>
+                <dd>
+                    <span>{{imProjects.scoreEinanceRoi}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.projectUserwiseBoard">Project Userwise Board</span></dt>
+                <dd>
+                    <span>{{imProjects.projectUserwiseBoard}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.projectBringNextday">Project Bring Nextday</span></dt>
+                <dd>
+                    <span>{{imProjects.projectBringNextday}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.projectBringSameboard">Project Bring Sameboard</span></dt>
+                <dd>
+                    <span>{{imProjects.projectBringSameboard}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.projectNewboardEverytime">Project Newboard Everytime</span></dt>
+                <dd>
+                    <span>{{imProjects.projectNewboardEverytime}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.projectUserwiseBoard2">Project Userwise Board 2</span></dt>
+                <dd>
+                    <span>{{imProjects.projectUserwiseBoard2}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.projectBringSameboard2">Project Bring Sameboard 2</span></dt>
+                <dd>
+                    <span>{{imProjects.projectBringSameboard2}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.projectNewboard2Everytime">Project Newboard 2 Everytime</span></dt>
+                <dd>
+                    <span>{{imProjects.projectNewboard2Everytime}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.projectNewboard2Always">Project Newboard 2 Always</span></dt>
+                <dd>
+                    <span>{{imProjects.projectNewboard2Always}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.projectReportWeekly">Project Report Weekly</span></dt>
+                <dd>
+                    <span>{{imProjects.projectReportWeekly}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.scoreGain">Score Gain</span></dt>
+                <dd>
+                    <span>{{imProjects.scoreGain}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.scoreLoss">Score Loss</span></dt>
+                <dd>
+                    <span>{{imProjects.scoreLoss}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.scoreDelivery">Score Delivery</span></dt>
+                <dd>
+                    <span>{{imProjects.scoreDelivery}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.scoreOperations">Score Operations</span></dt>
+                <dd>
+                    <span>{{imProjects.scoreOperations}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.scoreWhy">Score Why</span></dt>
+                <dd>
+                    <span>{{imProjects.scoreWhy}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.javaServices">Java Services</span></dt>
+                <dd>
+                    <span>{{imProjects.javaServices}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.netServices">Net Services</span></dt>
+                <dd>
+                    <span>{{imProjects.netServices}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.collectionLink">Collection Link</span></dt>
+                <dd>
+                    <span>{{imProjects.collectionLink}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.trainingLink">Training Link</span></dt>
+                <dd>
+                    <span>{{imProjects.trainingLink}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.collectionName">Collection Name</span></dt>
+                <dd>
+                    <span>{{imProjects.collectionName}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.trainingName">Training Name</span></dt>
+                <dd>
+                    <span>{{imProjects.trainingName}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.trainingDoc">Training Doc</span></dt>
+                <dd>
+                    <span>{{imProjects.trainingDoc}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.testingRichtext">Testing Richtext</span></dt>
+                <dd>
+                    <span>{{imProjects.testingRichtext}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.templateCategory">Template Category</span></dt>
+                <dd>
+                    <span>{{imProjects.templateCategory}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.dType">D Type</span></dt>
+                <dd>
+                    <span>{{imProjects.dType}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.dOption">D Option</span></dt>
+                <dd>
+                    <span>{{imProjects.dOption}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.dFilter">D Filter</span></dt>
+                <dd>
+                    <span>{{imProjects.dFilter}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.dId">D Id</span></dt>
+                <dd>
+                    <span>{{imProjects.dId}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.tType">T Type</span></dt>
+                <dd>
+                    <span>{{imProjects.tType}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.tOption">T Option</span></dt>
+                <dd>
+                    <span>{{imProjects.tOption}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.tFilter">T Filter</span></dt>
+                <dd>
+                    <span>{{imProjects.tFilter}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.tId">T Id</span></dt>
+                <dd>
+                    <span>{{imProjects.tId}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.risktype">Risktype</span></dt>
+                <dd>
+                    <span>{{imProjects.risktype}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.riskimpact">Riskimpact</span></dt>
+                <dd>
+                    <span>{{imProjects.riskimpact}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.riskprobability">Riskprobability</span></dt>
+                <dd>
+                    <span>{{imProjects.riskprobability}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.projectInitiativeId">Project Initiative Id</span></dt>
+                <dd>
+                    <div *ngIf="imProjects.projectInitiativeId">
+                        <a [routerLink]="['/project-initiative-id', imProjects.projectInitiativeId?.id, 'view']">{{imProjects.projectInitiativeId?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.projectBusinessgoalId">Project Businessgoal Id</span></dt>
+                <dd>
+                    <div *ngIf="imProjects.projectBusinessgoalId">
+                        <a [routerLink]="['/project-businessgoal-id', imProjects.projectBusinessgoalId?.id, 'view']">{{imProjects.projectBusinessgoalId?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.projectSubgoalId">Project Subgoal Id</span></dt>
+                <dd>
+                    <div *ngIf="imProjects.projectSubgoalId">
+                        <a [routerLink]="['/project-subgoal-id', imProjects.projectSubgoalId?.id, 'view']">{{imProjects.projectSubgoalId?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.projectMaingoalId">Project Maingoal Id</span></dt>
+                <dd>
+                    <div *ngIf="imProjects.projectMaingoalId">
+                        <a [routerLink]="['/project-maingoal-id', imProjects.projectMaingoalId?.id, 'view']">{{imProjects.projectMaingoalId?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.projectBucketId">Project Bucket Id</span></dt>
+                <dd>
+                    <div *ngIf="imProjects.projectBucketId">
+                        <a [routerLink]="['/project-bucket-id', imProjects.projectBucketId?.id, 'view']">{{imProjects.projectBucketId?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.projectCostCenterId">Project Cost Center Id</span></dt>
+                <dd>
+                    <div *ngIf="imProjects.projectCostCenterId">
+                        <a [routerLink]="['/project-cost-center-id', imProjects.projectCostCenterId?.id, 'view']">{{imProjects.projectCostCenterId?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.opportunityPriorityId">Opportunity Priority Id</span></dt>
+                <dd>
+                    <div *ngIf="imProjects.opportunityPriorityId">
+                        <a [routerLink]="['/opportunity-priority-id', imProjects.opportunityPriorityId?.id, 'view']">{{imProjects.opportunityPriorityId?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.backlogPractice">Backlog Practice</span></dt>
+                <dd>
+                    <div *ngIf="imProjects.backlogPractice">
+                        <a [routerLink]="['/backlog-practice', imProjects.backlogPractice?.id, 'view']">{{imProjects.backlogPractice?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.projectTheme">Project Theme</span></dt>
+                <dd>
+                    <div *ngIf="imProjects.projectTheme">
+                        <a [routerLink]="['/project-theme', imProjects.projectTheme?.id, 'view']">{{imProjects.projectTheme?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.projectClass">Project Class</span></dt>
+                <dd>
+                    <div *ngIf="imProjects.projectClass">
+                        <a [routerLink]="['/project-class', imProjects.projectClass?.id, 'view']">{{imProjects.projectClass?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.projectVertical">Project Vertical</span></dt>
+                <dd>
+                    <div *ngIf="imProjects.projectVertical">
+                        <a [routerLink]="['/project-vertical', imProjects.projectVertical?.id, 'view']">{{imProjects.projectVertical?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.projectBoardId">Project Board Id</span></dt>
+                <dd>
+                    <div *ngIf="imProjects.projectBoardId">
+                        <a [routerLink]="['/project-board-id', imProjects.projectBoardId?.id, 'view']">{{imProjects.projectBoardId?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.projectBoard2Id">Project Board 2 Id</span></dt>
+                <dd>
+                    <div *ngIf="imProjects.projectBoard2Id">
+                        <a [routerLink]="['/project-board-id', imProjects.projectBoard2Id?.id, 'view']">{{imProjects.projectBoard2Id?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.projectStatusId">Project Status Id</span></dt>
+                <dd>
+                    <div *ngIf="imProjects.projectStatusId">
+                        <a [routerLink]="['/project-status-id', imProjects.projectStatusId?.id, 'view']">{{imProjects.projectStatusId?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.projectTypeId">Project Type Id</span></dt>
+                <dd>
+                    <div *ngIf="imProjects.projectTypeId">
+                        <a [routerLink]="['/project-type-id', imProjects.projectTypeId?.id, 'view']">{{imProjects.projectTypeId?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.projectLeadId">Project Lead Id</span></dt>
+                <dd>
+                    <div *ngIf="imProjects.projectLeadId">
+                        <a [routerLink]="['/im-employee', imProjects.projectLeadId?.id, 'view']">{{imProjects.projectLeadId?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="App.imProjects.parentId">Parent Id</span></dt>
+                <dd>
+                    <div *ngIf="imProjects.parentId">
+                        <a [routerLink]="['/im-projects', imProjects.parentId?.id, 'view']">{{imProjects.parentId?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/im-projects', imProjects.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

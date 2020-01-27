@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserContact.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.domain</a> &gt; <span class="el_source">UserContact.java</span></div><h1>UserContact.java</h1><pre class="source lang-java linenums">package com.qnowapp.domain;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import javax.persistence.*;
+
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Objects;
+
+/**
+ * A UserContact.
+ */
+@Entity
+@Table(name = &quot;user_contact&quot;)
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+<span class="nc" id="L22">public class UserContact implements Serializable {</span>
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = &quot;sequenceGenerator&quot;)
+    @SequenceGenerator(name = &quot;sequenceGenerator&quot;)
+    private Long id;
+
+    @Column(name = &quot;home_phone&quot;)
+    private String homePhone;
+
+    @Column(name = &quot;work_phone&quot;)
+    private String workPhone;
+
+    @Column(name = &quot;cell_phone&quot;)
+    private String cellPhone;
+
+    @Column(name = &quot;perment_address&quot;)
+    private String permentAddress;
+
+    @Column(name = &quot;ha_line_1&quot;)
+    private String haLine1;
+
+    @Column(name = &quot;ha_line_2&quot;)
+    private String haLine2;
+
+    @Column(name = &quot;ha_postal&quot;)
+    private String haPostal;
+
+    @Column(name = &quot;wa_line_1&quot;)
+    private String waLine1;
+
+    @Column(name = &quot;wa_line_2&quot;)
+    private String waLine2;
+
+    @Column(name = &quot;wa_postal&quot;)
+    private String waPostal;
+
+    @Column(name = &quot;uc_note&quot;)
+    private String ucNote;
+
+    @Column(name = &quot;primary_role&quot;)
+    private String primaryRole;
+
+    @Column(name = &quot;secondary_role&quot;)
+    private String secondaryRole;
+
+    @Column(name = &quot;initiative&quot;)
+    private String initiative;
+
+    @Column(name = &quot;technology&quot;)
+    private String technology;
+
+    @Column(name = &quot;team_name&quot;)
+    private String teamName;
+
+    @OneToOne
+    @JoinColumn(unique = true)
+    private QnowUser qnowUser;
+
+    @ManyToOne
+    @JsonIgnoreProperties(&quot;userContacts&quot;)
+    private City waCity;
+
+    @ManyToOne
+    @JsonIgnoreProperties(&quot;userContacts&quot;)
+    private City haCity;
+
+    @ManyToOne
+    @JsonIgnoreProperties(&quot;userContacts&quot;)
+    private StateMaster waState;
+
+    @ManyToOne
+    @JsonIgnoreProperties(&quot;userContacts&quot;)
+    private StateMaster haState;
+
+    @ManyToOne
+    @JsonIgnoreProperties(&quot;userContacts&quot;)
+    private Country waCountry;
+
+    @ManyToOne
+    @JsonIgnoreProperties(&quot;userContacts&quot;)
+    private Country haCountry;
+
+<span class="nc" id="L107">    @ManyToMany</span>
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = &quot;user_contact_group_members&quot;,
+               joinColumns = @JoinColumn(name = &quot;user_contact_id&quot;, referencedColumnName = &quot;id&quot;),
+               inverseJoinColumns = @JoinColumn(name = &quot;group_members_id&quot;, referencedColumnName = &quot;id&quot;))
+    private Set&lt;GroupMembers&gt; groupMembers = new HashSet&lt;&gt;();
+
+<span class="nc" id="L114">    @ManyToMany(mappedBy = &quot;userContacts&quot;)</span>
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set&lt;ImEmployee&gt; imEmployees = new HashSet&lt;&gt;();
+
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    public Long getId() {
+<span class="nc" id="L121">        return id;</span>
+    }
+
+    public void setId(Long id) {
+<span class="nc" id="L125">        this.id = id;</span>
+<span class="nc" id="L126">    }</span>
+
+    public String getHomePhone() {
+<span class="nc" id="L129">        return homePhone;</span>
+    }
+
+    public UserContact homePhone(String homePhone) {
+<span class="nc" id="L133">        this.homePhone = homePhone;</span>
+<span class="nc" id="L134">        return this;</span>
+    }
+
+    public void setHomePhone(String homePhone) {
+<span class="nc" id="L138">        this.homePhone = homePhone;</span>
+<span class="nc" id="L139">    }</span>
+
+    public String getWorkPhone() {
+<span class="nc" id="L142">        return workPhone;</span>
+    }
+
+    public UserContact workPhone(String workPhone) {
+<span class="nc" id="L146">        this.workPhone = workPhone;</span>
+<span class="nc" id="L147">        return this;</span>
+    }
+
+    public void setWorkPhone(String workPhone) {
+<span class="nc" id="L151">        this.workPhone = workPhone;</span>
+<span class="nc" id="L152">    }</span>
+
+    public String getCellPhone() {
+<span class="nc" id="L155">        return cellPhone;</span>
+    }
+
+    public UserContact cellPhone(String cellPhone) {
+<span class="nc" id="L159">        this.cellPhone = cellPhone;</span>
+<span class="nc" id="L160">        return this;</span>
+    }
+
+    public void setCellPhone(String cellPhone) {
+<span class="nc" id="L164">        this.cellPhone = cellPhone;</span>
+<span class="nc" id="L165">    }</span>
+
+    public String getPermentAddress() {
+<span class="nc" id="L168">        return permentAddress;</span>
+    }
+
+    public UserContact permentAddress(String permentAddress) {
+<span class="nc" id="L172">        this.permentAddress = permentAddress;</span>
+<span class="nc" id="L173">        return this;</span>
+    }
+
+    public void setPermentAddress(String permentAddress) {
+<span class="nc" id="L177">        this.permentAddress = permentAddress;</span>
+<span class="nc" id="L178">    }</span>
+
+    public String getHaLine1() {
+<span class="nc" id="L181">        return haLine1;</span>
+    }
+
+    public UserContact haLine1(String haLine1) {
+<span class="nc" id="L185">        this.haLine1 = haLine1;</span>
+<span class="nc" id="L186">        return this;</span>
+    }
+
+    public void setHaLine1(String haLine1) {
+<span class="nc" id="L190">        this.haLine1 = haLine1;</span>
+<span class="nc" id="L191">    }</span>
+
+    public String getHaLine2() {
+<span class="nc" id="L194">        return haLine2;</span>
+    }
+
+    public UserContact haLine2(String haLine2) {
+<span class="nc" id="L198">        this.haLine2 = haLine2;</span>
+<span class="nc" id="L199">        return this;</span>
+    }
+
+    public void setHaLine2(String haLine2) {
+<span class="nc" id="L203">        this.haLine2 = haLine2;</span>
+<span class="nc" id="L204">    }</span>
+
+    public String getHaPostal() {
+<span class="nc" id="L207">        return haPostal;</span>
+    }
+
+    public UserContact haPostal(String haPostal) {
+<span class="nc" id="L211">        this.haPostal = haPostal;</span>
+<span class="nc" id="L212">        return this;</span>
+    }
+
+    public void setHaPostal(String haPostal) {
+<span class="nc" id="L216">        this.haPostal = haPostal;</span>
+<span class="nc" id="L217">    }</span>
+
+    public String getWaLine1() {
+<span class="nc" id="L220">        return waLine1;</span>
+    }
+
+    public UserContact waLine1(String waLine1) {
+<span class="nc" id="L224">        this.waLine1 = waLine1;</span>
+<span class="nc" id="L225">        return this;</span>
+    }
+
+    public void setWaLine1(String waLine1) {
+<span class="nc" id="L229">        this.waLine1 = waLine1;</span>
+<span class="nc" id="L230">    }</span>
+
+    public String getWaLine2() {
+<span class="nc" id="L233">        return waLine2;</span>
+    }
+
+    public UserContact waLine2(String waLine2) {
+<span class="nc" id="L237">        this.waLine2 = waLine2;</span>
+<span class="nc" id="L238">        return this;</span>
+    }
+
+    public void setWaLine2(String waLine2) {
+<span class="nc" id="L242">        this.waLine2 = waLine2;</span>
+<span class="nc" id="L243">    }</span>
+
+    public String getWaPostal() {
+<span class="nc" id="L246">        return waPostal;</span>
+    }
+
+    public UserContact waPostal(String waPostal) {
+<span class="nc" id="L250">        this.waPostal = waPostal;</span>
+<span class="nc" id="L251">        return this;</span>
+    }
+
+    public void setWaPostal(String waPostal) {
+<span class="nc" id="L255">        this.waPostal = waPostal;</span>
+<span class="nc" id="L256">    }</span>
+
+    public String getUcNote() {
+<span class="nc" id="L259">        return ucNote;</span>
+    }
+
+    public UserContact ucNote(String ucNote) {
+<span class="nc" id="L263">        this.ucNote = ucNote;</span>
+<span class="nc" id="L264">        return this;</span>
+    }
+
+    public void setUcNote(String ucNote) {
+<span class="nc" id="L268">        this.ucNote = ucNote;</span>
+<span class="nc" id="L269">    }</span>
+
+    public String getPrimaryRole() {
+<span class="nc" id="L272">        return primaryRole;</span>
+    }
+
+    public UserContact primaryRole(String primaryRole) {
+<span class="nc" id="L276">        this.primaryRole = primaryRole;</span>
+<span class="nc" id="L277">        return this;</span>
+    }
+
+    public void setPrimaryRole(String primaryRole) {
+<span class="nc" id="L281">        this.primaryRole = primaryRole;</span>
+<span class="nc" id="L282">    }</span>
+
+    public String getSecondaryRole() {
+<span class="nc" id="L285">        return secondaryRole;</span>
+    }
+
+    public UserContact secondaryRole(String secondaryRole) {
+<span class="nc" id="L289">        this.secondaryRole = secondaryRole;</span>
+<span class="nc" id="L290">        return this;</span>
+    }
+
+    public void setSecondaryRole(String secondaryRole) {
+<span class="nc" id="L294">        this.secondaryRole = secondaryRole;</span>
+<span class="nc" id="L295">    }</span>
+
+    public String getInitiative() {
+<span class="nc" id="L298">        return initiative;</span>
+    }
+
+    public UserContact initiative(String initiative) {
+<span class="nc" id="L302">        this.initiative = initiative;</span>
+<span class="nc" id="L303">        return this;</span>
+    }
+
+    public void setInitiative(String initiative) {
+<span class="nc" id="L307">        this.initiative = initiative;</span>
+<span class="nc" id="L308">    }</span>
+
+    public String getTechnology() {
+<span class="nc" id="L311">        return technology;</span>
+    }
+
+    public UserContact technology(String technology) {
+<span class="nc" id="L315">        this.technology = technology;</span>
+<span class="nc" id="L316">        return this;</span>
+    }
+
+    public void setTechnology(String technology) {
+<span class="nc" id="L320">        this.technology = technology;</span>
+<span class="nc" id="L321">    }</span>
+
+    public String getTeamName() {
+<span class="nc" id="L324">        return teamName;</span>
+    }
+
+    public UserContact teamName(String teamName) {
+<span class="nc" id="L328">        this.teamName = teamName;</span>
+<span class="nc" id="L329">        return this;</span>
+    }
+
+    public void setTeamName(String teamName) {
+<span class="nc" id="L333">        this.teamName = teamName;</span>
+<span class="nc" id="L334">    }</span>
+
+    public QnowUser getQnowUser() {
+<span class="nc" id="L337">        return qnowUser;</span>
+    }
+
+    public UserContact qnowUser(QnowUser qnowUser) {
+<span class="nc" id="L341">        this.qnowUser = qnowUser;</span>
+<span class="nc" id="L342">        return this;</span>
+    }
+
+    public void setQnowUser(QnowUser qnowUser) {
+<span class="nc" id="L346">        this.qnowUser = qnowUser;</span>
+<span class="nc" id="L347">    }</span>
+
+    public City getWaCity() {
+<span class="nc" id="L350">        return waCity;</span>
+    }
+
+    public UserContact waCity(City city) {
+<span class="nc" id="L354">        this.waCity = city;</span>
+<span class="nc" id="L355">        return this;</span>
+    }
+
+    public void setWaCity(City city) {
+<span class="nc" id="L359">        this.waCity = city;</span>
+<span class="nc" id="L360">    }</span>
+
+    public City getHaCity() {
+<span class="nc" id="L363">        return haCity;</span>
+    }
+
+    public UserContact haCity(City city) {
+<span class="nc" id="L367">        this.haCity = city;</span>
+<span class="nc" id="L368">        return this;</span>
+    }
+
+    public void setHaCity(City city) {
+<span class="nc" id="L372">        this.haCity = city;</span>
+<span class="nc" id="L373">    }</span>
+
+    public StateMaster getWaState() {
+<span class="nc" id="L376">        return waState;</span>
+    }
+
+    public UserContact waState(StateMaster stateMaster) {
+<span class="nc" id="L380">        this.waState = stateMaster;</span>
+<span class="nc" id="L381">        return this;</span>
+    }
+
+    public void setWaState(StateMaster stateMaster) {
+<span class="nc" id="L385">        this.waState = stateMaster;</span>
+<span class="nc" id="L386">    }</span>
+
+    public StateMaster getHaState() {
+<span class="nc" id="L389">        return haState;</span>
+    }
+
+    public UserContact haState(StateMaster stateMaster) {
+<span class="nc" id="L393">        this.haState = stateMaster;</span>
+<span class="nc" id="L394">        return this;</span>
+    }
+
+    public void setHaState(StateMaster stateMaster) {
+<span class="nc" id="L398">        this.haState = stateMaster;</span>
+<span class="nc" id="L399">    }</span>
+
+    public Country getWaCountry() {
+<span class="nc" id="L402">        return waCountry;</span>
+    }
+
+    public UserContact waCountry(Country country) {
+<span class="nc" id="L406">        this.waCountry = country;</span>
+<span class="nc" id="L407">        return this;</span>
+    }
+
+    public void setWaCountry(Country country) {
+<span class="nc" id="L411">        this.waCountry = country;</span>
+<span class="nc" id="L412">    }</span>
+
+    public Country getHaCountry() {
+<span class="nc" id="L415">        return haCountry;</span>
+    }
+
+    public UserContact haCountry(Country country) {
+<span class="nc" id="L419">        this.haCountry = country;</span>
+<span class="nc" id="L420">        return this;</span>
+    }
+
+    public void setHaCountry(Country country) {
+<span class="nc" id="L424">        this.haCountry = country;</span>
+<span class="nc" id="L425">    }</span>
+
+    public Set&lt;GroupMembers&gt; getGroupMembers() {
+<span class="nc" id="L428">        return groupMembers;</span>
+    }
+
+    public UserContact groupMembers(Set&lt;GroupMembers&gt; groupMembers) {
+<span class="nc" id="L432">        this.groupMembers = groupMembers;</span>
+<span class="nc" id="L433">        return this;</span>
+    }
+
+    public UserContact addGroupMembers(GroupMembers groupMembers) {
+<span class="nc" id="L437">        this.groupMembers.add(groupMembers);</span>
+<span class="nc" id="L438">        groupMembers.getUserContacts().add(this);</span>
+<span class="nc" id="L439">        return this;</span>
+    }
+
+    public UserContact removeGroupMembers(GroupMembers groupMembers) {
+<span class="nc" id="L443">        this.groupMembers.remove(groupMembers);</span>
+<span class="nc" id="L444">        groupMembers.getUserContacts().remove(this);</span>
+<span class="nc" id="L445">        return this;</span>
+    }
+
+    public void setGroupMembers(Set&lt;GroupMembers&gt; groupMembers) {
+<span class="nc" id="L449">        this.groupMembers = groupMembers;</span>
+<span class="nc" id="L450">    }</span>
+
+    public Set&lt;ImEmployee&gt; getImEmployees() {
+<span class="nc" id="L453">        return imEmployees;</span>
+    }
+
+    public UserContact imEmployees(Set&lt;ImEmployee&gt; imEmployees) {
+<span class="nc" id="L457">        this.imEmployees = imEmployees;</span>
+<span class="nc" id="L458">        return this;</span>
+    }
+
+    public UserContact addImEmployee(ImEmployee imEmployee) {
+<span class="nc" id="L462">        this.imEmployees.add(imEmployee);</span>
+<span class="nc" id="L463">        imEmployee.getUserContacts().add(this);</span>
+<span class="nc" id="L464">        return this;</span>
+    }
+
+    public UserContact removeImEmployee(ImEmployee imEmployee) {
+<span class="nc" id="L468">        this.imEmployees.remove(imEmployee);</span>
+<span class="nc" id="L469">        imEmployee.getUserContacts().remove(this);</span>
+<span class="nc" id="L470">        return this;</span>
+    }
+
+    public void setImEmployees(Set&lt;ImEmployee&gt; imEmployees) {
+<span class="nc" id="L474">        this.imEmployees = imEmployees;</span>
+<span class="nc" id="L475">    }</span>
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
+    @Override
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L480" title="All 2 branches missed.">        if (this == o) {</span>
+<span class="nc" id="L481">            return true;</span>
+        }
+<span class="nc bnc" id="L483" title="All 2 branches missed.">        if (!(o instanceof UserContact)) {</span>
+<span class="nc" id="L484">            return false;</span>
+        }
+<span class="nc bnc" id="L486" title="All 4 branches missed.">        return id != null &amp;&amp; id.equals(((UserContact) o).id);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L491">        return 31;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L496">        return &quot;UserContact{&quot; +</span>
+<span class="nc" id="L497">            &quot;id=&quot; + getId() +</span>
+<span class="nc" id="L498">            &quot;, homePhone='&quot; + getHomePhone() + &quot;'&quot; +</span>
+<span class="nc" id="L499">            &quot;, workPhone='&quot; + getWorkPhone() + &quot;'&quot; +</span>
+<span class="nc" id="L500">            &quot;, cellPhone='&quot; + getCellPhone() + &quot;'&quot; +</span>
+<span class="nc" id="L501">            &quot;, permentAddress='&quot; + getPermentAddress() + &quot;'&quot; +</span>
+<span class="nc" id="L502">            &quot;, haLine1='&quot; + getHaLine1() + &quot;'&quot; +</span>
+<span class="nc" id="L503">            &quot;, haLine2='&quot; + getHaLine2() + &quot;'&quot; +</span>
+<span class="nc" id="L504">            &quot;, haPostal='&quot; + getHaPostal() + &quot;'&quot; +</span>
+<span class="nc" id="L505">            &quot;, waLine1='&quot; + getWaLine1() + &quot;'&quot; +</span>
+<span class="nc" id="L506">            &quot;, waLine2='&quot; + getWaLine2() + &quot;'&quot; +</span>
+<span class="nc" id="L507">            &quot;, waPostal='&quot; + getWaPostal() + &quot;'&quot; +</span>
+<span class="nc" id="L508">            &quot;, ucNote='&quot; + getUcNote() + &quot;'&quot; +</span>
+<span class="nc" id="L509">            &quot;, primaryRole='&quot; + getPrimaryRole() + &quot;'&quot; +</span>
+<span class="nc" id="L510">            &quot;, secondaryRole='&quot; + getSecondaryRole() + &quot;'&quot; +</span>
+<span class="nc" id="L511">            &quot;, initiative='&quot; + getInitiative() + &quot;'&quot; +</span>
+<span class="nc" id="L512">            &quot;, technology='&quot; + getTechnology() + &quot;'&quot; +</span>
+<span class="nc" id="L513">            &quot;, teamName='&quot; + getTeamName() + &quot;'&quot; +</span>
+            &quot;}&quot;;
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserContactCriteria.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.service.dto</a> &gt; <span class="el_source">UserContactCriteria.java</span></div><h1>UserContactCriteria.java</h1><pre class="source lang-java linenums">package com.qnowapp.service.dto;
+
+import java.io.Serializable;
+import java.util.Objects;
+import io.github.jhipster.service.Criteria;
+import io.github.jhipster.service.filter.BooleanFilter;
+import io.github.jhipster.service.filter.DoubleFilter;
+import io.github.jhipster.service.filter.Filter;
+import io.github.jhipster.service.filter.FloatFilter;
+import io.github.jhipster.service.filter.IntegerFilter;
+import io.github.jhipster.service.filter.LongFilter;
+import io.github.jhipster.service.filter.StringFilter;
+
+/**
+ * Criteria class for the {@link com.qnowapp.domain.UserContact} entity. This class is used
+ * in {@link com.qnowapp.web.rest.UserContactResource} to receive all the possible filtering options from
+ * the Http GET request parameters.
+ * For example the following could be a valid request:
+ * {@code /user-contacts?id.greaterThan=5&amp;attr1.contains=something&amp;attr2.specified=false}
+ * As Spring is unable to properly convert the types, unless specific {@link Filter} class are used, we need to use
+ * fix type specific filters.
+ */
+public class UserContactCriteria implements Serializable, Criteria {
+
+    private static final long serialVersionUID = 1L;
+
+    private LongFilter id;
+
+    private StringFilter homePhone;
+
+    private StringFilter workPhone;
+
+    private StringFilter cellPhone;
+
+    private StringFilter permentAddress;
+
+    private StringFilter haLine1;
+
+    private StringFilter haLine2;
+
+    private StringFilter haPostal;
+
+    private StringFilter waLine1;
+
+    private StringFilter waLine2;
+
+    private StringFilter waPostal;
+
+    private StringFilter ucNote;
+
+    private StringFilter primaryRole;
+
+    private StringFilter secondaryRole;
+
+    private StringFilter initiative;
+
+    private StringFilter technology;
+
+    private StringFilter teamName;
+
+    private LongFilter qnowUserId;
+
+    private LongFilter waCityId;
+
+    private LongFilter haCityId;
+
+    private LongFilter waStateId;
+
+    private LongFilter haStateId;
+
+    private LongFilter waCountryId;
+
+    private LongFilter haCountryId;
+
+    private LongFilter groupMembersId;
+
+    private LongFilter imEmployeeId;
+
+<span class="nc" id="L79">    public UserContactCriteria(){</span>
+<span class="nc" id="L80">    }</span>
+
+<span class="nc" id="L82">    public UserContactCriteria(UserContactCriteria other){</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">        this.id = other.id == null ? null : other.id.copy();</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">        this.homePhone = other.homePhone == null ? null : other.homePhone.copy();</span>
+<span class="nc bnc" id="L85" title="All 2 branches missed.">        this.workPhone = other.workPhone == null ? null : other.workPhone.copy();</span>
+<span class="nc bnc" id="L86" title="All 2 branches missed.">        this.cellPhone = other.cellPhone == null ? null : other.cellPhone.copy();</span>
+<span class="nc bnc" id="L87" title="All 2 branches missed.">        this.permentAddress = other.permentAddress == null ? null : other.permentAddress.copy();</span>
+<span class="nc bnc" id="L88" title="All 2 branches missed.">        this.haLine1 = other.haLine1 == null ? null : other.haLine1.copy();</span>
+<span class="nc bnc" id="L89" title="All 2 branches missed.">        this.haLine2 = other.haLine2 == null ? null : other.haLine2.copy();</span>
+<span class="nc bnc" id="L90" title="All 2 branches missed.">        this.haPostal = other.haPostal == null ? null : other.haPostal.copy();</span>
+<span class="nc bnc" id="L91" title="All 2 branches missed.">        this.waLine1 = other.waLine1 == null ? null : other.waLine1.copy();</span>
+<span class="nc bnc" id="L92" title="All 2 branches missed.">        this.waLine2 = other.waLine2 == null ? null : other.waLine2.copy();</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">        this.waPostal = other.waPostal == null ? null : other.waPostal.copy();</span>
+<span class="nc bnc" id="L94" title="All 2 branches missed.">        this.ucNote = other.ucNote == null ? null : other.ucNote.copy();</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">        this.primaryRole = other.primaryRole == null ? null : other.primaryRole.copy();</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">        this.secondaryRole = other.secondaryRole == null ? null : other.secondaryRole.copy();</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">        this.initiative = other.initiative == null ? null : other.initiative.copy();</span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">        this.technology = other.technology == null ? null : other.technology.copy();</span>
+<span class="nc bnc" id="L99" title="All 2 branches missed.">        this.teamName = other.teamName == null ? null : other.teamName.copy();</span>
+<span class="nc bnc" id="L100" title="All 2 branches missed.">        this.qnowUserId = other.qnowUserId == null ? null : other.qnowUserId.copy();</span>
+<span class="nc bnc" id="L101" title="All 2 branches missed.">        this.waCityId = other.waCityId == null ? null : other.waCityId.copy();</span>
+<span class="nc bnc" id="L102" title="All 2 branches missed.">        this.haCityId = other.haCityId == null ? null : other.haCityId.copy();</span>
+<span class="nc bnc" id="L103" title="All 2 branches missed.">        this.waStateId = other.waStateId == null ? null : other.waStateId.copy();</span>
+<span class="nc bnc" id="L104" title="All 2 branches missed.">        this.haStateId = other.haStateId == null ? null : other.haStateId.copy();</span>
+<span class="nc bnc" id="L105" title="All 2 branches missed.">        this.waCountryId = other.waCountryId == null ? null : other.waCountryId.copy();</span>
+<span class="nc bnc" id="L106" title="All 2 branches missed.">        this.haCountryId = other.haCountryId == null ? null : other.haCountryId.copy();</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">        this.groupMembersId = other.groupMembersId == null ? null : other.groupMembersId.copy();</span>
+<span class="nc bnc" id="L108" title="All 2 branches missed.">        this.imEmployeeId = other.imEmployeeId == null ? null : other.imEmployeeId.copy();</span>
+<span class="nc" id="L109">    }</span>
+
+    @Override
+    public UserContactCriteria copy() {
+<span class="nc" id="L113">        return new UserContactCriteria(this);</span>
+    }
+
+    public LongFilter getId() {
+<span class="nc" id="L117">        return id;</span>
+    }
+
+    public void setId(LongFilter id) {
+<span class="nc" id="L121">        this.id = id;</span>
+<span class="nc" id="L122">    }</span>
+
+    public StringFilter getHomePhone() {
+<span class="nc" id="L125">        return homePhone;</span>
+    }
+
+    public void setHomePhone(StringFilter homePhone) {
+<span class="nc" id="L129">        this.homePhone = homePhone;</span>
+<span class="nc" id="L130">    }</span>
+
+    public StringFilter getWorkPhone() {
+<span class="nc" id="L133">        return workPhone;</span>
+    }
+
+    public void setWorkPhone(StringFilter workPhone) {
+<span class="nc" id="L137">        this.workPhone = workPhone;</span>
+<span class="nc" id="L138">    }</span>
+
+    public StringFilter getCellPhone() {
+<span class="nc" id="L141">        return cellPhone;</span>
+    }
+
+    public void setCellPhone(StringFilter cellPhone) {
+<span class="nc" id="L145">        this.cellPhone = cellPhone;</span>
+<span class="nc" id="L146">    }</span>
+
+    public StringFilter getPermentAddress() {
+<span class="nc" id="L149">        return permentAddress;</span>
+    }
+
+    public void setPermentAddress(StringFilter permentAddress) {
+<span class="nc" id="L153">        this.permentAddress = permentAddress;</span>
+<span class="nc" id="L154">    }</span>
+
+    public StringFilter getHaLine1() {
+<span class="nc" id="L157">        return haLine1;</span>
+    }
+
+    public void setHaLine1(StringFilter haLine1) {
+<span class="nc" id="L161">        this.haLine1 = haLine1;</span>
+<span class="nc" id="L162">    }</span>
+
+    public StringFilter getHaLine2() {
+<span class="nc" id="L165">        return haLine2;</span>
+    }
+
+    public void setHaLine2(StringFilter haLine2) {
+<span class="nc" id="L169">        this.haLine2 = haLine2;</span>
+<span class="nc" id="L170">    }</span>
+
+    public StringFilter getHaPostal() {
+<span class="nc" id="L173">        return haPostal;</span>
+    }
+
+    public void setHaPostal(StringFilter haPostal) {
+<span class="nc" id="L177">        this.haPostal = haPostal;</span>
+<span class="nc" id="L178">    }</span>
+
+    public StringFilter getWaLine1() {
+<span class="nc" id="L181">        return waLine1;</span>
+    }
+
+    public void setWaLine1(StringFilter waLine1) {
+<span class="nc" id="L185">        this.waLine1 = waLine1;</span>
+<span class="nc" id="L186">    }</span>
+
+    public StringFilter getWaLine2() {
+<span class="nc" id="L189">        return waLine2;</span>
+    }
+
+    public void setWaLine2(StringFilter waLine2) {
+<span class="nc" id="L193">        this.waLine2 = waLine2;</span>
+<span class="nc" id="L194">    }</span>
+
+    public StringFilter getWaPostal() {
+<span class="nc" id="L197">        return waPostal;</span>
+    }
+
+    public void setWaPostal(StringFilter waPostal) {
+<span class="nc" id="L201">        this.waPostal = waPostal;</span>
+<span class="nc" id="L202">    }</span>
+
+    public StringFilter getUcNote() {
+<span class="nc" id="L205">        return ucNote;</span>
+    }
+
+    public void setUcNote(StringFilter ucNote) {
+<span class="nc" id="L209">        this.ucNote = ucNote;</span>
+<span class="nc" id="L210">    }</span>
+
+    public StringFilter getPrimaryRole() {
+<span class="nc" id="L213">        return primaryRole;</span>
+    }
+
+    public void setPrimaryRole(StringFilter primaryRole) {
+<span class="nc" id="L217">        this.primaryRole = primaryRole;</span>
+<span class="nc" id="L218">    }</span>
+
+    public StringFilter getSecondaryRole() {
+<span class="nc" id="L221">        return secondaryRole;</span>
+    }
+
+    public void setSecondaryRole(StringFilter secondaryRole) {
+<span class="nc" id="L225">        this.secondaryRole = secondaryRole;</span>
+<span class="nc" id="L226">    }</span>
+
+    public StringFilter getInitiative() {
+<span class="nc" id="L229">        return initiative;</span>
+    }
+
+    public void setInitiative(StringFilter initiative) {
+<span class="nc" id="L233">        this.initiative = initiative;</span>
+<span class="nc" id="L234">    }</span>
+
+    public StringFilter getTechnology() {
+<span class="nc" id="L237">        return technology;</span>
+    }
+
+    public void setTechnology(StringFilter technology) {
+<span class="nc" id="L241">        this.technology = technology;</span>
+<span class="nc" id="L242">    }</span>
+
+    public StringFilter getTeamName() {
+<span class="nc" id="L245">        return teamName;</span>
+    }
+
+    public void setTeamName(StringFilter teamName) {
+<span class="nc" id="L249">        this.teamName = teamName;</span>
+<span class="nc" id="L250">    }</span>
+
+    public LongFilter getQnowUserId() {
+<span class="nc" id="L253">        return qnowUserId;</span>
+    }
+
+    public void setQnowUserId(LongFilter qnowUserId) {
+<span class="nc" id="L257">        this.qnowUserId = qnowUserId;</span>
+<span class="nc" id="L258">    }</span>
+
+    public LongFilter getWaCityId() {
+<span class="nc" id="L261">        return waCityId;</span>
+    }
+
+    public void setWaCityId(LongFilter waCityId) {
+<span class="nc" id="L265">        this.waCityId = waCityId;</span>
+<span class="nc" id="L266">    }</span>
+
+    public LongFilter getHaCityId() {
+<span class="nc" id="L269">        return haCityId;</span>
+    }
+
+    public void setHaCityId(LongFilter haCityId) {
+<span class="nc" id="L273">        this.haCityId = haCityId;</span>
+<span class="nc" id="L274">    }</span>
+
+    public LongFilter getWaStateId() {
+<span class="nc" id="L277">        return waStateId;</span>
+    }
+
+    public void setWaStateId(LongFilter waStateId) {
+<span class="nc" id="L281">        this.waStateId = waStateId;</span>
+<span class="nc" id="L282">    }</span>
+
+    public LongFilter getHaStateId() {
+<span class="nc" id="L285">        return haStateId;</span>
+    }
+
+    public void setHaStateId(LongFilter haStateId) {
+<span class="nc" id="L289">        this.haStateId = haStateId;</span>
+<span class="nc" id="L290">    }</span>
+
+    public LongFilter getWaCountryId() {
+<span class="nc" id="L293">        return waCountryId;</span>
+    }
+
+    public void setWaCountryId(LongFilter waCountryId) {
+<span class="nc" id="L297">        this.waCountryId = waCountryId;</span>
+<span class="nc" id="L298">    }</span>
+
+    public LongFilter getHaCountryId() {
+<span class="nc" id="L301">        return haCountryId;</span>
+    }
+
+    public void setHaCountryId(LongFilter haCountryId) {
+<span class="nc" id="L305">        this.haCountryId = haCountryId;</span>
+<span class="nc" id="L306">    }</span>
+
+    public LongFilter getGroupMembersId() {
+<span class="nc" id="L309">        return groupMembersId;</span>
+    }
+
+    public void setGroupMembersId(LongFilter groupMembersId) {
+<span class="nc" id="L313">        this.groupMembersId = groupMembersId;</span>
+<span class="nc" id="L314">    }</span>
+
+    public LongFilter getImEmployeeId() {
+<span class="nc" id="L317">        return imEmployeeId;</span>
+    }
+
+    public void setImEmployeeId(LongFilter imEmployeeId) {
+<span class="nc" id="L321">        this.imEmployeeId = imEmployeeId;</span>
+<span class="nc" id="L322">    }</span>
+
+
+    @Override
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L327" title="All 2 branches missed.">        if (this == o) {</span>
+<span class="nc" id="L328">            return true;</span>
+        }
+<span class="nc bnc" id="L330" title="All 4 branches missed.">        if (o == null || getClass() != o.getClass()) {</span>
+<span class="nc" id="L331">            return false;</span>
+        }
+<span class="nc" id="L333">        final UserContactCriteria that = (UserContactCriteria) o;</span>
+<span class="nc" id="L334">        return</span>
+<span class="nc bnc" id="L335" title="All 2 branches missed.">            Objects.equals(id, that.id) &amp;&amp;</span>
+<span class="nc bnc" id="L336" title="All 2 branches missed.">            Objects.equals(homePhone, that.homePhone) &amp;&amp;</span>
+<span class="nc bnc" id="L337" title="All 2 branches missed.">            Objects.equals(workPhone, that.workPhone) &amp;&amp;</span>
+<span class="nc bnc" id="L338" title="All 2 branches missed.">            Objects.equals(cellPhone, that.cellPhone) &amp;&amp;</span>
+<span class="nc bnc" id="L339" title="All 2 branches missed.">            Objects.equals(permentAddress, that.permentAddress) &amp;&amp;</span>
+<span class="nc bnc" id="L340" title="All 2 branches missed.">            Objects.equals(haLine1, that.haLine1) &amp;&amp;</span>
+<span class="nc bnc" id="L341" title="All 2 branches missed.">            Objects.equals(haLine2, that.haLine2) &amp;&amp;</span>
+<span class="nc bnc" id="L342" title="All 2 branches missed.">            Objects.equals(haPostal, that.haPostal) &amp;&amp;</span>
+<span class="nc bnc" id="L343" title="All 2 branches missed.">            Objects.equals(waLine1, that.waLine1) &amp;&amp;</span>
+<span class="nc bnc" id="L344" title="All 2 branches missed.">            Objects.equals(waLine2, that.waLine2) &amp;&amp;</span>
+<span class="nc bnc" id="L345" title="All 2 branches missed.">            Objects.equals(waPostal, that.waPostal) &amp;&amp;</span>
+<span class="nc bnc" id="L346" title="All 2 branches missed.">            Objects.equals(ucNote, that.ucNote) &amp;&amp;</span>
+<span class="nc bnc" id="L347" title="All 2 branches missed.">            Objects.equals(primaryRole, that.primaryRole) &amp;&amp;</span>
+<span class="nc bnc" id="L348" title="All 2 branches missed.">            Objects.equals(secondaryRole, that.secondaryRole) &amp;&amp;</span>
+<span class="nc bnc" id="L349" title="All 2 branches missed.">            Objects.equals(initiative, that.initiative) &amp;&amp;</span>
+<span class="nc bnc" id="L350" title="All 2 branches missed.">            Objects.equals(technology, that.technology) &amp;&amp;</span>
+<span class="nc bnc" id="L351" title="All 2 branches missed.">            Objects.equals(teamName, that.teamName) &amp;&amp;</span>
+<span class="nc bnc" id="L352" title="All 2 branches missed.">            Objects.equals(qnowUserId, that.qnowUserId) &amp;&amp;</span>
+<span class="nc bnc" id="L353" title="All 2 branches missed.">            Objects.equals(waCityId, that.waCityId) &amp;&amp;</span>
+<span class="nc bnc" id="L354" title="All 2 branches missed.">            Objects.equals(haCityId, that.haCityId) &amp;&amp;</span>
+<span class="nc bnc" id="L355" title="All 2 branches missed.">            Objects.equals(waStateId, that.waStateId) &amp;&amp;</span>
+<span class="nc bnc" id="L356" title="All 2 branches missed.">            Objects.equals(haStateId, that.haStateId) &amp;&amp;</span>
+<span class="nc bnc" id="L357" title="All 2 branches missed.">            Objects.equals(waCountryId, that.waCountryId) &amp;&amp;</span>
+<span class="nc bnc" id="L358" title="All 2 branches missed.">            Objects.equals(haCountryId, that.haCountryId) &amp;&amp;</span>
+<span class="nc bnc" id="L359" title="All 2 branches missed.">            Objects.equals(groupMembersId, that.groupMembersId) &amp;&amp;</span>
+<span class="nc bnc" id="L360" title="All 2 branches missed.">            Objects.equals(imEmployeeId, that.imEmployeeId);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L365">        return Objects.hash(</span>
+        id,
+        homePhone,
+        workPhone,
+        cellPhone,
+        permentAddress,
+        haLine1,
+        haLine2,
+        haPostal,
+        waLine1,
+        waLine2,
+        waPostal,
+        ucNote,
+        primaryRole,
+        secondaryRole,
+        initiative,
+        technology,
+        teamName,
+        qnowUserId,
+        waCityId,
+        haCityId,
+        waStateId,
+        haStateId,
+        waCountryId,
+        haCountryId,
+        groupMembersId,
+        imEmployeeId
+        );
+    }
+
+    @Override
+    public String toString() {
+<span class="nc bnc" id="L397" title="All 52 branches missed.">        return &quot;UserContactCriteria{&quot; +</span>
+                (id != null ? &quot;id=&quot; + id + &quot;, &quot; : &quot;&quot;) +
+                (homePhone != null ? &quot;homePhone=&quot; + homePhone + &quot;, &quot; : &quot;&quot;) +
+                (workPhone != null ? &quot;workPhone=&quot; + workPhone + &quot;, &quot; : &quot;&quot;) +
+                (cellPhone != null ? &quot;cellPhone=&quot; + cellPhone + &quot;, &quot; : &quot;&quot;) +
+                (permentAddress != null ? &quot;permentAddress=&quot; + permentAddress + &quot;, &quot; : &quot;&quot;) +
+                (haLine1 != null ? &quot;haLine1=&quot; + haLine1 + &quot;, &quot; : &quot;&quot;) +
+                (haLine2 != null ? &quot;haLine2=&quot; + haLine2 + &quot;, &quot; : &quot;&quot;) +
+                (haPostal != null ? &quot;haPostal=&quot; + haPostal + &quot;, &quot; : &quot;&quot;) +
+                (waLine1 != null ? &quot;waLine1=&quot; + waLine1 + &quot;, &quot; : &quot;&quot;) +
+                (waLine2 != null ? &quot;waLine2=&quot; + waLine2 + &quot;, &quot; : &quot;&quot;) +
+                (waPostal != null ? &quot;waPostal=&quot; + waPostal + &quot;, &quot; : &quot;&quot;) +
+                (ucNote != null ? &quot;ucNote=&quot; + ucNote + &quot;, &quot; : &quot;&quot;) +
+                (primaryRole != null ? &quot;primaryRole=&quot; + primaryRole + &quot;, &quot; : &quot;&quot;) +
+                (secondaryRole != null ? &quot;secondaryRole=&quot; + secondaryRole + &quot;, &quot; : &quot;&quot;) +
+                (initiative != null ? &quot;initiative=&quot; + initiative + &quot;, &quot; : &quot;&quot;) +
+                (technology != null ? &quot;technology=&quot; + technology + &quot;, &quot; : &quot;&quot;) +
+                (teamName != null ? &quot;teamName=&quot; + teamName + &quot;, &quot; : &quot;&quot;) +
+                (qnowUserId != null ? &quot;qnowUserId=&quot; + qnowUserId + &quot;, &quot; : &quot;&quot;) +
+                (waCityId != null ? &quot;waCityId=&quot; + waCityId + &quot;, &quot; : &quot;&quot;) +
+                (haCityId != null ? &quot;haCityId=&quot; + haCityId + &quot;, &quot; : &quot;&quot;) +
+                (waStateId != null ? &quot;waStateId=&quot; + waStateId + &quot;, &quot; : &quot;&quot;) +
+                (haStateId != null ? &quot;haStateId=&quot; + haStateId + &quot;, &quot; : &quot;&quot;) +
+                (waCountryId != null ? &quot;waCountryId=&quot; + waCountryId + &quot;, &quot; : &quot;&quot;) +
+                (haCountryId != null ? &quot;haCountryId=&quot; + haCountryId + &quot;, &quot; : &quot;&quot;) +
+                (groupMembersId != null ? &quot;groupMembersId=&quot; + groupMembersId + &quot;, &quot; : &quot;&quot;) +
+                (imEmployeeId != null ? &quot;imEmployeeId=&quot; + imEmployeeId + &quot;, &quot; : &quot;&quot;) +
+            &quot;}&quot;;
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

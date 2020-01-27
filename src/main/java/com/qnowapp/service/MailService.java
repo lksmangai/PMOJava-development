@@ -2,7 +2,6 @@ package com.qnowapp.service;
 
 import com.qnowapp.domain.User;
 
-
 import io.github.jhipster.config.JHipsterProperties;
 
 import java.nio.charset.StandardCharsets;

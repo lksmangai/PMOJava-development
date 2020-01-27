@@ -1,0 +1,22 @@
+{
+  "App": {
+    "employeeStatus": {
+      "home": {
+        "title": "Employee Statuses",
+        "createLabel": "Create a new Employee Status",
+        "createOrEditLabel": "Create or edit a Employee Status"
+      },
+      "created": "A new Employee Status is created with identifier {{ param }}",
+      "updated": "A Employee Status is updated with identifier {{ param }}",
+      "deleted": "A Employee Status is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Employee Status {{ id }}?"
+      },
+      "detail": {
+        "title": "Employee Status"
+      },
+      "statusCode": "Status Code",
+      "statusName": "Status Name"
+    }
+  }
+}

@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImProjectsQueryService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.service</a> &gt; <span class="el_source">ImProjectsQueryService.java</span></div><h1>ImProjectsQueryService.java</h1><pre class="source lang-java linenums">package com.qnowapp.service;
+
+import java.util.List;
+
+import javax.persistence.criteria.JoinType;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import io.github.jhipster.service.QueryService;
+
+import com.qnowapp.domain.ImProjects;
+import com.qnowapp.domain.*; // for static metamodels
+import com.qnowapp.repository.ImProjectsRepository;
+import com.qnowapp.service.dto.ImProjectsCriteria;
+
+/**
+ * Service for executing complex queries for {@link ImProjects} entities in the database.
+ * The main input is a {@link ImProjectsCriteria} which gets converted to {@link Specification},
+ * in a way that all the filters must apply.
+ * It returns a {@link List} of {@link ImProjects} or a {@link Page} of {@link ImProjects} which fulfills the criteria.
+ */
+@Service
+@Transactional(readOnly = true)
+public class ImProjectsQueryService extends QueryService&lt;ImProjects&gt; {
+
+<span class="nc" id="L32">    private final Logger log = LoggerFactory.getLogger(ImProjectsQueryService.class);</span>
+
+    private final ImProjectsRepository imProjectsRepository;
+
+<span class="nc" id="L36">    public ImProjectsQueryService(ImProjectsRepository imProjectsRepository) {</span>
+<span class="nc" id="L37">        this.imProjectsRepository = imProjectsRepository;</span>
+<span class="nc" id="L38">    }</span>
+
+    /**
+     * Return a {@link List} of {@link ImProjects} which matches the criteria from the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @return the matching entities.
+     */
+    @Transactional(readOnly = true)
+    public List&lt;ImProjects&gt; findByCriteria(ImProjectsCriteria criteria) {
+<span class="nc" id="L47">        log.debug(&quot;find by criteria : {}&quot;, criteria);</span>
+<span class="nc" id="L48">        final Specification&lt;ImProjects&gt; specification = createSpecification(criteria);</span>
+<span class="nc" id="L49">        return imProjectsRepository.findAll(specification);</span>
+    }
+
+    /**
+     * Return a {@link Page} of {@link ImProjects} which matches the criteria from the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @param page The page, which should be returned.
+     * @return the matching entities.
+     */
+    @Transactional(readOnly = true)
+    public Page&lt;ImProjects&gt; findByCriteria(ImProjectsCriteria criteria, Pageable page) {
+<span class="nc" id="L60">        log.debug(&quot;find by criteria : {}, page: {}&quot;, criteria, page);</span>
+<span class="nc" id="L61">        final Specification&lt;ImProjects&gt; specification = createSpecification(criteria);</span>
+<span class="nc" id="L62">        return imProjectsRepository.findAll(specification, page);</span>
+    }
+
+    /**
+     * Return the number of matching entities in the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @return the number of matching entities.
+     */
+    @Transactional(readOnly = true)
+    public long countByCriteria(ImProjectsCriteria criteria) {
+<span class="nc" id="L72">        log.debug(&quot;count by criteria : {}&quot;, criteria);</span>
+<span class="nc" id="L73">        final Specification&lt;ImProjects&gt; specification = createSpecification(criteria);</span>
+<span class="nc" id="L74">        return imProjectsRepository.count(specification);</span>
+    }
+
+    /**
+     * Function to convert ImProjectsCriteria to a {@link Specification}.
+     */
+    private Specification&lt;ImProjects&gt; createSpecification(ImProjectsCriteria criteria) {
+<span class="nc" id="L81">        Specification&lt;ImProjects&gt; specification = Specification.where(null);</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">        if (criteria != null) {</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">            if (criteria.getId() != null) {</span>
+<span class="nc" id="L84">                specification = specification.and(buildSpecification(criteria.getId(), ImProjects_.id));</span>
+            }
+<span class="nc bnc" id="L86" title="All 2 branches missed.">            if (criteria.getProjectName() != null) {</span>
+<span class="nc" id="L87">                specification = specification.and(buildStringSpecification(criteria.getProjectName(), ImProjects_.projectName));</span>
+            }
+<span class="nc bnc" id="L89" title="All 2 branches missed.">            if (criteria.getProjectNr() != null) {</span>
+<span class="nc" id="L90">                specification = specification.and(buildStringSpecification(criteria.getProjectNr(), ImProjects_.projectNr));</span>
+            }
+<span class="nc bnc" id="L92" title="All 2 branches missed.">            if (criteria.getProjectPath() != null) {</span>
+<span class="nc" id="L93">                specification = specification.and(buildStringSpecification(criteria.getProjectPath(), ImProjects_.projectPath));</span>
+            }
+<span class="nc bnc" id="L95" title="All 2 branches missed.">            if (criteria.getTreeSortkey() != null) {</span>
+<span class="nc" id="L96">                specification = specification.and(buildStringSpecification(criteria.getTreeSortkey(), ImProjects_.treeSortkey));</span>
+            }
+<span class="nc bnc" id="L98" title="All 2 branches missed.">            if (criteria.getMaxChildSortkey() != null) {</span>
+<span class="nc" id="L99">                specification = specification.and(buildStringSpecification(criteria.getMaxChildSortkey(), ImProjects_.maxChildSortkey));</span>
+            }
+<span class="nc bnc" id="L101" title="All 2 branches missed.">            if (criteria.getDescription() != null) {</span>
+<span class="nc" id="L102">                specification = specification.and(buildStringSpecification(criteria.getDescription(), ImProjects_.description));</span>
+            }
+<span class="nc bnc" id="L104" title="All 2 branches missed.">            if (criteria.getBillingTypeId() != null) {</span>
+<span class="nc" id="L105">                specification = specification.and(buildRangeSpecification(criteria.getBillingTypeId(), ImProjects_.billingTypeId));</span>
+            }
+<span class="nc bnc" id="L107" title="All 2 branches missed.">            if (criteria.getNote() != null) {</span>
+<span class="nc" id="L108">                specification = specification.and(buildStringSpecification(criteria.getNote(), ImProjects_.note));</span>
+            }
+<span class="nc bnc" id="L110" title="All 2 branches missed.">            if (criteria.getRequiresReportP() != null) {</span>
+<span class="nc" id="L111">                specification = specification.and(buildSpecification(criteria.getRequiresReportP(), ImProjects_.requiresReportP));</span>
+            }
+<span class="nc bnc" id="L113" title="All 2 branches missed.">            if (criteria.getProjectBudget() != null) {</span>
+<span class="nc" id="L114">                specification = specification.and(buildRangeSpecification(criteria.getProjectBudget(), ImProjects_.projectBudget));</span>
+            }
+<span class="nc bnc" id="L116" title="All 2 branches missed.">            if (criteria.getProjectRisk() != null) {</span>
+<span class="nc" id="L117">                specification = specification.and(buildStringSpecification(criteria.getProjectRisk(), ImProjects_.projectRisk));</span>
+            }
+<span class="nc bnc" id="L119" title="All 2 branches missed.">            if (criteria.getCorporateSponsor() != null) {</span>
+<span class="nc" id="L120">                specification = specification.and(buildStringSpecification(criteria.getCorporateSponsor(), ImProjects_.corporateSponsor));</span>
+            }
+<span class="nc bnc" id="L122" title="All 2 branches missed.">            if (criteria.getPercentCompleted() != null) {</span>
+<span class="nc" id="L123">                specification = specification.and(buildRangeSpecification(criteria.getPercentCompleted(), ImProjects_.percentCompleted));</span>
+            }
+<span class="nc bnc" id="L125" title="All 2 branches missed.">            if (criteria.getProjectBudgetHours() != null) {</span>
+<span class="nc" id="L126">                specification = specification.and(buildRangeSpecification(criteria.getProjectBudgetHours(), ImProjects_.projectBudgetHours));</span>
+            }
+<span class="nc bnc" id="L128" title="All 2 branches missed.">            if (criteria.getCostQuotesCache() != null) {</span>
+<span class="nc" id="L129">                specification = specification.and(buildRangeSpecification(criteria.getCostQuotesCache(), ImProjects_.costQuotesCache));</span>
+            }
+<span class="nc bnc" id="L131" title="All 2 branches missed.">            if (criteria.getCostInvoicesCache() != null) {</span>
+<span class="nc" id="L132">                specification = specification.and(buildRangeSpecification(criteria.getCostInvoicesCache(), ImProjects_.costInvoicesCache));</span>
+            }
+<span class="nc bnc" id="L134" title="All 2 branches missed.">            if (criteria.getCostTimesheetPlannedCache() != null) {</span>
+<span class="nc" id="L135">                specification = specification.and(buildRangeSpecification(criteria.getCostTimesheetPlannedCache(), ImProjects_.costTimesheetPlannedCache));</span>
+            }
+<span class="nc bnc" id="L137" title="All 2 branches missed.">            if (criteria.getCostPurchaseOrdersCache() != null) {</span>
+<span class="nc" id="L138">                specification = specification.and(buildRangeSpecification(criteria.getCostPurchaseOrdersCache(), ImProjects_.costPurchaseOrdersCache));</span>
+            }
+<span class="nc bnc" id="L140" title="All 2 branches missed.">            if (criteria.getCostBillsCache() != null) {</span>
+<span class="nc" id="L141">                specification = specification.and(buildRangeSpecification(criteria.getCostBillsCache(), ImProjects_.costBillsCache));</span>
+            }
+<span class="nc bnc" id="L143" title="All 2 branches missed.">            if (criteria.getCostTimesheetLoggedCache() != null) {</span>
+<span class="nc" id="L144">                specification = specification.and(buildRangeSpecification(criteria.getCostTimesheetLoggedCache(), ImProjects_.costTimesheetLoggedCache));</span>
+            }
+<span class="nc bnc" id="L146" title="All 2 branches missed.">            if (criteria.getEndDate() != null) {</span>
+<span class="nc" id="L147">                specification = specification.and(buildRangeSpecification(criteria.getEndDate(), ImProjects_.endDate));</span>
+            }
+<span class="nc bnc" id="L149" title="All 2 branches missed.">            if (criteria.getStartDate() != null) {</span>
+<span class="nc" id="L150">                specification = specification.and(buildRangeSpecification(criteria.getStartDate(), ImProjects_.startDate));</span>
+            }
+<span class="nc bnc" id="L152" title="All 2 branches missed.">            if (criteria.getTemplateP() != null) {</span>
+<span class="nc" id="L153">                specification = specification.and(buildSpecification(criteria.getTemplateP(), ImProjects_.templateP));</span>
+            }
+<span class="nc bnc" id="L155" title="All 2 branches missed.">            if (criteria.getSortOrder() != null) {</span>
+<span class="nc" id="L156">                specification = specification.and(buildRangeSpecification(criteria.getSortOrder(), ImProjects_.sortOrder));</span>
+            }
+<span class="nc bnc" id="L158" title="All 2 branches missed.">            if (criteria.getReportedHoursCache() != null) {</span>
+<span class="nc" id="L159">                specification = specification.and(buildRangeSpecification(criteria.getReportedHoursCache(), ImProjects_.reportedHoursCache));</span>
+            }
+<span class="nc bnc" id="L161" title="All 2 branches missed.">            if (criteria.getCostExpensePlannedCache() != null) {</span>
+<span class="nc" id="L162">                specification = specification.and(buildRangeSpecification(criteria.getCostExpensePlannedCache(), ImProjects_.costExpensePlannedCache));</span>
+            }
+<span class="nc bnc" id="L164" title="All 2 branches missed.">            if (criteria.getCostExpenseLoggedCache() != null) {</span>
+<span class="nc" id="L165">                specification = specification.and(buildRangeSpecification(criteria.getCostExpenseLoggedCache(), ImProjects_.costExpenseLoggedCache));</span>
+            }
+<span class="nc bnc" id="L167" title="All 2 branches missed.">            if (criteria.getConfirmDate() != null) {</span>
+<span class="nc" id="L168">                specification = specification.and(buildRangeSpecification(criteria.getConfirmDate(), ImProjects_.confirmDate));</span>
+            }
+<span class="nc bnc" id="L170" title="All 2 branches missed.">            if (criteria.getCostDeliveryNotesCache() != null) {</span>
+<span class="nc" id="L171">                specification = specification.and(buildRangeSpecification(criteria.getCostDeliveryNotesCache(), ImProjects_.costDeliveryNotesCache));</span>
+            }
+<span class="nc bnc" id="L173" title="All 2 branches missed.">            if (criteria.getCostCacheDirty() != null) {</span>
+<span class="nc" id="L174">                specification = specification.and(buildRangeSpecification(criteria.getCostCacheDirty(), ImProjects_.costCacheDirty));</span>
+            }
+<span class="nc bnc" id="L176" title="All 2 branches missed.">            if (criteria.getMilestoneP() != null) {</span>
+<span class="nc" id="L177">                specification = specification.and(buildSpecification(criteria.getMilestoneP(), ImProjects_.milestoneP));</span>
+            }
+<span class="nc bnc" id="L179" title="All 2 branches missed.">            if (criteria.getReleaseItemP() != null) {</span>
+<span class="nc" id="L180">                specification = specification.and(buildStringSpecification(criteria.getReleaseItemP(), ImProjects_.releaseItemP));</span>
+            }
+<span class="nc bnc" id="L182" title="All 2 branches missed.">            if (criteria.getPresalesProbability() != null) {</span>
+<span class="nc" id="L183">                specification = specification.and(buildRangeSpecification(criteria.getPresalesProbability(), ImProjects_.presalesProbability));</span>
+            }
+<span class="nc bnc" id="L185" title="All 2 branches missed.">            if (criteria.getPresalesValue() != null) {</span>
+<span class="nc" id="L186">                specification = specification.and(buildRangeSpecification(criteria.getPresalesValue(), ImProjects_.presalesValue));</span>
+            }
+<span class="nc bnc" id="L188" title="All 2 branches missed.">            if (criteria.getReportedDaysCache() != null) {</span>
+<span class="nc" id="L189">                specification = specification.and(buildRangeSpecification(criteria.getReportedDaysCache(), ImProjects_.reportedDaysCache));</span>
+            }
+<span class="nc bnc" id="L191" title="All 2 branches missed.">            if (criteria.getPresalesValueCurrency() != null) {</span>
+<span class="nc" id="L192">                specification = specification.and(buildStringSpecification(criteria.getPresalesValueCurrency(), ImProjects_.presalesValueCurrency));</span>
+            }
+<span class="nc bnc" id="L194" title="All 2 branches missed.">            if (criteria.getOpportunitySalesStageId() != null) {</span>
+<span class="nc" id="L195">                specification = specification.and(buildRangeSpecification(criteria.getOpportunitySalesStageId(), ImProjects_.opportunitySalesStageId));</span>
+            }
+<span class="nc bnc" id="L197" title="All 2 branches missed.">            if (criteria.getOpportunityCampaignId() != null) {</span>
+<span class="nc" id="L198">                specification = specification.and(buildRangeSpecification(criteria.getOpportunityCampaignId(), ImProjects_.opportunityCampaignId));</span>
+            }
+<span class="nc bnc" id="L200" title="All 2 branches missed.">            if (criteria.getScoreRevenue() != null) {</span>
+<span class="nc" id="L201">                specification = specification.and(buildRangeSpecification(criteria.getScoreRevenue(), ImProjects_.scoreRevenue));</span>
+            }
+<span class="nc bnc" id="L203" title="All 2 branches missed.">            if (criteria.getScoreStrategic() != null) {</span>
+<span class="nc" id="L204">                specification = specification.and(buildRangeSpecification(criteria.getScoreStrategic(), ImProjects_.scoreStrategic));</span>
+            }
+<span class="nc bnc" id="L206" title="All 2 branches missed.">            if (criteria.getScoreFinanceNpv() != null) {</span>
+<span class="nc" id="L207">                specification = specification.and(buildRangeSpecification(criteria.getScoreFinanceNpv(), ImProjects_.scoreFinanceNpv));</span>
+            }
+<span class="nc bnc" id="L209" title="All 2 branches missed.">            if (criteria.getScoreCustomers() != null) {</span>
+<span class="nc" id="L210">                specification = specification.and(buildRangeSpecification(criteria.getScoreCustomers(), ImProjects_.scoreCustomers));</span>
+            }
+<span class="nc bnc" id="L212" title="All 2 branches missed.">            if (criteria.getScoreFinanceCost() != null) {</span>
+<span class="nc" id="L213">                specification = specification.and(buildRangeSpecification(criteria.getScoreFinanceCost(), ImProjects_.scoreFinanceCost));</span>
+            }
+<span class="nc bnc" id="L215" title="All 2 branches missed.">            if (criteria.getCostBillsPlanned() != null) {</span>
+<span class="nc" id="L216">                specification = specification.and(buildRangeSpecification(criteria.getCostBillsPlanned(), ImProjects_.costBillsPlanned));</span>
+            }
+<span class="nc bnc" id="L218" title="All 2 branches missed.">            if (criteria.getCostExpensesPlanned() != null) {</span>
+<span class="nc" id="L219">                specification = specification.and(buildRangeSpecification(criteria.getCostExpensesPlanned(), ImProjects_.costExpensesPlanned));</span>
+            }
+<span class="nc bnc" id="L221" title="All 2 branches missed.">            if (criteria.getScoreRisk() != null) {</span>
+<span class="nc" id="L222">                specification = specification.and(buildRangeSpecification(criteria.getScoreRisk(), ImProjects_.scoreRisk));</span>
+            }
+<span class="nc bnc" id="L224" title="All 2 branches missed.">            if (criteria.getScoreCapabilities() != null) {</span>
+<span class="nc" id="L225">                specification = specification.and(buildRangeSpecification(criteria.getScoreCapabilities(), ImProjects_.scoreCapabilities));</span>
+            }
+<span class="nc bnc" id="L227" title="All 2 branches missed.">            if (criteria.getScoreEinanceRoi() != null) {</span>
+<span class="nc" id="L228">                specification = specification.and(buildRangeSpecification(criteria.getScoreEinanceRoi(), ImProjects_.scoreEinanceRoi));</span>
+            }
+<span class="nc bnc" id="L230" title="All 2 branches missed.">            if (criteria.getProjectUserwiseBoard() != null) {</span>
+<span class="nc" id="L231">                specification = specification.and(buildStringSpecification(criteria.getProjectUserwiseBoard(), ImProjects_.projectUserwiseBoard));</span>
+            }
+<span class="nc bnc" id="L233" title="All 2 branches missed.">            if (criteria.getProjectBringNextday() != null) {</span>
+<span class="nc" id="L234">                specification = specification.and(buildRangeSpecification(criteria.getProjectBringNextday(), ImProjects_.projectBringNextday));</span>
+            }
+<span class="nc bnc" id="L236" title="All 2 branches missed.">            if (criteria.getProjectBringSameboard() != null) {</span>
+<span class="nc" id="L237">                specification = specification.and(buildStringSpecification(criteria.getProjectBringSameboard(), ImProjects_.projectBringSameboard));</span>
+            }
+<span class="nc bnc" id="L239" title="All 2 branches missed.">            if (criteria.getProjectNewboardEverytime() != null) {</span>
+<span class="nc" id="L240">                specification = specification.and(buildStringSpecification(criteria.getProjectNewboardEverytime(), ImProjects_.projectNewboardEverytime));</span>
+            }
+<span class="nc bnc" id="L242" title="All 2 branches missed.">            if (criteria.getProjectUserwiseBoard2() != null) {</span>
+<span class="nc" id="L243">                specification = specification.and(buildStringSpecification(criteria.getProjectUserwiseBoard2(), ImProjects_.projectUserwiseBoard2));</span>
+            }
+<span class="nc bnc" id="L245" title="All 2 branches missed.">            if (criteria.getProjectBringSameboard2() != null) {</span>
+<span class="nc" id="L246">                specification = specification.and(buildStringSpecification(criteria.getProjectBringSameboard2(), ImProjects_.projectBringSameboard2));</span>
+            }
+<span class="nc bnc" id="L248" title="All 2 branches missed.">            if (criteria.getProjectNewboard2Everytime() != null) {</span>
+<span class="nc" id="L249">                specification = specification.and(buildRangeSpecification(criteria.getProjectNewboard2Everytime(), ImProjects_.projectNewboard2Everytime));</span>
+            }
+<span class="nc bnc" id="L251" title="All 2 branches missed.">            if (criteria.getProjectNewboard2Always() != null) {</span>
+<span class="nc" id="L252">                specification = specification.and(buildStringSpecification(criteria.getProjectNewboard2Always(), ImProjects_.projectNewboard2Always));</span>
+            }
+<span class="nc bnc" id="L254" title="All 2 branches missed.">            if (criteria.getProjectReportWeekly() != null) {</span>
+<span class="nc" id="L255">                specification = specification.and(buildStringSpecification(criteria.getProjectReportWeekly(), ImProjects_.projectReportWeekly));</span>
+            }
+<span class="nc bnc" id="L257" title="All 2 branches missed.">            if (criteria.getScoreGain() != null) {</span>
+<span class="nc" id="L258">                specification = specification.and(buildRangeSpecification(criteria.getScoreGain(), ImProjects_.scoreGain));</span>
+            }
+<span class="nc bnc" id="L260" title="All 2 branches missed.">            if (criteria.getScoreLoss() != null) {</span>
+<span class="nc" id="L261">                specification = specification.and(buildRangeSpecification(criteria.getScoreLoss(), ImProjects_.scoreLoss));</span>
+            }
+<span class="nc bnc" id="L263" title="All 2 branches missed.">            if (criteria.getScoreDelivery() != null) {</span>
+<span class="nc" id="L264">                specification = specification.and(buildRangeSpecification(criteria.getScoreDelivery(), ImProjects_.scoreDelivery));</span>
+            }
+<span class="nc bnc" id="L266" title="All 2 branches missed.">            if (criteria.getScoreOperations() != null) {</span>
+<span class="nc" id="L267">                specification = specification.and(buildRangeSpecification(criteria.getScoreOperations(), ImProjects_.scoreOperations));</span>
+            }
+<span class="nc bnc" id="L269" title="All 2 branches missed.">            if (criteria.getScoreWhy() != null) {</span>
+<span class="nc" id="L270">                specification = specification.and(buildRangeSpecification(criteria.getScoreWhy(), ImProjects_.scoreWhy));</span>
+            }
+<span class="nc bnc" id="L272" title="All 2 branches missed.">            if (criteria.getJavaServices() != null) {</span>
+<span class="nc" id="L273">                specification = specification.and(buildStringSpecification(criteria.getJavaServices(), ImProjects_.javaServices));</span>
+            }
+<span class="nc bnc" id="L275" title="All 2 branches missed.">            if (criteria.getNetServices() != null) {</span>
+<span class="nc" id="L276">                specification = specification.and(buildStringSpecification(criteria.getNetServices(), ImProjects_.netServices));</span>
+            }
+<span class="nc bnc" id="L278" title="All 2 branches missed.">            if (criteria.getCollectionLink() != null) {</span>
+<span class="nc" id="L279">                specification = specification.and(buildStringSpecification(criteria.getCollectionLink(), ImProjects_.collectionLink));</span>
+            }
+<span class="nc bnc" id="L281" title="All 2 branches missed.">            if (criteria.getTrainingLink() != null) {</span>
+<span class="nc" id="L282">                specification = specification.and(buildStringSpecification(criteria.getTrainingLink(), ImProjects_.trainingLink));</span>
+            }
+<span class="nc bnc" id="L284" title="All 2 branches missed.">            if (criteria.getCollectionName() != null) {</span>
+<span class="nc" id="L285">                specification = specification.and(buildStringSpecification(criteria.getCollectionName(), ImProjects_.collectionName));</span>
+            }
+<span class="nc bnc" id="L287" title="All 2 branches missed.">            if (criteria.getTrainingName() != null) {</span>
+<span class="nc" id="L288">                specification = specification.and(buildStringSpecification(criteria.getTrainingName(), ImProjects_.trainingName));</span>
+            }
+<span class="nc bnc" id="L290" title="All 2 branches missed.">            if (criteria.getTrainingDoc() != null) {</span>
+<span class="nc" id="L291">                specification = specification.and(buildStringSpecification(criteria.getTrainingDoc(), ImProjects_.trainingDoc));</span>
+            }
+<span class="nc bnc" id="L293" title="All 2 branches missed.">            if (criteria.getTestingRichtext() != null) {</span>
+<span class="nc" id="L294">                specification = specification.and(buildRangeSpecification(criteria.getTestingRichtext(), ImProjects_.testingRichtext));</span>
+            }
+<span class="nc bnc" id="L296" title="All 2 branches missed.">            if (criteria.getTemplateCategory() != null) {</span>
+<span class="nc" id="L297">                specification = specification.and(buildStringSpecification(criteria.getTemplateCategory(), ImProjects_.templateCategory));</span>
+            }
+<span class="nc bnc" id="L299" title="All 2 branches missed.">            if (criteria.getdType() != null) {</span>
+<span class="nc" id="L300">                specification = specification.and(buildRangeSpecification(criteria.getdType(), ImProjects_.dType));</span>
+            }
+<span class="nc bnc" id="L302" title="All 2 branches missed.">            if (criteria.getdOption() != null) {</span>
+<span class="nc" id="L303">                specification = specification.and(buildRangeSpecification(criteria.getdOption(), ImProjects_.dOption));</span>
+            }
+<span class="nc bnc" id="L305" title="All 2 branches missed.">            if (criteria.getdFilter() != null) {</span>
+<span class="nc" id="L306">                specification = specification.and(buildRangeSpecification(criteria.getdFilter(), ImProjects_.dFilter));</span>
+            }
+<span class="nc bnc" id="L308" title="All 2 branches missed.">            if (criteria.getdId() != null) {</span>
+<span class="nc" id="L309">                specification = specification.and(buildRangeSpecification(criteria.getdId(), ImProjects_.dId));</span>
+            }
+<span class="nc bnc" id="L311" title="All 2 branches missed.">            if (criteria.gettType() != null) {</span>
+<span class="nc" id="L312">                specification = specification.and(buildRangeSpecification(criteria.gettType(), ImProjects_.tType));</span>
+            }
+<span class="nc bnc" id="L314" title="All 2 branches missed.">            if (criteria.gettOption() != null) {</span>
+<span class="nc" id="L315">                specification = specification.and(buildRangeSpecification(criteria.gettOption(), ImProjects_.tOption));</span>
+            }
+<span class="nc bnc" id="L317" title="All 2 branches missed.">            if (criteria.gettFilter() != null) {</span>
+<span class="nc" id="L318">                specification = specification.and(buildRangeSpecification(criteria.gettFilter(), ImProjects_.tFilter));</span>
+            }
+<span class="nc bnc" id="L320" title="All 2 branches missed.">            if (criteria.gettId() != null) {</span>
+<span class="nc" id="L321">                specification = specification.and(buildRangeSpecification(criteria.gettId(), ImProjects_.tId));</span>
+            }
+<span class="nc bnc" id="L323" title="All 2 branches missed.">            if (criteria.getRisktype() != null) {</span>
+<span class="nc" id="L324">                specification = specification.and(buildStringSpecification(criteria.getRisktype(), ImProjects_.risktype));</span>
+            }
+<span class="nc bnc" id="L326" title="All 2 branches missed.">            if (criteria.getRiskimpact() != null) {</span>
+<span class="nc" id="L327">                specification = specification.and(buildRangeSpecification(criteria.getRiskimpact(), ImProjects_.riskimpact));</span>
+            }
+<span class="nc bnc" id="L329" title="All 2 branches missed.">            if (criteria.getRiskprobability() != null) {</span>
+<span class="nc" id="L330">                specification = specification.and(buildRangeSpecification(criteria.getRiskprobability(), ImProjects_.riskprobability));</span>
+            }
+<span class="nc bnc" id="L332" title="All 2 branches missed.">            if (criteria.getProjectInitiativeIdId() != null) {</span>
+<span class="nc" id="L333">                specification = specification.and(buildSpecification(criteria.getProjectInitiativeIdId(),</span>
+<span class="nc" id="L334">                    root -&gt; root.join(ImProjects_.projectInitiativeId, JoinType.LEFT).get(ProjectInitiativeId_.id)));</span>
+            }
+<span class="nc bnc" id="L336" title="All 2 branches missed.">            if (criteria.getProjectBusinessgoalIdId() != null) {</span>
+<span class="nc" id="L337">                specification = specification.and(buildSpecification(criteria.getProjectBusinessgoalIdId(),</span>
+<span class="nc" id="L338">                    root -&gt; root.join(ImProjects_.projectBusinessgoalId, JoinType.LEFT).get(ProjectBusinessgoalId_.id)));</span>
+            }
+<span class="nc bnc" id="L340" title="All 2 branches missed.">            if (criteria.getProjectSubgoalIdId() != null) {</span>
+<span class="nc" id="L341">                specification = specification.and(buildSpecification(criteria.getProjectSubgoalIdId(),</span>
+<span class="nc" id="L342">                    root -&gt; root.join(ImProjects_.projectSubgoalId, JoinType.LEFT).get(ProjectSubgoalId_.id)));</span>
+            }
+<span class="nc bnc" id="L344" title="All 2 branches missed.">            if (criteria.getProjectMaingoalIdId() != null) {</span>
+<span class="nc" id="L345">                specification = specification.and(buildSpecification(criteria.getProjectMaingoalIdId(),</span>
+<span class="nc" id="L346">                    root -&gt; root.join(ImProjects_.projectMaingoalId, JoinType.LEFT).get(ProjectMaingoalId_.id)));</span>
+            }
+<span class="nc bnc" id="L348" title="All 2 branches missed.">            if (criteria.getProjectBucketIdId() != null) {</span>
+<span class="nc" id="L349">                specification = specification.and(buildSpecification(criteria.getProjectBucketIdId(),</span>
+<span class="nc" id="L350">                    root -&gt; root.join(ImProjects_.projectBucketId, JoinType.LEFT).get(ProjectBucketId_.id)));</span>
+            }
+<span class="nc bnc" id="L352" title="All 2 branches missed.">            if (criteria.getProjectCostCenterIdId() != null) {</span>
+<span class="nc" id="L353">                specification = specification.and(buildSpecification(criteria.getProjectCostCenterIdId(),</span>
+<span class="nc" id="L354">                    root -&gt; root.join(ImProjects_.projectCostCenterId, JoinType.LEFT).get(ProjectCostCenterId_.id)));</span>
+            }
+<span class="nc bnc" id="L356" title="All 2 branches missed.">            if (criteria.getOpportunityPriorityIdId() != null) {</span>
+<span class="nc" id="L357">                specification = specification.and(buildSpecification(criteria.getOpportunityPriorityIdId(),</span>
+<span class="nc" id="L358">                    root -&gt; root.join(ImProjects_.opportunityPriorityId, JoinType.LEFT).get(OpportunityPriorityId_.id)));</span>
+            }
+<span class="nc bnc" id="L360" title="All 2 branches missed.">            if (criteria.getBacklogPracticeId() != null) {</span>
+<span class="nc" id="L361">                specification = specification.and(buildSpecification(criteria.getBacklogPracticeId(),</span>
+<span class="nc" id="L362">                    root -&gt; root.join(ImProjects_.backlogPractice, JoinType.LEFT).get(BacklogPractice_.id)));</span>
+            }
+<span class="nc bnc" id="L364" title="All 2 branches missed.">            if (criteria.getProjectThemeId() != null) {</span>
+<span class="nc" id="L365">                specification = specification.and(buildSpecification(criteria.getProjectThemeId(),</span>
+<span class="nc" id="L366">                    root -&gt; root.join(ImProjects_.projectTheme, JoinType.LEFT).get(ProjectTheme_.id)));</span>
+            }
+<span class="nc bnc" id="L368" title="All 2 branches missed.">            if (criteria.getProjectClassId() != null) {</span>
+<span class="nc" id="L369">                specification = specification.and(buildSpecification(criteria.getProjectClassId(),</span>
+<span class="nc" id="L370">                    root -&gt; root.join(ImProjects_.projectClass, JoinType.LEFT).get(ProjectClass_.id)));</span>
+            }
+<span class="nc bnc" id="L372" title="All 2 branches missed.">            if (criteria.getProjectVerticalId() != null) {</span>
+<span class="nc" id="L373">                specification = specification.and(buildSpecification(criteria.getProjectVerticalId(),</span>
+<span class="nc" id="L374">                    root -&gt; root.join(ImProjects_.projectVertical, JoinType.LEFT).get(ProjectVertical_.id)));</span>
+            }
+<span class="nc bnc" id="L376" title="All 2 branches missed.">            if (criteria.getProjectBoardIdId() != null) {</span>
+<span class="nc" id="L377">                specification = specification.and(buildSpecification(criteria.getProjectBoardIdId(),</span>
+<span class="nc" id="L378">                    root -&gt; root.join(ImProjects_.projectBoardId, JoinType.LEFT).get(ProjectBoardId_.id)));</span>
+            }
+<span class="nc bnc" id="L380" title="All 2 branches missed.">            if (criteria.getProjectBoard2IdId() != null) {</span>
+<span class="nc" id="L381">                specification = specification.and(buildSpecification(criteria.getProjectBoard2IdId(),</span>
+<span class="nc" id="L382">                    root -&gt; root.join(ImProjects_.projectBoard2Id, JoinType.LEFT).get(ProjectBoardId_.id)));</span>
+            }
+<span class="nc bnc" id="L384" title="All 2 branches missed.">            if (criteria.getProjectStatusIdId() != null) {</span>
+<span class="nc" id="L385">                specification = specification.and(buildSpecification(criteria.getProjectStatusIdId(),</span>
+<span class="nc" id="L386">                    root -&gt; root.join(ImProjects_.projectStatusId, JoinType.LEFT).get(ProjectStatusId_.id)));</span>
+            }
+<span class="nc bnc" id="L388" title="All 2 branches missed.">            if (criteria.getProjectTypeIdId() != null) {</span>
+<span class="nc" id="L389">                specification = specification.and(buildSpecification(criteria.getProjectTypeIdId(),</span>
+<span class="nc" id="L390">                    root -&gt; root.join(ImProjects_.projectTypeId, JoinType.LEFT).get(ProjectTypeId_.id)));</span>
+            }
+<span class="nc bnc" id="L392" title="All 2 branches missed.">            if (criteria.getProjectLeadIdId() != null) {</span>
+<span class="nc" id="L393">                specification = specification.and(buildSpecification(criteria.getProjectLeadIdId(),</span>
+<span class="nc" id="L394">                    root -&gt; root.join(ImProjects_.projectLeadId, JoinType.LEFT).get(ImEmployee_.id)));</span>
+            }
+<span class="nc bnc" id="L396" title="All 2 branches missed.">            if (criteria.getParentIdId() != null) {</span>
+<span class="nc" id="L397">                specification = specification.and(buildSpecification(criteria.getParentIdId(),</span>
+<span class="nc" id="L398">                    root -&gt; root.join(ImProjects_.parentId, JoinType.LEFT).get(ImProjects_.id)));</span>
+            }
+        }
+<span class="nc" id="L401">        return specification;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

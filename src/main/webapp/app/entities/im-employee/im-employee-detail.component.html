@@ -1,0 +1,113 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="imEmployee">
+            <h2><span jhiTranslate="App.imEmployee.detail.title">Im Employee</span> {{imEmployee.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="App.imEmployee.jobTitle">Job Title</span></dt>
+                <dd>
+                    <span>{{imEmployee.jobTitle}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imEmployee.jobDescription">Job Description</span></dt>
+                <dd>
+                    <span>{{imEmployee.jobDescription}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imEmployee.availability">Availability</span></dt>
+                <dd>
+                    <span>{{imEmployee.availability}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imEmployee.ssNumber">Ss Number</span></dt>
+                <dd>
+                    <span>{{imEmployee.ssNumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imEmployee.salary">Salary</span></dt>
+                <dd>
+                    <span>{{imEmployee.salary}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imEmployee.socialSecurity">Social Security</span></dt>
+                <dd>
+                    <span>{{imEmployee.socialSecurity}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imEmployee.insurance">Insurance</span></dt>
+                <dd>
+                    <span>{{imEmployee.insurance}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imEmployee.otherCosts">Other Costs</span></dt>
+                <dd>
+                    <span>{{imEmployee.otherCosts}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imEmployee.currency">Currency</span></dt>
+                <dd>
+                    <span>{{imEmployee.currency}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imEmployee.dependantP">Dependant P</span></dt>
+                <dd>
+                    <span>{{imEmployee.dependantP}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imEmployee.onlyJobP">Only Job P</span></dt>
+                <dd>
+                    <span>{{imEmployee.onlyJobP}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imEmployee.marriedP">Married P</span></dt>
+                <dd>
+                    <span>{{imEmployee.marriedP}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imEmployee.headOfHouseholdP">Head Of Household P</span></dt>
+                <dd>
+                    <span>{{imEmployee.headOfHouseholdP}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imEmployee.birthdate">Birthdate</span></dt>
+                <dd>
+                    <span>{{imEmployee.birthdate}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imEmployee.hourlyCost">Hourly Cost</span></dt>
+                <dd>
+                    <span>{{imEmployee.hourlyCost}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imEmployee.qnowUser">Qnow User</span></dt>
+                <dd>
+                    <div *ngIf="imEmployee.qnowUser">
+                        <a [routerLink]="['/qnow-user', imEmployee.qnowUser?.id, 'view']">{{imEmployee.qnowUser?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="App.imEmployee.employeeStatus">Employee Status</span></dt>
+                <dd>
+                    <div *ngIf="imEmployee.employeeStatus">
+                        <a [routerLink]="['/employee-status', imEmployee.employeeStatus?.id, 'view']">{{imEmployee.employeeStatus?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="App.imEmployee.departmentId">Department Id</span></dt>
+                <dd>
+                    <div *ngIf="imEmployee.departmentId">
+                        <a [routerLink]="['/department', imEmployee.departmentId?.id, 'view']">{{imEmployee.departmentId?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="App.imEmployee.supervisorId">Supervisor Id</span></dt>
+                <dd>
+                    <div *ngIf="imEmployee.supervisorId">
+                        <a [routerLink]="['/im-employee', imEmployee.supervisorId?.id, 'view']">{{imEmployee.supervisorId?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="App.imEmployee.userContact">User Contact</span></dt>
+                <dd>
+                    <span *ngFor="let userContact of imEmployee.userContacts; let last = last">
+                        <a [routerLink]="['/user-contact', userContact?.id, 'view' ]">{{userContact.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/im-employee', imEmployee.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

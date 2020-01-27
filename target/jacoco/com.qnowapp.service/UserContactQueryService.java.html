@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserContactQueryService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.service</a> &gt; <span class="el_source">UserContactQueryService.java</span></div><h1>UserContactQueryService.java</h1><pre class="source lang-java linenums">package com.qnowapp.service;
+
+import java.util.List;
+
+import javax.persistence.criteria.JoinType;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import io.github.jhipster.service.QueryService;
+
+import com.qnowapp.domain.UserContact;
+import com.qnowapp.domain.*; // for static metamodels
+import com.qnowapp.repository.UserContactRepository;
+import com.qnowapp.service.dto.UserContactCriteria;
+
+/**
+ * Service for executing complex queries for {@link UserContact} entities in the database.
+ * The main input is a {@link UserContactCriteria} which gets converted to {@link Specification},
+ * in a way that all the filters must apply.
+ * It returns a {@link List} of {@link UserContact} or a {@link Page} of {@link UserContact} which fulfills the criteria.
+ */
+@Service
+@Transactional(readOnly = true)
+public class UserContactQueryService extends QueryService&lt;UserContact&gt; {
+
+<span class="nc" id="L32">    private final Logger log = LoggerFactory.getLogger(UserContactQueryService.class);</span>
+
+    private final UserContactRepository userContactRepository;
+
+<span class="nc" id="L36">    public UserContactQueryService(UserContactRepository userContactRepository) {</span>
+<span class="nc" id="L37">        this.userContactRepository = userContactRepository;</span>
+<span class="nc" id="L38">    }</span>
+
+    /**
+     * Return a {@link List} of {@link UserContact} which matches the criteria from the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @return the matching entities.
+     */
+    @Transactional(readOnly = true)
+    public List&lt;UserContact&gt; findByCriteria(UserContactCriteria criteria) {
+<span class="nc" id="L47">        log.debug(&quot;find by criteria : {}&quot;, criteria);</span>
+<span class="nc" id="L48">        final Specification&lt;UserContact&gt; specification = createSpecification(criteria);</span>
+<span class="nc" id="L49">        return userContactRepository.findAll(specification);</span>
+    }
+
+    /**
+     * Return a {@link Page} of {@link UserContact} which matches the criteria from the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @param page The page, which should be returned.
+     * @return the matching entities.
+     */
+    @Transactional(readOnly = true)
+    public Page&lt;UserContact&gt; findByCriteria(UserContactCriteria criteria, Pageable page) {
+<span class="nc" id="L60">        log.debug(&quot;find by criteria : {}, page: {}&quot;, criteria, page);</span>
+<span class="nc" id="L61">        final Specification&lt;UserContact&gt; specification = createSpecification(criteria);</span>
+<span class="nc" id="L62">        return userContactRepository.findAll(specification, page);</span>
+    }
+
+    /**
+     * Return the number of matching entities in the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @return the number of matching entities.
+     */
+    @Transactional(readOnly = true)
+    public long countByCriteria(UserContactCriteria criteria) {
+<span class="nc" id="L72">        log.debug(&quot;count by criteria : {}&quot;, criteria);</span>
+<span class="nc" id="L73">        final Specification&lt;UserContact&gt; specification = createSpecification(criteria);</span>
+<span class="nc" id="L74">        return userContactRepository.count(specification);</span>
+    }
+
+    /**
+     * Function to convert UserContactCriteria to a {@link Specification}.
+     */
+    private Specification&lt;UserContact&gt; createSpecification(UserContactCriteria criteria) {
+<span class="nc" id="L81">        Specification&lt;UserContact&gt; specification = Specification.where(null);</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">        if (criteria != null) {</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">            if (criteria.getId() != null) {</span>
+<span class="nc" id="L84">                specification = specification.and(buildSpecification(criteria.getId(), UserContact_.id));</span>
+            }
+<span class="nc bnc" id="L86" title="All 2 branches missed.">            if (criteria.getHomePhone() != null) {</span>
+<span class="nc" id="L87">                specification = specification.and(buildStringSpecification(criteria.getHomePhone(), UserContact_.homePhone));</span>
+            }
+<span class="nc bnc" id="L89" title="All 2 branches missed.">            if (criteria.getWorkPhone() != null) {</span>
+<span class="nc" id="L90">                specification = specification.and(buildStringSpecification(criteria.getWorkPhone(), UserContact_.workPhone));</span>
+            }
+<span class="nc bnc" id="L92" title="All 2 branches missed.">            if (criteria.getCellPhone() != null) {</span>
+<span class="nc" id="L93">                specification = specification.and(buildStringSpecification(criteria.getCellPhone(), UserContact_.cellPhone));</span>
+            }
+<span class="nc bnc" id="L95" title="All 2 branches missed.">            if (criteria.getPermentAddress() != null) {</span>
+<span class="nc" id="L96">                specification = specification.and(buildStringSpecification(criteria.getPermentAddress(), UserContact_.permentAddress));</span>
+            }
+<span class="nc bnc" id="L98" title="All 2 branches missed.">            if (criteria.getHaLine1() != null) {</span>
+<span class="nc" id="L99">                specification = specification.and(buildStringSpecification(criteria.getHaLine1(), UserContact_.haLine1));</span>
+            }
+<span class="nc bnc" id="L101" title="All 2 branches missed.">            if (criteria.getHaLine2() != null) {</span>
+<span class="nc" id="L102">                specification = specification.and(buildStringSpecification(criteria.getHaLine2(), UserContact_.haLine2));</span>
+            }
+<span class="nc bnc" id="L104" title="All 2 branches missed.">            if (criteria.getHaPostal() != null) {</span>
+<span class="nc" id="L105">                specification = specification.and(buildStringSpecification(criteria.getHaPostal(), UserContact_.haPostal));</span>
+            }
+<span class="nc bnc" id="L107" title="All 2 branches missed.">            if (criteria.getWaLine1() != null) {</span>
+<span class="nc" id="L108">                specification = specification.and(buildStringSpecification(criteria.getWaLine1(), UserContact_.waLine1));</span>
+            }
+<span class="nc bnc" id="L110" title="All 2 branches missed.">            if (criteria.getWaLine2() != null) {</span>
+<span class="nc" id="L111">                specification = specification.and(buildStringSpecification(criteria.getWaLine2(), UserContact_.waLine2));</span>
+            }
+<span class="nc bnc" id="L113" title="All 2 branches missed.">            if (criteria.getWaPostal() != null) {</span>
+<span class="nc" id="L114">                specification = specification.and(buildStringSpecification(criteria.getWaPostal(), UserContact_.waPostal));</span>
+            }
+<span class="nc bnc" id="L116" title="All 2 branches missed.">            if (criteria.getUcNote() != null) {</span>
+<span class="nc" id="L117">                specification = specification.and(buildStringSpecification(criteria.getUcNote(), UserContact_.ucNote));</span>
+            }
+<span class="nc bnc" id="L119" title="All 2 branches missed.">            if (criteria.getPrimaryRole() != null) {</span>
+<span class="nc" id="L120">                specification = specification.and(buildStringSpecification(criteria.getPrimaryRole(), UserContact_.primaryRole));</span>
+            }
+<span class="nc bnc" id="L122" title="All 2 branches missed.">            if (criteria.getSecondaryRole() != null) {</span>
+<span class="nc" id="L123">                specification = specification.and(buildStringSpecification(criteria.getSecondaryRole(), UserContact_.secondaryRole));</span>
+            }
+<span class="nc bnc" id="L125" title="All 2 branches missed.">            if (criteria.getInitiative() != null) {</span>
+<span class="nc" id="L126">                specification = specification.and(buildStringSpecification(criteria.getInitiative(), UserContact_.initiative));</span>
+            }
+<span class="nc bnc" id="L128" title="All 2 branches missed.">            if (criteria.getTechnology() != null) {</span>
+<span class="nc" id="L129">                specification = specification.and(buildStringSpecification(criteria.getTechnology(), UserContact_.technology));</span>
+            }
+<span class="nc bnc" id="L131" title="All 2 branches missed.">            if (criteria.getTeamName() != null) {</span>
+<span class="nc" id="L132">                specification = specification.and(buildStringSpecification(criteria.getTeamName(), UserContact_.teamName));</span>
+            }
+<span class="nc bnc" id="L134" title="All 2 branches missed.">            if (criteria.getQnowUserId() != null) {</span>
+<span class="nc" id="L135">                specification = specification.and(buildSpecification(criteria.getQnowUserId(),</span>
+<span class="nc" id="L136">                    root -&gt; root.join(UserContact_.qnowUser, JoinType.LEFT).get(QnowUser_.id)));</span>
+            }
+<span class="nc bnc" id="L138" title="All 2 branches missed.">            if (criteria.getWaCityId() != null) {</span>
+<span class="nc" id="L139">                specification = specification.and(buildSpecification(criteria.getWaCityId(),</span>
+<span class="nc" id="L140">                    root -&gt; root.join(UserContact_.waCity, JoinType.LEFT).get(City_.id)));</span>
+            }
+<span class="nc bnc" id="L142" title="All 2 branches missed.">            if (criteria.getHaCityId() != null) {</span>
+<span class="nc" id="L143">                specification = specification.and(buildSpecification(criteria.getHaCityId(),</span>
+<span class="nc" id="L144">                    root -&gt; root.join(UserContact_.haCity, JoinType.LEFT).get(City_.id)));</span>
+            }
+<span class="nc bnc" id="L146" title="All 2 branches missed.">            if (criteria.getWaStateId() != null) {</span>
+<span class="nc" id="L147">                specification = specification.and(buildSpecification(criteria.getWaStateId(),</span>
+<span class="nc" id="L148">                    root -&gt; root.join(UserContact_.waState, JoinType.LEFT).get(StateMaster_.id)));</span>
+            }
+<span class="nc bnc" id="L150" title="All 2 branches missed.">            if (criteria.getHaStateId() != null) {</span>
+<span class="nc" id="L151">                specification = specification.and(buildSpecification(criteria.getHaStateId(),</span>
+<span class="nc" id="L152">                    root -&gt; root.join(UserContact_.haState, JoinType.LEFT).get(StateMaster_.id)));</span>
+            }
+<span class="nc bnc" id="L154" title="All 2 branches missed.">            if (criteria.getWaCountryId() != null) {</span>
+<span class="nc" id="L155">                specification = specification.and(buildSpecification(criteria.getWaCountryId(),</span>
+<span class="nc" id="L156">                    root -&gt; root.join(UserContact_.waCountry, JoinType.LEFT).get(Country_.id)));</span>
+            }
+<span class="nc bnc" id="L158" title="All 2 branches missed.">            if (criteria.getHaCountryId() != null) {</span>
+<span class="nc" id="L159">                specification = specification.and(buildSpecification(criteria.getHaCountryId(),</span>
+<span class="nc" id="L160">                    root -&gt; root.join(UserContact_.haCountry, JoinType.LEFT).get(Country_.id)));</span>
+            }
+<span class="nc bnc" id="L162" title="All 2 branches missed.">            if (criteria.getGroupMembersId() != null) {</span>
+<span class="nc" id="L163">                specification = specification.and(buildSpecification(criteria.getGroupMembersId(),</span>
+<span class="nc" id="L164">                    root -&gt; root.join(UserContact_.groupMembers, JoinType.LEFT).get(GroupMembers_.id)));</span>
+            }
+<span class="nc bnc" id="L166" title="All 2 branches missed.">            if (criteria.getImEmployeeId() != null) {</span>
+<span class="nc" id="L167">                specification = specification.and(buildSpecification(criteria.getImEmployeeId(),</span>
+<span class="nc" id="L168">                    root -&gt; root.join(UserContact_.imEmployees, JoinType.LEFT).get(ImEmployee_.id)));</span>
+            }
+        }
+<span class="nc" id="L171">        return specification;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

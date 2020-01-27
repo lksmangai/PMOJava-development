@@ -1,0 +1,45 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="projectAllocation">
+            <h2><span jhiTranslate="App.projectAllocation.detail.title">Project Allocation</span> {{projectAllocation.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="App.projectAllocation.percentage">Percentage</span></dt>
+                <dd>
+                    <span>{{projectAllocation.percentage}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.projectAllocation.imEmployee">Im Employee</span></dt>
+                <dd>
+                    <div *ngIf="projectAllocation.imEmployee">
+                        <a [routerLink]="['/im-employee', projectAllocation.imEmployee?.id, 'view']">{{projectAllocation.imEmployee?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="App.projectAllocation.imProjects">Im Projects</span></dt>
+                <dd>
+                    <div *ngIf="projectAllocation.imProjects">
+                        <a [routerLink]="['/im-projects', projectAllocation.imProjects?.id, 'view']">{{projectAllocation.imProjects?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="App.projectAllocation.projectRoles">Project Roles</span></dt>
+                <dd>
+                    <div *ngIf="projectAllocation.projectRoles">
+                        <a [routerLink]="['/project-roles', projectAllocation.projectRoles?.id, 'view']">{{projectAllocation.projectRoles?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/project-allocation', projectAllocation.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

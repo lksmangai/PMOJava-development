@@ -1,11 +1,10 @@
 package com.qnowapp.web.rest;
 
 import com.qnowapp.domain.SkillCategory;
-
 import com.qnowapp.service.SkillCategoryService;
 import com.qnowapp.web.rest.errors.BadRequestAlertException;
 import com.qnowapp.service.dto.SkillCategoryCriteria;
-
+import com.qnowapp.service.SkillCategoryQueryService;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -38,10 +37,11 @@ public class SkillCategoryResource {
 
     private final SkillCategoryService skillCategoryService;
 
+    private final SkillCategoryQueryService skillCategoryQueryService;
 
-    public SkillCategoryResource(SkillCategoryService skillCategoryService) {
+    public SkillCategoryResource(SkillCategoryService skillCategoryService, SkillCategoryQueryService skillCategoryQueryService) {
         this.skillCategoryService = skillCategoryService;
-        
+        this.skillCategoryQueryService = skillCategoryQueryService;
     }
 
     /**
@@ -94,12 +94,24 @@ public class SkillCategoryResource {
      */
     @CrossOrigin
     @GetMapping("/skill-categories")
-    public ResponseEntity<List<SkillCategory>> getAllSkillCategories() {
-        log.debug("REST request to get SkillCategories by criteria: {}");
-        List<SkillCategory> entityList = skillCategoryService.findAll();
+    public ResponseEntity<List<SkillCategory>> getAllSkillCategories(SkillCategoryCriteria criteria) {
+        log.debug("REST request to get SkillCategories by criteria: {}", criteria);
+        List<SkillCategory> entityList = skillCategoryQueryService.findByCriteria(criteria);
         return ResponseEntity.ok().body(entityList);
     }
 
+    /**
+    * {@code GET  /skill-categories/count} : count all the skillCategories.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping("/skill-categories/count")
+    public ResponseEntity<Long> countSkillCategories(SkillCategoryCriteria criteria) {
+        log.debug("REST request to count SkillCategories by criteria: {}", criteria);
+        return ResponseEntity.ok().body(skillCategoryQueryService.countByCriteria(criteria));
+    }
 
     /**
      * {@code GET  /skill-categories/:id} : get the "id" skillCategory.

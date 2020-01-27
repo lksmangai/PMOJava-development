@@ -1,10 +1,10 @@
 package com.qnowapp.web.rest;
 
 import com.qnowapp.domain.SkillExpertise;
-
 import com.qnowapp.service.SkillExpertiseService;
 import com.qnowapp.web.rest.errors.BadRequestAlertException;
 import com.qnowapp.service.dto.SkillExpertiseCriteria;
+import com.qnowapp.service.SkillExpertiseQueryService;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -37,11 +37,12 @@ public class SkillExpertiseResource {
 
     private final SkillExpertiseService skillExpertiseService;
 
-  
+    private final SkillExpertiseQueryService skillExpertiseQueryService;
 
-    public SkillExpertiseResource(SkillExpertiseService skillExpertiseService) {
+    public SkillExpertiseResource(SkillExpertiseService skillExpertiseService, SkillExpertiseQueryService skillExpertiseQueryService) {
         this.skillExpertiseService = skillExpertiseService;
- }
+        this.skillExpertiseQueryService = skillExpertiseQueryService;
+    }
 
     /**
      * {@code POST  /skill-expertises} : Create a new skillExpertise.
@@ -93,13 +94,24 @@ public class SkillExpertiseResource {
      */
     @CrossOrigin
     @GetMapping("/skill-expertises")
-    public ResponseEntity<List<SkillExpertise>> getAllSkillExpertises( ) {
-        log.debug("REST request to get SkillExpertises by criteria: {}");
-        List<SkillExpertise> entityList = skillExpertiseService.findAll();
+    public ResponseEntity<List<SkillExpertise>> getAllSkillExpertises(SkillExpertiseCriteria criteria) {
+        log.debug("REST request to get SkillExpertises by criteria: {}", criteria);
+        List<SkillExpertise> entityList = skillExpertiseQueryService.findByCriteria(criteria);
         return ResponseEntity.ok().body(entityList);
     }
 
-
+    /**
+    * {@code GET  /skill-expertises/count} : count all the skillExpertises.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping("/skill-expertises/count")
+    public ResponseEntity<Long> countSkillExpertises(SkillExpertiseCriteria criteria) {
+        log.debug("REST request to count SkillExpertises by criteria: {}", criteria);
+        return ResponseEntity.ok().body(skillExpertiseQueryService.countByCriteria(criteria));
+    }
 
     /**
      * {@code GET  /skill-expertises/:id} : get the "id" skillExpertise.

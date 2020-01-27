@@ -1,0 +1,23 @@
+{
+  "App": {
+    "projectMaingoalId": {
+      "home": {
+        "title": "Project Maingoal Ids",
+        "createLabel": "Create a new Project Maingoal Id",
+        "createOrEditLabel": "Create or edit a Project Maingoal Id"
+      },
+      "created": "A new Project Maingoal Id is created with identifier {{ param }}",
+      "updated": "A Project Maingoal Id is updated with identifier {{ param }}",
+      "deleted": "A Project Maingoal Id is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Project Maingoal Id {{ id }}?"
+      },
+      "detail": {
+        "title": "Project Maingoal Id"
+      },
+      "code": "Code",
+      "name": "Name",
+      "description": "Description"
+    }
+  }
+}

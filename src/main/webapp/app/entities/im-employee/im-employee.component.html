@@ -1,0 +1,112 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="App.imEmployee.home.title">Im Employees</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-im-employee" [routerLink]="['/im-employee/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="App.imEmployee.home.createLabel">
+            Create new Im Employee
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="imEmployees">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="App.imEmployee.jobTitle">Job Title</span></th>
+            <th><span jhiTranslate="App.imEmployee.jobDescription">Job Description</span></th>
+            <th><span jhiTranslate="App.imEmployee.availability">Availability</span></th>
+            <th><span jhiTranslate="App.imEmployee.ssNumber">Ss Number</span></th>
+            <th><span jhiTranslate="App.imEmployee.salary">Salary</span></th>
+            <th><span jhiTranslate="App.imEmployee.socialSecurity">Social Security</span></th>
+            <th><span jhiTranslate="App.imEmployee.insurance">Insurance</span></th>
+            <th><span jhiTranslate="App.imEmployee.otherCosts">Other Costs</span></th>
+            <th><span jhiTranslate="App.imEmployee.currency">Currency</span></th>
+            <th><span jhiTranslate="App.imEmployee.dependantP">Dependant P</span></th>
+            <th><span jhiTranslate="App.imEmployee.onlyJobP">Only Job P</span></th>
+            <th><span jhiTranslate="App.imEmployee.marriedP">Married P</span></th>
+            <th><span jhiTranslate="App.imEmployee.headOfHouseholdP">Head Of Household P</span></th>
+            <th><span jhiTranslate="App.imEmployee.birthdate">Birthdate</span></th>
+            <th><span jhiTranslate="App.imEmployee.hourlyCost">Hourly Cost</span></th>
+            <th><span jhiTranslate="App.imEmployee.qnowUser">Qnow User</span></th>
+            <th><span jhiTranslate="App.imEmployee.employeeStatus">Employee Status</span></th>
+            <th><span jhiTranslate="App.imEmployee.departmentId">Department Id</span></th>
+            <th><span jhiTranslate="App.imEmployee.supervisorId">Supervisor Id</span></th>
+            <th><span jhiTranslate="App.imEmployee.userContact">User Contact</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let imEmployee of imEmployees ;trackBy: trackId">
+                <td><a [routerLink]="['/im-employee', imEmployee.id, 'view' ]">{{imEmployee.id}}</a></td>
+                <td>{{imEmployee.jobTitle}}</td>
+                <td>{{imEmployee.jobDescription}}</td>
+                <td>{{imEmployee.availability}}</td>
+                <td>{{imEmployee.ssNumber}}</td>
+                <td>{{imEmployee.salary}}</td>
+                <td>{{imEmployee.socialSecurity}}</td>
+                <td>{{imEmployee.insurance}}</td>
+                <td>{{imEmployee.otherCosts}}</td>
+                <td>{{imEmployee.currency}}</td>
+                <td>{{imEmployee.dependantP}}</td>
+                <td>{{imEmployee.onlyJobP}}</td>
+                <td>{{imEmployee.marriedP}}</td>
+                <td>{{imEmployee.headOfHouseholdP}}</td>
+                <td>{{imEmployee.birthdate | date:'medium'}}</td>
+                <td>{{imEmployee.hourlyCost}}</td>
+                <td>
+                    <div *ngIf="imEmployee.qnowUser">
+                        <a [routerLink]="['../qnow-user', imEmployee.qnowUser?.id, 'view' ]" >{{imEmployee.qnowUser?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="imEmployee.employeeStatus">
+                        <a [routerLink]="['../employee-status', imEmployee.employeeStatus?.id, 'view' ]" >{{imEmployee.employeeStatus?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="imEmployee.departmentId">
+                        <a [routerLink]="['../department', imEmployee.departmentId?.id, 'view' ]" >{{imEmployee.departmentId?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="imEmployee.supervisorId">
+                        <a [routerLink]="['../im-employee', imEmployee.supervisorId?.id, 'view' ]" >{{imEmployee.supervisorId?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <span *ngFor="let userContact of imEmployee.userContacts; let last = last">
+                            <a class="form-control-static" [routerLink]="['../user-contact', userContact?.id, 'view' ]">{{userContact.id}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/im-employee', imEmployee.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/im-employee', imEmployee.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'im-employee', { outlets: { popup: imEmployee.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

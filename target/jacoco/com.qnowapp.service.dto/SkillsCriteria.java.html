@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SkillsCriteria.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.service.dto</a> &gt; <span class="el_source">SkillsCriteria.java</span></div><h1>SkillsCriteria.java</h1><pre class="source lang-java linenums">package com.qnowapp.service.dto;
+
+import java.io.Serializable;
+import java.util.Objects;
+import io.github.jhipster.service.Criteria;
+import io.github.jhipster.service.filter.BooleanFilter;
+import io.github.jhipster.service.filter.DoubleFilter;
+import io.github.jhipster.service.filter.Filter;
+import io.github.jhipster.service.filter.FloatFilter;
+import io.github.jhipster.service.filter.IntegerFilter;
+import io.github.jhipster.service.filter.LongFilter;
+import io.github.jhipster.service.filter.StringFilter;
+
+/**
+ * Criteria class for the {@link com.qnowapp.domain.Skills} entity. This class is used
+ * in {@link com.qnowapp.web.rest.SkillsResource} to receive all the possible filtering options from
+ * the Http GET request parameters.
+ * For example the following could be a valid request:
+ * {@code /skills?id.greaterThan=5&amp;attr1.contains=something&amp;attr2.specified=false}
+ * As Spring is unable to properly convert the types, unless specific {@link Filter} class are used, we need to use
+ * fix type specific filters.
+ */
+public class SkillsCriteria implements Serializable, Criteria {
+
+    private static final long serialVersionUID = 1L;
+
+    private LongFilter id;
+
+    private StringFilter skillCode;
+
+    private StringFilter skillName;
+
+    private LongFilter parentSkillsIdId;
+
+    private LongFilter skillCategoryIdId;
+
+<span class="nc" id="L37">    public SkillsCriteria(){</span>
+<span class="nc" id="L38">    }</span>
+
+<span class="nc" id="L40">    public SkillsCriteria(SkillsCriteria other){</span>
+<span class="nc bnc" id="L41" title="All 2 branches missed.">        this.id = other.id == null ? null : other.id.copy();</span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">        this.skillCode = other.skillCode == null ? null : other.skillCode.copy();</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">        this.skillName = other.skillName == null ? null : other.skillName.copy();</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">        this.parentSkillsIdId = other.parentSkillsIdId == null ? null : other.parentSkillsIdId.copy();</span>
+<span class="nc bnc" id="L45" title="All 2 branches missed.">        this.skillCategoryIdId = other.skillCategoryIdId == null ? null : other.skillCategoryIdId.copy();</span>
+<span class="nc" id="L46">    }</span>
+
+    @Override
+    public SkillsCriteria copy() {
+<span class="nc" id="L50">        return new SkillsCriteria(this);</span>
+    }
+
+    public LongFilter getId() {
+<span class="nc" id="L54">        return id;</span>
+    }
+
+    public void setId(LongFilter id) {
+<span class="nc" id="L58">        this.id = id;</span>
+<span class="nc" id="L59">    }</span>
+
+    public StringFilter getSkillCode() {
+<span class="nc" id="L62">        return skillCode;</span>
+    }
+
+    public void setSkillCode(StringFilter skillCode) {
+<span class="nc" id="L66">        this.skillCode = skillCode;</span>
+<span class="nc" id="L67">    }</span>
+
+    public StringFilter getSkillName() {
+<span class="nc" id="L70">        return skillName;</span>
+    }
+
+    public void setSkillName(StringFilter skillName) {
+<span class="nc" id="L74">        this.skillName = skillName;</span>
+<span class="nc" id="L75">    }</span>
+
+    public LongFilter getParentSkillsIdId() {
+<span class="nc" id="L78">        return parentSkillsIdId;</span>
+    }
+
+    public void setParentSkillsIdId(LongFilter parentSkillsIdId) {
+<span class="nc" id="L82">        this.parentSkillsIdId = parentSkillsIdId;</span>
+<span class="nc" id="L83">    }</span>
+
+    public LongFilter getSkillCategoryIdId() {
+<span class="nc" id="L86">        return skillCategoryIdId;</span>
+    }
+
+    public void setSkillCategoryIdId(LongFilter skillCategoryIdId) {
+<span class="nc" id="L90">        this.skillCategoryIdId = skillCategoryIdId;</span>
+<span class="nc" id="L91">    }</span>
+
+
+    @Override
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L96" title="All 2 branches missed.">        if (this == o) {</span>
+<span class="nc" id="L97">            return true;</span>
+        }
+<span class="nc bnc" id="L99" title="All 4 branches missed.">        if (o == null || getClass() != o.getClass()) {</span>
+<span class="nc" id="L100">            return false;</span>
+        }
+<span class="nc" id="L102">        final SkillsCriteria that = (SkillsCriteria) o;</span>
+<span class="nc" id="L103">        return</span>
+<span class="nc bnc" id="L104" title="All 2 branches missed.">            Objects.equals(id, that.id) &amp;&amp;</span>
+<span class="nc bnc" id="L105" title="All 2 branches missed.">            Objects.equals(skillCode, that.skillCode) &amp;&amp;</span>
+<span class="nc bnc" id="L106" title="All 2 branches missed.">            Objects.equals(skillName, that.skillName) &amp;&amp;</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">            Objects.equals(parentSkillsIdId, that.parentSkillsIdId) &amp;&amp;</span>
+<span class="nc bnc" id="L108" title="All 2 branches missed.">            Objects.equals(skillCategoryIdId, that.skillCategoryIdId);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L113">        return Objects.hash(</span>
+        id,
+        skillCode,
+        skillName,
+        parentSkillsIdId,
+        skillCategoryIdId
+        );
+    }
+
+    @Override
+    public String toString() {
+<span class="nc bnc" id="L124" title="All 10 branches missed.">        return &quot;SkillsCriteria{&quot; +</span>
+                (id != null ? &quot;id=&quot; + id + &quot;, &quot; : &quot;&quot;) +
+                (skillCode != null ? &quot;skillCode=&quot; + skillCode + &quot;, &quot; : &quot;&quot;) +
+                (skillName != null ? &quot;skillName=&quot; + skillName + &quot;, &quot; : &quot;&quot;) +
+                (parentSkillsIdId != null ? &quot;parentSkillsIdId=&quot; + parentSkillsIdId + &quot;, &quot; : &quot;&quot;) +
+                (skillCategoryIdId != null ? &quot;skillCategoryIdId=&quot; + skillCategoryIdId + &quot;, &quot; : &quot;&quot;) +
+            &quot;}&quot;;
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

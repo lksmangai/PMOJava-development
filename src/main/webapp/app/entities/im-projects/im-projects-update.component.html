@@ -1,0 +1,575 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-im-projects-heading" jhiTranslate="App.imProjects.home.createOrEditLabel">Create or edit a Im Projects</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!imProjects.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.projectName" for="field_projectName">Project Name</label>
+                    <input type="text" class="form-control" name="projectName" id="field_projectName"
+                           formControlName="projectName"/>
+                    <div *ngIf="editForm.get('projectName').invalid && (editForm.get('projectName').dirty || editForm.get('projectName').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('projectName').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.projectNr" for="field_projectNr">Project Nr</label>
+                    <input type="text" class="form-control" name="projectNr" id="field_projectNr"
+                           formControlName="projectNr"/>
+                    <div *ngIf="editForm.get('projectNr').invalid && (editForm.get('projectNr').dirty || editForm.get('projectNr').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('projectNr').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.projectPath" for="field_projectPath">Project Path</label>
+                    <input type="text" class="form-control" name="projectPath" id="field_projectPath"
+                           formControlName="projectPath"/>
+                    <div *ngIf="editForm.get('projectPath').invalid && (editForm.get('projectPath').dirty || editForm.get('projectPath').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('projectPath').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.treeSortkey" for="field_treeSortkey">Tree Sortkey</label>
+                    <input type="text" class="form-control" name="treeSortkey" id="field_treeSortkey"
+                           formControlName="treeSortkey"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.maxChildSortkey" for="field_maxChildSortkey">Max Child Sortkey</label>
+                    <input type="text" class="form-control" name="maxChildSortkey" id="field_maxChildSortkey"
+                           formControlName="maxChildSortkey"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.description" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                           formControlName="description"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.billingTypeId" for="field_billingTypeId">Billing Type Id</label>
+                    <input type="number" class="form-control" name="billingTypeId" id="field_billingTypeId"
+                           formControlName="billingTypeId"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.note" for="field_note">Note</label>
+                    <input type="text" class="form-control" name="note" id="field_note"
+                           formControlName="note"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.requiresReportP" for="field_requiresReportP">Requires Report P</label>
+                    <input type="checkbox" class="form-control" name="requiresReportP" id="field_requiresReportP"
+                           formControlName="requiresReportP"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.projectBudget" for="field_projectBudget">Project Budget</label>
+                    <input type="number" class="form-control" name="projectBudget" id="field_projectBudget"
+                           formControlName="projectBudget"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.projectRisk" for="field_projectRisk">Project Risk</label>
+                    <input type="text" class="form-control" name="projectRisk" id="field_projectRisk"
+                           formControlName="projectRisk"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.corporateSponsor" for="field_corporateSponsor">Corporate Sponsor</label>
+                    <input type="text" class="form-control" name="corporateSponsor" id="field_corporateSponsor"
+                           formControlName="corporateSponsor"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.percentCompleted" for="field_percentCompleted">Percent Completed</label>
+                    <input type="number" class="form-control" name="percentCompleted" id="field_percentCompleted"
+                           formControlName="percentCompleted"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.projectBudgetHours" for="field_projectBudgetHours">Project Budget Hours</label>
+                    <input type="number" class="form-control" name="projectBudgetHours" id="field_projectBudgetHours"
+                           formControlName="projectBudgetHours"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.costQuotesCache" for="field_costQuotesCache">Cost Quotes Cache</label>
+                    <input type="number" class="form-control" name="costQuotesCache" id="field_costQuotesCache"
+                           formControlName="costQuotesCache"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.costInvoicesCache" for="field_costInvoicesCache">Cost Invoices Cache</label>
+                    <input type="number" class="form-control" name="costInvoicesCache" id="field_costInvoicesCache"
+                           formControlName="costInvoicesCache"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.costTimesheetPlannedCache" for="field_costTimesheetPlannedCache">Cost Timesheet Planned Cache</label>
+                    <input type="number" class="form-control" name="costTimesheetPlannedCache" id="field_costTimesheetPlannedCache"
+                           formControlName="costTimesheetPlannedCache"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.costPurchaseOrdersCache" for="field_costPurchaseOrdersCache">Cost Purchase Orders Cache</label>
+                    <input type="number" class="form-control" name="costPurchaseOrdersCache" id="field_costPurchaseOrdersCache"
+                           formControlName="costPurchaseOrdersCache"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.costBillsCache" for="field_costBillsCache">Cost Bills Cache</label>
+                    <input type="number" class="form-control" name="costBillsCache" id="field_costBillsCache"
+                           formControlName="costBillsCache"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.costTimesheetLoggedCache" for="field_costTimesheetLoggedCache">Cost Timesheet Logged Cache</label>
+                    <input type="number" class="form-control" name="costTimesheetLoggedCache" id="field_costTimesheetLoggedCache"
+                           formControlName="costTimesheetLoggedCache"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.endDate" for="field_endDate">End Date</label>
+                    <div class="d-flex">
+                        <input id="field_endDate" type="datetime-local" class="form-control" name="endDate" formControlName="endDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.startDate" for="field_startDate">Start Date</label>
+                    <div class="d-flex">
+                        <input id="field_startDate" type="datetime-local" class="form-control" name="startDate" formControlName="startDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.templateP" for="field_templateP">Template P</label>
+                    <input type="checkbox" class="form-control" name="templateP" id="field_templateP"
+                           formControlName="templateP"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.sortOrder" for="field_sortOrder">Sort Order</label>
+                    <input type="number" class="form-control" name="sortOrder" id="field_sortOrder"
+                           formControlName="sortOrder"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.reportedHoursCache" for="field_reportedHoursCache">Reported Hours Cache</label>
+                    <input type="number" class="form-control" name="reportedHoursCache" id="field_reportedHoursCache"
+                           formControlName="reportedHoursCache"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.costExpensePlannedCache" for="field_costExpensePlannedCache">Cost Expense Planned Cache</label>
+                    <input type="number" class="form-control" name="costExpensePlannedCache" id="field_costExpensePlannedCache"
+                           formControlName="costExpensePlannedCache"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.costExpenseLoggedCache" for="field_costExpenseLoggedCache">Cost Expense Logged Cache</label>
+                    <input type="number" class="form-control" name="costExpenseLoggedCache" id="field_costExpenseLoggedCache"
+                           formControlName="costExpenseLoggedCache"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.confirmDate" for="field_confirmDate">Confirm Date</label>
+                    <div class="d-flex">
+                        <input id="field_confirmDate" type="datetime-local" class="form-control" name="confirmDate" formControlName="confirmDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.costDeliveryNotesCache" for="field_costDeliveryNotesCache">Cost Delivery Notes Cache</label>
+                    <input type="number" class="form-control" name="costDeliveryNotesCache" id="field_costDeliveryNotesCache"
+                           formControlName="costDeliveryNotesCache"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.costCacheDirty" for="field_costCacheDirty">Cost Cache Dirty</label>
+                    <div class="d-flex">
+                        <input id="field_costCacheDirty" type="datetime-local" class="form-control" name="costCacheDirty" formControlName="costCacheDirty" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.milestoneP" for="field_milestoneP">Milestone P</label>
+                    <input type="checkbox" class="form-control" name="milestoneP" id="field_milestoneP"
+                           formControlName="milestoneP"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.releaseItemP" for="field_releaseItemP">Release Item P</label>
+                    <input type="text" class="form-control" name="releaseItemP" id="field_releaseItemP"
+                           formControlName="releaseItemP"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.presalesProbability" for="field_presalesProbability">Presales Probability</label>
+                    <input type="number" class="form-control" name="presalesProbability" id="field_presalesProbability"
+                           formControlName="presalesProbability"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.presalesValue" for="field_presalesValue">Presales Value</label>
+                    <input type="number" class="form-control" name="presalesValue" id="field_presalesValue"
+                           formControlName="presalesValue"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.reportedDaysCache" for="field_reportedDaysCache">Reported Days Cache</label>
+                    <input type="number" class="form-control" name="reportedDaysCache" id="field_reportedDaysCache"
+                           formControlName="reportedDaysCache"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.presalesValueCurrency" for="field_presalesValueCurrency">Presales Value Currency</label>
+                    <input type="text" class="form-control" name="presalesValueCurrency" id="field_presalesValueCurrency"
+                           formControlName="presalesValueCurrency"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.opportunitySalesStageId" for="field_opportunitySalesStageId">Opportunity Sales Stage Id</label>
+                    <input type="number" class="form-control" name="opportunitySalesStageId" id="field_opportunitySalesStageId"
+                           formControlName="opportunitySalesStageId"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.opportunityCampaignId" for="field_opportunityCampaignId">Opportunity Campaign Id</label>
+                    <input type="number" class="form-control" name="opportunityCampaignId" id="field_opportunityCampaignId"
+                           formControlName="opportunityCampaignId"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.scoreRevenue" for="field_scoreRevenue">Score Revenue</label>
+                    <input type="number" class="form-control" name="scoreRevenue" id="field_scoreRevenue"
+                           formControlName="scoreRevenue"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.scoreStrategic" for="field_scoreStrategic">Score Strategic</label>
+                    <input type="number" class="form-control" name="scoreStrategic" id="field_scoreStrategic"
+                           formControlName="scoreStrategic"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.scoreFinanceNpv" for="field_scoreFinanceNpv">Score Finance Npv</label>
+                    <input type="number" class="form-control" name="scoreFinanceNpv" id="field_scoreFinanceNpv"
+                           formControlName="scoreFinanceNpv"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.scoreCustomers" for="field_scoreCustomers">Score Customers</label>
+                    <input type="number" class="form-control" name="scoreCustomers" id="field_scoreCustomers"
+                           formControlName="scoreCustomers"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.scoreFinanceCost" for="field_scoreFinanceCost">Score Finance Cost</label>
+                    <input type="number" class="form-control" name="scoreFinanceCost" id="field_scoreFinanceCost"
+                           formControlName="scoreFinanceCost"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.costBillsPlanned" for="field_costBillsPlanned">Cost Bills Planned</label>
+                    <input type="number" class="form-control" name="costBillsPlanned" id="field_costBillsPlanned"
+                           formControlName="costBillsPlanned"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.costExpensesPlanned" for="field_costExpensesPlanned">Cost Expenses Planned</label>
+                    <input type="number" class="form-control" name="costExpensesPlanned" id="field_costExpensesPlanned"
+                           formControlName="costExpensesPlanned"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.scoreRisk" for="field_scoreRisk">Score Risk</label>
+                    <input type="number" class="form-control" name="scoreRisk" id="field_scoreRisk"
+                           formControlName="scoreRisk"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.scoreCapabilities" for="field_scoreCapabilities">Score Capabilities</label>
+                    <input type="number" class="form-control" name="scoreCapabilities" id="field_scoreCapabilities"
+                           formControlName="scoreCapabilities"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.scoreEinanceRoi" for="field_scoreEinanceRoi">Score Einance Roi</label>
+                    <input type="number" class="form-control" name="scoreEinanceRoi" id="field_scoreEinanceRoi"
+                           formControlName="scoreEinanceRoi"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.projectUserwiseBoard" for="field_projectUserwiseBoard">Project Userwise Board</label>
+                    <input type="text" class="form-control" name="projectUserwiseBoard" id="field_projectUserwiseBoard"
+                           formControlName="projectUserwiseBoard"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.projectBringNextday" for="field_projectBringNextday">Project Bring Nextday</label>
+                    <input type="number" class="form-control" name="projectBringNextday" id="field_projectBringNextday"
+                           formControlName="projectBringNextday"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.projectBringSameboard" for="field_projectBringSameboard">Project Bring Sameboard</label>
+                    <input type="text" class="form-control" name="projectBringSameboard" id="field_projectBringSameboard"
+                           formControlName="projectBringSameboard"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.projectNewboardEverytime" for="field_projectNewboardEverytime">Project Newboard Everytime</label>
+                    <input type="text" class="form-control" name="projectNewboardEverytime" id="field_projectNewboardEverytime"
+                           formControlName="projectNewboardEverytime"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.projectUserwiseBoard2" for="field_projectUserwiseBoard2">Project Userwise Board 2</label>
+                    <input type="text" class="form-control" name="projectUserwiseBoard2" id="field_projectUserwiseBoard2"
+                           formControlName="projectUserwiseBoard2"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.projectBringSameboard2" for="field_projectBringSameboard2">Project Bring Sameboard 2</label>
+                    <input type="text" class="form-control" name="projectBringSameboard2" id="field_projectBringSameboard2"
+                           formControlName="projectBringSameboard2"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.projectNewboard2Everytime" for="field_projectNewboard2Everytime">Project Newboard 2 Everytime</label>
+                    <input type="number" class="form-control" name="projectNewboard2Everytime" id="field_projectNewboard2Everytime"
+                           formControlName="projectNewboard2Everytime"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.projectNewboard2Always" for="field_projectNewboard2Always">Project Newboard 2 Always</label>
+                    <input type="text" class="form-control" name="projectNewboard2Always" id="field_projectNewboard2Always"
+                           formControlName="projectNewboard2Always"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.projectReportWeekly" for="field_projectReportWeekly">Project Report Weekly</label>
+                    <input type="text" class="form-control" name="projectReportWeekly" id="field_projectReportWeekly"
+                           formControlName="projectReportWeekly"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.scoreGain" for="field_scoreGain">Score Gain</label>
+                    <input type="number" class="form-control" name="scoreGain" id="field_scoreGain"
+                           formControlName="scoreGain"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.scoreLoss" for="field_scoreLoss">Score Loss</label>
+                    <input type="number" class="form-control" name="scoreLoss" id="field_scoreLoss"
+                           formControlName="scoreLoss"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.scoreDelivery" for="field_scoreDelivery">Score Delivery</label>
+                    <input type="number" class="form-control" name="scoreDelivery" id="field_scoreDelivery"
+                           formControlName="scoreDelivery"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.scoreOperations" for="field_scoreOperations">Score Operations</label>
+                    <input type="number" class="form-control" name="scoreOperations" id="field_scoreOperations"
+                           formControlName="scoreOperations"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.scoreWhy" for="field_scoreWhy">Score Why</label>
+                    <input type="number" class="form-control" name="scoreWhy" id="field_scoreWhy"
+                           formControlName="scoreWhy"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.javaServices" for="field_javaServices">Java Services</label>
+                    <input type="text" class="form-control" name="javaServices" id="field_javaServices"
+                           formControlName="javaServices"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.netServices" for="field_netServices">Net Services</label>
+                    <input type="text" class="form-control" name="netServices" id="field_netServices"
+                           formControlName="netServices"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.collectionLink" for="field_collectionLink">Collection Link</label>
+                    <input type="text" class="form-control" name="collectionLink" id="field_collectionLink"
+                           formControlName="collectionLink"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.trainingLink" for="field_trainingLink">Training Link</label>
+                    <input type="text" class="form-control" name="trainingLink" id="field_trainingLink"
+                           formControlName="trainingLink"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.collectionName" for="field_collectionName">Collection Name</label>
+                    <input type="text" class="form-control" name="collectionName" id="field_collectionName"
+                           formControlName="collectionName"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.trainingName" for="field_trainingName">Training Name</label>
+                    <input type="text" class="form-control" name="trainingName" id="field_trainingName"
+                           formControlName="trainingName"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.trainingDoc" for="field_trainingDoc">Training Doc</label>
+                    <input type="text" class="form-control" name="trainingDoc" id="field_trainingDoc"
+                           formControlName="trainingDoc"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.testingRichtext" for="field_testingRichtext">Testing Richtext</label>
+                    <input type="number" class="form-control" name="testingRichtext" id="field_testingRichtext"
+                           formControlName="testingRichtext"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.templateCategory" for="field_templateCategory">Template Category</label>
+                    <input type="text" class="form-control" name="templateCategory" id="field_templateCategory"
+                           formControlName="templateCategory"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.dType" for="field_dType">D Type</label>
+                    <input type="number" class="form-control" name="dType" id="field_dType"
+                           formControlName="dType"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.dOption" for="field_dOption">D Option</label>
+                    <input type="number" class="form-control" name="dOption" id="field_dOption"
+                           formControlName="dOption"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.dFilter" for="field_dFilter">D Filter</label>
+                    <input type="number" class="form-control" name="dFilter" id="field_dFilter"
+                           formControlName="dFilter"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.dId" for="field_dId">D Id</label>
+                    <input type="number" class="form-control" name="dId" id="field_dId"
+                           formControlName="dId"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.tType" for="field_tType">T Type</label>
+                    <input type="number" class="form-control" name="tType" id="field_tType"
+                           formControlName="tType"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.tOption" for="field_tOption">T Option</label>
+                    <input type="number" class="form-control" name="tOption" id="field_tOption"
+                           formControlName="tOption"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.tFilter" for="field_tFilter">T Filter</label>
+                    <input type="number" class="form-control" name="tFilter" id="field_tFilter"
+                           formControlName="tFilter"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.tId" for="field_tId">T Id</label>
+                    <input type="number" class="form-control" name="tId" id="field_tId"
+                           formControlName="tId"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.risktype" for="field_risktype">Risktype</label>
+                    <input type="text" class="form-control" name="risktype" id="field_risktype"
+                           formControlName="risktype"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.riskimpact" for="field_riskimpact">Riskimpact</label>
+                    <input type="number" class="form-control" name="riskimpact" id="field_riskimpact"
+                           formControlName="riskimpact"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.riskprobability" for="field_riskprobability">Riskprobability</label>
+                    <input type="number" class="form-control" name="riskprobability" id="field_riskprobability"
+                           formControlName="riskprobability"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.projectInitiativeId" for="field_projectInitiativeId">Project Initiative Id</label>
+                    <select class="form-control" id="field_projectInitiativeId" name="projectInitiativeId" formControlName="projectInitiativeId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="projectInitiativeIdOption.id === editForm.get('projectInitiativeId').value?.id ? editForm.get('projectInitiativeId').value : projectInitiativeIdOption" *ngFor="let projectInitiativeIdOption of projectinitiativeids; trackBy: trackProjectInitiativeIdById">{{projectInitiativeIdOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.projectBusinessgoalId" for="field_projectBusinessgoalId">Project Businessgoal Id</label>
+                    <select class="form-control" id="field_projectBusinessgoalId" name="projectBusinessgoalId" formControlName="projectBusinessgoalId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="projectBusinessgoalIdOption.id === editForm.get('projectBusinessgoalId').value?.id ? editForm.get('projectBusinessgoalId').value : projectBusinessgoalIdOption" *ngFor="let projectBusinessgoalIdOption of projectbusinessgoalids; trackBy: trackProjectBusinessgoalIdById">{{projectBusinessgoalIdOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.projectSubgoalId" for="field_projectSubgoalId">Project Subgoal Id</label>
+                    <select class="form-control" id="field_projectSubgoalId" name="projectSubgoalId" formControlName="projectSubgoalId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="projectSubgoalIdOption.id === editForm.get('projectSubgoalId').value?.id ? editForm.get('projectSubgoalId').value : projectSubgoalIdOption" *ngFor="let projectSubgoalIdOption of projectsubgoalids; trackBy: trackProjectSubgoalIdById">{{projectSubgoalIdOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.projectMaingoalId" for="field_projectMaingoalId">Project Maingoal Id</label>
+                    <select class="form-control" id="field_projectMaingoalId" name="projectMaingoalId" formControlName="projectMaingoalId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="projectMaingoalIdOption.id === editForm.get('projectMaingoalId').value?.id ? editForm.get('projectMaingoalId').value : projectMaingoalIdOption" *ngFor="let projectMaingoalIdOption of projectmaingoalids; trackBy: trackProjectMaingoalIdById">{{projectMaingoalIdOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.projectBucketId" for="field_projectBucketId">Project Bucket Id</label>
+                    <select class="form-control" id="field_projectBucketId" name="projectBucketId" formControlName="projectBucketId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="projectBucketIdOption.id === editForm.get('projectBucketId').value?.id ? editForm.get('projectBucketId').value : projectBucketIdOption" *ngFor="let projectBucketIdOption of projectbucketids; trackBy: trackProjectBucketIdById">{{projectBucketIdOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.projectCostCenterId" for="field_projectCostCenterId">Project Cost Center Id</label>
+                    <select class="form-control" id="field_projectCostCenterId" name="projectCostCenterId" formControlName="projectCostCenterId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="projectCostCenterIdOption.id === editForm.get('projectCostCenterId').value?.id ? editForm.get('projectCostCenterId').value : projectCostCenterIdOption" *ngFor="let projectCostCenterIdOption of projectcostcenterids; trackBy: trackProjectCostCenterIdById">{{projectCostCenterIdOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.opportunityPriorityId" for="field_opportunityPriorityId">Opportunity Priority Id</label>
+                    <select class="form-control" id="field_opportunityPriorityId" name="opportunityPriorityId" formControlName="opportunityPriorityId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="opportunityPriorityIdOption.id === editForm.get('opportunityPriorityId').value?.id ? editForm.get('opportunityPriorityId').value : opportunityPriorityIdOption" *ngFor="let opportunityPriorityIdOption of opportunitypriorityids; trackBy: trackOpportunityPriorityIdById">{{opportunityPriorityIdOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.backlogPractice" for="field_backlogPractice">Backlog Practice</label>
+                    <select class="form-control" id="field_backlogPractice" name="backlogPractice" formControlName="backlogPractice">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="backlogPracticeOption.id === editForm.get('backlogPractice').value?.id ? editForm.get('backlogPractice').value : backlogPracticeOption" *ngFor="let backlogPracticeOption of backlogpractices; trackBy: trackBacklogPracticeById">{{backlogPracticeOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.projectTheme" for="field_projectTheme">Project Theme</label>
+                    <select class="form-control" id="field_projectTheme" name="projectTheme" formControlName="projectTheme">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="projectThemeOption.id === editForm.get('projectTheme').value?.id ? editForm.get('projectTheme').value : projectThemeOption" *ngFor="let projectThemeOption of projectthemes; trackBy: trackProjectThemeById">{{projectThemeOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.projectClass" for="field_projectClass">Project Class</label>
+                    <select class="form-control" id="field_projectClass" name="projectClass" formControlName="projectClass">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="projectClassOption.id === editForm.get('projectClass').value?.id ? editForm.get('projectClass').value : projectClassOption" *ngFor="let projectClassOption of projectclasses; trackBy: trackProjectClassById">{{projectClassOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.projectVertical" for="field_projectVertical">Project Vertical</label>
+                    <select class="form-control" id="field_projectVertical" name="projectVertical" formControlName="projectVertical">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="projectVerticalOption.id === editForm.get('projectVertical').value?.id ? editForm.get('projectVertical').value : projectVerticalOption" *ngFor="let projectVerticalOption of projectverticals; trackBy: trackProjectVerticalById">{{projectVerticalOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.projectBoardId" for="field_projectBoardId">Project Board Id</label>
+                    <select class="form-control" id="field_projectBoardId" name="projectBoardId" formControlName="projectBoardId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="projectBoardIdOption.id === editForm.get('projectBoardId').value?.id ? editForm.get('projectBoardId').value : projectBoardIdOption" *ngFor="let projectBoardIdOption of projectboardids; trackBy: trackProjectBoardIdById">{{projectBoardIdOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.projectBoard2Id" for="field_projectBoard2Id">Project Board 2 Id</label>
+                    <select class="form-control" id="field_projectBoard2Id" name="projectBoard2Id" formControlName="projectBoard2Id">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="projectBoardIdOption.id === editForm.get('projectBoard2Id').value?.id ? editForm.get('projectBoard2Id').value : projectBoardIdOption" *ngFor="let projectBoardIdOption of projectboardids; trackBy: trackProjectBoardIdById">{{projectBoardIdOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.projectStatusId" for="field_projectStatusId">Project Status Id</label>
+                    <select class="form-control" id="field_projectStatusId" name="projectStatusId" formControlName="projectStatusId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="projectStatusIdOption.id === editForm.get('projectStatusId').value?.id ? editForm.get('projectStatusId').value : projectStatusIdOption" *ngFor="let projectStatusIdOption of projectstatusids; trackBy: trackProjectStatusIdById">{{projectStatusIdOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.projectTypeId" for="field_projectTypeId">Project Type Id</label>
+                    <select class="form-control" id="field_projectTypeId" name="projectTypeId" formControlName="projectTypeId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="projectTypeIdOption.id === editForm.get('projectTypeId').value?.id ? editForm.get('projectTypeId').value : projectTypeIdOption" *ngFor="let projectTypeIdOption of projecttypeids; trackBy: trackProjectTypeIdById">{{projectTypeIdOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.projectLeadId" for="field_projectLeadId">Project Lead Id</label>
+                    <select class="form-control" id="field_projectLeadId" name="projectLeadId" formControlName="projectLeadId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="imEmployeeOption.id === editForm.get('projectLeadId').value?.id ? editForm.get('projectLeadId').value : imEmployeeOption" *ngFor="let imEmployeeOption of imemployees; trackBy: trackImEmployeeById">{{imEmployeeOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.imProjects.parentId" for="field_parentId">Parent Id</label>
+                    <select class="form-control" id="field_parentId" name="parentId" formControlName="parentId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="imProjectsOption.id === editForm.get('parentId').value?.id ? editForm.get('parentId').value : imProjectsOption" *ngFor="let imProjectsOption of improjects; trackBy: trackImProjectsById">{{imProjectsOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,18 +1,11 @@
 package com.qnowapp.web.rest;
 
-import com.qnowapp.domain.ImEmployee;
-import com.qnowapp.domain.QnowUser;
-import com.qnowapp.domain.User;
-import com.qnowapp.repository.ImEmployeeRepository;
-import com.qnowapp.repository.QnowUserRepository;
-import com.qnowapp.repository.UserRepository;
 import com.qnowapp.security.jwt.JWTFilter;
 import com.qnowapp.security.jwt.TokenProvider;
 import com.qnowapp.web.rest.vm.LoginVM;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,15 +24,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/api")
 public class UserJWTController {
-	@Autowired
-	UserRepository userRepository;
-	
-	@Autowired
-	QnowUserRepository qnowUserRepository;
-	
-	@Autowired
-	ImEmployeeRepository imEmployeeRepository;
-	
+
     private final TokenProvider tokenProvider;
 
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
@@ -59,21 +44,9 @@ public class UserJWTController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         boolean rememberMe = (loginVM.isRememberMe() == null) ? false : loginVM.isRememberMe();
         String jwt = tokenProvider.createToken(authentication, rememberMe);
-        
-        User user = new User();
-        user = userRepository.findBylogin(loginVM.getUsername());
-        
-        QnowUser qnowUser = qnowUserRepository.findByuser(user);
-        
-        ImEmployee imEmployee = imEmployeeRepository.findByqnowUser(qnowUser);
-        
-        
-        
- 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
-       
-        return new ResponseEntity<>(new JWTToken(jwt , imEmployee), httpHeaders, HttpStatus.OK);
+        return new ResponseEntity<>(new JWTToken(jwt), httpHeaders, HttpStatus.OK);
     }
 
     /**
@@ -82,19 +55,12 @@ public class UserJWTController {
     static class JWTToken {
 
         private String idToken;
-        
-        private ImEmployee imemployee;
 
         JWTToken(String idToken) {
             this.idToken = idToken;
         }
 
-        JWTToken(String jwt, ImEmployee imemployee) {
-        	this.idToken = jwt;
-        	this.imemployee = imemployee;
-		}
-
-		@JsonProperty("id_token")
+        @JsonProperty("id_token")
         String getIdToken() {
             return idToken;
         }
@@ -102,17 +68,5 @@ public class UserJWTController {
         void setIdToken(String idToken) {
             this.idToken = idToken;
         }
-
-		public ImEmployee getImemployee() {
-			return imemployee;
-		}
-
-		public void setImemployee(ImEmployee imemployee) {
-			this.imemployee = imemployee;
-		}
-
-	
-        
-        
     }
 }

@@ -1,10 +1,9 @@
 package com.qnowapp.web.rest;
 
 import com.qnowapp.domain.ImProjects;
-
 import com.qnowapp.domain.ProjectInitiativeId;
 import com.qnowapp.repository.ProjectInitiativeIdRepository;
-
+import com.qnowapp.service.ProjectInitiativeIdQueryService;
 import com.qnowapp.service.ProjectInitiativeIdService;
 import com.qnowapp.service.dto.ProjectInitiativeIdCriteria;
 import com.qnowapp.web.rest.errors.BadRequestAlertException;
@@ -47,10 +46,12 @@ public class ProjectInitiativeIdResource {
    
     private final ProjectInitiativeIdService projectInitiativeIdService;
 
-   
-    public ProjectInitiativeIdResource( ProjectInitiativeIdService projectInitiativeIdService) {
-        this.projectInitiativeIdService = projectInitiativeIdService;
+    private final ProjectInitiativeIdQueryService projectInitiativeIdQueryService;
 
+    public ProjectInitiativeIdResource( ProjectInitiativeIdService projectInitiativeIdService, ProjectInitiativeIdQueryService projectInitiativeIdQueryService) {
+        this.projectInitiativeIdService = projectInitiativeIdService;
+        this.projectInitiativeIdQueryService = projectInitiativeIdQueryService;
+       
     }
 
 
@@ -78,7 +79,7 @@ public class ProjectInitiativeIdResource {
                     .body(result);
 
             if (fromTesting == false) {
-               
+                System.out.println(projectInitiativeId.getName());
                 String csvFile1 = "src\\main\\resources\\initiative.csv";
                 BufferedReader br = null;
                 String line = "";
@@ -89,27 +90,28 @@ public class ProjectInitiativeIdResource {
                     int count = 0;
                     while ((line = br.readLine()) != null) {
                         count++;
-                   
+                        System.out.println(+count);
                         if (count == 1)
                             continue;
                         String[] country = line.split(cvsSplitBy);
                         try {
                             if (country.length > 3 ) {
-                        
+                                System.out.println("1");
                                 projectInitiativeId.setId(null);
                                 projectInitiativeId.setCode(country[0]);
-                                
+                                System.out.println("2");
                                 projectInitiativeId.setName(country[1]);
-                             
+                                System.out.println("3");
                                 projectInitiativeId.setDescription(country[2]);
                                 ProjectInitiativeId result2 = projectInitiativeIdRepository.save(projectInitiativeId);  
-                             
+                                System.out.println(result2.getId());
+                                System.out.println(projectInitiativeId + "new project created");
                             }
                         } catch (Exception e) {
                         }
                     }
                 } catch (Exception e) {
-                    
+                    // TODO: handle exception
                 } finally {
                     if (br != null) {
                         try {
@@ -159,13 +161,24 @@ public class ProjectInitiativeIdResource {
      */
     @CrossOrigin
     @GetMapping("/project-initiative-ids")
-    public ResponseEntity<List<ProjectInitiativeId>> getAllProjectInitiativeIds( ) {
-        log.debug("REST request to get ProjectInitiativeIds by criteria: {}");
-        List<ProjectInitiativeId> entityList = projectInitiativeIdService.findAll();
+    public ResponseEntity<List<ProjectInitiativeId>> getAllProjectInitiativeIds(ProjectInitiativeIdCriteria criteria) {
+        log.debug("REST request to get ProjectInitiativeIds by criteria: {}", criteria);
+        List<ProjectInitiativeId> entityList = projectInitiativeIdQueryService.findByCriteria(criteria);
         return ResponseEntity.ok().body(entityList);
     }
 
-
+    /**
+    * {@code GET  /project-initiative-ids/count} : count all the projectInitiativeIds.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping("/project-initiative-ids/count")
+    public ResponseEntity<Long> countProjectInitiativeIds(ProjectInitiativeIdCriteria criteria) {
+        log.debug("REST request to count ProjectInitiativeIds by criteria: {}", criteria);
+        return ResponseEntity.ok().body(projectInitiativeIdQueryService.countByCriteria(criteria));
+    }
 
     /**
      * {@code GET  /project-initiative-ids/:id} : get the "id" projectInitiativeId.

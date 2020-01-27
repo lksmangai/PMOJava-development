@@ -1,0 +1,24 @@
+{
+  "App": {
+    "skills": {
+      "home": {
+        "title": "Skills",
+        "createLabel": "Create a new Skills",
+        "createOrEditLabel": "Create or edit a Skills"
+      },
+      "created": "A new Skills is created with identifier {{ param }}",
+      "updated": "A Skills is updated with identifier {{ param }}",
+      "deleted": "A Skills is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Skills {{ id }}?"
+      },
+      "detail": {
+        "title": "Skills"
+      },
+      "skillCode": "Skill Code",
+      "skillName": "Skill Name",
+      "parentSkillsId": "Parent Skills Id",
+      "skillCategoryId": "Skill Category Id"
+    }
+  }
+}

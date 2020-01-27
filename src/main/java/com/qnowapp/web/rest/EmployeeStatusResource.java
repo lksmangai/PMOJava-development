@@ -1,11 +1,10 @@
 package com.qnowapp.web.rest;
 
 import com.qnowapp.domain.EmployeeStatus;
-
 import com.qnowapp.service.EmployeeStatusService;
 import com.qnowapp.web.rest.errors.BadRequestAlertException;
 import com.qnowapp.service.dto.EmployeeStatusCriteria;
-
+import com.qnowapp.service.EmployeeStatusQueryService;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -38,10 +37,11 @@ public class EmployeeStatusResource {
 
     private final EmployeeStatusService employeeStatusService;
 
+    private final EmployeeStatusQueryService employeeStatusQueryService;
 
-    public EmployeeStatusResource(EmployeeStatusService employeeStatusService) {
+    public EmployeeStatusResource(EmployeeStatusService employeeStatusService, EmployeeStatusQueryService employeeStatusQueryService) {
         this.employeeStatusService = employeeStatusService;
-       
+        this.employeeStatusQueryService = employeeStatusQueryService;
     }
 
     /**
@@ -94,13 +94,24 @@ public class EmployeeStatusResource {
      */
     @CrossOrigin
     @GetMapping("/employee-statuses")
-    public ResponseEntity<List<EmployeeStatus>> getAllEmployeeStatuses( ) {
-        log.debug("REST request to get EmployeeStatuses by criteria: {}");
-        List<EmployeeStatus> entityList = employeeStatusService.findAll();
+    public ResponseEntity<List<EmployeeStatus>> getAllEmployeeStatuses(EmployeeStatusCriteria criteria) {
+        log.debug("REST request to get EmployeeStatuses by criteria: {}", criteria);
+        List<EmployeeStatus> entityList = employeeStatusQueryService.findByCriteria(criteria);
         return ResponseEntity.ok().body(entityList);
     }
 
-   
+    /**
+    * {@code GET  /employee-statuses/count} : count all the employeeStatuses.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping("/employee-statuses/count")
+    public ResponseEntity<Long> countEmployeeStatuses(EmployeeStatusCriteria criteria) {
+        log.debug("REST request to count EmployeeStatuses by criteria: {}", criteria);
+        return ResponseEntity.ok().body(employeeStatusQueryService.countByCriteria(criteria));
+    }
 
     /**
      * {@code GET  /employee-statuses/:id} : get the "id" employeeStatus.

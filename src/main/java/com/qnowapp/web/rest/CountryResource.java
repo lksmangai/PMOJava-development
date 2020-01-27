@@ -1,10 +1,11 @@
 package com.qnowapp.web.rest;
 
 import com.qnowapp.domain.Country;
-
 import com.qnowapp.service.CountryService;
 import com.qnowapp.web.rest.errors.BadRequestAlertException;
 import com.qnowapp.service.dto.CountryCriteria;
+import com.qnowapp.service.CountryQueryService;
+
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -36,10 +37,11 @@ public class CountryResource {
 
     private final CountryService countryService;
 
+    private final CountryQueryService countryQueryService;
 
-    public CountryResource(CountryService countryService) {
+    public CountryResource(CountryService countryService, CountryQueryService countryQueryService) {
         this.countryService = countryService;
-       
+        this.countryQueryService = countryQueryService;
     }
 
     /**
@@ -92,13 +94,24 @@ public class CountryResource {
      */
     @CrossOrigin
     @GetMapping("/countries")
-    public ResponseEntity<List<Country>> getAllCountries( ) {
-        log.debug("REST request to get Countries by criteria: {}");
-        List<Country> entityList = countryService.findAll();
-        		
+    public ResponseEntity<List<Country>> getAllCountries(CountryCriteria criteria) {
+        log.debug("REST request to get Countries by criteria: {}", criteria);
+        List<Country> entityList = countryQueryService.findByCriteria(criteria);
         return ResponseEntity.ok().body(entityList);
     }
 
+    /**
+    * {@code GET  /countries/count} : count all the countries.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping("/countries/count")
+    public ResponseEntity<Long> countCountries(CountryCriteria criteria) {
+        log.debug("REST request to count Countries by criteria: {}", criteria);
+        return ResponseEntity.ok().body(countryQueryService.countByCriteria(criteria));
+    }
 
     /**
      * {@code GET  /countries/:id} : get the "id" country.

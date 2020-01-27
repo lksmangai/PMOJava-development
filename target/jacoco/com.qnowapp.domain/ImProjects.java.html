@@ -1,0 +1,1758 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImProjects.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.domain</a> &gt; <span class="el_source">ImProjects.java</span></div><h1>ImProjects.java</h1><pre class="source lang-java linenums">
+package com.qnowapp.domain;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.validator.constraints.Length;
+
+import javax.persistence.*;
+import javax.validation.constraints.*;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.Instant;
+import java.time.ZonedDateTime;
+import java.util.Objects;
+
+/**
+ * A ImProjects.
+ */
+@Entity
+@Table(name = &quot;im_projects&quot;)
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+<span class="nc" id="L25">public class ImProjects implements Serializable {</span>
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = &quot;sequenceGenerator&quot;)
+    @SequenceGenerator(name = &quot;sequenceGenerator&quot;)
+    private Long id;
+
+
+   @NotNull
+
+    @Column(name = &quot;project_name&quot;,length = 1024 , nullable = false)
+    @Length(max = 1024)
+    private String projectName;
+
+    @NotNull
+    @Column(name = &quot;project_nr&quot;, nullable = false)
+    private String projectNr;
+
+    @NotNull
+    @Column(name = &quot;project_path&quot;, nullable = false)
+    private String projectPath;
+
+    @Column(name = &quot;tree_sortkey&quot;)
+    private String treeSortkey;
+
+    @Column(name = &quot;max_child_sortkey&quot;)
+    private String maxChildSortkey;
+
+
+   @Column(name = &quot;description&quot;, length = 4096)
+
+    @Length(max = 4096)
+    private String description;
+
+    @Column(name = &quot;billing_type_id&quot;)
+    private Integer billingTypeId;
+
+    @Column(name = &quot;note&quot;)
+    private String note;
+
+    @Column(name = &quot;requires_report_p&quot;)
+    private Boolean requiresReportP;
+
+    @Column(name = &quot;project_budget&quot;)
+    private Double projectBudget;
+
+    @Column(name = &quot;project_risk&quot;)
+    private String projectRisk;
+
+    @Column(name = &quot;corporate_sponsor&quot;)
+    private String corporateSponsor;
+
+    @Column(name = &quot;percent_completed&quot;)
+    private Double percentCompleted;
+
+    @Column(name = &quot;project_budget_hours&quot;)
+    private Double projectBudgetHours;
+
+    @Column(name = &quot;cost_quotes_cache&quot;, precision = 21, scale = 2)
+    private BigDecimal costQuotesCache;
+
+    @Column(name = &quot;cost_invoices_cache&quot;)
+    private Integer costInvoicesCache;
+
+    @Column(name = &quot;cost_timesheet_planned_cache&quot;)
+    private Integer costTimesheetPlannedCache;
+
+    @Column(name = &quot;cost_purchase_orders_cache&quot;)
+    private Integer costPurchaseOrdersCache;
+
+    @Column(name = &quot;cost_bills_cache&quot;)
+    private Integer costBillsCache;
+
+    @Column(name = &quot;cost_timesheet_logged_cache&quot;)
+    private Integer costTimesheetLoggedCache;
+
+    @Column(name = &quot;end_date&quot;)
+    private ZonedDateTime endDate;
+
+    @Column(name = &quot;start_date&quot;)
+    private ZonedDateTime startDate;
+
+    @Column(name = &quot;template_p&quot;)
+    private Boolean templateP;
+
+    @Column(name = &quot;sort_order&quot;)
+    private Integer sortOrder;
+
+    @Column(name = &quot;reported_hours_cache&quot;)
+    private Double reportedHoursCache;
+
+    @Column(name = &quot;cost_expense_planned_cache&quot;)
+    private Integer costExpensePlannedCache;
+
+    @Column(name = &quot;cost_expense_logged_cache&quot;)
+    private Integer costExpenseLoggedCache;
+
+    @Column(name = &quot;confirm_date&quot;)
+    private Instant confirmDate;
+
+    @Column(name = &quot;cost_delivery_notes_cache&quot;, precision = 21, scale = 2)
+    private BigDecimal costDeliveryNotesCache;
+
+    @Column(name = &quot;cost_cache_dirty&quot;)
+    private ZonedDateTime costCacheDirty;
+
+    @Column(name = &quot;milestone_p&quot;)
+    private Boolean milestoneP;
+
+    @Column(name = &quot;release_item_p&quot;)
+    private String releaseItemP;
+
+    @Column(name = &quot;presales_probability&quot;, precision = 21, scale = 2)
+    private BigDecimal presalesProbability;
+
+    @Column(name = &quot;presales_value&quot;, precision = 21, scale = 2)
+    private BigDecimal presalesValue;
+
+    @Column(name = &quot;reported_days_cache&quot;, precision = 21, scale = 2)
+    private BigDecimal reportedDaysCache;
+
+    @Column(name = &quot;presales_value_currency&quot;)
+    private String presalesValueCurrency;
+
+    @Column(name = &quot;opportunity_sales_stage_id&quot;)
+    private Integer opportunitySalesStageId;
+
+    @Column(name = &quot;opportunity_campaign_id&quot;)
+    private Integer opportunityCampaignId;
+
+    @Column(name = &quot;score_revenue&quot;, precision = 21, scale = 2)
+    private BigDecimal scoreRevenue;
+
+    @Column(name = &quot;score_strategic&quot;, precision = 21, scale = 2)
+    private BigDecimal scoreStrategic;
+
+    @Column(name = &quot;score_finance_npv&quot;, precision = 21, scale = 2)
+    private BigDecimal scoreFinanceNpv;
+
+    @Column(name = &quot;score_customers&quot;, precision = 21, scale = 2)
+    private BigDecimal scoreCustomers;
+
+    @Column(name = &quot;score_finance_cost&quot;, precision = 21, scale = 2)
+    private BigDecimal scoreFinanceCost;
+
+    @Column(name = &quot;cost_bills_planned&quot;, precision = 21, scale = 2)
+    private BigDecimal costBillsPlanned;
+
+    @Column(name = &quot;cost_expenses_planned&quot;, precision = 21, scale = 2)
+    private BigDecimal costExpensesPlanned;
+
+    @Column(name = &quot;score_risk&quot;, precision = 21, scale = 2)
+    private BigDecimal scoreRisk;
+
+    @Column(name = &quot;score_capabilities&quot;, precision = 21, scale = 2)
+    private BigDecimal scoreCapabilities;
+
+    @Column(name = &quot;score_einance_roi&quot;, precision = 21, scale = 2)
+    private BigDecimal scoreEinanceRoi;
+
+    @Column(name = &quot;project_userwise_board&quot;)
+    private String projectUserwiseBoard;
+
+    @Column(name = &quot;project_bring_nextday&quot;)
+    private Integer projectBringNextday;
+
+    @Column(name = &quot;project_bring_sameboard&quot;)
+    private String projectBringSameboard;
+
+    @Column(name = &quot;project_newboard_everytime&quot;)
+    private String projectNewboardEverytime;
+
+    @Column(name = &quot;project_userwise_board_2&quot;)
+    private String projectUserwiseBoard2;
+
+    @Column(name = &quot;project_bring_sameboard_2&quot;)
+    private String projectBringSameboard2;
+
+    @Column(name = &quot;project_newboard_2_everytime&quot;)
+    private Integer projectNewboard2Everytime;
+
+    @Column(name = &quot;project_newboard_2_always&quot;)
+    private String projectNewboard2Always;
+
+    @Column(name = &quot;project_report_weekly&quot;)
+    private String projectReportWeekly;
+
+    @Column(name = &quot;score_gain&quot;)
+    private Double scoreGain;
+
+    @Column(name = &quot;score_loss&quot;)
+    private Double scoreLoss;
+
+    @Column(name = &quot;score_delivery&quot;)
+    private Double scoreDelivery;
+
+    @Column(name = &quot;score_operations&quot;)
+    private Double scoreOperations;
+
+    @Column(name = &quot;score_why&quot;)
+    private Integer scoreWhy;
+
+    @Column(name = &quot;java_services&quot;)
+    private String javaServices;
+
+    @Column(name = &quot;net_services&quot;)
+    private String netServices;
+
+    @Column(name = &quot;collection_link&quot;)
+    private String collectionLink;
+
+    @Column(name = &quot;training_link&quot;)
+    private String trainingLink;
+
+    @Column(name = &quot;collection_name&quot;)
+    private String collectionName;
+
+    @Column(name = &quot;training_name&quot;)
+    private String trainingName;
+
+    @Column(name = &quot;training_doc&quot;)
+    private String trainingDoc;
+
+    @Column(name = &quot;testing_richtext&quot;)
+    private Integer testingRichtext;
+
+    @Column(name = &quot;template_category&quot;)
+    private String templateCategory;
+
+    @Column(name = &quot;d_type&quot;)
+    private Integer dType;
+
+    @Column(name = &quot;d_option&quot;)
+    private Integer dOption;
+
+    @Column(name = &quot;d_filter&quot;)
+    private Integer dFilter;
+
+    @Column(name = &quot;d_id&quot;)
+    private Integer dId;
+
+    @Column(name = &quot;t_type&quot;)
+    private Integer tType;
+
+    @Column(name = &quot;t_option&quot;)
+    private Integer tOption;
+
+    @Column(name = &quot;t_filter&quot;)
+    private Integer tFilter;
+
+    @Column(name = &quot;t_id&quot;)
+    private Integer tId;
+
+    @Column(name = &quot;risktype&quot;)
+    private String risktype;
+
+    @Column(name = &quot;riskimpact&quot;)
+    private Double riskimpact;
+
+    @Column(name = &quot;riskprobability&quot;)
+    private Double riskprobability;
+
+    @ManyToOne
+    @JsonIgnoreProperties(&quot;imProjects&quot;)
+    private ProjectInitiativeId projectInitiativeId;
+
+    @ManyToOne
+    @JsonIgnoreProperties(&quot;imProjects&quot;)
+    private ProjectBusinessgoalId projectBusinessgoalId;
+
+    @ManyToOne
+    @JsonIgnoreProperties(&quot;imProjects&quot;)
+    private ProjectSubgoalId projectSubgoalId;
+
+    @ManyToOne
+    @JsonIgnoreProperties(&quot;imProjects&quot;)
+    private ProjectMaingoalId projectMaingoalId;
+
+    @ManyToOne
+    @JsonIgnoreProperties(&quot;imProjects&quot;)
+    private ProjectBucketId projectBucketId;
+
+    @ManyToOne
+    @JsonIgnoreProperties(&quot;imProjects&quot;)
+    private ProjectCostCenterId projectCostCenterId;
+
+    @ManyToOne
+    @JsonIgnoreProperties(&quot;imProjects&quot;)
+    private OpportunityPriorityId opportunityPriorityId;
+
+    @ManyToOne
+    @JsonIgnoreProperties(&quot;imProjects&quot;)
+    private BacklogPractice backlogPractice;
+
+    @ManyToOne
+    @JsonIgnoreProperties(&quot;imProjects&quot;)
+    private ProjectTheme projectTheme;
+
+    @ManyToOne
+    @JsonIgnoreProperties(&quot;imProjects&quot;)
+    private ProjectClass projectClass;
+
+    @ManyToOne
+    @JsonIgnoreProperties(&quot;imProjects&quot;)
+    private ProjectVertical projectVertical;
+
+    @ManyToOne
+    @JsonIgnoreProperties(&quot;imProjects&quot;)
+    private ProjectBoardId projectBoardId;
+
+    @ManyToOne
+    @JsonIgnoreProperties(&quot;imProjects&quot;)
+    private ProjectBoardId projectBoard2Id;
+
+    @ManyToOne
+    @JsonIgnoreProperties(&quot;imProjects&quot;)
+    private ProjectStatusId projectStatusId;
+
+    @ManyToOne
+    @JsonIgnoreProperties(&quot;imProjects&quot;)
+    private ProjectTypeId projectTypeId;
+
+    @ManyToOne
+    @JsonIgnoreProperties(&quot;imProjects&quot;)
+    private ImEmployee projectLeadId;
+
+    @ManyToOne
+    @JsonIgnoreProperties(&quot;imProjects&quot;)
+    private ImProjects parentId;
+
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    public Long getId() {
+<span class="nc" id="L359">        return id;</span>
+    }
+
+    public void setId(Long id) {
+<span class="nc" id="L363">        this.id = id;</span>
+<span class="nc" id="L364">    }</span>
+
+    public String getProjectName() {
+<span class="nc" id="L367">        return projectName;</span>
+    }
+
+    public ImProjects projectName(String projectName) {
+<span class="nc" id="L371">        this.projectName = projectName;</span>
+<span class="nc" id="L372">        return this;</span>
+    }
+
+    public void setProjectName(String projectName) {
+<span class="nc" id="L376">        this.projectName = projectName;</span>
+<span class="nc" id="L377">    }</span>
+
+    public String getProjectNr() {
+<span class="nc" id="L380">        return projectNr;</span>
+    }
+
+    public ImProjects projectNr(String projectNr) {
+<span class="nc" id="L384">        this.projectNr = projectNr;</span>
+<span class="nc" id="L385">        return this;</span>
+    }
+
+    public void setProjectNr(String projectNr) {
+<span class="nc" id="L389">        this.projectNr = projectNr;</span>
+<span class="nc" id="L390">    }</span>
+
+    public String getProjectPath() {
+<span class="nc" id="L393">        return projectPath;</span>
+    }
+
+    public ImProjects projectPath(String projectPath) {
+<span class="nc" id="L397">        this.projectPath = projectPath;</span>
+<span class="nc" id="L398">        return this;</span>
+    }
+
+    public void setProjectPath(String projectPath) {
+<span class="nc" id="L402">        this.projectPath = projectPath;</span>
+<span class="nc" id="L403">    }</span>
+
+    public String getTreeSortkey() {
+<span class="nc" id="L406">        return treeSortkey;</span>
+    }
+
+    public ImProjects treeSortkey(String treeSortkey) {
+<span class="nc" id="L410">        this.treeSortkey = treeSortkey;</span>
+<span class="nc" id="L411">        return this;</span>
+    }
+
+    public void setTreeSortkey(String treeSortkey) {
+<span class="nc" id="L415">        this.treeSortkey = treeSortkey;</span>
+<span class="nc" id="L416">    }</span>
+
+    public String getMaxChildSortkey() {
+<span class="nc" id="L419">        return maxChildSortkey;</span>
+    }
+
+    public ImProjects maxChildSortkey(String maxChildSortkey) {
+<span class="nc" id="L423">        this.maxChildSortkey = maxChildSortkey;</span>
+<span class="nc" id="L424">        return this;</span>
+    }
+
+    public void setMaxChildSortkey(String maxChildSortkey) {
+<span class="nc" id="L428">        this.maxChildSortkey = maxChildSortkey;</span>
+<span class="nc" id="L429">    }</span>
+
+    public String getDescription() {
+<span class="nc" id="L432">        return description;</span>
+    }
+
+    public ImProjects description(String description) {
+<span class="nc" id="L436">        this.description = description;</span>
+<span class="nc" id="L437">        return this;</span>
+    }
+
+    public void setDescription(String description) {
+<span class="nc" id="L441">        this.description = description;</span>
+<span class="nc" id="L442">    }</span>
+
+    public Integer getBillingTypeId() {
+<span class="nc" id="L445">        return billingTypeId;</span>
+    }
+
+    public ImProjects billingTypeId(Integer billingTypeId) {
+<span class="nc" id="L449">        this.billingTypeId = billingTypeId;</span>
+<span class="nc" id="L450">        return this;</span>
+    }
+
+    public void setBillingTypeId(Integer billingTypeId) {
+<span class="nc" id="L454">        this.billingTypeId = billingTypeId;</span>
+<span class="nc" id="L455">    }</span>
+
+    public String getNote() {
+<span class="nc" id="L458">        return note;</span>
+    }
+
+    public ImProjects note(String note) {
+<span class="nc" id="L462">        this.note = note;</span>
+<span class="nc" id="L463">        return this;</span>
+    }
+
+    public void setNote(String note) {
+<span class="nc" id="L467">        this.note = note;</span>
+<span class="nc" id="L468">    }</span>
+
+    public Boolean isRequiresReportP() {
+<span class="nc" id="L471">        return requiresReportP;</span>
+    }
+
+    public ImProjects requiresReportP(Boolean requiresReportP) {
+<span class="nc" id="L475">        this.requiresReportP = requiresReportP;</span>
+<span class="nc" id="L476">        return this;</span>
+    }
+
+    public void setRequiresReportP(Boolean requiresReportP) {
+<span class="nc" id="L480">        this.requiresReportP = requiresReportP;</span>
+<span class="nc" id="L481">    }</span>
+
+    public Double getProjectBudget() {
+<span class="nc" id="L484">        return projectBudget;</span>
+    }
+
+    public ImProjects projectBudget(Double projectBudget) {
+<span class="nc" id="L488">        this.projectBudget = projectBudget;</span>
+<span class="nc" id="L489">        return this;</span>
+    }
+
+    public void setProjectBudget(Double projectBudget) {
+<span class="nc" id="L493">        this.projectBudget = projectBudget;</span>
+<span class="nc" id="L494">    }</span>
+
+    public String getProjectRisk() {
+<span class="nc" id="L497">        return projectRisk;</span>
+    }
+
+    public ImProjects projectRisk(String projectRisk) {
+<span class="nc" id="L501">        this.projectRisk = projectRisk;</span>
+<span class="nc" id="L502">        return this;</span>
+    }
+
+    public void setProjectRisk(String projectRisk) {
+<span class="nc" id="L506">        this.projectRisk = projectRisk;</span>
+<span class="nc" id="L507">    }</span>
+
+    public String getCorporateSponsor() {
+<span class="nc" id="L510">        return corporateSponsor;</span>
+    }
+
+    public ImProjects corporateSponsor(String corporateSponsor) {
+<span class="nc" id="L514">        this.corporateSponsor = corporateSponsor;</span>
+<span class="nc" id="L515">        return this;</span>
+    }
+
+    public void setCorporateSponsor(String corporateSponsor) {
+<span class="nc" id="L519">        this.corporateSponsor = corporateSponsor;</span>
+<span class="nc" id="L520">    }</span>
+
+    public Double getPercentCompleted() {
+<span class="nc" id="L523">        return percentCompleted;</span>
+    }
+
+    public ImProjects percentCompleted(Double percentCompleted) {
+<span class="nc" id="L527">        this.percentCompleted = percentCompleted;</span>
+<span class="nc" id="L528">        return this;</span>
+    }
+
+    public void setPercentCompleted(Double percentCompleted) {
+<span class="nc" id="L532">        this.percentCompleted = percentCompleted;</span>
+<span class="nc" id="L533">    }</span>
+
+    public Double getProjectBudgetHours() {
+<span class="nc" id="L536">        return projectBudgetHours;</span>
+    }
+
+    public ImProjects projectBudgetHours(Double projectBudgetHours) {
+<span class="nc" id="L540">        this.projectBudgetHours = projectBudgetHours;</span>
+<span class="nc" id="L541">        return this;</span>
+    }
+
+    public void setProjectBudgetHours(Double projectBudgetHours) {
+<span class="nc" id="L545">        this.projectBudgetHours = projectBudgetHours;</span>
+<span class="nc" id="L546">    }</span>
+
+    public BigDecimal getCostQuotesCache() {
+<span class="nc" id="L549">        return costQuotesCache;</span>
+    }
+
+    public ImProjects costQuotesCache(BigDecimal costQuotesCache) {
+<span class="nc" id="L553">        this.costQuotesCache = costQuotesCache;</span>
+<span class="nc" id="L554">        return this;</span>
+    }
+
+    public void setCostQuotesCache(BigDecimal costQuotesCache) {
+<span class="nc" id="L558">        this.costQuotesCache = costQuotesCache;</span>
+<span class="nc" id="L559">    }</span>
+
+    public Integer getCostInvoicesCache() {
+<span class="nc" id="L562">        return costInvoicesCache;</span>
+    }
+
+    public ImProjects costInvoicesCache(Integer costInvoicesCache) {
+<span class="nc" id="L566">        this.costInvoicesCache = costInvoicesCache;</span>
+<span class="nc" id="L567">        return this;</span>
+    }
+
+    public void setCostInvoicesCache(Integer costInvoicesCache) {
+<span class="nc" id="L571">        this.costInvoicesCache = costInvoicesCache;</span>
+<span class="nc" id="L572">    }</span>
+
+    public Integer getCostTimesheetPlannedCache() {
+<span class="nc" id="L575">        return costTimesheetPlannedCache;</span>
+    }
+
+    public ImProjects costTimesheetPlannedCache(Integer costTimesheetPlannedCache) {
+<span class="nc" id="L579">        this.costTimesheetPlannedCache = costTimesheetPlannedCache;</span>
+<span class="nc" id="L580">        return this;</span>
+    }
+
+    public void setCostTimesheetPlannedCache(Integer costTimesheetPlannedCache) {
+<span class="nc" id="L584">        this.costTimesheetPlannedCache = costTimesheetPlannedCache;</span>
+<span class="nc" id="L585">    }</span>
+
+    public Integer getCostPurchaseOrdersCache() {
+<span class="nc" id="L588">        return costPurchaseOrdersCache;</span>
+    }
+
+    public ImProjects costPurchaseOrdersCache(Integer costPurchaseOrdersCache) {
+<span class="nc" id="L592">        this.costPurchaseOrdersCache = costPurchaseOrdersCache;</span>
+<span class="nc" id="L593">        return this;</span>
+    }
+
+    public void setCostPurchaseOrdersCache(Integer costPurchaseOrdersCache) {
+<span class="nc" id="L597">        this.costPurchaseOrdersCache = costPurchaseOrdersCache;</span>
+<span class="nc" id="L598">    }</span>
+
+    public Integer getCostBillsCache() {
+<span class="nc" id="L601">        return costBillsCache;</span>
+    }
+
+    public ImProjects costBillsCache(Integer costBillsCache) {
+<span class="nc" id="L605">        this.costBillsCache = costBillsCache;</span>
+<span class="nc" id="L606">        return this;</span>
+    }
+
+    public void setCostBillsCache(Integer costBillsCache) {
+<span class="nc" id="L610">        this.costBillsCache = costBillsCache;</span>
+<span class="nc" id="L611">    }</span>
+
+    public Integer getCostTimesheetLoggedCache() {
+<span class="nc" id="L614">        return costTimesheetLoggedCache;</span>
+    }
+
+    public ImProjects costTimesheetLoggedCache(Integer costTimesheetLoggedCache) {
+<span class="nc" id="L618">        this.costTimesheetLoggedCache = costTimesheetLoggedCache;</span>
+<span class="nc" id="L619">        return this;</span>
+    }
+
+    public void setCostTimesheetLoggedCache(Integer costTimesheetLoggedCache) {
+<span class="nc" id="L623">        this.costTimesheetLoggedCache = costTimesheetLoggedCache;</span>
+<span class="nc" id="L624">    }</span>
+
+    public ZonedDateTime getEndDate() {
+<span class="nc" id="L627">        return endDate;</span>
+    }
+
+    public ImProjects endDate(ZonedDateTime endDate) {
+<span class="nc" id="L631">        this.endDate = endDate;</span>
+<span class="nc" id="L632">        return this;</span>
+    }
+
+    public void setEndDate(ZonedDateTime endDate) {
+<span class="nc" id="L636">        this.endDate = endDate;</span>
+<span class="nc" id="L637">    }</span>
+
+    public ZonedDateTime getStartDate() {
+<span class="nc" id="L640">        return startDate;</span>
+    }
+
+    public ImProjects startDate(ZonedDateTime startDate) {
+<span class="nc" id="L644">        this.startDate = startDate;</span>
+<span class="nc" id="L645">        return this;</span>
+    }
+
+    public void setStartDate(ZonedDateTime startDate) {
+<span class="nc" id="L649">        this.startDate = startDate;</span>
+<span class="nc" id="L650">    }</span>
+
+    public Boolean isTemplateP() {
+<span class="nc" id="L653">        return templateP;</span>
+    }
+
+    public ImProjects templateP(Boolean templateP) {
+<span class="nc" id="L657">        this.templateP = templateP;</span>
+<span class="nc" id="L658">        return this;</span>
+    }
+
+    public void setTemplateP(Boolean templateP) {
+<span class="nc" id="L662">        this.templateP = templateP;</span>
+<span class="nc" id="L663">    }</span>
+
+    public Integer getSortOrder() {
+<span class="nc" id="L666">        return sortOrder;</span>
+    }
+
+    public ImProjects sortOrder(Integer sortOrder) {
+<span class="nc" id="L670">        this.sortOrder = sortOrder;</span>
+<span class="nc" id="L671">        return this;</span>
+    }
+
+    public void setSortOrder(Integer sortOrder) {
+<span class="nc" id="L675">        this.sortOrder = sortOrder;</span>
+<span class="nc" id="L676">    }</span>
+
+    public Double getReportedHoursCache() {
+<span class="nc" id="L679">        return reportedHoursCache;</span>
+    }
+
+    public ImProjects reportedHoursCache(Double reportedHoursCache) {
+<span class="nc" id="L683">        this.reportedHoursCache = reportedHoursCache;</span>
+<span class="nc" id="L684">        return this;</span>
+    }
+
+    public void setReportedHoursCache(Double reportedHoursCache) {
+<span class="nc" id="L688">        this.reportedHoursCache = reportedHoursCache;</span>
+<span class="nc" id="L689">    }</span>
+
+    public Integer getCostExpensePlannedCache() {
+<span class="nc" id="L692">        return costExpensePlannedCache;</span>
+    }
+
+    public ImProjects costExpensePlannedCache(Integer costExpensePlannedCache) {
+<span class="nc" id="L696">        this.costExpensePlannedCache = costExpensePlannedCache;</span>
+<span class="nc" id="L697">        return this;</span>
+    }
+
+    public void setCostExpensePlannedCache(Integer costExpensePlannedCache) {
+<span class="nc" id="L701">        this.costExpensePlannedCache = costExpensePlannedCache;</span>
+<span class="nc" id="L702">    }</span>
+
+    public Integer getCostExpenseLoggedCache() {
+<span class="nc" id="L705">        return costExpenseLoggedCache;</span>
+    }
+
+    public ImProjects costExpenseLoggedCache(Integer costExpenseLoggedCache) {
+<span class="nc" id="L709">        this.costExpenseLoggedCache = costExpenseLoggedCache;</span>
+<span class="nc" id="L710">        return this;</span>
+    }
+
+    public void setCostExpenseLoggedCache(Integer costExpenseLoggedCache) {
+<span class="nc" id="L714">        this.costExpenseLoggedCache = costExpenseLoggedCache;</span>
+<span class="nc" id="L715">    }</span>
+
+    public Instant getConfirmDate() {
+<span class="nc" id="L718">        return confirmDate;</span>
+    }
+
+    public ImProjects confirmDate(Instant confirmDate) {
+<span class="nc" id="L722">        this.confirmDate = confirmDate;</span>
+<span class="nc" id="L723">        return this;</span>
+    }
+
+    public void setConfirmDate(Instant confirmDate) {
+<span class="nc" id="L727">        this.confirmDate = confirmDate;</span>
+<span class="nc" id="L728">    }</span>
+
+    public BigDecimal getCostDeliveryNotesCache() {
+<span class="nc" id="L731">        return costDeliveryNotesCache;</span>
+    }
+
+    public ImProjects costDeliveryNotesCache(BigDecimal costDeliveryNotesCache) {
+<span class="nc" id="L735">        this.costDeliveryNotesCache = costDeliveryNotesCache;</span>
+<span class="nc" id="L736">        return this;</span>
+    }
+
+    public void setCostDeliveryNotesCache(BigDecimal costDeliveryNotesCache) {
+<span class="nc" id="L740">        this.costDeliveryNotesCache = costDeliveryNotesCache;</span>
+<span class="nc" id="L741">    }</span>
+
+    public ZonedDateTime getCostCacheDirty() {
+<span class="nc" id="L744">        return costCacheDirty;</span>
+    }
+
+    public ImProjects costCacheDirty(ZonedDateTime costCacheDirty) {
+<span class="nc" id="L748">        this.costCacheDirty = costCacheDirty;</span>
+<span class="nc" id="L749">        return this;</span>
+    }
+
+    public void setCostCacheDirty(ZonedDateTime costCacheDirty) {
+<span class="nc" id="L753">        this.costCacheDirty = costCacheDirty;</span>
+<span class="nc" id="L754">    }</span>
+
+    public Boolean isMilestoneP() {
+<span class="nc" id="L757">        return milestoneP;</span>
+    }
+
+    public ImProjects milestoneP(Boolean milestoneP) {
+<span class="nc" id="L761">        this.milestoneP = milestoneP;</span>
+<span class="nc" id="L762">        return this;</span>
+    }
+
+    public void setMilestoneP(Boolean milestoneP) {
+<span class="nc" id="L766">        this.milestoneP = milestoneP;</span>
+<span class="nc" id="L767">    }</span>
+
+    public String getReleaseItemP() {
+<span class="nc" id="L770">        return releaseItemP;</span>
+    }
+
+    public ImProjects releaseItemP(String releaseItemP) {
+<span class="nc" id="L774">        this.releaseItemP = releaseItemP;</span>
+<span class="nc" id="L775">        return this;</span>
+    }
+
+    public void setReleaseItemP(String releaseItemP) {
+<span class="nc" id="L779">        this.releaseItemP = releaseItemP;</span>
+<span class="nc" id="L780">    }</span>
+
+    public BigDecimal getPresalesProbability() {
+<span class="nc" id="L783">        return presalesProbability;</span>
+    }
+
+    public ImProjects presalesProbability(BigDecimal presalesProbability) {
+<span class="nc" id="L787">        this.presalesProbability = presalesProbability;</span>
+<span class="nc" id="L788">        return this;</span>
+    }
+
+    public void setPresalesProbability(BigDecimal presalesProbability) {
+<span class="nc" id="L792">        this.presalesProbability = presalesProbability;</span>
+<span class="nc" id="L793">    }</span>
+
+    public BigDecimal getPresalesValue() {
+<span class="nc" id="L796">        return presalesValue;</span>
+    }
+
+    public ImProjects presalesValue(BigDecimal presalesValue) {
+<span class="nc" id="L800">        this.presalesValue = presalesValue;</span>
+<span class="nc" id="L801">        return this;</span>
+    }
+
+    public void setPresalesValue(BigDecimal presalesValue) {
+<span class="nc" id="L805">        this.presalesValue = presalesValue;</span>
+<span class="nc" id="L806">    }</span>
+
+    public BigDecimal getReportedDaysCache() {
+<span class="nc" id="L809">        return reportedDaysCache;</span>
+    }
+
+    public ImProjects reportedDaysCache(BigDecimal reportedDaysCache) {
+<span class="nc" id="L813">        this.reportedDaysCache = reportedDaysCache;</span>
+<span class="nc" id="L814">        return this;</span>
+    }
+
+    public void setReportedDaysCache(BigDecimal reportedDaysCache) {
+<span class="nc" id="L818">        this.reportedDaysCache = reportedDaysCache;</span>
+<span class="nc" id="L819">    }</span>
+
+    public String getPresalesValueCurrency() {
+<span class="nc" id="L822">        return presalesValueCurrency;</span>
+    }
+
+    public ImProjects presalesValueCurrency(String presalesValueCurrency) {
+<span class="nc" id="L826">        this.presalesValueCurrency = presalesValueCurrency;</span>
+<span class="nc" id="L827">        return this;</span>
+    }
+
+    public void setPresalesValueCurrency(String presalesValueCurrency) {
+<span class="nc" id="L831">        this.presalesValueCurrency = presalesValueCurrency;</span>
+<span class="nc" id="L832">    }</span>
+
+    public Integer getOpportunitySalesStageId() {
+<span class="nc" id="L835">        return opportunitySalesStageId;</span>
+    }
+
+    public ImProjects opportunitySalesStageId(Integer opportunitySalesStageId) {
+<span class="nc" id="L839">        this.opportunitySalesStageId = opportunitySalesStageId;</span>
+<span class="nc" id="L840">        return this;</span>
+    }
+
+    public void setOpportunitySalesStageId(Integer opportunitySalesStageId) {
+<span class="nc" id="L844">        this.opportunitySalesStageId = opportunitySalesStageId;</span>
+<span class="nc" id="L845">    }</span>
+
+    public Integer getOpportunityCampaignId() {
+<span class="nc" id="L848">        return opportunityCampaignId;</span>
+    }
+
+    public ImProjects opportunityCampaignId(Integer opportunityCampaignId) {
+<span class="nc" id="L852">        this.opportunityCampaignId = opportunityCampaignId;</span>
+<span class="nc" id="L853">        return this;</span>
+    }
+
+    public void setOpportunityCampaignId(Integer opportunityCampaignId) {
+<span class="nc" id="L857">        this.opportunityCampaignId = opportunityCampaignId;</span>
+<span class="nc" id="L858">    }</span>
+
+    public BigDecimal getScoreRevenue() {
+<span class="nc" id="L861">        return scoreRevenue;</span>
+    }
+
+    public ImProjects scoreRevenue(BigDecimal scoreRevenue) {
+<span class="nc" id="L865">        this.scoreRevenue = scoreRevenue;</span>
+<span class="nc" id="L866">        return this;</span>
+    }
+
+    public void setScoreRevenue(BigDecimal scoreRevenue) {
+<span class="nc" id="L870">        this.scoreRevenue = scoreRevenue;</span>
+<span class="nc" id="L871">    }</span>
+
+    public BigDecimal getScoreStrategic() {
+<span class="nc" id="L874">        return scoreStrategic;</span>
+    }
+
+    public ImProjects scoreStrategic(BigDecimal scoreStrategic) {
+<span class="nc" id="L878">        this.scoreStrategic = scoreStrategic;</span>
+<span class="nc" id="L879">        return this;</span>
+    }
+
+    public void setScoreStrategic(BigDecimal scoreStrategic) {
+<span class="nc" id="L883">        this.scoreStrategic = scoreStrategic;</span>
+<span class="nc" id="L884">    }</span>
+
+    public BigDecimal getScoreFinanceNpv() {
+<span class="nc" id="L887">        return scoreFinanceNpv;</span>
+    }
+
+    public ImProjects scoreFinanceNpv(BigDecimal scoreFinanceNpv) {
+<span class="nc" id="L891">        this.scoreFinanceNpv = scoreFinanceNpv;</span>
+<span class="nc" id="L892">        return this;</span>
+    }
+
+    public void setScoreFinanceNpv(BigDecimal scoreFinanceNpv) {
+<span class="nc" id="L896">        this.scoreFinanceNpv = scoreFinanceNpv;</span>
+<span class="nc" id="L897">    }</span>
+
+    public BigDecimal getScoreCustomers() {
+<span class="nc" id="L900">        return scoreCustomers;</span>
+    }
+
+    public ImProjects scoreCustomers(BigDecimal scoreCustomers) {
+<span class="nc" id="L904">        this.scoreCustomers = scoreCustomers;</span>
+<span class="nc" id="L905">        return this;</span>
+    }
+
+    public void setScoreCustomers(BigDecimal scoreCustomers) {
+<span class="nc" id="L909">        this.scoreCustomers = scoreCustomers;</span>
+<span class="nc" id="L910">    }</span>
+
+    public BigDecimal getScoreFinanceCost() {
+<span class="nc" id="L913">        return scoreFinanceCost;</span>
+    }
+
+    public ImProjects scoreFinanceCost(BigDecimal scoreFinanceCost) {
+<span class="nc" id="L917">        this.scoreFinanceCost = scoreFinanceCost;</span>
+<span class="nc" id="L918">        return this;</span>
+    }
+
+    public void setScoreFinanceCost(BigDecimal scoreFinanceCost) {
+<span class="nc" id="L922">        this.scoreFinanceCost = scoreFinanceCost;</span>
+<span class="nc" id="L923">    }</span>
+
+    public BigDecimal getCostBillsPlanned() {
+<span class="nc" id="L926">        return costBillsPlanned;</span>
+    }
+
+    public ImProjects costBillsPlanned(BigDecimal costBillsPlanned) {
+<span class="nc" id="L930">        this.costBillsPlanned = costBillsPlanned;</span>
+<span class="nc" id="L931">        return this;</span>
+    }
+    public void setCostBillsPlanned(BigDecimal costBillsPlanned) {
+<span class="nc" id="L934">        this.costBillsPlanned = costBillsPlanned;</span>
+<span class="nc" id="L935">    }</span>
+
+    public BigDecimal getCostExpensesPlanned() {
+<span class="nc" id="L938">        return costExpensesPlanned;</span>
+    }
+
+    public ImProjects costExpensesPlanned(BigDecimal costExpensesPlanned) {
+<span class="nc" id="L942">        this.costExpensesPlanned = costExpensesPlanned;</span>
+<span class="nc" id="L943">        return this;</span>
+    }
+
+    public void setCostExpensesPlanned(BigDecimal costExpensesPlanned) {
+<span class="nc" id="L947">        this.costExpensesPlanned = costExpensesPlanned;</span>
+<span class="nc" id="L948">    }</span>
+
+    public BigDecimal getScoreRisk() {
+<span class="nc" id="L951">        return scoreRisk;</span>
+    }
+
+    public ImProjects scoreRisk(BigDecimal scoreRisk) {
+<span class="nc" id="L955">        this.scoreRisk = scoreRisk;</span>
+<span class="nc" id="L956">        return this;</span>
+    }
+
+    public void setScoreRisk(BigDecimal scoreRisk) {
+<span class="nc" id="L960">        this.scoreRisk = scoreRisk;</span>
+<span class="nc" id="L961">    }</span>
+
+    public BigDecimal getScoreCapabilities() {
+<span class="nc" id="L964">        return scoreCapabilities;</span>
+    }
+
+    public ImProjects scoreCapabilities(BigDecimal scoreCapabilities) {
+<span class="nc" id="L968">        this.scoreCapabilities = scoreCapabilities;</span>
+<span class="nc" id="L969">        return this;</span>
+    }
+
+    public void setScoreCapabilities(BigDecimal scoreCapabilities) {
+<span class="nc" id="L973">        this.scoreCapabilities = scoreCapabilities;</span>
+<span class="nc" id="L974">    }</span>
+
+    public BigDecimal getScoreEinanceRoi() {
+<span class="nc" id="L977">        return scoreEinanceRoi;</span>
+    }
+
+    public ImProjects scoreEinanceRoi(BigDecimal scoreEinanceRoi) {
+<span class="nc" id="L981">        this.scoreEinanceRoi = scoreEinanceRoi;</span>
+<span class="nc" id="L982">        return this;</span>
+    }
+
+    public void setScoreEinanceRoi(BigDecimal scoreEinanceRoi) {
+<span class="nc" id="L986">        this.scoreEinanceRoi = scoreEinanceRoi;</span>
+<span class="nc" id="L987">    }</span>
+
+    public String getProjectUserwiseBoard() {
+<span class="nc" id="L990">        return projectUserwiseBoard;</span>
+    }
+
+    public ImProjects projectUserwiseBoard(String projectUserwiseBoard) {
+<span class="nc" id="L994">        this.projectUserwiseBoard = projectUserwiseBoard;</span>
+<span class="nc" id="L995">        return this;</span>
+    }
+
+    public void setProjectUserwiseBoard(String projectUserwiseBoard) {
+<span class="nc" id="L999">        this.projectUserwiseBoard = projectUserwiseBoard;</span>
+<span class="nc" id="L1000">    }</span>
+
+    public Integer getProjectBringNextday() {
+<span class="nc" id="L1003">        return projectBringNextday;</span>
+    }
+
+    public ImProjects projectBringNextday(Integer projectBringNextday) {
+<span class="nc" id="L1007">        this.projectBringNextday = projectBringNextday;</span>
+<span class="nc" id="L1008">        return this;</span>
+    }
+
+    public void setProjectBringNextday(Integer projectBringNextday) {
+<span class="nc" id="L1012">        this.projectBringNextday = projectBringNextday;</span>
+<span class="nc" id="L1013">    }</span>
+
+    public String getProjectBringSameboard() {
+<span class="nc" id="L1016">        return projectBringSameboard;</span>
+    }
+
+    public ImProjects projectBringSameboard(String projectBringSameboard) {
+<span class="nc" id="L1020">        this.projectBringSameboard = projectBringSameboard;</span>
+<span class="nc" id="L1021">        return this;</span>
+    }
+
+    public void setProjectBringSameboard(String projectBringSameboard) {
+<span class="nc" id="L1025">        this.projectBringSameboard = projectBringSameboard;</span>
+<span class="nc" id="L1026">    }</span>
+
+    public String getProjectNewboardEverytime() {
+<span class="nc" id="L1029">        return projectNewboardEverytime;</span>
+    }
+
+    public ImProjects projectNewboardEverytime(String projectNewboardEverytime) {
+<span class="nc" id="L1033">        this.projectNewboardEverytime = projectNewboardEverytime;</span>
+<span class="nc" id="L1034">        return this;</span>
+    }
+
+    public void setProjectNewboardEverytime(String projectNewboardEverytime) {
+<span class="nc" id="L1038">        this.projectNewboardEverytime = projectNewboardEverytime;</span>
+<span class="nc" id="L1039">    }</span>
+
+    public String getProjectUserwiseBoard2() {
+<span class="nc" id="L1042">        return projectUserwiseBoard2;</span>
+    }
+
+    public ImProjects projectUserwiseBoard2(String projectUserwiseBoard2) {
+<span class="nc" id="L1046">        this.projectUserwiseBoard2 = projectUserwiseBoard2;</span>
+<span class="nc" id="L1047">        return this;</span>
+    }
+
+    public void setProjectUserwiseBoard2(String projectUserwiseBoard2) {
+<span class="nc" id="L1051">        this.projectUserwiseBoard2 = projectUserwiseBoard2;</span>
+<span class="nc" id="L1052">    }</span>
+
+    public String getProjectBringSameboard2() {
+<span class="nc" id="L1055">        return projectBringSameboard2;</span>
+    }
+
+    public ImProjects projectBringSameboard2(String projectBringSameboard2) {
+<span class="nc" id="L1059">        this.projectBringSameboard2 = projectBringSameboard2;</span>
+<span class="nc" id="L1060">        return this;</span>
+    }
+
+    public void setProjectBringSameboard2(String projectBringSameboard2) {
+<span class="nc" id="L1064">        this.projectBringSameboard2 = projectBringSameboard2;</span>
+<span class="nc" id="L1065">    }</span>
+
+    public Integer getProjectNewboard2Everytime() {
+<span class="nc" id="L1068">        return projectNewboard2Everytime;</span>
+    }
+
+    public ImProjects projectNewboard2Everytime(Integer projectNewboard2Everytime) {
+<span class="nc" id="L1072">        this.projectNewboard2Everytime = projectNewboard2Everytime;</span>
+<span class="nc" id="L1073">        return this;</span>
+    }
+
+    public void setProjectNewboard2Everytime(Integer projectNewboard2Everytime) {
+<span class="nc" id="L1077">        this.projectNewboard2Everytime = projectNewboard2Everytime;</span>
+<span class="nc" id="L1078">    }</span>
+
+    public String getProjectNewboard2Always() {
+<span class="nc" id="L1081">        return projectNewboard2Always;</span>
+    }
+
+    public ImProjects projectNewboard2Always(String projectNewboard2Always) {
+<span class="nc" id="L1085">        this.projectNewboard2Always = projectNewboard2Always;</span>
+<span class="nc" id="L1086">        return this;</span>
+    }
+
+    public void setProjectNewboard2Always(String projectNewboard2Always) {
+<span class="nc" id="L1090">        this.projectNewboard2Always = projectNewboard2Always;</span>
+<span class="nc" id="L1091">    }</span>
+
+    public String getProjectReportWeekly() {
+<span class="nc" id="L1094">        return projectReportWeekly;</span>
+    }
+
+    public ImProjects projectReportWeekly(String projectReportWeekly) {
+<span class="nc" id="L1098">        this.projectReportWeekly = projectReportWeekly;</span>
+<span class="nc" id="L1099">        return this;</span>
+    }
+
+    public void setProjectReportWeekly(String projectReportWeekly) {
+<span class="nc" id="L1103">        this.projectReportWeekly = projectReportWeekly;</span>
+<span class="nc" id="L1104">    }</span>
+
+    public Double getScoreGain() {
+<span class="nc" id="L1107">        return scoreGain;</span>
+    }
+
+    public ImProjects scoreGain(Double scoreGain) {
+<span class="nc" id="L1111">        this.scoreGain = scoreGain;</span>
+<span class="nc" id="L1112">        return this;</span>
+    }
+
+    public void setScoreGain(Double scoreGain) {
+<span class="nc" id="L1116">        this.scoreGain = scoreGain;</span>
+<span class="nc" id="L1117">    }</span>
+
+    public Double getScoreLoss() {
+<span class="nc" id="L1120">        return scoreLoss;</span>
+    }
+
+    public ImProjects scoreLoss(Double scoreLoss) {
+<span class="nc" id="L1124">        this.scoreLoss = scoreLoss;</span>
+<span class="nc" id="L1125">        return this;</span>
+    }
+
+    public void setScoreLoss(Double scoreLoss) {
+<span class="nc" id="L1129">        this.scoreLoss = scoreLoss;</span>
+<span class="nc" id="L1130">    }</span>
+
+    public Double getScoreDelivery() {
+<span class="nc" id="L1133">        return scoreDelivery;</span>
+    }
+
+    public ImProjects scoreDelivery(Double scoreDelivery) {
+<span class="nc" id="L1137">        this.scoreDelivery = scoreDelivery;</span>
+<span class="nc" id="L1138">        return this;</span>
+    }
+
+    public void setScoreDelivery(Double scoreDelivery) {
+<span class="nc" id="L1142">        this.scoreDelivery = scoreDelivery;</span>
+<span class="nc" id="L1143">    }</span>
+
+    public Double getScoreOperations() {
+<span class="nc" id="L1146">        return scoreOperations;</span>
+    }
+
+    public ImProjects scoreOperations(Double scoreOperations) {
+<span class="nc" id="L1150">        this.scoreOperations = scoreOperations;</span>
+<span class="nc" id="L1151">        return this;</span>
+    }
+
+    public void setScoreOperations(Double scoreOperations) {
+<span class="nc" id="L1155">        this.scoreOperations = scoreOperations;</span>
+<span class="nc" id="L1156">    }</span>
+
+    public Integer getScoreWhy() {
+<span class="nc" id="L1159">        return scoreWhy;</span>
+    }
+
+    public ImProjects scoreWhy(Integer scoreWhy) {
+<span class="nc" id="L1163">        this.scoreWhy = scoreWhy;</span>
+<span class="nc" id="L1164">        return this;</span>
+    }
+
+    public void setScoreWhy(Integer scoreWhy) {
+<span class="nc" id="L1168">        this.scoreWhy = scoreWhy;</span>
+<span class="nc" id="L1169">    }</span>
+
+    public String getJavaServices() {
+<span class="nc" id="L1172">        return javaServices;</span>
+    }
+
+    public ImProjects javaServices(String javaServices) {
+<span class="nc" id="L1176">        this.javaServices = javaServices;</span>
+<span class="nc" id="L1177">        return this;</span>
+    }
+
+    public void setJavaServices(String javaServices) {
+<span class="nc" id="L1181">        this.javaServices = javaServices;</span>
+<span class="nc" id="L1182">    }</span>
+
+    public String getNetServices() {
+<span class="nc" id="L1185">        return netServices;</span>
+    }
+
+    public ImProjects netServices(String netServices) {
+<span class="nc" id="L1189">        this.netServices = netServices;</span>
+<span class="nc" id="L1190">        return this;</span>
+    }
+
+    public void setNetServices(String netServices) {
+<span class="nc" id="L1194">        this.netServices = netServices;</span>
+<span class="nc" id="L1195">    }</span>
+
+    public String getCollectionLink() {
+<span class="nc" id="L1198">        return collectionLink;</span>
+    }
+
+    public ImProjects collectionLink(String collectionLink) {
+<span class="nc" id="L1202">        this.collectionLink = collectionLink;</span>
+<span class="nc" id="L1203">        return this;</span>
+    }
+
+    public void setCollectionLink(String collectionLink) {
+<span class="nc" id="L1207">        this.collectionLink = collectionLink;</span>
+<span class="nc" id="L1208">    }</span>
+
+    public String getTrainingLink() {
+<span class="nc" id="L1211">        return trainingLink;</span>
+    }
+
+    public ImProjects trainingLink(String trainingLink) {
+<span class="nc" id="L1215">        this.trainingLink = trainingLink;</span>
+<span class="nc" id="L1216">        return this;</span>
+    }
+
+    public void setTrainingLink(String trainingLink) {
+<span class="nc" id="L1220">        this.trainingLink = trainingLink;</span>
+<span class="nc" id="L1221">    }</span>
+
+    public String getCollectionName() {
+<span class="nc" id="L1224">        return collectionName;</span>
+    }
+
+    public ImProjects collectionName(String collectionName) {
+<span class="nc" id="L1228">        this.collectionName = collectionName;</span>
+<span class="nc" id="L1229">        return this;</span>
+    }
+
+    public void setCollectionName(String collectionName) {
+<span class="nc" id="L1233">        this.collectionName = collectionName;</span>
+<span class="nc" id="L1234">    }</span>
+
+    public String getTrainingName() {
+<span class="nc" id="L1237">        return trainingName;</span>
+    }
+
+    public ImProjects trainingName(String trainingName) {
+<span class="nc" id="L1241">        this.trainingName = trainingName;</span>
+<span class="nc" id="L1242">        return this;</span>
+    }
+
+    public void setTrainingName(String trainingName) {
+<span class="nc" id="L1246">        this.trainingName = trainingName;</span>
+<span class="nc" id="L1247">    }</span>
+
+    public String getTrainingDoc() {
+<span class="nc" id="L1250">        return trainingDoc;</span>
+    }
+
+    public ImProjects trainingDoc(String trainingDoc) {
+<span class="nc" id="L1254">        this.trainingDoc = trainingDoc;</span>
+<span class="nc" id="L1255">        return this;</span>
+    }
+
+    public void setTrainingDoc(String trainingDoc) {
+<span class="nc" id="L1259">        this.trainingDoc = trainingDoc;</span>
+<span class="nc" id="L1260">    }</span>
+
+    public Integer getTestingRichtext() {
+<span class="nc" id="L1263">        return testingRichtext;</span>
+    }
+
+    public ImProjects testingRichtext(Integer testingRichtext) {
+<span class="nc" id="L1267">        this.testingRichtext = testingRichtext;</span>
+<span class="nc" id="L1268">        return this;</span>
+    }
+
+    public void setTestingRichtext(Integer testingRichtext) {
+<span class="nc" id="L1272">        this.testingRichtext = testingRichtext;</span>
+<span class="nc" id="L1273">    }</span>
+
+    public String getTemplateCategory() {
+<span class="nc" id="L1276">        return templateCategory;</span>
+    }
+
+    public ImProjects templateCategory(String templateCategory) {
+<span class="nc" id="L1280">        this.templateCategory = templateCategory;</span>
+<span class="nc" id="L1281">        return this;</span>
+    }
+
+    public void setTemplateCategory(String templateCategory) {
+<span class="nc" id="L1285">        this.templateCategory = templateCategory;</span>
+<span class="nc" id="L1286">    }</span>
+
+    public Integer getdType() {
+<span class="nc" id="L1289">        return dType;</span>
+    }
+
+    public ImProjects dType(Integer dType) {
+<span class="nc" id="L1293">        this.dType = dType;</span>
+<span class="nc" id="L1294">        return this;</span>
+    }
+
+    public void setdType(Integer dType) {
+<span class="nc" id="L1298">        this.dType = dType;</span>
+<span class="nc" id="L1299">    }</span>
+
+    public Integer getdOption() {
+<span class="nc" id="L1302">        return dOption;</span>
+    }
+
+    public ImProjects dOption(Integer dOption) {
+<span class="nc" id="L1306">        this.dOption = dOption;</span>
+<span class="nc" id="L1307">        return this;</span>
+    }
+
+    public void setdOption(Integer dOption) {
+<span class="nc" id="L1311">        this.dOption = dOption;</span>
+<span class="nc" id="L1312">    }</span>
+
+    public Integer getdFilter() {
+<span class="nc" id="L1315">        return dFilter;</span>
+    }
+
+    public ImProjects dFilter(Integer dFilter) {
+<span class="nc" id="L1319">        this.dFilter = dFilter;</span>
+<span class="nc" id="L1320">        return this;</span>
+    }
+
+    public void setdFilter(Integer dFilter) {
+<span class="nc" id="L1324">        this.dFilter = dFilter;</span>
+<span class="nc" id="L1325">    }</span>
+
+    public Integer getdId() {
+<span class="nc" id="L1328">        return dId;</span>
+    }
+
+    public ImProjects dId(Integer dId) {
+<span class="nc" id="L1332">        this.dId = dId;</span>
+<span class="nc" id="L1333">        return this;</span>
+    }
+
+    public void setdId(Integer dId) {
+<span class="nc" id="L1337">        this.dId = dId;</span>
+<span class="nc" id="L1338">    }</span>
+
+    public Integer gettType() {
+<span class="nc" id="L1341">        return tType;</span>
+    }
+
+    public ImProjects tType(Integer tType) {
+<span class="nc" id="L1345">        this.tType = tType;</span>
+<span class="nc" id="L1346">        return this;</span>
+    }
+
+    public void settType(Integer tType) {
+<span class="nc" id="L1350">        this.tType = tType;</span>
+<span class="nc" id="L1351">    }</span>
+
+    public Integer gettOption() {
+<span class="nc" id="L1354">        return tOption;</span>
+    }
+
+    public ImProjects tOption(Integer tOption) {
+<span class="nc" id="L1358">        this.tOption = tOption;</span>
+<span class="nc" id="L1359">        return this;</span>
+    }
+
+    public void settOption(Integer tOption) {
+<span class="nc" id="L1363">        this.tOption = tOption;</span>
+<span class="nc" id="L1364">    }</span>
+
+    public Integer gettFilter() {
+<span class="nc" id="L1367">        return tFilter;</span>
+    }
+
+    public ImProjects tFilter(Integer tFilter) {
+<span class="nc" id="L1371">        this.tFilter = tFilter;</span>
+<span class="nc" id="L1372">        return this;</span>
+    }
+
+    public void settFilter(Integer tFilter) {
+<span class="nc" id="L1376">        this.tFilter = tFilter;</span>
+<span class="nc" id="L1377">    }</span>
+
+    public Integer gettId() {
+<span class="nc" id="L1380">        return tId;</span>
+    }
+
+    public ImProjects tId(Integer tId) {
+<span class="nc" id="L1384">        this.tId = tId;</span>
+<span class="nc" id="L1385">        return this;</span>
+    }
+
+    public void settId(Integer tId) {
+<span class="nc" id="L1389">        this.tId = tId;</span>
+<span class="nc" id="L1390">    }</span>
+
+    public String getRisktype() {
+<span class="nc" id="L1393">        return risktype;</span>
+    }
+
+    public ImProjects risktype(String risktype) {
+<span class="nc" id="L1397">        this.risktype = risktype;</span>
+<span class="nc" id="L1398">        return this;</span>
+    }
+
+    public void setRisktype(String risktype) {
+<span class="nc" id="L1402">        this.risktype = risktype;</span>
+<span class="nc" id="L1403">    }</span>
+
+    public Double getRiskimpact() {
+<span class="nc" id="L1406">        return riskimpact;</span>
+    }
+
+    public ImProjects riskimpact(Double riskimpact) {
+<span class="nc" id="L1410">        this.riskimpact = riskimpact;</span>
+<span class="nc" id="L1411">        return this;</span>
+    }
+
+    public void setRiskimpact(Double riskimpact) {
+<span class="nc" id="L1415">        this.riskimpact = riskimpact;</span>
+<span class="nc" id="L1416">    }</span>
+
+    public Double getRiskprobability() {
+<span class="nc" id="L1419">        return riskprobability;</span>
+    }
+
+    public ImProjects riskprobability(Double riskprobability) {
+<span class="nc" id="L1423">        this.riskprobability = riskprobability;</span>
+<span class="nc" id="L1424">        return this;</span>
+    }
+
+    public void setRiskprobability(Double riskprobability) {
+<span class="nc" id="L1428">        this.riskprobability = riskprobability;</span>
+<span class="nc" id="L1429">    }</span>
+
+    public ProjectInitiativeId getProjectInitiativeId() {
+<span class="nc" id="L1432">        return projectInitiativeId;</span>
+    }
+
+    public ImProjects projectInitiativeId(ProjectInitiativeId projectInitiativeId) {
+<span class="nc" id="L1436">        this.projectInitiativeId = projectInitiativeId;</span>
+<span class="nc" id="L1437">        return this;</span>
+    }
+
+    public void setProjectInitiativeId(ProjectInitiativeId projectInitiativeId) {
+<span class="nc" id="L1441">        this.projectInitiativeId = projectInitiativeId;</span>
+<span class="nc" id="L1442">    }</span>
+
+    public ProjectBusinessgoalId getProjectBusinessgoalId() {
+<span class="nc" id="L1445">        return projectBusinessgoalId;</span>
+    }
+
+    public ImProjects projectBusinessgoalId(ProjectBusinessgoalId projectBusinessgoalId) {
+<span class="nc" id="L1449">        this.projectBusinessgoalId = projectBusinessgoalId;</span>
+<span class="nc" id="L1450">        return this;</span>
+    }
+
+    public void setProjectBusinessgoalId(ProjectBusinessgoalId projectBusinessgoalId) {
+<span class="nc" id="L1454">        this.projectBusinessgoalId = projectBusinessgoalId;</span>
+<span class="nc" id="L1455">    }</span>
+
+    public ProjectSubgoalId getProjectSubgoalId() {
+<span class="nc" id="L1458">        return projectSubgoalId;</span>
+    }
+
+    public ImProjects projectSubgoalId(ProjectSubgoalId projectSubgoalId) {
+<span class="nc" id="L1462">        this.projectSubgoalId = projectSubgoalId;</span>
+<span class="nc" id="L1463">        return this;</span>
+    }
+
+    public void setProjectSubgoalId(ProjectSubgoalId projectSubgoalId) {
+<span class="nc" id="L1467">        this.projectSubgoalId = projectSubgoalId;</span>
+<span class="nc" id="L1468">    }</span>
+
+    public ProjectMaingoalId getProjectMaingoalId() {
+<span class="nc" id="L1471">        return projectMaingoalId;</span>
+    }
+
+    public ImProjects projectMaingoalId(ProjectMaingoalId projectMaingoalId) {
+<span class="nc" id="L1475">        this.projectMaingoalId = projectMaingoalId;</span>
+<span class="nc" id="L1476">        return this;</span>
+    }
+
+    public void setProjectMaingoalId(ProjectMaingoalId projectMaingoalId) {
+<span class="nc" id="L1480">        this.projectMaingoalId = projectMaingoalId;</span>
+<span class="nc" id="L1481">    }</span>
+
+    public ProjectBucketId getProjectBucketId() {
+<span class="nc" id="L1484">        return projectBucketId;</span>
+    }
+
+    public ImProjects projectBucketId(ProjectBucketId projectBucketId) {
+<span class="nc" id="L1488">        this.projectBucketId = projectBucketId;</span>
+<span class="nc" id="L1489">        return this;</span>
+    }
+
+    public void setProjectBucketId(ProjectBucketId projectBucketId) {
+<span class="nc" id="L1493">        this.projectBucketId = projectBucketId;</span>
+<span class="nc" id="L1494">    }</span>
+
+    public ProjectCostCenterId getProjectCostCenterId() {
+<span class="nc" id="L1497">        return projectCostCenterId;</span>
+    }
+
+    public ImProjects projectCostCenterId(ProjectCostCenterId projectCostCenterId) {
+<span class="nc" id="L1501">        this.projectCostCenterId = projectCostCenterId;</span>
+<span class="nc" id="L1502">        return this;</span>
+    }
+
+    public void setProjectCostCenterId(ProjectCostCenterId projectCostCenterId) {
+<span class="nc" id="L1506">        this.projectCostCenterId = projectCostCenterId;</span>
+<span class="nc" id="L1507">    }</span>
+
+    public OpportunityPriorityId getOpportunityPriorityId() {
+<span class="nc" id="L1510">        return opportunityPriorityId;</span>
+    }
+
+    public ImProjects opportunityPriorityId(OpportunityPriorityId opportunityPriorityId) {
+<span class="nc" id="L1514">        this.opportunityPriorityId = opportunityPriorityId;</span>
+<span class="nc" id="L1515">        return this;</span>
+    }
+
+    public void setOpportunityPriorityId(OpportunityPriorityId opportunityPriorityId) {
+<span class="nc" id="L1519">        this.opportunityPriorityId = opportunityPriorityId;</span>
+<span class="nc" id="L1520">    }</span>
+
+    public BacklogPractice getBacklogPractice() {
+<span class="nc" id="L1523">        return backlogPractice;</span>
+    }
+
+    public ImProjects backlogPractice(BacklogPractice backlogPractice) {
+<span class="nc" id="L1527">        this.backlogPractice = backlogPractice;</span>
+<span class="nc" id="L1528">        return this;</span>
+    }
+
+    public void setBacklogPractice(BacklogPractice backlogPractice) {
+<span class="nc" id="L1532">        this.backlogPractice = backlogPractice;</span>
+<span class="nc" id="L1533">    }</span>
+
+    public ProjectTheme getProjectTheme() {
+<span class="nc" id="L1536">        return projectTheme;</span>
+    }
+
+    public ImProjects projectTheme(ProjectTheme projectTheme) {
+<span class="nc" id="L1540">        this.projectTheme = projectTheme;</span>
+<span class="nc" id="L1541">        return this;</span>
+    }
+
+    public void setProjectTheme(ProjectTheme projectTheme) {
+<span class="nc" id="L1545">        this.projectTheme = projectTheme;</span>
+<span class="nc" id="L1546">    }</span>
+
+    public ProjectClass getProjectClass() {
+<span class="nc" id="L1549">        return projectClass;</span>
+    }
+
+    public ImProjects projectClass(ProjectClass projectClass) {
+<span class="nc" id="L1553">        this.projectClass = projectClass;</span>
+<span class="nc" id="L1554">        return this;</span>
+    }
+
+    public void setProjectClass(ProjectClass projectClass) {
+<span class="nc" id="L1558">        this.projectClass = projectClass;</span>
+<span class="nc" id="L1559">    }</span>
+
+    public ProjectVertical getProjectVertical() {
+<span class="nc" id="L1562">        return projectVertical;</span>
+    }
+
+    public ImProjects projectVertical(ProjectVertical projectVertical) {
+<span class="nc" id="L1566">        this.projectVertical = projectVertical;</span>
+<span class="nc" id="L1567">        return this;</span>
+    }
+
+    public void setProjectVertical(ProjectVertical projectVertical) {
+<span class="nc" id="L1571">        this.projectVertical = projectVertical;</span>
+<span class="nc" id="L1572">    }</span>
+
+    public ProjectBoardId getProjectBoardId() {
+<span class="nc" id="L1575">        return projectBoardId;</span>
+    }
+
+    public ImProjects projectBoardId(ProjectBoardId projectBoardId) {
+<span class="nc" id="L1579">        this.projectBoardId = projectBoardId;</span>
+<span class="nc" id="L1580">        return this;</span>
+    }
+
+    public void setProjectBoardId(ProjectBoardId projectBoardId) {
+<span class="nc" id="L1584">        this.projectBoardId = projectBoardId;</span>
+<span class="nc" id="L1585">    }</span>
+
+    public ProjectBoardId getProjectBoard2Id() {
+<span class="nc" id="L1588">        return projectBoard2Id;</span>
+    }
+
+    public ImProjects projectBoard2Id(ProjectBoardId projectBoardId) {
+<span class="nc" id="L1592">        this.projectBoard2Id = projectBoardId;</span>
+<span class="nc" id="L1593">        return this;</span>
+    }
+
+    public void setProjectBoard2Id(ProjectBoardId projectBoardId) {
+<span class="nc" id="L1597">        this.projectBoard2Id = projectBoardId;</span>
+<span class="nc" id="L1598">    }</span>
+
+    public ProjectStatusId getProjectStatusId() {
+<span class="nc" id="L1601">        return projectStatusId;</span>
+    }
+
+    public ImProjects projectStatusId(ProjectStatusId projectStatusId) {
+<span class="nc" id="L1605">        this.projectStatusId = projectStatusId;</span>
+<span class="nc" id="L1606">        return this;</span>
+    }
+
+    public void setProjectStatusId(ProjectStatusId projectStatusId) {
+<span class="nc" id="L1610">        this.projectStatusId = projectStatusId;</span>
+<span class="nc" id="L1611">    }</span>
+
+    public ProjectTypeId getProjectTypeId() {
+<span class="nc" id="L1614">        return projectTypeId;</span>
+    }
+
+    public ImProjects projectTypeId(ProjectTypeId projectTypeId) {
+<span class="nc" id="L1618">        this.projectTypeId = projectTypeId;</span>
+<span class="nc" id="L1619">        return this;</span>
+    }
+
+    public void setProjectTypeId(ProjectTypeId projectTypeId) {
+<span class="nc" id="L1623">        this.projectTypeId = projectTypeId;</span>
+<span class="nc" id="L1624">    }</span>
+
+    public ImEmployee getProjectLeadId() {
+<span class="nc" id="L1627">        return projectLeadId;</span>
+    }
+
+    public ImProjects projectLeadId(ImEmployee imEmployee) {
+<span class="nc" id="L1631">        this.projectLeadId = imEmployee;</span>
+<span class="nc" id="L1632">        return this;</span>
+    }
+
+    public void setProjectLeadId(ImEmployee imEmployee) {
+<span class="nc" id="L1636">        this.projectLeadId = imEmployee;</span>
+<span class="nc" id="L1637">    }</span>
+
+    public ImProjects getParentId() {
+<span class="nc" id="L1640">        return parentId;</span>
+    }
+
+    public ImProjects parentId(ImProjects imProjects) {
+<span class="nc" id="L1644">        this.parentId = imProjects;</span>
+<span class="nc" id="L1645">        return this;</span>
+    }
+
+    public void setParentId(ImProjects imProjects) {
+<span class="nc" id="L1649">        this.parentId = imProjects;</span>
+<span class="nc" id="L1650">    }</span>
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
+    @Override
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L1655" title="All 2 branches missed.">        if (this == o) {</span>
+<span class="nc" id="L1656">            return true;</span>
+        }
+<span class="nc bnc" id="L1658" title="All 2 branches missed.">        if (!(o instanceof ImProjects)) {</span>
+<span class="nc" id="L1659">            return false;</span>
+        }
+<span class="nc bnc" id="L1661" title="All 4 branches missed.">        return id != null &amp;&amp; id.equals(((ImProjects) o).id);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L1666">        return 31;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L1671">        return &quot;ImProjects{&quot; +</span>
+<span class="nc" id="L1672">            &quot;id=&quot; + getId() +</span>
+<span class="nc" id="L1673">            &quot;, projectName='&quot; + getProjectName() + &quot;'&quot; +</span>
+<span class="nc" id="L1674">            &quot;, projectNr='&quot; + getProjectNr() + &quot;'&quot; +</span>
+<span class="nc" id="L1675">            &quot;, projectPath='&quot; + getProjectPath() + &quot;'&quot; +</span>
+<span class="nc" id="L1676">            &quot;, treeSortkey='&quot; + getTreeSortkey() + &quot;'&quot; +</span>
+<span class="nc" id="L1677">            &quot;, maxChildSortkey='&quot; + getMaxChildSortkey() + &quot;'&quot; +</span>
+<span class="nc" id="L1678">            &quot;, description='&quot; + getDescription() + &quot;'&quot; +</span>
+<span class="nc" id="L1679">            &quot;, billingTypeId=&quot; + getBillingTypeId() +</span>
+<span class="nc" id="L1680">            &quot;, note='&quot; + getNote() + &quot;'&quot; +</span>
+<span class="nc" id="L1681">            &quot;, requiresReportP='&quot; + isRequiresReportP() + &quot;'&quot; +</span>
+<span class="nc" id="L1682">            &quot;, projectBudget=&quot; + getProjectBudget() +</span>
+<span class="nc" id="L1683">            &quot;, projectRisk='&quot; + getProjectRisk() + &quot;'&quot; +</span>
+<span class="nc" id="L1684">            &quot;, corporateSponsor='&quot; + getCorporateSponsor() + &quot;'&quot; +</span>
+<span class="nc" id="L1685">            &quot;, percentCompleted=&quot; + getPercentCompleted() +</span>
+<span class="nc" id="L1686">            &quot;, projectBudgetHours=&quot; + getProjectBudgetHours() +</span>
+<span class="nc" id="L1687">            &quot;, costQuotesCache=&quot; + getCostQuotesCache() +</span>
+<span class="nc" id="L1688">            &quot;, costInvoicesCache=&quot; + getCostInvoicesCache() +</span>
+<span class="nc" id="L1689">            &quot;, costTimesheetPlannedCache=&quot; + getCostTimesheetPlannedCache() +</span>
+<span class="nc" id="L1690">            &quot;, costPurchaseOrdersCache=&quot; + getCostPurchaseOrdersCache() +</span>
+<span class="nc" id="L1691">            &quot;, costBillsCache=&quot; + getCostBillsCache() +</span>
+<span class="nc" id="L1692">            &quot;, costTimesheetLoggedCache=&quot; + getCostTimesheetLoggedCache() +</span>
+<span class="nc" id="L1693">            &quot;, endDate='&quot; + getEndDate() + &quot;'&quot; +</span>
+<span class="nc" id="L1694">            &quot;, startDate='&quot; + getStartDate() + &quot;'&quot; +</span>
+<span class="nc" id="L1695">            &quot;, templateP='&quot; + isTemplateP() + &quot;'&quot; +</span>
+<span class="nc" id="L1696">            &quot;, sortOrder=&quot; + getSortOrder() +</span>
+<span class="nc" id="L1697">            &quot;, reportedHoursCache=&quot; + getReportedHoursCache() +</span>
+<span class="nc" id="L1698">            &quot;, costExpensePlannedCache=&quot; + getCostExpensePlannedCache() +</span>
+<span class="nc" id="L1699">            &quot;, costExpenseLoggedCache=&quot; + getCostExpenseLoggedCache() +</span>
+<span class="nc" id="L1700">            &quot;, confirmDate='&quot; + getConfirmDate() + &quot;'&quot; +</span>
+<span class="nc" id="L1701">            &quot;, costDeliveryNotesCache=&quot; + getCostDeliveryNotesCache() +</span>
+<span class="nc" id="L1702">            &quot;, costCacheDirty='&quot; + getCostCacheDirty() + &quot;'&quot; +</span>
+<span class="nc" id="L1703">            &quot;, milestoneP='&quot; + isMilestoneP() + &quot;'&quot; +</span>
+<span class="nc" id="L1704">            &quot;, releaseItemP='&quot; + getReleaseItemP() + &quot;'&quot; +</span>
+<span class="nc" id="L1705">            &quot;, presalesProbability=&quot; + getPresalesProbability() +</span>
+<span class="nc" id="L1706">            &quot;, presalesValue=&quot; + getPresalesValue() +</span>
+<span class="nc" id="L1707">            &quot;, reportedDaysCache=&quot; + getReportedDaysCache() +</span>
+<span class="nc" id="L1708">            &quot;, presalesValueCurrency='&quot; + getPresalesValueCurrency() + &quot;'&quot; +</span>
+<span class="nc" id="L1709">            &quot;, opportunitySalesStageId=&quot; + getOpportunitySalesStageId() +</span>
+<span class="nc" id="L1710">            &quot;, opportunityCampaignId=&quot; + getOpportunityCampaignId() +</span>
+<span class="nc" id="L1711">            &quot;, scoreRevenue=&quot; + getScoreRevenue() +</span>
+<span class="nc" id="L1712">            &quot;, scoreStrategic=&quot; + getScoreStrategic() +</span>
+<span class="nc" id="L1713">            &quot;, scoreFinanceNpv=&quot; + getScoreFinanceNpv() +</span>
+<span class="nc" id="L1714">            &quot;, scoreCustomers=&quot; + getScoreCustomers() +</span>
+<span class="nc" id="L1715">            &quot;, scoreFinanceCost=&quot; + getScoreFinanceCost() +</span>
+<span class="nc" id="L1716">            &quot;, costBillsPlanned=&quot; + getCostBillsPlanned() +</span>
+<span class="nc" id="L1717">            &quot;, costExpensesPlanned=&quot; + getCostExpensesPlanned() +</span>
+<span class="nc" id="L1718">            &quot;, scoreRisk=&quot; + getScoreRisk() +</span>
+<span class="nc" id="L1719">            &quot;, scoreCapabilities=&quot; + getScoreCapabilities() +</span>
+<span class="nc" id="L1720">            &quot;, scoreEinanceRoi=&quot; + getScoreEinanceRoi() +</span>
+<span class="nc" id="L1721">            &quot;, projectUserwiseBoard='&quot; + getProjectUserwiseBoard() + &quot;'&quot; +</span>
+<span class="nc" id="L1722">            &quot;, projectBringNextday=&quot; + getProjectBringNextday() +</span>
+<span class="nc" id="L1723">            &quot;, projectBringSameboard='&quot; + getProjectBringSameboard() + &quot;'&quot; +</span>
+<span class="nc" id="L1724">            &quot;, projectNewboardEverytime='&quot; + getProjectNewboardEverytime() + &quot;'&quot; +</span>
+<span class="nc" id="L1725">            &quot;, projectUserwiseBoard2='&quot; + getProjectUserwiseBoard2() + &quot;'&quot; +</span>
+<span class="nc" id="L1726">            &quot;, projectBringSameboard2='&quot; + getProjectBringSameboard2() + &quot;'&quot; +</span>
+<span class="nc" id="L1727">            &quot;, projectNewboard2Everytime=&quot; + getProjectNewboard2Everytime() +</span>
+<span class="nc" id="L1728">            &quot;, projectNewboard2Always='&quot; + getProjectNewboard2Always() + &quot;'&quot; +</span>
+<span class="nc" id="L1729">            &quot;, projectReportWeekly='&quot; + getProjectReportWeekly() + &quot;'&quot; +</span>
+<span class="nc" id="L1730">            &quot;, scoreGain=&quot; + getScoreGain() +</span>
+<span class="nc" id="L1731">            &quot;, scoreLoss=&quot; + getScoreLoss() +</span>
+<span class="nc" id="L1732">            &quot;, scoreDelivery=&quot; + getScoreDelivery() +</span>
+<span class="nc" id="L1733">            &quot;, scoreOperations=&quot; + getScoreOperations() +</span>
+<span class="nc" id="L1734">            &quot;, scoreWhy=&quot; + getScoreWhy() +</span>
+<span class="nc" id="L1735">            &quot;, javaServices='&quot; + getJavaServices() + &quot;'&quot; +</span>
+<span class="nc" id="L1736">            &quot;, netServices='&quot; + getNetServices() + &quot;'&quot; +</span>
+<span class="nc" id="L1737">            &quot;, collectionLink='&quot; + getCollectionLink() + &quot;'&quot; +</span>
+<span class="nc" id="L1738">            &quot;, trainingLink='&quot; + getTrainingLink() + &quot;'&quot; +</span>
+<span class="nc" id="L1739">            &quot;, collectionName='&quot; + getCollectionName() + &quot;'&quot; +</span>
+<span class="nc" id="L1740">            &quot;, trainingName='&quot; + getTrainingName() + &quot;'&quot; +</span>
+<span class="nc" id="L1741">            &quot;, trainingDoc='&quot; + getTrainingDoc() + &quot;'&quot; +</span>
+<span class="nc" id="L1742">            &quot;, testingRichtext=&quot; + getTestingRichtext() +</span>
+<span class="nc" id="L1743">            &quot;, templateCategory='&quot; + getTemplateCategory() + &quot;'&quot; +</span>
+<span class="nc" id="L1744">            &quot;, dType=&quot; + getdType() +</span>
+<span class="nc" id="L1745">            &quot;, dOption=&quot; + getdOption() +</span>
+<span class="nc" id="L1746">            &quot;, dFilter=&quot; + getdFilter() +</span>
+<span class="nc" id="L1747">            &quot;, dId=&quot; + getdId() +</span>
+<span class="nc" id="L1748">            &quot;, tType=&quot; + gettType() +</span>
+<span class="nc" id="L1749">            &quot;, tOption=&quot; + gettOption() +</span>
+<span class="nc" id="L1750">            &quot;, tFilter=&quot; + gettFilter() +</span>
+<span class="nc" id="L1751">            &quot;, tId=&quot; + gettId() +</span>
+<span class="nc" id="L1752">            &quot;, risktype='&quot; + getRisktype() + &quot;'&quot; +</span>
+<span class="nc" id="L1753">            &quot;, riskimpact=&quot; + getRiskimpact() +</span>
+<span class="nc" id="L1754">            &quot;, riskprobability=&quot; + getRiskprobability() +</span>
+            &quot;}&quot;;
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

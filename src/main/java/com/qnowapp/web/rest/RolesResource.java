@@ -4,6 +4,8 @@ import com.qnowapp.domain.Roles;
 import com.qnowapp.service.RolesService;
 import com.qnowapp.web.rest.errors.BadRequestAlertException;
 import com.qnowapp.service.dto.RolesCriteria;
+import com.qnowapp.service.RolesQueryService;
+
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -35,11 +37,11 @@ public class RolesResource {
 
     private final RolesService rolesService;
 
-    
+    private final RolesQueryService rolesQueryService;
 
-    public RolesResource(RolesService rolesService) {
+    public RolesResource(RolesService rolesService, RolesQueryService rolesQueryService) {
         this.rolesService = rolesService;
-      
+        this.rolesQueryService = rolesQueryService;
     }
 
     /**
@@ -94,11 +96,22 @@ public class RolesResource {
     @GetMapping("/roles")
     public ResponseEntity<List<Roles>> getAllRoles(RolesCriteria criteria) {
         log.debug("REST request to get Roles by criteria: {}", criteria);
-        List<Roles> entityList = rolesService.findAll();
+        List<Roles> entityList = rolesQueryService.findByCriteria(criteria);
         return ResponseEntity.ok().body(entityList);
     }
 
-
+    /**
+    * {@code GET  /roles/count} : count all the roles.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping("/roles/count")
+    public ResponseEntity<Long> countRoles(RolesCriteria criteria) {
+        log.debug("REST request to count Roles by criteria: {}", criteria);
+        return ResponseEntity.ok().body(rolesQueryService.countByCriteria(criteria));
+    }
 
     /**
      * {@code GET  /roles/:id} : get the "id" roles.

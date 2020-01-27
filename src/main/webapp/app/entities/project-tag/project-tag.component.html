@@ -1,0 +1,80 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="App.projectTag.home.title">Project Tags</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-project-tag" [routerLink]="['/project-tag/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="App.projectTag.home.createLabel">
+            Create new Project Tag
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="projectTags">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="App.projectTag.code">Code</span></th>
+            <th><span jhiTranslate="App.projectTag.name">Name</span></th>
+            <th><span jhiTranslate="App.projectTag.description">Description</span></th>
+            <th><span jhiTranslate="App.projectTag.flag">Flag</span></th>
+            <th><span jhiTranslate="App.projectTag.color">Color</span></th>
+            <th><span jhiTranslate="App.projectTag.tagType">Tag Type</span></th>
+            <th><span jhiTranslate="App.projectTag.imEmployee">Im Employee</span></th>
+            <th><span jhiTranslate="App.projectTag.imProjects">Im Projects</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let projectTag of projectTags ;trackBy: trackId">
+                <td><a [routerLink]="['/project-tag', projectTag.id, 'view' ]">{{projectTag.id}}</a></td>
+                <td>{{projectTag.code}}</td>
+                <td>{{projectTag.name}}</td>
+                <td>{{projectTag.description}}</td>
+                <td>{{projectTag.flag}}</td>
+                <td>{{projectTag.color}}</td>
+                <td>
+                    <div *ngIf="projectTag.tagType">
+                        <a [routerLink]="['../tag-type', projectTag.tagType?.id, 'view' ]" >{{projectTag.tagType?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="projectTag.imEmployee">
+                        <a [routerLink]="['../im-employee', projectTag.imEmployee?.id, 'view' ]" >{{projectTag.imEmployee?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="projectTag.imProjects">
+                        <a [routerLink]="['../im-projects', projectTag.imProjects?.id, 'view' ]" >{{projectTag.imProjects?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/project-tag', projectTag.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/project-tag', projectTag.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'project-tag', { outlets: { popup: projectTag.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

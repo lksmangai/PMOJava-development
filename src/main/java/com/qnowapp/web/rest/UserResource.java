@@ -2,15 +2,9 @@ package com.qnowapp.web.rest;
 
 
 import com.qnowapp.config.Constants;
-import com.qnowapp.domain.AllocationDetailsModel;
-import com.qnowapp.domain.Blank;
-import com.qnowapp.domain.Createuser;
 import com.qnowapp.domain.ImEmployee;
 import com.qnowapp.domain.ProjectClass;
-import com.qnowapp.domain.ProjectDetailsModel;
 import com.qnowapp.domain.QnowUser;
-import com.qnowapp.domain.StringProject;
-import com.qnowapp.domain.TimesheetDetailsModel;
 import com.qnowapp.domain.User;
 import com.qnowapp.domain.UserContact;
 import com.qnowapp.repository.ImEmployeeRepository;
@@ -24,7 +18,6 @@ import com.qnowapp.service.dto.UserDTO;
 import com.qnowapp.web.rest.errors.BadRequestAlertException;
 import com.qnowapp.web.rest.errors.EmailAlreadyUsedException;
 import com.qnowapp.web.rest.errors.LoginAlreadyUsedException;
-import com.qnowapp.web.rest.vm.ManagedUserVM;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
@@ -50,14 +43,13 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.ZonedDateTime;
 import java.util.*;
-import java.util.stream.Collectors;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api")
@@ -148,38 +140,20 @@ public class UserResource {
 	
 	
 	@CrossOrigin
-    @PostMapping("/usersnewcreate")
-    public ResponseEntity<StringProject> createUserNEW(@Valid @RequestBody Createuser createuser) throws URISyntaxException {
-        log.debug("REST request to save User : {}", createuser);
-
-     if (userRepository.findOneByEmailIgnoreCase(createuser.getEmail()).isPresent()) {
-            throw new EmailAlreadyUsedException();
-        } else {
-
-    		StringProject msg = new StringProject();
-
-        	AccountResource AccountResource = new AccountResource(userRepository, userService, mailService);
-        	ManagedUserVM managedUserVM = new ManagedUserVM();
-        	
-        	
-        	
-	        UserDTO UserDTO = new UserDTO();
-        	User user = new User();
-      
-        	managedUserVM.setLogin(createuser.getEmail());
-        	managedUserVM.setEmail(createuser.getEmail());
-        	managedUserVM.setFirstName(createuser.getFirstName());
-        	managedUserVM.setLastName(createuser.getLastName());
-
-        	
-        	
-        	managedUserVM.setPassword(createuser.getPassword());
-        	
-        	User newUser  = AccountResource.registermyAccount(managedUserVM);
-        	
-
-        	
-   
+	@PostMapping("/users")
+	@PreAuthorize("hasRole(\"" + AuthoritiesConstants.ADMIN + "\")")
+	public ResponseEntity<User> createUser(@Valid @RequestBody UserDTO userDTO) throws URISyntaxException {
+		log.debug("REST request to save User : {}", userDTO);
+		// System.out.println(" hiiii");
+		if (userDTO.getId() != null) {
+			throw new BadRequestAlertException("A new user cannot already have an ID", "userManagement", "idexists");
+			// Lowercase the user login before comparing with database
+		} else if (userRepository.findOneByLogin(userDTO.getLogin().toLowerCase()).isPresent()) {
+			throw new LoginAlreadyUsedException();
+		} else if (userRepository.findOneByEmailIgnoreCase(userDTO.getEmail()).isPresent()) {
+			throw new EmailAlreadyUsedException();
+		} else {
+			User newUser = userService.createUser(userDTO);
 			QnowUser qnowUser1 = new QnowUser();
 			qnowUser1.setUser(newUser);
 			QnowUser result9 = qnowUserRepository.save(qnowUser1);
@@ -190,61 +164,15 @@ public class UserResource {
 			imEmployee1.setQnowUser(qnowUser1);
 			ImEmployee result20 = imEmployeeRepository.save(imEmployee1);
 			mailService.sendCreationEmail(newUser);
-			msg.setMsg("user created");
-
-			return new ResponseEntity<StringProject>(msg, HttpStatus.OK);
-        }
-    }
-	
-	
-	
-	
-	
-	@CrossOrigin
-    @PostMapping("/users")
-    @PreAuthorize("hasRole(\"" + AuthoritiesConstants.ADMIN + "\")")
-    public ResponseEntity<User> createUser(@Valid @RequestBody UserDTO userDTO) throws URISyntaxException {
-        log.debug("REST request to save User : {}", userDTO);
-
-        if (userDTO.getId() != null) {
-            throw new BadRequestAlertException("A new user cannot already have an ID", "userManagement", "idexists");
-            // Lowercase the user login before comparing with database
-        } else if (userRepository.findOneByLogin(userDTO.getLogin().toLowerCase()).isPresent()) {
-            throw new LoginAlreadyUsedException();
-        } else if (userRepository.findOneByEmailIgnoreCase(userDTO.getEmail()).isPresent()) {
-            throw new EmailAlreadyUsedException();
-        } else {
-        	User newUser = userService.createUser(userDTO);
-			QnowUser qnowUser1 = new QnowUser();
-			qnowUser1.setUser(newUser);
-			QnowUser result9 = qnowUserRepository.save(qnowUser1);
-			UserContact userContact1 = new UserContact();
-			userContact1.setQnowUser(qnowUser1);
-			UserContact result10 = userContactRepository.save(userContact1);
-			ImEmployee imEmployee1 = new ImEmployee();
-			imEmployee1.setQnowUser(qnowUser1);
-			ImEmployee result20 = imEmployeeRepository.save(imEmployee1);
-			mailService.sendCreationEmail(newUser);
-            return ResponseEntity.created(new URI("/api/users/" + newUser.getLogin()))
-                .headers(HeaderUtil.createAlert(applicationName,  "userManagement.created", newUser.getLogin()))
-                .body(newUser);
-        }
-    }
-    
-	@CrossOrigin
-	@PostMapping("/userscsv")
-	public ResponseEntity<User> createUsercsv(@Valid @RequestBody Blank blank) throws URISyntaxException {
-	
-		User newUser = new User();
-		UserDTO userDTO = new UserDTO();
-			ResponseEntity<User> returnObj = ResponseEntity.created(new URI("/api/userscsv/" + newUser.getLogin()))
+			ResponseEntity<User> returnObj = ResponseEntity.created(new URI("/api/users/" + newUser.getLogin()))
 					.headers(HeaderUtil.createAlert(applicationName, "userManagement.created", newUser.getLogin()))
 					.body(newUser);
 
 			if (fromTesting == false) {
-		
-				String csvFile = "F:\\PMO1\\src\\main\\resources\\users06Jul2019.csv";
-				
+				System.out.println(userDTO.getFirstName());
+
+				String csvFile = "src\\main\\resources\\pmqusers.csv";
+
 				BufferedReader br = null;
 				String line = "";
 				String cvsSplitBy = ";";
@@ -263,13 +191,14 @@ public class UserResource {
 								userDTO.setFirstName(removeQuotes(country[0]));
 								userDTO.setLastName(removeQuotes(country[1]));
 								userDTO.setEmail(removeQuotes(country[2]));
-					
+								System.out.println(userDTO + "new user created");
 								try {
 									User newUserK = userService.createUser(userDTO);
 									QnowUser qnowUser = new QnowUser();
 
 									qnowUser.setUser(newUserK);
-
+									System.out.println(newUserK + "QnowUser created");
+									System.out.println("-------------" + qnowUser.toString());
 									QnowUser result = qnowUserRepository.save(qnowUser);
 									ResponseEntity abc = ResponseEntity
 											.created(new URI("/api/qnow-users/" + result.getId()))
@@ -295,7 +224,7 @@ public class UserResource {
 									userContact.setTechnology(removeQuotes(country[50]));
 									userContact.setTeamName(removeQuotes(country[48]));
 									userContact.setQnowUser(qnowUser);
-									
+									System.out.println(qnowUser + "user contact created");
 									UserContact result1 = userContactRepository.save(userContact);
 									ResponseEntity ucercontact = ResponseEntity
 											.created(new URI("/api/user-contacts/" + result.getId()))
@@ -304,11 +233,12 @@ public class UserResource {
 											.body(result);
 
 									ImEmployee imEmployee = new ImEmployee();
-								
+									System.out.println("1");
 									imEmployee.setJobTitle(removeQuotes(country[28]));
-									
+									System.out.println("2");
 									imEmployee.setJobDescription(removeQuotes(country[29]));
-								
+									System.out.println("3");
+									// System.out.println(removeQuotes(country[30]));
 									String availability = removeQuotes(country[30]);
 									if (availability.equals("")) {
 										imEmployee.setAvailability(100);
@@ -316,30 +246,34 @@ public class UserResource {
 										imEmployee.setAvailability(Integer.parseInt(availability));
 									}
 
-								
+									System.out.println("4");
 									imEmployee.setSsNumber(removeQuotes(country[32]));
-									
+									System.out.println("5");
 
 									imEmployee.setSalary(convertToBigDecimal(removeQuotes(country[33])));
-									
+									System.out.println("6");
+
 									imEmployee.setSocialSecurity(convertToInteger(removeQuotes(country[34])));
 
-								
+									System.out.println("7");
 
 									imEmployee.setInsurance(convertToInteger(removeQuotes(country[35])));
-									
+									System.out.println("8");
 
 									imEmployee.setOtherCosts(convertToInteger(removeQuotes(country[36])));
-								
+									System.out.println("9");
 									imEmployee.setCurrency(removeQuotes(country[37]));
-								
-									imEmployee.setHourlyCost(new BigDecimal(20.00));
+									System.out.println("10");
 									
+									
+									System.out.println("11");
+									imEmployee.setHourlyCost(new BigDecimal(20.00));
+									System.out.println("12");
 									imEmployee.setQnowUser(qnowUser);
-							
+									System.out.println("13");
 
 									ImEmployee result2 = imEmployeeRepository.save(imEmployee);
-							
+									System.out.println("im employee created ");
 									ResponseEntity imemployee = ResponseEntity
 											.created(new URI("/api/im-employees/" + result.getId()))
 											.headers(HeaderUtil.createEntityCreationAlert(applicationName, true,
@@ -347,15 +281,18 @@ public class UserResource {
 											.body(result2);
 
 								} catch (Exception e) {
-								
+									System.out.println(e);
 								}
 							}
 						} catch (Exception u) {
 						}
-					
+						/*
+						 * System.out.println("Country [login= " + country[2] + " , name=" + country[0]
+						 * + " " + country[1] + " , email = " + country[2] + "]");
+						 */
 					}
 				} catch (Exception e) {
-					//System.out.println(e);
+					System.out.println(e);
 				} finally {
 					if (br != null) {
 						try {
@@ -370,7 +307,7 @@ public class UserResource {
 			
 			return returnObj;
 		}
-	
+	}
 
 	@CrossOrigin
 	@PutMapping("/users")
@@ -390,7 +327,6 @@ public class UserResource {
 		return ResponseUtil.wrapOrNotFound(updatedUser,
 				HeaderUtil.createAlert(applicationName, "userManagement.updated", userDTO.getLogin()));
 	}
-
 
 	/**
 	 * {@code GET /users} : get all users.

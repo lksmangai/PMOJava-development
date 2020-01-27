@@ -1,0 +1,23 @@
+{
+  "App": {
+    "projectInitiativeId": {
+      "home": {
+        "title": "Project Initiative Ids",
+        "createLabel": "Create a new Project Initiative Id",
+        "createOrEditLabel": "Create or edit a Project Initiative Id"
+      },
+      "created": "A new Project Initiative Id is created with identifier {{ param }}",
+      "updated": "A Project Initiative Id is updated with identifier {{ param }}",
+      "deleted": "A Project Initiative Id is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Project Initiative Id {{ id }}?"
+      },
+      "detail": {
+        "title": "Project Initiative Id"
+      },
+      "code": "Code",
+      "name": "Name",
+      "description": "Description"
+    }
+  }
+}

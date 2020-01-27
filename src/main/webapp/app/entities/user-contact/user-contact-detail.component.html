@@ -1,0 +1,135 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="userContact">
+            <h2><span jhiTranslate="App.userContact.detail.title">User Contact</span> {{userContact.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="App.userContact.homePhone">Home Phone</span></dt>
+                <dd>
+                    <span>{{userContact.homePhone}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.userContact.workPhone">Work Phone</span></dt>
+                <dd>
+                    <span>{{userContact.workPhone}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.userContact.cellPhone">Cell Phone</span></dt>
+                <dd>
+                    <span>{{userContact.cellPhone}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.userContact.permentAddress">Perment Address</span></dt>
+                <dd>
+                    <span>{{userContact.permentAddress}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.userContact.haLine1">Ha Line 1</span></dt>
+                <dd>
+                    <span>{{userContact.haLine1}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.userContact.haLine2">Ha Line 2</span></dt>
+                <dd>
+                    <span>{{userContact.haLine2}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.userContact.haPostal">Ha Postal</span></dt>
+                <dd>
+                    <span>{{userContact.haPostal}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.userContact.waLine1">Wa Line 1</span></dt>
+                <dd>
+                    <span>{{userContact.waLine1}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.userContact.waLine2">Wa Line 2</span></dt>
+                <dd>
+                    <span>{{userContact.waLine2}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.userContact.waPostal">Wa Postal</span></dt>
+                <dd>
+                    <span>{{userContact.waPostal}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.userContact.ucNote">Uc Note</span></dt>
+                <dd>
+                    <span>{{userContact.ucNote}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.userContact.primaryRole">Primary Role</span></dt>
+                <dd>
+                    <span>{{userContact.primaryRole}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.userContact.secondaryRole">Secondary Role</span></dt>
+                <dd>
+                    <span>{{userContact.secondaryRole}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.userContact.initiative">Initiative</span></dt>
+                <dd>
+                    <span>{{userContact.initiative}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.userContact.technology">Technology</span></dt>
+                <dd>
+                    <span>{{userContact.technology}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.userContact.teamName">Team Name</span></dt>
+                <dd>
+                    <span>{{userContact.teamName}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.userContact.qnowUser">Qnow User</span></dt>
+                <dd>
+                    <div *ngIf="userContact.qnowUser">
+                        <a [routerLink]="['/qnow-user', userContact.qnowUser?.id, 'view']">{{userContact.qnowUser?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="App.userContact.waCity">Wa City</span></dt>
+                <dd>
+                    <div *ngIf="userContact.waCity">
+                        <a [routerLink]="['/city', userContact.waCity?.id, 'view']">{{userContact.waCity?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="App.userContact.haCity">Ha City</span></dt>
+                <dd>
+                    <div *ngIf="userContact.haCity">
+                        <a [routerLink]="['/city', userContact.haCity?.id, 'view']">{{userContact.haCity?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="App.userContact.waState">Wa State</span></dt>
+                <dd>
+                    <div *ngIf="userContact.waState">
+                        <a [routerLink]="['/state-master', userContact.waState?.id, 'view']">{{userContact.waState?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="App.userContact.haState">Ha State</span></dt>
+                <dd>
+                    <div *ngIf="userContact.haState">
+                        <a [routerLink]="['/state-master', userContact.haState?.id, 'view']">{{userContact.haState?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="App.userContact.waCountry">Wa Country</span></dt>
+                <dd>
+                    <div *ngIf="userContact.waCountry">
+                        <a [routerLink]="['/country', userContact.waCountry?.id, 'view']">{{userContact.waCountry?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="App.userContact.haCountry">Ha Country</span></dt>
+                <dd>
+                    <div *ngIf="userContact.haCountry">
+                        <a [routerLink]="['/country', userContact.haCountry?.id, 'view']">{{userContact.haCountry?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="App.userContact.groupMembers">Group Members</span></dt>
+                <dd>
+                    <span *ngFor="let groupMembers of userContact.groupMembers; let last = last">
+                        <a [routerLink]="['/group-members', groupMembers?.id, 'view' ]">{{groupMembers.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/user-contact', userContact.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-file-storage-heading" jhiTranslate="App.fileStorage.home.createOrEditLabel">Create or edit a File Storage</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!fileStorage.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.fileStorage.filename" for="field_filename">Filename</label>
+                    <input type="text" class="form-control" name="filename" id="field_filename"
+                           formControlName="filename"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.fileStorage.caption" for="field_caption">Caption</label>
+                    <input type="text" class="form-control" name="caption" id="field_caption"
+                           formControlName="caption"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.fileStorage.userContact" for="field_userContact">User Contact</label>
+                    <select class="form-control" id="field_userContact" name="userContact" formControlName="userContact">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="userContactOption.id === editForm.get('userContact').value?.id ? editForm.get('userContact').value : userContactOption" *ngFor="let userContactOption of usercontacts; trackBy: trackUserContactById">{{userContactOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.fileStorage.imProjects" for="field_imProjects">Im Projects</label>
+                    <select class="form-control" id="field_imProjects" name="imProjects" formControlName="imProjects">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="imProjectsOption.id === editForm.get('imProjects').value?.id ? editForm.get('imProjects').value : imProjectsOption" *ngFor="let imProjectsOption of improjects; trackBy: trackImProjectsById">{{imProjectsOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

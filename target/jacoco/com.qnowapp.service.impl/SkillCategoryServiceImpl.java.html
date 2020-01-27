@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SkillCategoryServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.service.impl</a> &gt; <span class="el_source">SkillCategoryServiceImpl.java</span></div><h1>SkillCategoryServiceImpl.java</h1><pre class="source lang-java linenums">package com.qnowapp.service.impl;
+
+import com.qnowapp.service.SkillCategoryService;
+import com.qnowapp.domain.SkillCategory;
+import com.qnowapp.repository.SkillCategoryRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * Service Implementation for managing {@link SkillCategory}.
+ */
+@Service
+@Transactional
+public class SkillCategoryServiceImpl implements SkillCategoryService {
+
+<span class="nc" id="L22">    private final Logger log = LoggerFactory.getLogger(SkillCategoryServiceImpl.class);</span>
+
+    private final SkillCategoryRepository skillCategoryRepository;
+
+<span class="nc" id="L26">    public SkillCategoryServiceImpl(SkillCategoryRepository skillCategoryRepository) {</span>
+<span class="nc" id="L27">        this.skillCategoryRepository = skillCategoryRepository;</span>
+<span class="nc" id="L28">    }</span>
+
+    /**
+     * Save a skillCategory.
+     *
+     * @param skillCategory the entity to save.
+     * @return the persisted entity.
+     */
+    @Override
+    public SkillCategory save(SkillCategory skillCategory) {
+<span class="nc" id="L38">        log.debug(&quot;Request to save SkillCategory : {}&quot;, skillCategory);</span>
+<span class="nc" id="L39">        return skillCategoryRepository.save(skillCategory);</span>
+    }
+
+    /**
+     * Get all the skillCategories.
+     *
+     * @return the list of entities.
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List&lt;SkillCategory&gt; findAll() {
+<span class="nc" id="L50">        log.debug(&quot;Request to get all SkillCategories&quot;);</span>
+<span class="nc" id="L51">        return skillCategoryRepository.findAll();</span>
+    }
+
+
+    /**
+     * Get one skillCategory by id.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Optional&lt;SkillCategory&gt; findOne(Long id) {
+<span class="nc" id="L64">        log.debug(&quot;Request to get SkillCategory : {}&quot;, id);</span>
+<span class="nc" id="L65">        return skillCategoryRepository.findById(id);</span>
+    }
+
+    /**
+     * Delete the skillCategory by id.
+     *
+     * @param id the id of the entity.
+     */
+    @Override
+    public void delete(Long id) {
+<span class="nc" id="L75">        log.debug(&quot;Request to delete SkillCategory : {}&quot;, id);</span>
+<span class="nc" id="L76">        skillCategoryRepository.deleteById(id);</span>
+<span class="nc" id="L77">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

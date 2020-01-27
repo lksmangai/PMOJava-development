@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserResource.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.web.rest</a> &gt; <span class="el_source">UserResource.java</span></div><h1>UserResource.java</h1><pre class="source lang-java linenums">package com.qnowapp.web.rest;
+
+
+import com.qnowapp.config.Constants;
+import com.qnowapp.domain.ImEmployee;
+import com.qnowapp.domain.ProjectClass;
+import com.qnowapp.domain.QnowUser;
+import com.qnowapp.domain.User;
+import com.qnowapp.domain.UserContact;
+import com.qnowapp.repository.ImEmployeeRepository;
+import com.qnowapp.repository.QnowUserRepository;
+import com.qnowapp.repository.UserContactRepository;
+import com.qnowapp.repository.UserRepository;
+import com.qnowapp.security.AuthoritiesConstants;
+import com.qnowapp.service.MailService;
+import com.qnowapp.service.UserService;
+import com.qnowapp.service.dto.UserDTO;
+import com.qnowapp.web.rest.errors.BadRequestAlertException;
+import com.qnowapp.web.rest.errors.EmailAlreadyUsedException;
+import com.qnowapp.web.rest.errors.LoginAlreadyUsedException;
+
+import io.github.jhipster.web.util.HeaderUtil;
+import io.github.jhipster.web.util.PaginationUtil;
+import io.github.jhipster.web.util.ResponseUtil;
+
+import org.hibernate.service.spi.InjectService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import javax.validation.Valid;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.time.ZonedDateTime;
+import java.util.*;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.math.BigDecimal;
+
+@CrossOrigin(origins = &quot;*&quot;, allowedHeaders = &quot;*&quot;)
+@RestController
+@RequestMapping(&quot;/api&quot;)
+public class UserResource {
+
+	@Autowired
+	QnowUserRepository qnowUserRepository;
+
+	@Autowired
+	UserContactRepository userContactRepository;
+
+	@Autowired
+	ImEmployeeRepository imEmployeeRepository;
+
+	private static final String ENTITY_NAME = &quot;qnowUser&quot;;
+<span class="nc" id="L68">	private final Logger log = LoggerFactory.getLogger(UserResource.class);</span>
+
+	@Value(&quot;${jhipster.clientApp.name}&quot;)
+	private String applicationName;
+<span class="nc" id="L72">	private static Boolean fromTesting = false;</span>
+	private final UserService userService;
+
+	private final UserRepository userRepository;
+
+	private final MailService mailService;
+
+<span class="nc" id="L79">	public UserResource(UserService userService, UserRepository userRepository, MailService mailService) {</span>
+
+<span class="nc" id="L81">		this.userService = userService;</span>
+<span class="nc" id="L82">		this.userRepository = userRepository;</span>
+<span class="nc" id="L83">		this.mailService = mailService;</span>
+<span class="nc" id="L84">	}</span>
+
+	public static void setFromTesting(Boolean bState) {
+<span class="nc" id="L87">		fromTesting = bState;</span>
+<span class="nc" id="L88">	}</span>
+
+	public String removeQuotes(String MyEmail) {
+<span class="nc" id="L91">		String doubleQuote = &quot;\&quot;&quot;;</span>
+<span class="nc bnc" id="L92" title="All 2 branches missed.">		if (MyEmail.substring(0, 1).equals(doubleQuote)) {</span>
+<span class="nc" id="L93">			MyEmail = MyEmail.substring(1, MyEmail.length());</span>
+		}
+
+<span class="nc bnc" id="L96" title="All 2 branches missed.">		if (MyEmail.substring(MyEmail.length() - 1, MyEmail.length()).equals(doubleQuote)) {</span>
+
+<span class="nc" id="L98">			MyEmail = MyEmail.substring(0, MyEmail.length() - 1);</span>
+
+		}
+<span class="nc" id="L101">		return MyEmail;</span>
+	}
+
+	public Integer convertToInteger(String integer) {
+
+<span class="nc bnc" id="L106" title="All 2 branches missed.">		if (integer.equals(&quot;&quot;)) {</span>
+<span class="nc" id="L107">			return 0;</span>
+		} else {
+			try {
+<span class="nc" id="L110">				Float fl = Float.parseFloat(integer);</span>
+<span class="nc" id="L111">				Integer i = Math.round(fl);</span>
+<span class="nc" id="L112">				return i;</span>
+<span class="nc" id="L113">			} catch (Exception e) {</span>
+<span class="nc" id="L114">				System.out.println(e);</span>
+			}
+
+		}
+<span class="nc" id="L118">		return 0;</span>
+
+	}
+	
+
+	public BigDecimal convertToBigDecimal(String integer) {
+
+<span class="nc bnc" id="L125" title="All 2 branches missed.">		if (integer.equals(&quot;&quot;)) {</span>
+<span class="nc" id="L126">			return new BigDecimal(0);</span>
+		} else {
+			try {
+<span class="nc" id="L129">				Float fl = Float.parseFloat(integer);</span>
+
+<span class="nc" id="L131">				return new BigDecimal(fl);</span>
+<span class="nc" id="L132">			} catch (Exception e) {</span>
+<span class="nc" id="L133">				System.out.println(e);</span>
+			}
+
+		}
+<span class="nc" id="L137">		return new BigDecimal(0);</span>
+
+	}
+	
+	
+	@CrossOrigin
+	@PostMapping(&quot;/users&quot;)
+	@PreAuthorize(&quot;hasRole(\&quot;&quot; + AuthoritiesConstants.ADMIN + &quot;\&quot;)&quot;)
+	public ResponseEntity&lt;User&gt; createUser(@Valid @RequestBody UserDTO userDTO) throws URISyntaxException {
+<span class="nc" id="L146">		log.debug(&quot;REST request to save User : {}&quot;, userDTO);</span>
+		// System.out.println(&quot; hiiii&quot;);
+<span class="nc bnc" id="L148" title="All 2 branches missed.">		if (userDTO.getId() != null) {</span>
+<span class="nc" id="L149">			throw new BadRequestAlertException(&quot;A new user cannot already have an ID&quot;, &quot;userManagement&quot;, &quot;idexists&quot;);</span>
+			// Lowercase the user login before comparing with database
+<span class="nc bnc" id="L151" title="All 2 branches missed.">		} else if (userRepository.findOneByLogin(userDTO.getLogin().toLowerCase()).isPresent()) {</span>
+<span class="nc" id="L152">			throw new LoginAlreadyUsedException();</span>
+<span class="nc bnc" id="L153" title="All 2 branches missed.">		} else if (userRepository.findOneByEmailIgnoreCase(userDTO.getEmail()).isPresent()) {</span>
+<span class="nc" id="L154">			throw new EmailAlreadyUsedException();</span>
+		} else {
+<span class="nc" id="L156">			User newUser = userService.createUser(userDTO);</span>
+<span class="nc" id="L157">			QnowUser qnowUser1 = new QnowUser();</span>
+<span class="nc" id="L158">			qnowUser1.setUser(newUser);</span>
+<span class="nc" id="L159">			QnowUser result9 = qnowUserRepository.save(qnowUser1);</span>
+<span class="nc" id="L160">			UserContact userContact1 = new UserContact();</span>
+<span class="nc" id="L161">			userContact1.setQnowUser(qnowUser1);</span>
+<span class="nc" id="L162">			UserContact result10 = userContactRepository.save(userContact1);</span>
+<span class="nc" id="L163">			ImEmployee imEmployee1 = new ImEmployee();</span>
+<span class="nc" id="L164">			imEmployee1.setQnowUser(qnowUser1);</span>
+<span class="nc" id="L165">			ImEmployee result20 = imEmployeeRepository.save(imEmployee1);</span>
+<span class="nc" id="L166">			mailService.sendCreationEmail(newUser);</span>
+<span class="nc" id="L167">			ResponseEntity&lt;User&gt; returnObj = ResponseEntity.created(new URI(&quot;/api/users/&quot; + newUser.getLogin()))</span>
+<span class="nc" id="L168">					.headers(HeaderUtil.createAlert(applicationName, &quot;userManagement.created&quot;, newUser.getLogin()))</span>
+<span class="nc" id="L169">					.body(newUser);</span>
+
+<span class="nc bnc" id="L171" title="All 2 branches missed.">			if (fromTesting == false) {</span>
+<span class="nc" id="L172">				System.out.println(userDTO.getFirstName());</span>
+
+<span class="nc" id="L174">				String csvFile = &quot;src\\main\\resources\\pmqusers.csv&quot;;</span>
+
+<span class="nc" id="L176">				BufferedReader br = null;</span>
+<span class="nc" id="L177">				String line = &quot;&quot;;</span>
+<span class="nc" id="L178">				String cvsSplitBy = &quot;;&quot;;</span>
+
+				try {
+<span class="nc" id="L181">					br = new BufferedReader(new FileReader(csvFile));</span>
+<span class="nc" id="L182">					int count = 0;</span>
+<span class="nc bnc" id="L183" title="All 2 branches missed.">					while ((line = br.readLine()) != null) {</span>
+<span class="nc" id="L184">						count++;</span>
+<span class="nc bnc" id="L185" title="All 2 branches missed.">						if (count == 1)</span>
+<span class="nc" id="L186">							continue;</span>
+<span class="nc" id="L187">						String[] country = line.split(cvsSplitBy);</span>
+						try {
+<span class="nc bnc" id="L189" title="All 2 branches missed.">							if (country.length &gt; 2) {</span>
+<span class="nc" id="L190">								userDTO.setLogin(removeQuotes(country[2]));</span>
+<span class="nc" id="L191">								userDTO.setFirstName(removeQuotes(country[0]));</span>
+<span class="nc" id="L192">								userDTO.setLastName(removeQuotes(country[1]));</span>
+<span class="nc" id="L193">								userDTO.setEmail(removeQuotes(country[2]));</span>
+<span class="nc" id="L194">								System.out.println(userDTO + &quot;new user created&quot;);</span>
+								try {
+<span class="nc" id="L196">									User newUserK = userService.createUser(userDTO);</span>
+<span class="nc" id="L197">									QnowUser qnowUser = new QnowUser();</span>
+
+<span class="nc" id="L199">									qnowUser.setUser(newUserK);</span>
+<span class="nc" id="L200">									System.out.println(newUserK + &quot;QnowUser created&quot;);</span>
+<span class="nc" id="L201">									System.out.println(&quot;-------------&quot; + qnowUser.toString());</span>
+<span class="nc" id="L202">									QnowUser result = qnowUserRepository.save(qnowUser);</span>
+<span class="nc" id="L203">									ResponseEntity abc = ResponseEntity</span>
+<span class="nc" id="L204">											.created(new URI(&quot;/api/qnow-users/&quot; + result.getId()))</span>
+<span class="nc" id="L205">											.headers(HeaderUtil.createEntityCreationAlert(applicationName, true,</span>
+<span class="nc" id="L206">													ENTITY_NAME, result.getId().toString()))</span>
+<span class="nc" id="L207">											.body(result);</span>
+
+<span class="nc" id="L209">									UserContact userContact = new UserContact();</span>
+
+<span class="nc" id="L211">									userContact.setWorkPhone(removeQuotes(country[6]));</span>
+<span class="nc" id="L212">									userContact.setCellPhone(removeQuotes(country[7]));</span>
+									// userContact.setPermentAddress(removeQuotes(country[2]));
+<span class="nc" id="L214">									userContact.setHaLine1(removeQuotes(country[13]));</span>
+<span class="nc" id="L215">									userContact.setHaLine2(removeQuotes(country[14]));</span>
+<span class="nc" id="L216">									userContact.setHaPostal(removeQuotes(country[17]));</span>
+<span class="nc" id="L217">									userContact.setWaLine1(removeQuotes(country[19]));</span>
+<span class="nc" id="L218">									userContact.setWaLine2(removeQuotes(country[20]));</span>
+<span class="nc" id="L219">									userContact.setWaPostal(removeQuotes(country[23]));</span>
+<span class="nc" id="L220">									userContact.setUcNote(removeQuotes(country[25]));</span>
+<span class="nc" id="L221">									userContact.setPrimaryRole(removeQuotes(country[51]));</span>
+<span class="nc" id="L222">									userContact.setSecondaryRole(removeQuotes(country[52]));</span>
+<span class="nc" id="L223">									userContact.setInitiative(removeQuotes(country[47]));</span>
+<span class="nc" id="L224">									userContact.setTechnology(removeQuotes(country[50]));</span>
+<span class="nc" id="L225">									userContact.setTeamName(removeQuotes(country[48]));</span>
+<span class="nc" id="L226">									userContact.setQnowUser(qnowUser);</span>
+<span class="nc" id="L227">									System.out.println(qnowUser + &quot;user contact created&quot;);</span>
+<span class="nc" id="L228">									UserContact result1 = userContactRepository.save(userContact);</span>
+<span class="nc" id="L229">									ResponseEntity ucercontact = ResponseEntity</span>
+<span class="nc" id="L230">											.created(new URI(&quot;/api/user-contacts/&quot; + result.getId()))</span>
+<span class="nc" id="L231">											.headers(HeaderUtil.createEntityCreationAlert(applicationName, true,</span>
+<span class="nc" id="L232">													ENTITY_NAME, result.getId().toString()))</span>
+<span class="nc" id="L233">											.body(result);</span>
+
+<span class="nc" id="L235">									ImEmployee imEmployee = new ImEmployee();</span>
+<span class="nc" id="L236">									System.out.println(&quot;1&quot;);</span>
+<span class="nc" id="L237">									imEmployee.setJobTitle(removeQuotes(country[28]));</span>
+<span class="nc" id="L238">									System.out.println(&quot;2&quot;);</span>
+<span class="nc" id="L239">									imEmployee.setJobDescription(removeQuotes(country[29]));</span>
+<span class="nc" id="L240">									System.out.println(&quot;3&quot;);</span>
+									// System.out.println(removeQuotes(country[30]));
+<span class="nc" id="L242">									String availability = removeQuotes(country[30]);</span>
+<span class="nc bnc" id="L243" title="All 2 branches missed.">									if (availability.equals(&quot;&quot;)) {</span>
+<span class="nc" id="L244">										imEmployee.setAvailability(100);</span>
+									} else {
+<span class="nc" id="L246">										imEmployee.setAvailability(Integer.parseInt(availability));</span>
+									}
+
+<span class="nc" id="L249">									System.out.println(&quot;4&quot;);</span>
+<span class="nc" id="L250">									imEmployee.setSsNumber(removeQuotes(country[32]));</span>
+<span class="nc" id="L251">									System.out.println(&quot;5&quot;);</span>
+
+<span class="nc" id="L253">									imEmployee.setSalary(convertToBigDecimal(removeQuotes(country[33])));</span>
+<span class="nc" id="L254">									System.out.println(&quot;6&quot;);</span>
+
+<span class="nc" id="L256">									imEmployee.setSocialSecurity(convertToInteger(removeQuotes(country[34])));</span>
+
+<span class="nc" id="L258">									System.out.println(&quot;7&quot;);</span>
+
+<span class="nc" id="L260">									imEmployee.setInsurance(convertToInteger(removeQuotes(country[35])));</span>
+<span class="nc" id="L261">									System.out.println(&quot;8&quot;);</span>
+
+<span class="nc" id="L263">									imEmployee.setOtherCosts(convertToInteger(removeQuotes(country[36])));</span>
+<span class="nc" id="L264">									System.out.println(&quot;9&quot;);</span>
+<span class="nc" id="L265">									imEmployee.setCurrency(removeQuotes(country[37]));</span>
+<span class="nc" id="L266">									System.out.println(&quot;10&quot;);</span>
+									
+									
+<span class="nc" id="L269">									System.out.println(&quot;11&quot;);</span>
+<span class="nc" id="L270">									imEmployee.setHourlyCost(new BigDecimal(20.00));</span>
+<span class="nc" id="L271">									System.out.println(&quot;12&quot;);</span>
+<span class="nc" id="L272">									imEmployee.setQnowUser(qnowUser);</span>
+<span class="nc" id="L273">									System.out.println(&quot;13&quot;);</span>
+
+<span class="nc" id="L275">									ImEmployee result2 = imEmployeeRepository.save(imEmployee);</span>
+<span class="nc" id="L276">									System.out.println(&quot;im employee created &quot;);</span>
+<span class="nc" id="L277">									ResponseEntity imemployee = ResponseEntity</span>
+<span class="nc" id="L278">											.created(new URI(&quot;/api/im-employees/&quot; + result.getId()))</span>
+<span class="nc" id="L279">											.headers(HeaderUtil.createEntityCreationAlert(applicationName, true,</span>
+<span class="nc" id="L280">													ENTITY_NAME, result.getId().toString()))</span>
+<span class="nc" id="L281">											.body(result2);</span>
+
+<span class="nc" id="L283">								} catch (Exception e) {</span>
+<span class="nc" id="L284">									System.out.println(e);</span>
+<span class="nc" id="L285">								}</span>
+							}
+<span class="nc" id="L287">						} catch (Exception u) {</span>
+<span class="nc" id="L288">						}</span>
+						/*
+						 * System.out.println(&quot;Country [login= &quot; + country[2] + &quot; , name=&quot; + country[0]
+						 * + &quot; &quot; + country[1] + &quot; , email = &quot; + country[2] + &quot;]&quot;);
+						 */
+<span class="nc" id="L293">					}</span>
+<span class="nc" id="L294">				} catch (Exception e) {</span>
+<span class="nc" id="L295">					System.out.println(e);</span>
+				} finally {
+<span class="nc bnc" id="L297" title="All 2 branches missed.">					if (br != null) {</span>
+						try {
+<span class="nc" id="L299">							br.close();</span>
+<span class="nc" id="L300">						} catch (Exception e) {</span>
+<span class="nc" id="L301">							System.out.println(e);</span>
+<span class="nc" id="L302">						}</span>
+					}
+				}
+
+			}
+			
+<span class="nc" id="L308">			return returnObj;</span>
+		}
+	}
+
+	@CrossOrigin
+	@PutMapping(&quot;/users&quot;)
+	@PreAuthorize(&quot;hasRole(\&quot;&quot; + AuthoritiesConstants.ADMIN + &quot;\&quot;)&quot;)
+	public ResponseEntity&lt;UserDTO&gt; updateUser(@Valid @RequestBody UserDTO userDTO) {
+<span class="nc" id="L316">		log.debug(&quot;REST request to update User : {}&quot;, userDTO);</span>
+<span class="nc" id="L317">		Optional&lt;User&gt; existingUser = userRepository.findOneByEmailIgnoreCase(userDTO.getEmail());</span>
+<span class="nc bnc" id="L318" title="All 4 branches missed.">		if (existingUser.isPresent() &amp;&amp; (!existingUser.get().getId().equals(userDTO.getId()))) {</span>
+<span class="nc" id="L319">			throw new EmailAlreadyUsedException();</span>
+		}
+<span class="nc" id="L321">		existingUser = userRepository.findOneByLogin(userDTO.getLogin().toLowerCase());</span>
+<span class="nc bnc" id="L322" title="All 4 branches missed.">		if (existingUser.isPresent() &amp;&amp; (!existingUser.get().getId().equals(userDTO.getId()))) {</span>
+<span class="nc" id="L323">			throw new LoginAlreadyUsedException();</span>
+		}
+<span class="nc" id="L325">		Optional&lt;UserDTO&gt; updatedUser = userService.updateUser(userDTO);</span>
+
+<span class="nc" id="L327">		return ResponseUtil.wrapOrNotFound(updatedUser,</span>
+<span class="nc" id="L328">				HeaderUtil.createAlert(applicationName, &quot;userManagement.updated&quot;, userDTO.getLogin()));</span>
+	}
+
+	/**
+	 * {@code GET /users} : get all users.
+	 *
+	 * @param pageable the pagination information.
+	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+	 *         all users.
+	 */
+	@CrossOrigin
+	@GetMapping(&quot;/users&quot;)
+<span class="nc" id="L340">	public List&lt;User&gt; getAllUser() { log.debug(&quot;REST request to get all ProjectClasses&quot;);</span>
+<span class="nc" id="L341">	        return userRepository.findAll();</span>
+	}
+
+	
+    @GetMapping(&quot;/usersOld&quot;)
+    public ResponseEntity&lt;List&lt;UserDTO&gt;&gt; getAllUsers(@RequestParam MultiValueMap&lt;String, String&gt; queryParams, UriComponentsBuilder uriBuilder, Pageable pageable) {
+<span class="nc" id="L347">        final Page&lt;UserDTO&gt; page = userService.getAllManagedUsers(pageable);</span>
+<span class="nc" id="L348">        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(uriBuilder.queryParams(queryParams), page);</span>
+<span class="nc" id="L349">        return new ResponseEntity&lt;&gt;(page.getContent(), headers, HttpStatus.OK);</span>
+    }
+
+	//List&lt;UserDTO&gt; getAllUser()
+	/**
+	 * Gets a list of all roles.
+	 * 
+	 * @return a string list of all roles.
+	 */
+	@CrossOrigin
+	@GetMapping(&quot;/users/authorities&quot;)
+	@PreAuthorize(&quot;hasRole(\&quot;&quot; + AuthoritiesConstants.ADMIN + &quot;\&quot;)&quot;)
+	public List&lt;String&gt; getAuthorities() {
+<span class="nc" id="L362">		return userService.getAuthorities();</span>
+	}
+
+	/**
+	 * {@code GET /users/:login} : get the &quot;login&quot; user.
+	 *
+	 * @param login the login of the user to find.
+	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+	 *         the &quot;login&quot; user, or with status {@code 404 (Not Found)}.
+	 */
+	@CrossOrigin
+	@GetMapping(&quot;/users/{login:&quot; + Constants.LOGIN_REGEX + &quot;}&quot;)
+	public ResponseEntity&lt;UserDTO&gt; getUser(@PathVariable String login) {
+<span class="nc" id="L375">		log.debug(&quot;REST request to get User : {}&quot;, login);</span>
+<span class="nc" id="L376">		return ResponseUtil.wrapOrNotFound(userService.getUserWithAuthoritiesByLogin(login).map(UserDTO::new));</span>
+	}
+
+	/**
+	 * {@code DELETE /users/:login} : delete the &quot;login&quot; User.
+	 *
+	 * @param login the login of the user to delete.
+	 * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
+	 */
+	@CrossOrigin
+	@DeleteMapping(&quot;/users/{login:&quot; + Constants.LOGIN_REGEX + &quot;}&quot;)
+	@PreAuthorize(&quot;hasRole(\&quot;&quot; + AuthoritiesConstants.ADMIN + &quot;\&quot;)&quot;)
+	public ResponseEntity&lt;Void&gt; deleteUser(@PathVariable String login) {
+<span class="nc" id="L389">		log.debug(&quot;REST request to delete User: {}&quot;, login);</span>
+<span class="nc" id="L390">		userService.deleteUser(login);</span>
+<span class="nc" id="L391">		return ResponseEntity.noContent()</span>
+<span class="nc" id="L392">				.headers(HeaderUtil.createAlert(applicationName, &quot;userManagement.deleted&quot;, login)).build();</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

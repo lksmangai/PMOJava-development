@@ -80,93 +80,93 @@ public class UserContactQueryService extends QueryService<UserContact> {
     private Specification<UserContact> createSpecification(UserContactCriteria criteria) {
         Specification<UserContact> specification = Specification.where(null);
         if (criteria != null) {
-//            if (criteria.getId() != null) {
-//                specification = specification.and(buildSpecification(criteria.getId(), UserContact_.id));
-//            }
-//            if (criteria.getHomePhone() != null) {
-//                specification = specification.and(buildStringSpecification(criteria.getHomePhone(), UserContact_.homePhone));
-//            }
-//            if (criteria.getWorkPhone() != null) {
-//                specification = specification.and(buildStringSpecification(criteria.getWorkPhone(), UserContact_.workPhone));
-//            }
-//            if (criteria.getCellPhone() != null) {
-//                specification = specification.and(buildStringSpecification(criteria.getCellPhone(), UserContact_.cellPhone));
-//            }
-//            if (criteria.getPermentAddress() != null) {
-//                specification = specification.and(buildStringSpecification(criteria.getPermentAddress(), UserContact_.permentAddress));
-//            }
-//            if (criteria.getHaLine1() != null) {
-//                specification = specification.and(buildStringSpecification(criteria.getHaLine1(), UserContact_.haLine1));
-//            }
-//            if (criteria.getHaLine2() != null) {
-//                specification = specification.and(buildStringSpecification(criteria.getHaLine2(), UserContact_.haLine2));
-//            }
-//            if (criteria.getHaPostal() != null) {
-//                specification = specification.and(buildStringSpecification(criteria.getHaPostal(), UserContact_.haPostal));
-//            }
-//            if (criteria.getWaLine1() != null) {
-//                specification = specification.and(buildStringSpecification(criteria.getWaLine1(), UserContact_.waLine1));
-//            }
-//            if (criteria.getWaLine2() != null) {
-//                specification = specification.and(buildStringSpecification(criteria.getWaLine2(), UserContact_.waLine2));
-//            }
-//            if (criteria.getWaPostal() != null) {
-//                specification = specification.and(buildStringSpecification(criteria.getWaPostal(), UserContact_.waPostal));
-//            }
-//            if (criteria.getUcNote() != null) {
-//                specification = specification.and(buildStringSpecification(criteria.getUcNote(), UserContact_.ucNote));
-//            }
-//            if (criteria.getPrimaryRole() != null) {
-//                specification = specification.and(buildStringSpecification(criteria.getPrimaryRole(), UserContact_.primaryRole));
-//            }
-//            if (criteria.getSecondaryRole() != null) {
-//                specification = specification.and(buildStringSpecification(criteria.getSecondaryRole(), UserContact_.secondaryRole));
-//            }
-//            if (criteria.getInitiative() != null) {
-//                specification = specification.and(buildStringSpecification(criteria.getInitiative(), UserContact_.initiative));
-//            }
-//            if (criteria.getTechnology() != null) {
-//                specification = specification.and(buildStringSpecification(criteria.getTechnology(), UserContact_.technology));
-//            }
-//            if (criteria.getTeamName() != null) {
-//                specification = specification.and(buildStringSpecification(criteria.getTeamName(), UserContact_.teamName));
-//            }
-//            if (criteria.getQnowUserId() != null) {
-//                specification = specification.and(buildSpecification(criteria.getQnowUserId(),
-//                    root -> root.join(UserContact_.qnowUser, JoinType.LEFT).get(QnowUser_.id)));
-//            }
-//            if (criteria.getWaCityId() != null) {
-//                specification = specification.and(buildSpecification(criteria.getWaCityId(),
-//                    root -> root.join(UserContact_.waCity, JoinType.LEFT).get(City_.id)));
-//            }
-//            if (criteria.getHaCityId() != null) {
-//                specification = specification.and(buildSpecification(criteria.getHaCityId(),
-//                    root -> root.join(UserContact_.haCity, JoinType.LEFT).get(City_.id)));
-//            }
-//            if (criteria.getWaStateId() != null) {
-//                specification = specification.and(buildSpecification(criteria.getWaStateId(),
-//                    root -> root.join(UserContact_.waState, JoinType.LEFT).get(StateMaster_.id)));
-//            }
-//            if (criteria.getHaStateId() != null) {
-//                specification = specification.and(buildSpecification(criteria.getHaStateId(),
-//                    root -> root.join(UserContact_.haState, JoinType.LEFT).get(StateMaster_.id)));
-//            }
-//            if (criteria.getWaCountryId() != null) {
-//                specification = specification.and(buildSpecification(criteria.getWaCountryId(),
-//                    root -> root.join(UserContact_.waCountry, JoinType.LEFT).get(Country_.id)));
-//            }
-//            if (criteria.getHaCountryId() != null) {
-//                specification = specification.and(buildSpecification(criteria.getHaCountryId(),
-//                    root -> root.join(UserContact_.haCountry, JoinType.LEFT).get(Country_.id)));
-//            }
-//            if (criteria.getGroupMembersId() != null) {
-//                specification = specification.and(buildSpecification(criteria.getGroupMembersId(),
-//                    root -> root.join(UserContact_.groupMembers, JoinType.LEFT).get(GroupMembers_.id)));
-//            }
-//            if (criteria.getImEmployeeId() != null) {
-//                specification = specification.and(buildSpecification(criteria.getImEmployeeId(),
-//                    root -> root.join(UserContact_.imEmployees, JoinType.LEFT).get(ImEmployee_.id)));
-//            }
+            if (criteria.getId() != null) {
+                specification = specification.and(buildSpecification(criteria.getId(), UserContact_.id));
+            }
+            if (criteria.getHomePhone() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getHomePhone(), UserContact_.homePhone));
+            }
+            if (criteria.getWorkPhone() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getWorkPhone(), UserContact_.workPhone));
+            }
+            if (criteria.getCellPhone() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getCellPhone(), UserContact_.cellPhone));
+            }
+            if (criteria.getPermentAddress() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getPermentAddress(), UserContact_.permentAddress));
+            }
+            if (criteria.getHaLine1() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getHaLine1(), UserContact_.haLine1));
+            }
+            if (criteria.getHaLine2() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getHaLine2(), UserContact_.haLine2));
+            }
+            if (criteria.getHaPostal() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getHaPostal(), UserContact_.haPostal));
+            }
+            if (criteria.getWaLine1() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getWaLine1(), UserContact_.waLine1));
+            }
+            if (criteria.getWaLine2() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getWaLine2(), UserContact_.waLine2));
+            }
+            if (criteria.getWaPostal() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getWaPostal(), UserContact_.waPostal));
+            }
+            if (criteria.getUcNote() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getUcNote(), UserContact_.ucNote));
+            }
+            if (criteria.getPrimaryRole() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getPrimaryRole(), UserContact_.primaryRole));
+            }
+            if (criteria.getSecondaryRole() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getSecondaryRole(), UserContact_.secondaryRole));
+            }
+            if (criteria.getInitiative() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getInitiative(), UserContact_.initiative));
+            }
+            if (criteria.getTechnology() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getTechnology(), UserContact_.technology));
+            }
+            if (criteria.getTeamName() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getTeamName(), UserContact_.teamName));
+            }
+            if (criteria.getQnowUserId() != null) {
+                specification = specification.and(buildSpecification(criteria.getQnowUserId(),
+                    root -> root.join(UserContact_.qnowUser, JoinType.LEFT).get(QnowUser_.id)));
+            }
+            if (criteria.getWaCityId() != null) {
+                specification = specification.and(buildSpecification(criteria.getWaCityId(),
+                    root -> root.join(UserContact_.waCity, JoinType.LEFT).get(City_.id)));
+            }
+            if (criteria.getHaCityId() != null) {
+                specification = specification.and(buildSpecification(criteria.getHaCityId(),
+                    root -> root.join(UserContact_.haCity, JoinType.LEFT).get(City_.id)));
+            }
+            if (criteria.getWaStateId() != null) {
+                specification = specification.and(buildSpecification(criteria.getWaStateId(),
+                    root -> root.join(UserContact_.waState, JoinType.LEFT).get(StateMaster_.id)));
+            }
+            if (criteria.getHaStateId() != null) {
+                specification = specification.and(buildSpecification(criteria.getHaStateId(),
+                    root -> root.join(UserContact_.haState, JoinType.LEFT).get(StateMaster_.id)));
+            }
+            if (criteria.getWaCountryId() != null) {
+                specification = specification.and(buildSpecification(criteria.getWaCountryId(),
+                    root -> root.join(UserContact_.waCountry, JoinType.LEFT).get(Country_.id)));
+            }
+            if (criteria.getHaCountryId() != null) {
+                specification = specification.and(buildSpecification(criteria.getHaCountryId(),
+                    root -> root.join(UserContact_.haCountry, JoinType.LEFT).get(Country_.id)));
+            }
+            if (criteria.getGroupMembersId() != null) {
+                specification = specification.and(buildSpecification(criteria.getGroupMembersId(),
+                    root -> root.join(UserContact_.groupMembers, JoinType.LEFT).get(GroupMembers_.id)));
+            }
+            if (criteria.getImEmployeeId() != null) {
+                specification = specification.and(buildSpecification(criteria.getImEmployeeId(),
+                    root -> root.join(UserContact_.imEmployees, JoinType.LEFT).get(ImEmployee_.id)));
+            }
         }
         return specification;
     }

@@ -1,0 +1,23 @@
+{
+  "App": {
+    "projectRoles": {
+      "home": {
+        "title": "Project Roles",
+        "createLabel": "Create a new Project Roles",
+        "createOrEditLabel": "Create or edit a Project Roles"
+      },
+      "created": "A new Project Roles is created with identifier {{ param }}",
+      "updated": "A Project Roles is updated with identifier {{ param }}",
+      "deleted": "A Project Roles is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Project Roles {{ id }}?"
+      },
+      "detail": {
+        "title": "Project Roles"
+      },
+      "code": "Code",
+      "name": "Name",
+      "description": "Description"
+    }
+  }
+}

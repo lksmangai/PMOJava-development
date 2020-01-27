@@ -1,4 +1,4 @@
-package com.qnowapp.security ;
+package com.qnowapp.security;
 
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;

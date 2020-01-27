@@ -1,0 +1,28 @@
+category_id;category;description;category_type;category_gif;enabled_p;parent_only_p;aux_int1;aux_int2;aux_string1;aux_string2;sort_order;visible_tcl
+10046337;QInsight;;Project Vertical;category;t;f;;;;;0;
+10046336;Qonductor;;Project Vertical;category;t;f;;;;;0;
+10046338;BANQ;;Project Vertical;category;t;f;;;;;0;
+10046339;QDMS;;Project Vertical;category;t;f;;;;;0;
+10046340;QBots;;Project Vertical;category;t;f;;;;;0;
+10046341;QCollege;;Project Vertical;category;t;f;;;;;0;
+10046342;QConnectors;;Project Vertical;category;t;f;;;;;0;
+10046343;Support;;Project Vertical;category;t;f;;;;;0;
+10046329;Qore;;Project Vertical;category;t;f;;;;;0;
+10046330;PMQ;;Project Vertical;category;t;f;;;;;0;
+10046331;QMobile;;Project Vertical;category;t;f;;;;;0;
+10046332;QSuite Web;;Project Vertical;category;t;f;;;;;0;
+10046333;QSuite;;Project Vertical;category;t;f;;;;;0;
+10046334;QVisit;;Project Vertical;category;t;f;;;;;0;
+10046328;Project Vertical;;Project Vertical;category;f;f;;;;;0;
+10046344;myQOne;;Project Vertical;category;t;f;;;;;0;
+10046345;QOne;;Project Vertical;category;t;f;;;;;0;
+10046346;Compliances;;Project Vertical;category;t;f;;;;;0;
+10046348;Training;;Project Vertical;category;t;f;;;;;0;
+10046350;Followup or Feedback;;Project Vertical;category;t;f;;;;;0;
+10046349;HR Activity Or Action;;Project Vertical;category;t;f;;;;;0;
+10046335;QPathways;;Project Vertical;category;t;f;;;;;0;
+10046403;RCM Ops;;Project Vertical;category;t;f;;;;;0;
+10046404;Finance and Accounts;;Project Vertical;category;t;f;;;;;0;
+10046405;Interfaces;;Project Vertical;category;t;f;;;;;0;
+10046406;QRx EPCS;;Project Vertical;category;t;f;;;;;0;
+10046407;Implementation;;Project Vertical;category;t;f;;;;;0;

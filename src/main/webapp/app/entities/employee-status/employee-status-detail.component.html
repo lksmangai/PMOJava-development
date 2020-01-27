@@ -1,0 +1,31 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="employeeStatus">
+            <h2><span jhiTranslate="App.employeeStatus.detail.title">Employee Status</span> {{employeeStatus.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="App.employeeStatus.statusCode">Status Code</span></dt>
+                <dd>
+                    <span>{{employeeStatus.statusCode}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.employeeStatus.statusName">Status Name</span></dt>
+                <dd>
+                    <span>{{employeeStatus.statusName}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/employee-status', employeeStatus.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

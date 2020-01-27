@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SkillCategoryResource.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.web.rest</a> &gt; <span class="el_source">SkillCategoryResource.java</span></div><h1>SkillCategoryResource.java</h1><pre class="source lang-java linenums">package com.qnowapp.web.rest;
+
+import com.qnowapp.domain.SkillCategory;
+import com.qnowapp.service.SkillCategoryService;
+import com.qnowapp.web.rest.errors.BadRequestAlertException;
+import com.qnowapp.service.dto.SkillCategoryCriteria;
+import com.qnowapp.service.SkillCategoryQueryService;
+
+import io.github.jhipster.web.util.HeaderUtil;
+import io.github.jhipster.web.util.ResponseUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * REST controller for managing {@link com.qnowapp.domain.SkillCategory}.
+ */
+@CrossOrigin(origins = &quot;*&quot;, allowedHeaders = &quot;*&quot;)
+@RestController
+@RequestMapping(&quot;/api&quot;)
+public class SkillCategoryResource {
+
+<span class="nc" id="L31">    private final Logger log = LoggerFactory.getLogger(SkillCategoryResource.class);</span>
+
+    private static final String ENTITY_NAME = &quot;skillCategory&quot;;
+
+    @Value(&quot;${jhipster.clientApp.name}&quot;)
+    private String applicationName;
+
+    private final SkillCategoryService skillCategoryService;
+
+    private final SkillCategoryQueryService skillCategoryQueryService;
+
+<span class="nc" id="L42">    public SkillCategoryResource(SkillCategoryService skillCategoryService, SkillCategoryQueryService skillCategoryQueryService) {</span>
+<span class="nc" id="L43">        this.skillCategoryService = skillCategoryService;</span>
+<span class="nc" id="L44">        this.skillCategoryQueryService = skillCategoryQueryService;</span>
+<span class="nc" id="L45">    }</span>
+
+    /**
+     * {@code POST  /skill-categories} : Create a new skillCategory.
+     *
+     * @param skillCategory the skillCategory to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new skillCategory, or with status {@code 400 (Bad Request)} if the skillCategory has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @CrossOrigin
+    @PostMapping(&quot;/skill-categories&quot;)
+    public ResponseEntity&lt;SkillCategory&gt; createSkillCategory(@RequestBody SkillCategory skillCategory) throws URISyntaxException {
+<span class="nc" id="L57">        log.debug(&quot;REST request to save SkillCategory : {}&quot;, skillCategory);</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">        if (skillCategory.getId() != null) {</span>
+<span class="nc" id="L59">            throw new BadRequestAlertException(&quot;A new skillCategory cannot already have an ID&quot;, ENTITY_NAME, &quot;idexists&quot;);</span>
+        }
+<span class="nc" id="L61">        SkillCategory result = skillCategoryService.save(skillCategory);</span>
+<span class="nc" id="L62">        return ResponseEntity.created(new URI(&quot;/api/skill-categories/&quot; + result.getId()))</span>
+<span class="nc" id="L63">            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))</span>
+<span class="nc" id="L64">            .body(result);</span>
+    }
+
+    /**
+     * {@code PUT  /skill-categories} : Updates an existing skillCategory.
+     *
+     * @param skillCategory the skillCategory to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated skillCategory,
+     * or with status {@code 400 (Bad Request)} if the skillCategory is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the skillCategory couldn't be updated.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @CrossOrigin
+    @PutMapping(&quot;/skill-categories&quot;)
+    public ResponseEntity&lt;SkillCategory&gt; updateSkillCategory(@RequestBody SkillCategory skillCategory) throws URISyntaxException {
+<span class="nc" id="L79">        log.debug(&quot;REST request to update SkillCategory : {}&quot;, skillCategory);</span>
+<span class="nc bnc" id="L80" title="All 2 branches missed.">        if (skillCategory.getId() == null) {</span>
+<span class="nc" id="L81">            throw new BadRequestAlertException(&quot;Invalid id&quot;, ENTITY_NAME, &quot;idnull&quot;);</span>
+        }
+<span class="nc" id="L83">        SkillCategory result = skillCategoryService.save(skillCategory);</span>
+<span class="nc" id="L84">        return ResponseEntity.ok()</span>
+<span class="nc" id="L85">            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, skillCategory.getId().toString()))</span>
+<span class="nc" id="L86">            .body(result);</span>
+    }
+
+    /**
+     * {@code GET  /skill-categories} : get all the skillCategories.
+     *
+     * @param criteria the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of skillCategories in body.
+     */
+    @CrossOrigin
+    @GetMapping(&quot;/skill-categories&quot;)
+    public ResponseEntity&lt;List&lt;SkillCategory&gt;&gt; getAllSkillCategories(SkillCategoryCriteria criteria) {
+<span class="nc" id="L98">        log.debug(&quot;REST request to get SkillCategories by criteria: {}&quot;, criteria);</span>
+<span class="nc" id="L99">        List&lt;SkillCategory&gt; entityList = skillCategoryQueryService.findByCriteria(criteria);</span>
+<span class="nc" id="L100">        return ResponseEntity.ok().body(entityList);</span>
+    }
+
+    /**
+    * {@code GET  /skill-categories/count} : count all the skillCategories.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping(&quot;/skill-categories/count&quot;)
+    public ResponseEntity&lt;Long&gt; countSkillCategories(SkillCategoryCriteria criteria) {
+<span class="nc" id="L112">        log.debug(&quot;REST request to count SkillCategories by criteria: {}&quot;, criteria);</span>
+<span class="nc" id="L113">        return ResponseEntity.ok().body(skillCategoryQueryService.countByCriteria(criteria));</span>
+    }
+
+    /**
+     * {@code GET  /skill-categories/:id} : get the &quot;id&quot; skillCategory.
+     *
+     * @param id the id of the skillCategory to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the skillCategory, or with status {@code 404 (Not Found)}.
+     */
+    @CrossOrigin
+    @GetMapping(&quot;/skill-categories/{id}&quot;)
+    public ResponseEntity&lt;SkillCategory&gt; getSkillCategory(@PathVariable Long id) {
+<span class="nc" id="L125">        log.debug(&quot;REST request to get SkillCategory : {}&quot;, id);</span>
+<span class="nc" id="L126">        Optional&lt;SkillCategory&gt; skillCategory = skillCategoryService.findOne(id);</span>
+<span class="nc" id="L127">        return ResponseUtil.wrapOrNotFound(skillCategory);</span>
+    }
+
+    /**
+     * {@code DELETE  /skill-categories/:id} : delete the &quot;id&quot; skillCategory.
+     *
+     * @param id the id of the skillCategory to delete.
+     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
+     */
+    @CrossOrigin
+    @DeleteMapping(&quot;/skill-categories/{id}&quot;)
+    public ResponseEntity&lt;Void&gt; deleteSkillCategory(@PathVariable Long id) {
+<span class="nc" id="L139">        log.debug(&quot;REST request to delete SkillCategory : {}&quot;, id);</span>
+<span class="nc" id="L140">        skillCategoryService.delete(id);</span>
+<span class="nc" id="L141">        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

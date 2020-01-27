@@ -1,0 +1,23 @@
+{
+  "App": {
+    "projectStatusId": {
+      "home": {
+        "title": "Project Status Ids",
+        "createLabel": "Create a new Project Status Id",
+        "createOrEditLabel": "Create or edit a Project Status Id"
+      },
+      "created": "A new Project Status Id is created with identifier {{ param }}",
+      "updated": "A Project Status Id is updated with identifier {{ param }}",
+      "deleted": "A Project Status Id is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Project Status Id {{ id }}?"
+      },
+      "detail": {
+        "title": "Project Status Id"
+      },
+      "code": "Code",
+      "name": "Name",
+      "description": "Description"
+    }
+  }
+}

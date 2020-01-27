@@ -1,0 +1,23 @@
+{
+  "App": {
+    "projectVertical": {
+      "home": {
+        "title": "Project Verticals",
+        "createLabel": "Create a new Project Vertical",
+        "createOrEditLabel": "Create or edit a Project Vertical"
+      },
+      "created": "A new Project Vertical is created with identifier {{ param }}",
+      "updated": "A Project Vertical is updated with identifier {{ param }}",
+      "deleted": "A Project Vertical is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Project Vertical {{ id }}?"
+      },
+      "detail": {
+        "title": "Project Vertical"
+      },
+      "code": "Code",
+      "name": "Name",
+      "description": "Description"
+    }
+  }
+}

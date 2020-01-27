@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SkillTableServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.service.impl</a> &gt; <span class="el_source">SkillTableServiceImpl.java</span></div><h1>SkillTableServiceImpl.java</h1><pre class="source lang-java linenums">package com.qnowapp.service.impl;
+
+import com.qnowapp.service.SkillTableService;
+import com.qnowapp.domain.SkillTable;
+import com.qnowapp.repository.SkillTableRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * Service Implementation for managing {@link SkillTable}.
+ */
+@Service
+@Transactional
+public class SkillTableServiceImpl implements SkillTableService {
+
+<span class="nc" id="L22">    private final Logger log = LoggerFactory.getLogger(SkillTableServiceImpl.class);</span>
+
+    private final SkillTableRepository skillTableRepository;
+
+<span class="nc" id="L26">    public SkillTableServiceImpl(SkillTableRepository skillTableRepository) {</span>
+<span class="nc" id="L27">        this.skillTableRepository = skillTableRepository;</span>
+<span class="nc" id="L28">    }</span>
+
+    /**
+     * Save a skillTable.
+     *
+     * @param skillTable the entity to save.
+     * @return the persisted entity.
+     */
+    @Override
+    public SkillTable save(SkillTable skillTable) {
+<span class="nc" id="L38">        log.debug(&quot;Request to save SkillTable : {}&quot;, skillTable);</span>
+<span class="nc" id="L39">        return skillTableRepository.save(skillTable);</span>
+    }
+
+    /**
+     * Get all the skillTables.
+     *
+     * @return the list of entities.
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List&lt;SkillTable&gt; findAll() {
+<span class="nc" id="L50">        log.debug(&quot;Request to get all SkillTables&quot;);</span>
+<span class="nc" id="L51">        return skillTableRepository.findAll();</span>
+    }
+
+
+    /**
+     * Get one skillTable by id.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Optional&lt;SkillTable&gt; findOne(Long id) {
+<span class="nc" id="L64">        log.debug(&quot;Request to get SkillTable : {}&quot;, id);</span>
+<span class="nc" id="L65">        return skillTableRepository.findById(id);</span>
+    }
+
+    /**
+     * Delete the skillTable by id.
+     *
+     * @param id the id of the entity.
+     */
+    @Override
+    public void delete(Long id) {
+<span class="nc" id="L75">        log.debug(&quot;Request to delete SkillTable : {}&quot;, id);</span>
+<span class="nc" id="L76">        skillTableRepository.deleteById(id);</span>
+<span class="nc" id="L77">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

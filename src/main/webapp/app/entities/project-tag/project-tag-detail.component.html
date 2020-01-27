@@ -1,0 +1,61 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="projectTag">
+            <h2><span jhiTranslate="App.projectTag.detail.title">Project Tag</span> {{projectTag.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="App.projectTag.code">Code</span></dt>
+                <dd>
+                    <span>{{projectTag.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.projectTag.name">Name</span></dt>
+                <dd>
+                    <span>{{projectTag.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.projectTag.description">Description</span></dt>
+                <dd>
+                    <span>{{projectTag.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.projectTag.flag">Flag</span></dt>
+                <dd>
+                    <span>{{projectTag.flag}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.projectTag.color">Color</span></dt>
+                <dd>
+                    <span>{{projectTag.color}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.projectTag.tagType">Tag Type</span></dt>
+                <dd>
+                    <div *ngIf="projectTag.tagType">
+                        <a [routerLink]="['/tag-type', projectTag.tagType?.id, 'view']">{{projectTag.tagType?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="App.projectTag.imEmployee">Im Employee</span></dt>
+                <dd>
+                    <div *ngIf="projectTag.imEmployee">
+                        <a [routerLink]="['/im-employee', projectTag.imEmployee?.id, 'view']">{{projectTag.imEmployee?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="App.projectTag.imProjects">Im Projects</span></dt>
+                <dd>
+                    <div *ngIf="projectTag.imProjects">
+                        <a [routerLink]="['/im-projects', projectTag.imProjects?.id, 'view']">{{projectTag.imProjects?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/project-tag', projectTag.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

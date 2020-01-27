@@ -1,10 +1,11 @@
 package com.qnowapp.web.rest;
 
 import com.qnowapp.domain.Company;
-
 import com.qnowapp.service.CompanyService;
 import com.qnowapp.web.rest.errors.BadRequestAlertException;
 import com.qnowapp.service.dto.CompanyCriteria;
+import com.qnowapp.service.CompanyQueryService;
+
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -36,11 +37,11 @@ public class CompanyResource {
 
     private final CompanyService companyService;
 
- 
+    private final CompanyQueryService companyQueryService;
 
-    public CompanyResource(CompanyService companyService) {
+    public CompanyResource(CompanyService companyService, CompanyQueryService companyQueryService) {
         this.companyService = companyService;
-     
+        this.companyQueryService = companyQueryService;
     }
 
     /**
@@ -93,10 +94,23 @@ public class CompanyResource {
      */
     @CrossOrigin
     @GetMapping("/companies")
-    public ResponseEntity<List<Company>> getAllCompanies( ) {
-        log.debug("REST request to get Companies by criteria: {}");
-        List<Company> entityList = companyService.findAll();
+    public ResponseEntity<List<Company>> getAllCompanies(CompanyCriteria criteria) {
+        log.debug("REST request to get Companies by criteria: {}", criteria);
+        List<Company> entityList = companyQueryService.findByCriteria(criteria);
         return ResponseEntity.ok().body(entityList);
+    }
+
+    /**
+    * {@code GET  /companies/count} : count all the companies.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping("/companies/count")
+    public ResponseEntity<Long> countCompanies(CompanyCriteria criteria) {
+        log.debug("REST request to count Companies by criteria: {}", criteria);
+        return ResponseEntity.ok().body(companyQueryService.countByCriteria(criteria));
     }
 
     /**

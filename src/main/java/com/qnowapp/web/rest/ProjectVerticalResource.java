@@ -1,10 +1,9 @@
 package com.qnowapp.web.rest;
 
 import com.qnowapp.domain.ProjectInitiativeId;
-
 import com.qnowapp.domain.ProjectVertical;
 import com.qnowapp.repository.ProjectVerticalRepository;
-
+import com.qnowapp.service.ProjectVerticalQueryService;
 import com.qnowapp.service.ProjectVerticalService;
 import com.qnowapp.service.dto.ProjectVerticalCriteria;
 import com.qnowapp.web.rest.errors.BadRequestAlertException;
@@ -49,11 +48,11 @@ public class ProjectVerticalResource {
    
     private final ProjectVerticalService projectVerticalService;
 
-   
+    private final ProjectVerticalQueryService projectVerticalQueryService;
 
-    public ProjectVerticalResource(ProjectVerticalService projectVerticalService) {
+    public ProjectVerticalResource(ProjectVerticalService projectVerticalService, ProjectVerticalQueryService projectVerticalQueryService) {
         this.projectVerticalService = projectVerticalService;
-       
+        this.projectVerticalQueryService = projectVerticalQueryService;
 
     }
     public static void setFromTesting(Boolean bState) {
@@ -81,7 +80,7 @@ public class ProjectVerticalResource {
                     .body(result);
 
             if (fromTesting == false) {
-        
+                System.out.println(projectVertical.getName());
                 String csvFile1 = "src\\main\\resources\\vertical.csv";
                 BufferedReader br = null;
                 String line = "";
@@ -92,27 +91,28 @@ public class ProjectVerticalResource {
                     int count = 0;
                     while ((line = br.readLine()) != null) {
                         count++;
-                      
+                        System.out.println(+count);
                         if (count == 1)
                             continue;
                         String[] country = line.split(cvsSplitBy);
                         try {
                             if (country.length > 3 ) {
-                             
+                                System.out.println("1");
                                 projectVertical.setId(null);
                                 projectVertical.setCode(country[0]);
-                              
+                                System.out.println("2");
                                 projectVertical.setName(country[1]);
-                                
+                                System.out.println("3");
                                 projectVertical.setDescription(country[2]);
                                 ProjectVertical result2 = projectVerticalRepository.save(projectVertical);  
-                                
+                                System.out.println(result2.getId());
+                                System.out.println(projectVertical + "new project created");
                             }
                         } catch (Exception e) {
                         }
                     }
                 } catch (Exception e) {
-                   
+                    // TODO: handle exception
                 } finally {
                     if (br != null) {
                         try {
@@ -159,13 +159,24 @@ public class ProjectVerticalResource {
      */
     @CrossOrigin
     @GetMapping("/project-verticals")
-    public ResponseEntity<List<ProjectVertical>> getAllProjectVerticals( ) {
-        log.debug("REST request to get ProjectVerticals by criteria: {}");
-        List<ProjectVertical> entityList = projectVerticalService.findAll();
+    public ResponseEntity<List<ProjectVertical>> getAllProjectVerticals(ProjectVerticalCriteria criteria) {
+        log.debug("REST request to get ProjectVerticals by criteria: {}", criteria);
+        List<ProjectVertical> entityList = projectVerticalQueryService.findByCriteria(criteria);
         return ResponseEntity.ok().body(entityList);
     }
 
-
+    /**
+    * {@code GET  /project-verticals/count} : count all the projectVerticals.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping("/project-verticals/count")
+    public ResponseEntity<Long> countProjectVerticals(ProjectVerticalCriteria criteria) {
+        log.debug("REST request to count ProjectVerticals by criteria: {}", criteria);
+        return ResponseEntity.ok().body(projectVerticalQueryService.countByCriteria(criteria));
+    }
 
     /**
      * {@code GET  /project-verticals/:id} : get the "id" projectVertical.

@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="imTimesheet">
+            <h2><span jhiTranslate="App.imTimesheet.detail.title">Im Timesheet</span> {{imTimesheet.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="App.imTimesheet.logdate">Logdate</span></dt>
+                <dd>
+                    <span>{{imTimesheet.logdate}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imTimesheet.loghours">Loghours</span></dt>
+                <dd>
+                    <span>{{imTimesheet.loghours}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imTimesheet.billhours">Billhours</span></dt>
+                <dd>
+                    <span>{{imTimesheet.billhours}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imTimesheet.notes">Notes</span></dt>
+                <dd>
+                    <span>{{imTimesheet.notes}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.imTimesheet.imEmployee">Im Employee</span></dt>
+                <dd>
+                    <div *ngIf="imTimesheet.imEmployee">
+                        <a [routerLink]="['/im-employee', imTimesheet.imEmployee?.id, 'view']">{{imTimesheet.imEmployee?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="App.imTimesheet.imProjects">Im Projects</span></dt>
+                <dd>
+                    <div *ngIf="imTimesheet.imProjects">
+                        <a [routerLink]="['/im-projects', imTimesheet.imProjects?.id, 'view']">{{imTimesheet.imProjects?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/im-timesheet', imTimesheet.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

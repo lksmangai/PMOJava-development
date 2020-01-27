@@ -1,10 +1,11 @@
 package com.qnowapp.web.rest;
 
 import com.qnowapp.domain.StateMaster;
-
 import com.qnowapp.service.StateMasterService;
 import com.qnowapp.web.rest.errors.BadRequestAlertException;
 import com.qnowapp.service.dto.StateMasterCriteria;
+import com.qnowapp.service.StateMasterQueryService;
+
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -36,11 +37,11 @@ public class StateMasterResource {
 
     private final StateMasterService stateMasterService;
 
-    
+    private final StateMasterQueryService stateMasterQueryService;
 
-    public StateMasterResource(StateMasterService stateMasterService) {
+    public StateMasterResource(StateMasterService stateMasterService, StateMasterQueryService stateMasterQueryService) {
         this.stateMasterService = stateMasterService;
-     
+        this.stateMasterQueryService = stateMasterQueryService;
     }
 
     /**
@@ -93,13 +94,24 @@ public class StateMasterResource {
      */
     @CrossOrigin
     @GetMapping("/state-masters")
-    public ResponseEntity<List<StateMaster>> getAllStateMasters( ) {
-        log.debug("REST request to get StateMasters by criteria: {}");
-        List<StateMaster> entityList = stateMasterService.findAll();
+    public ResponseEntity<List<StateMaster>> getAllStateMasters(StateMasterCriteria criteria) {
+        log.debug("REST request to get StateMasters by criteria: {}", criteria);
+        List<StateMaster> entityList = stateMasterQueryService.findByCriteria(criteria);
         return ResponseEntity.ok().body(entityList);
     }
 
-
+    /**
+    * {@code GET  /state-masters/count} : count all the stateMasters.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping("/state-masters/count")
+    public ResponseEntity<Long> countStateMasters(StateMasterCriteria criteria) {
+        log.debug("REST request to count StateMasters by criteria: {}", criteria);
+        return ResponseEntity.ok().body(stateMasterQueryService.countByCriteria(criteria));
+    }
 
     /**
      * {@code GET  /state-masters/:id} : get the "id" stateMaster.

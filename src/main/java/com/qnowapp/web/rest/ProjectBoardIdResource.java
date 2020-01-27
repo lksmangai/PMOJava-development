@@ -1,10 +1,10 @@
 package com.qnowapp.web.rest;
 
 import com.qnowapp.domain.ProjectBoardId;
-
 import com.qnowapp.service.ProjectBoardIdService;
 import com.qnowapp.web.rest.errors.BadRequestAlertException;
 import com.qnowapp.service.dto.ProjectBoardIdCriteria;
+import com.qnowapp.service.ProjectBoardIdQueryService;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -37,11 +37,11 @@ public class ProjectBoardIdResource {
 
     private final ProjectBoardIdService projectBoardIdService;
 
+    private final ProjectBoardIdQueryService projectBoardIdQueryService;
 
-
-    public ProjectBoardIdResource(ProjectBoardIdService projectBoardIdService) {
+    public ProjectBoardIdResource(ProjectBoardIdService projectBoardIdService, ProjectBoardIdQueryService projectBoardIdQueryService) {
         this.projectBoardIdService = projectBoardIdService;
-
+        this.projectBoardIdQueryService = projectBoardIdQueryService;
     }
 
     /**
@@ -94,12 +94,24 @@ public class ProjectBoardIdResource {
      */
     @CrossOrigin
     @GetMapping("/project-board-ids")
-    public ResponseEntity<List<ProjectBoardId>> getAllProjectBoardIds( ) {
-        log.debug("REST request to get ProjectBoardIds by criteria: {}");
-        List<ProjectBoardId> entityList = projectBoardIdService.findAll();
+    public ResponseEntity<List<ProjectBoardId>> getAllProjectBoardIds(ProjectBoardIdCriteria criteria) {
+        log.debug("REST request to get ProjectBoardIds by criteria: {}", criteria);
+        List<ProjectBoardId> entityList = projectBoardIdQueryService.findByCriteria(criteria);
         return ResponseEntity.ok().body(entityList);
     }
 
+    /**
+    * {@code GET  /project-board-ids/count} : count all the projectBoardIds.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping("/project-board-ids/count")
+    public ResponseEntity<Long> countProjectBoardIds(ProjectBoardIdCriteria criteria) {
+        log.debug("REST request to count ProjectBoardIds by criteria: {}", criteria);
+        return ResponseEntity.ok().body(projectBoardIdQueryService.countByCriteria(criteria));
+    }
 
     /**
      * {@code GET  /project-board-ids/:id} : get the "id" projectBoardId.

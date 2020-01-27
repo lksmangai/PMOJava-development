@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProjectAllocationResource.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Qnow 1</a> &gt; <a href="index.source.html" class="el_package">com.qnowapp.web.rest</a> &gt; <span class="el_source">ProjectAllocationResource.java</span></div><h1>ProjectAllocationResource.java</h1><pre class="source lang-java linenums">package com.qnowapp.web.rest;
+
+import com.qnowapp.domain.ImEmployee;
+import com.qnowapp.domain.ImProjects;
+import com.qnowapp.domain.ProjectAllocation;
+import com.qnowapp.domain.ProjectClass;
+import com.qnowapp.domain.ProjectRoles;
+import com.qnowapp.domain.QnowUser;
+import com.qnowapp.domain.User;
+import com.qnowapp.repository.ImEmployeeRepository;
+import com.qnowapp.repository.ImProjectsRepository;
+import com.qnowapp.repository.ProjectAllocationRepository;
+import com.qnowapp.repository.ProjectRolesRepository;
+
+import com.qnowapp.service.ProjectAllocationQueryService;
+import com.qnowapp.service.ProjectAllocationService;
+import com.qnowapp.service.dto.ProjectAllocationCriteria;
+
+import com.qnowapp.web.rest.errors.BadRequestAlertException;
+
+import io.github.jhipster.web.util.HeaderUtil;
+import io.github.jhipster.web.util.ResponseUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.lang.reflect.Array;
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * REST controller for managing {@link com.qnowapp.domain.ProjectAllocation}.
+ */
+@CrossOrigin(origins = &quot;*&quot;, allowedHeaders = &quot;*&quot;)
+@RestController
+@RequestMapping(&quot;/api&quot;)
+public class ProjectAllocationResource {
+
+  
+<span class="nc" id="L48">    private final Logger log = LoggerFactory.getLogger(ProjectAllocationResource.class);</span>
+
+    private static final String ENTITY_NAME = &quot;projectAllocation&quot;;
+
+    @Value(&quot;${jhipster.clientApp.name}&quot;)
+    private String applicationName;
+
+  
+<span class="nc" id="L56">    private static Boolean fromTesting = true;</span>
+    
+    
+    @Autowired
+    ImEmployeeRepository imEmployeeRepository;
+    
+    
+    @Autowired
+    ImProjectsRepository imProjectsRepository;
+    
+    @Autowired
+    ProjectRolesRepository projectRolesRepository;
+    
+    @Autowired
+    ProjectAllocationRepository projectAllocationRepository ;
+    
+<span class="nc" id="L72">    ImEmployee imEmployee = new ImEmployee();</span>
+
+<span class="nc" id="L74">    ImProjects imProjects = new ImProjects();</span>
+    
+<span class="nc" id="L76">    ProjectRoles projectRoles = new ProjectRoles();</span>
+    
+    private final ProjectAllocationService projectAllocationService;
+
+    private final ProjectAllocationQueryService projectAllocationQueryService;
+
+<span class="nc" id="L82">    public ProjectAllocationResource(ProjectAllocationService projectAllocationService, ProjectAllocationQueryService projectAllocationQueryService) {</span>
+<span class="nc" id="L83">        this.projectAllocationService = projectAllocationService;</span>
+<span class="nc" id="L84">        this.projectAllocationQueryService = projectAllocationQueryService;</span>
+      
+<span class="nc" id="L86">    }</span>
+    
+
+
+    /**
+     * {@code POST  /project-allocations} : Create a new projectAllocation.
+     *
+     * @param projectAllocation the projectAllocation to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
+     *         body the new projectAllocation, or with status
+     *         {@code 400 (Bad Request)} if the projectAllocation has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    public String removeDoubleQuotes(String MyEmail) {
+<span class="nc bnc" id="L100" title="All 2 branches missed.">        if (MyEmail == null) {</span>
+<span class="nc" id="L101">            return null;</span>
+
+        }
+<span class="nc bnc" id="L104" title="All 2 branches missed.">        if (MyEmail.equals(&quot;&quot;)) {</span>
+<span class="nc" id="L105">            System.out.println(MyEmail);</span>
+<span class="nc" id="L106">            return MyEmail;</span>
+
+        }
+<span class="nc" id="L109">        String doubleQuote = &quot;\&quot;\&quot;&quot;;</span>
+<span class="nc bnc" id="L110" title="All 2 branches missed.">        if (MyEmail.substring(0, 2).equals(doubleQuote)) {</span>
+<span class="nc" id="L111">            MyEmail = MyEmail.substring(2, MyEmail.length());</span>
+        }
+
+<span class="nc bnc" id="L114" title="All 2 branches missed.">        if (MyEmail.substring(MyEmail.length() - 2, MyEmail.length()).equals(doubleQuote)) {</span>
+
+<span class="nc" id="L116">            MyEmail = MyEmail.substring(0, MyEmail.length() - 2);</span>
+
+        }
+<span class="nc" id="L119">        return MyEmail;</span>
+    }
+
+    public String removeQuotes(String MyEmail) {
+<span class="nc bnc" id="L123" title="All 2 branches missed.">        if (MyEmail == null) {</span>
+<span class="nc" id="L124">            return null;</span>
+
+        }
+<span class="nc bnc" id="L127" title="All 2 branches missed.">        if (MyEmail.equals(&quot;&quot;)) {</span>
+<span class="nc" id="L128">            System.out.println(MyEmail);</span>
+<span class="nc" id="L129">            return MyEmail;</span>
+
+        }
+<span class="nc" id="L132">        String doubleQuote = &quot;\&quot;{&quot;;</span>
+<span class="nc bnc" id="L133" title="All 2 branches missed.">        if (MyEmail.substring(0, 2).equals(doubleQuote)) {</span>
+<span class="nc" id="L134">            MyEmail = MyEmail.substring(2, MyEmail.length());</span>
+        }
+<span class="nc" id="L136">        String doubleQuote1 = &quot;}\&quot;&quot;;</span>
+<span class="nc bnc" id="L137" title="All 2 branches missed.">        if (MyEmail.substring(MyEmail.length() - 2, MyEmail.length()).equals(doubleQuote1)) {</span>
+
+<span class="nc" id="L139">            MyEmail = MyEmail.substring(0, MyEmail.length() - 2);</span>
+
+        }
+<span class="nc" id="L142">        return MyEmail;</span>
+    }
+
+    public String removeComma(String MyEmail) {
+<span class="nc bnc" id="L146" title="All 2 branches missed.">        if (MyEmail == null) {</span>
+<span class="nc" id="L147">            return null;</span>
+
+        }
+<span class="nc bnc" id="L150" title="All 2 branches missed.">        if (MyEmail.equals(&quot;&quot;)) {</span>
+<span class="nc" id="L151">            System.out.println(MyEmail);</span>
+<span class="nc" id="L152">            return MyEmail;</span>
+
+        }
+<span class="nc" id="L155">        String doubleQuote = &quot;,&quot;;</span>
+<span class="nc bnc" id="L156" title="All 2 branches missed.">        if (MyEmail.substring(0, 1).equals(doubleQuote)) {</span>
+<span class="nc" id="L157">            MyEmail = MyEmail.substring(1, MyEmail.length());</span>
+        }
+
+<span class="nc bnc" id="L160" title="All 2 branches missed.">        if (MyEmail.substring(MyEmail.length() - 1, MyEmail.length()).equals(doubleQuote)) {</span>
+
+<span class="nc" id="L162">            MyEmail = MyEmail.substring(0, MyEmail.length() - 1);</span>
+
+        }
+<span class="nc" id="L165">        return MyEmail;</span>
+    }
+
+    public Double convertToDouble(String integer) {
+
+<span class="nc bnc" id="L170" title="All 4 branches missed.">        if (integer.equals(&quot;&quot;) || integer == null) {</span>
+<span class="nc" id="L171">            return new Double(0);</span>
+        } else {
+            try {
+<span class="nc" id="L174">                Float fl = Float.parseFloat(integer);</span>
+
+<span class="nc" id="L176">                return new Double(fl);</span>
+<span class="nc" id="L177">            } catch (Exception e) {</span>
+<span class="nc" id="L178">                System.out.println(e);</span>
+            }
+
+        }
+<span class="nc" id="L182">        return new Double(0);</span>
+
+    }
+
+    @CrossOrigin
+    @PostMapping(&quot;/project-allocations&quot;)
+    public ResponseEntity&lt;ProjectAllocation&gt; createProjectAllocation(@RequestBody ProjectAllocation projectAllocation)
+            throws URISyntaxException {
+<span class="nc" id="L190">        log.debug(&quot;REST request to save ProjectAllocation : {}&quot;, projectAllocation);</span>
+<span class="nc bnc" id="L191" title="All 2 branches missed.">        if (projectAllocation.getId() != null) {</span>
+<span class="nc" id="L192">            throw new BadRequestAlertException(&quot;A new projectAllocation cannot already have an ID&quot;, ENTITY_NAME,</span>
+                    &quot;idexists&quot;);
+        } else {
+<span class="nc" id="L195">            ProjectAllocation result = projectAllocationRepository.save(projectAllocation);</span>
+<span class="nc" id="L196">            ResponseEntity&lt;ProjectAllocation&gt; a = ResponseEntity</span>
+<span class="nc" id="L197">                    .created(new URI(&quot;/api/project-initiative-ids/&quot; + result.getId())).headers(HeaderUtil</span>
+<span class="nc" id="L198">                            .createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))</span>
+<span class="nc" id="L199">                    .body(result);</span>
+
+<span class="nc bnc" id="L201" title="All 2 branches missed.">            if (fromTesting == false) {</span>
+                
+<span class="nc" id="L203">                List&lt;ImEmployee&gt; myEmployee = imEmployeeRepository.findAll();</span>
+<span class="nc" id="L204">                List&lt;ImProjects&gt; myProject = imProjectsRepository.findAll();</span>
+<span class="nc" id="L205">                List&lt;ProjectRoles&gt; myRoles = projectRolesRepository.findAll();</span>
+                
+<span class="nc" id="L207">                System.out.println(projectAllocation.getId());</span>
+<span class="nc" id="L208">                String csvFile1 = &quot;src\\main\\resources\\pmqprojects.csv&quot;;</span>
+<span class="nc" id="L209">                BufferedReader br = null;</span>
+<span class="nc" id="L210">                String line = &quot;&quot;;</span>
+<span class="nc" id="L211">                String cvsSplitBy = &quot;;&quot;;</span>
+
+                try {
+<span class="nc" id="L214">                    br = new BufferedReader(new FileReader(csvFile1));</span>
+<span class="nc" id="L215">                    int count = 0;</span>
+<span class="nc bnc" id="L216" title="All 2 branches missed.">                    while ((line = br.readLine()) != null) {</span>
+<span class="nc" id="L217">                        count++;</span>
+<span class="nc" id="L218">                        System.out.println(+count);</span>
+<span class="nc bnc" id="L219" title="All 2 branches missed.">                        if (count == 1)</span>
+<span class="nc" id="L220">                            continue;</span>
+                        //line = line + &quot;;test&quot;;
+<span class="nc" id="L222">                        String[] country = line.split(cvsSplitBy);</span>
+
+                        
+
+                        try {
+<span class="nc bnc" id="L227" title="All 2 branches missed.">                            if (country.length &gt; 117) {</span>
+<span class="nc" id="L228">                                String country1 = removeQuotes(country[116]);</span>
+<span class="nc" id="L229">                                String country2 =country1.replace(&quot;\&quot;&quot;,&quot;&quot;);</span>
+<span class="nc" id="L230">                                String country3 =country2.replace(&quot;{&quot;,&quot;&quot;);</span>
+<span class="nc" id="L231">                                String country4 = country3.replace(&quot;}&quot;,&quot;&quot;);</span>
+<span class="nc" id="L232">                                System.out.println(country4 + &quot;country1&quot;);</span>
+                                String[] tempArray;
+<span class="nc" id="L234">                                String delimiter = &quot;,&quot;;</span>
+                                //country1 = country1 + &quot;,test1&quot;;
+                                
+<span class="nc" id="L237">                                System.out.println(&quot;country1 222&quot; + country4);</span>
+<span class="nc" id="L238">                                tempArray =country4.split(delimiter);</span>
+<span class="nc" id="L239">                                System.out.println(&quot;country1 224&quot; + country4);</span>
+<span class="nc bnc" id="L240" title="All 2 branches missed.">                                for (int i = 0; i &lt; tempArray.length; i++)</span>
+
+                                {
+<span class="nc" id="L243">                                    String delimiter1 = &quot;#&quot;;</span>
+                                    
+<span class="nc" id="L245">                                    String str = removeDoubleQuotes(tempArray[i]);</span>
+                                    //String str = st.toString();
+                                    //str = str + &quot;#test&quot;;
+<span class="nc" id="L248">                                    String[] allocation = str.split(delimiter1);</span>
+<span class="nc bnc" id="L249" title="All 2 branches missed.">                                    if(allocation.length &gt; 3) {</span>
+<span class="nc" id="L250">                                        System.out.println(allocation[0]);</span>
+<span class="nc" id="L251">                                        System.out.println(allocation[1]);</span>
+<span class="nc" id="L252">                                        System.out.println(allocation[2]);</span>
+<span class="nc" id="L253">                                        System.out.println(allocation[3]);</span>
+<span class="nc" id="L254">                                        System.out.println(country[4] + &quot; ImProject&quot;);</span>
+
+                                            try {
+                                                 
+<span class="nc" id="L258">                                                    System.out.println(&quot;1&quot;);</span>
+                                                    
+<span class="nc" id="L260">                                                    Boolean founda = false;</span>
+<span class="nc" id="L261">                                                    System.out.println(&quot;2&quot;);</span>
+<span class="nc" id="L262">                                                    String Employee = allocation[0];</span>
+<span class="nc" id="L263">                                                    System.out.println(&quot;3&quot; + Employee);</span>
+<span class="nc" id="L264">                                                    projectAllocation.setImEmployee(null);</span>
+<span class="nc" id="L265">                                                    System.out.println(&quot;4&quot;);</span>
+<span class="nc bnc" id="L266" title="All 4 branches missed.">                                                    if (Employee.equals(&quot;&quot;) == false &amp;&amp; Employee != null) {</span>
+<span class="nc" id="L267">                                                        System.out.println(&quot;5&quot;);</span>
+<span class="nc" id="L268">                                                        myEmployee.forEach(item -&gt; {</span>
+<span class="nc" id="L269">                                                            System.out.println(&quot;6&quot;);</span>
+<span class="nc" id="L270">                                                            QnowUser QuserHere = item.getQnowUser();</span>
+<span class="nc" id="L271">                                                            System.out.println(&quot;7&quot;);</span>
+<span class="nc bnc" id="L272" title="All 2 branches missed.">                                                            if (QuserHere != null) {</span>
+<span class="nc" id="L273">                                                                System.out.println(&quot;8&quot;);</span>
+<span class="nc" id="L274">                                                                User userHere = QuserHere.getUser();</span>
+<span class="nc" id="L275">                                                                System.out.println(&quot;9&quot;);</span>
+<span class="nc bnc" id="L276" title="All 2 branches missed.">                                                                if (userHere != null) {</span>
+<span class="nc" id="L277">                                                                    System.out.println(&quot;10&quot;);</span>
+<span class="nc" id="L278">                                                                    String myEmailHere = userHere.getEmail();</span>
+<span class="nc" id="L279">                                                                    System.out.println(&quot;11&quot;);</span>
+<span class="nc bnc" id="L280" title="All 2 branches missed.">                                                                    if (myEmailHere.equals(Employee)) {</span>
+<span class="nc" id="L281">                                                                        System.out.println(&quot;12&quot;);</span>
+<span class="nc" id="L282">                                                                        projectAllocation.setImEmployee(item);</span>
+<span class="nc" id="L283">                                                                        System.out.println(&quot;13&quot;);</span>
+                                                                    }
+                                                                }
+                                                            }
+
+<span class="nc" id="L288">                                                        });</span>
+                                                    }
+                                                    
+                                                    
+<span class="nc" id="L292">                                                    Boolean found1 = false;</span>
+<span class="nc" id="L293">                                                    String Project = country[4];</span>
+<span class="nc" id="L294">                                                    projectAllocation.setImProjects(null);</span>
+<span class="nc bnc" id="L295" title="All 4 branches missed.">                                                    if (Project.equals(&quot;&quot;) == false &amp;&amp; Project != null) {</span>
+<span class="nc" id="L296">                                                        myProject.forEach(item -&gt; {</span>
+<span class="nc" id="L297">                                                            String myPath = item.getProjectPath();</span>
+<span class="nc bnc" id="L298" title="All 2 branches missed.">                                                            if (myPath.equals(Project)) {</span>
+<span class="nc" id="L299">                                                                System.out.println(&quot;14&quot;);</span>
+<span class="nc" id="L300">                                                                projectAllocation.setImProjects(item); </span>
+
+                                                            }
+
+<span class="nc" id="L304">                                                        });</span>
+                                                    }
+
+                                                    
+<span class="nc" id="L308">                                                    Boolean found2 = false;</span>
+<span class="nc" id="L309">                                                    String Roles = allocation[1];</span>
+<span class="nc" id="L310">                                                    projectAllocation.setProjectRoles(null);</span>
+<span class="nc bnc" id="L311" title="All 4 branches missed.">                                                    if (Roles.equals(&quot;&quot;) == false &amp;&amp; Roles != null) {</span>
+<span class="nc" id="L312">                                                        myRoles.forEach(item -&gt; {</span>
+<span class="nc" id="L313">                                                            String myPath = item.getCode();</span>
+<span class="nc bnc" id="L314" title="All 2 branches missed.">                                                            if (myPath.equals(Roles)) {</span>
+<span class="nc" id="L315">                                                                System.out.println(&quot;15&quot;);</span>
+<span class="nc" id="L316">                                                                projectAllocation.setProjectRoles(item); // 93</span>
+
+                                                            }
+
+<span class="nc" id="L320">                                                        });</span>
+                                                    }
+<span class="nc" id="L322">                                                    System.out.println(&quot;16&quot;);</span>
+<span class="nc" id="L323">                                                    projectAllocation.setPercentage(convertToDouble(allocation[3]));</span>
+                                                    
+<span class="nc" id="L325">                                                    System.out.println(&quot;17&quot;);</span>
+<span class="nc" id="L326">                                                    projectAllocation.setId(null);</span>
+<span class="nc" id="L327">                                                    ProjectAllocation result2 = projectAllocationRepository.save(projectAllocation);</span>
+<span class="nc" id="L328">                                                    System.out.println(&quot;18&quot;);</span>
+<span class="nc" id="L329">                                                    System.out.println(result2.getId());</span>
+<span class="nc" id="L330">                                                    System.out.println(projectAllocation + &quot;new project created&quot;);</span>
+                                                
+<span class="nc" id="L332">                                            } catch (Exception e) {</span>
+<span class="nc" id="L333">                                                System.out.println(e + &quot; e1 &quot; + count + &quot; &quot; + line);</span>
+<span class="nc" id="L334">                                                return a;</span>
+                                                
+<span class="nc" id="L336">                                            }</span>
+                                    
+                                        
+                                    }
+                                    
+                                }
+<span class="nc" id="L342">                                System.out.println(&quot;country1 324&quot; + country1);</span>
+                                }
+
+                                
+
+                            
+<span class="nc" id="L348">                        } catch (Exception e) {</span>
+<span class="nc" id="L349">                            System.out.println(e + &quot; e2 &quot; + count + &quot; &quot; + line);</span>
+<span class="nc" id="L350">                            return a;</span>
+<span class="nc" id="L351">                        }</span>
+<span class="nc" id="L352">                    }</span>
+<span class="nc" id="L353">                } catch (Exception e) {</span>
+<span class="nc" id="L354">                    System.out.println(e + &quot; e3  &quot;+ line);</span>
+<span class="nc" id="L355">                    return a;</span>
+                    // TODO: handle exception
+                } finally {
+<span class="nc bnc" id="L358" title="All 2 branches missed.">                    if (br != null) {</span>
+                        try {
+<span class="nc" id="L360">                            br.close();</span>
+<span class="nc" id="L361">                        } catch (Exception e) {</span>
+<span class="nc" id="L362">                            System.out.println(e);</span>
+<span class="nc" id="L363">                        }</span>
+
+                    }
+                }
+            }
+<span class="nc" id="L368">            return a;</span>
+        }
+    }
+    /**
+     * {@code PUT  /project-allocations} : Updates an existing projectAllocation.
+     *
+     * @param projectAllocation the projectAllocation to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated projectAllocation,
+     * or with status {@code 400 (Bad Request)} if the projectAllocation is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the projectAllocation couldn't be updated.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @CrossOrigin
+    @PutMapping(&quot;/project-allocations&quot;)
+    public ResponseEntity&lt;ProjectAllocation&gt; updateProjectAllocation(@RequestBody ProjectAllocation projectAllocation) throws URISyntaxException {
+<span class="nc" id="L383">        log.debug(&quot;REST request to update ProjectAllocation : {}&quot;, projectAllocation);</span>
+<span class="nc bnc" id="L384" title="All 2 branches missed.">        if (projectAllocation.getId() == null) {</span>
+<span class="nc" id="L385">            throw new BadRequestAlertException(&quot;Invalid id&quot;, ENTITY_NAME, &quot;idnull&quot;);</span>
+        }
+<span class="nc" id="L387">        ProjectAllocation result = projectAllocationService.save(projectAllocation);</span>
+<span class="nc" id="L388">        return ResponseEntity.ok()</span>
+<span class="nc" id="L389">            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, projectAllocation.getId().toString()))</span>
+<span class="nc" id="L390">            .body(result);</span>
+    }
+
+    /**
+     * {@code GET  /project-allocations} : get all the projectAllocations.
+     *
+     * @param criteria the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of projectAllocations in body.
+     */
+    @CrossOrigin
+    @GetMapping(&quot;/project-allocations&quot;)
+    public ResponseEntity&lt;List&lt;ProjectAllocation&gt;&gt; getAllProjectAllocations(ProjectAllocationCriteria criteria) {
+<span class="nc" id="L402">        log.debug(&quot;REST request to get ProjectAllocations by criteria: {}&quot;, criteria);</span>
+<span class="nc" id="L403">        List&lt;ProjectAllocation&gt; entityList = projectAllocationQueryService.findByCriteria(criteria);</span>
+<span class="nc" id="L404">        return ResponseEntity.ok().body(entityList);</span>
+    }
+
+    /**
+    * {@code GET  /project-allocations/count} : count all the projectAllocations.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping(&quot;/project-allocations/count&quot;)
+    public ResponseEntity&lt;Long&gt; countProjectAllocations(ProjectAllocationCriteria criteria) {
+<span class="nc" id="L416">        log.debug(&quot;REST request to count ProjectAllocations by criteria: {}&quot;, criteria);</span>
+<span class="nc" id="L417">        return ResponseEntity.ok().body(projectAllocationQueryService.countByCriteria(criteria));</span>
+    }
+
+    /**
+     * {@code GET  /project-allocations/:id} : get the &quot;id&quot; projectAllocation.
+     *
+     * @param id the id of the projectAllocation to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the projectAllocation, or with status {@code 404 (Not Found)}.
+     */
+    @CrossOrigin
+    @GetMapping(&quot;/project-allocations/{id}&quot;)
+    public ResponseEntity&lt;ProjectAllocation&gt; getProjectAllocation(@PathVariable Long id) {
+<span class="nc" id="L429">        log.debug(&quot;REST request to get ProjectAllocation : {}&quot;, id);</span>
+<span class="nc" id="L430">        Optional&lt;ProjectAllocation&gt; projectAllocation = projectAllocationService.findOne(id);</span>
+<span class="nc" id="L431">        return ResponseUtil.wrapOrNotFound(projectAllocation);</span>
+    }
+
+    /**
+     * {@code DELETE  /project-allocations/:id} : delete the &quot;id&quot; projectAllocation.
+     *
+     * @param id the id of the projectAllocation to delete.
+     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
+     */
+    @CrossOrigin
+    @DeleteMapping(&quot;/project-allocations/{id}&quot;)
+    public ResponseEntity&lt;Void&gt; deleteProjectAllocation(@PathVariable Long id) {
+<span class="nc" id="L443">        log.debug(&quot;REST request to delete ProjectAllocation : {}&quot;, id);</span>
+<span class="nc" id="L444">        projectAllocationService.delete(id);</span>
+<span class="nc" id="L445">        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();</span>
+    }
+}
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

@@ -1,8 +1,6 @@
 package com.qnowapp.web.rest;
 
 
-import com.qnowapp.domain.Blank;
-
 import com.qnowapp.domain.ImEmployee;
 import com.qnowapp.domain.ImProjects;
 import com.qnowapp.domain.ImTimesheet;
@@ -12,7 +10,7 @@ import com.qnowapp.domain.User;
 import com.qnowapp.repository.ImEmployeeRepository;
 import com.qnowapp.repository.ImProjectsRepository;
 import com.qnowapp.repository.ImTimesheetRepository;
-
+import com.qnowapp.service.ImTimesheetQueryService;
 import com.qnowapp.service.ImTimesheetService;
 import com.qnowapp.service.dto.ImTimesheetCriteria;
 import com.qnowapp.web.rest.errors.BadRequestAlertException;
@@ -51,7 +49,7 @@ public class ImTimesheetResource {
 
     private static final String ENTITY_NAME = "imTimesheet";
     
-    private static Boolean fromTesting = false;
+    private static Boolean fromTesting = true;
     
     @Autowired
     ImEmployeeRepository imEmployeeRepository;
@@ -74,10 +72,11 @@ public class ImTimesheetResource {
 
     private final ImTimesheetService imTimesheetService;
 
-    public ImTimesheetResource( ImTimesheetService imTimesheetService) {
+    private final ImTimesheetQueryService imTimesheetQueryService;
+    public ImTimesheetResource( ImTimesheetService imTimesheetService, ImTimesheetQueryService imTimesheetQueryService) {
       
         this.imTimesheetService = imTimesheetService;
-        
+        this.imTimesheetQueryService = imTimesheetQueryService;
     }
     
     public static void setFromTesting(Boolean bState) {
@@ -90,7 +89,7 @@ public class ImTimesheetResource {
 
         }
         if (MyEmail.equals("")) {
-           
+            System.out.println(MyEmail);
             return MyEmail;
 
         }
@@ -117,7 +116,7 @@ public class ImTimesheetResource {
 
                 return new Double(fl);
             } catch (Exception e) {
-               
+                System.out.println(e);
             }
 
         }
@@ -136,7 +135,7 @@ public class ImTimesheetResource {
                 ZonedDateTime resultado = ZonedDateTime.ofLocal(mydate, ZoneOffset.UTC, null);
                 return resultado;
             } catch (Exception e) {
-            	System.out.println(e);
+                System.out.println(e);
             }
 
         }
@@ -150,28 +149,18 @@ public class ImTimesheetResource {
      * LocalDateTime.parse(a.substring(0, 19), formatter1); ZonedDateTime resultado
      * = ZonedDateTime.ofLocal(mydate, ZoneOffset.UTC, null);
      */
+    
     @CrossOrigin
     @PostMapping("/im-timesheets")
     public ResponseEntity<ImTimesheet> createImTimesheet(@Valid @RequestBody ImTimesheet imTimesheet) throws URISyntaxException {
         log.debug("REST request to save ImTimesheet : {}", imTimesheet);
         if (imTimesheet.getId() != null) {
             throw new BadRequestAlertException("A new imTimesheet cannot already have an ID", ENTITY_NAME, "idexists");
-        }
-        ImTimesheet result = imTimesheetService.save(imTimesheet);
-        return ResponseEntity.created(new URI("/api/im-timesheets/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-            .body(result);
-    }
-    @CrossOrigin
-    @PostMapping("/im-timesheetscsv")
-    public ResponseEntity<ImTimesheet> createImTimesheetcsv(@Valid @RequestBody Blank blank) throws URISyntaxException {
-    
-            ImTimesheet result = new ImTimesheet();
-            long a=new Long(1);
-            result.setId(a);
-            ImTimesheet imTimesheet = new ImTimesheet();
+        }else {
+
+            ImTimesheet result = imTimesheetRepository.save(imTimesheet);
             ResponseEntity<ImTimesheet> returnObj = ResponseEntity
-                    .created(new URI("/api/im-timesheetscsv/" + result.getId())).headers(HeaderUtil
+                    .created(new URI("/api/im-projects/" + result.getId())).headers(HeaderUtil
                             .createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
                     .body(result);
             if (fromTesting == false) {
@@ -181,7 +170,7 @@ public class ImTimesheetResource {
                 
                 
                 
-                String csvFile1 = "F:\\PMO1\\src\\main\\resources\\pmqtimesheet06Jul2019.csv";
+                String csvFile1 = "src\\main\\resources\\pmqtimesheet.csv";
                 BufferedReader br = null;
                 String line = "";
                 String cvsSplitBy = ";";
@@ -191,47 +180,50 @@ public class ImTimesheetResource {
                     int count = 0;
                     while ((line = br.readLine()) != null) {
                         count++;
-                       
+                        System.out.println("hiii111111  " + count);
                         if (count == 1)
                             continue;
                         line = line + ";test";
                         String[] country = line.split(cvsSplitBy);
-                       
+                        System.out.println(line);
+                        //System.out.println(country.length);
                         try {
                             if (country.length >= 4) {
-                              
+                                System.out.println("1");
                                 imTimesheet.setId(null);
-                               
+                                
+                                System.out.println("country[3]) " + country[3]);
                                 imTimesheet.setLoghours(convertToDouble(removeQuotes(country[3])));
-                             
+                                System.out.println("country[3]) " + country[2]);
                                 imTimesheet.setLogdate(convertToZonedDateTime(country[2]));
-                              
+                                System.out.println("country[3]) " + country[4]);
                                 imTimesheet.setNotes(removeQuotes(country[4]));
-                              
+                                
+
                                 Boolean founda = false;
-                                
+                                System.out.println("2");
                                 String Employee = removeQuotes(country[0]);
-                                
+                                System.out.println("3" + Employee);
                                 imTimesheet.setImEmployee(null);
-                               
+                                System.out.println("4");
                                 if (Employee.equals("") == false && Employee != null) {
-                                   
+                                    System.out.println("5");
                                     myEmployee.forEach(item -> {
-                                       
+                                        System.out.println("6");
                                         QnowUser QuserHere = item.getQnowUser();
-                                      
+                                        System.out.println("7");
                                         if (QuserHere != null) {
-                                            
+                                            System.out.println("8");
                                             User userHere = QuserHere.getUser();
-                                           
+                                            System.out.println("9");
                                             if (userHere != null) {
-                                               
+                                                System.out.println("10");
                                                 String myEmailHere = userHere.getEmail();
-                                                
+                                                System.out.println("11");
                                                 if (myEmailHere.equals(Employee)) {
-                                                   
+                                                    System.out.println("12");
                                                     imTimesheet.setImEmployee(item);
-                                                    
+                                                    System.out.println("13");
                                                 }
                                             }
                                         }
@@ -247,7 +239,7 @@ public class ImTimesheetResource {
                                     myProject.forEach(item -> {
                                         String myPath = item.getProjectPath();
                                         if (myPath.equals(Project)) {
-                                            
+                                            System.out.println("14");
                                             imTimesheet.setImProjects(item); 
 
                                         }
@@ -255,25 +247,28 @@ public class ImTimesheetResource {
                                     });
                                 }
                                 }
-                           
+                            System.out.println("17");
                             imTimesheet.setId(null);
                             ImTimesheet result2 =imTimesheetRepository.save(imTimesheet);
-                           
+                            System.out.println("18");
+                            System.out.println(result2.getId());
+                            System.out.println(imTimesheet + "new project created");
+                            
                         } catch (Exception e) {
-                        	System.out.println(e + "e3");
+                            System.out.println(e + "e3");
                             return returnObj;
                         }
                     }
                 
                 } catch (Exception e) {
-                	System.out.println(e + "e2");
+                    System.out.println(e + "e2");
                     return returnObj;
                 } finally {
                     if (br != null) {
                         try {
                             br.close();
                         } catch (Exception e) {
-                        	System.out.println(e + "e1");
+                            System.out.println(e + "e1");
                         }
                     }
                 }
@@ -284,7 +279,7 @@ public class ImTimesheetResource {
 
         }
 
-    
+    }
 
     /**
      * {@code PUT  /im-timesheets} : Updates an existing imTimesheet.
@@ -316,13 +311,24 @@ public class ImTimesheetResource {
      */
     @CrossOrigin
     @GetMapping("/im-timesheets")
-    public ResponseEntity<List<ImTimesheet>> getAllImTimesheets( ) {
-        log.debug("REST request to get ImTimesheets by criteria: {}");
-        List<ImTimesheet> entityList = imTimesheetService.findAll();
+    public ResponseEntity<List<ImTimesheet>> getAllImTimesheets(ImTimesheetCriteria criteria) {
+        log.debug("REST request to get ImTimesheets by criteria: {}", criteria);
+        List<ImTimesheet> entityList = imTimesheetQueryService.findByCriteria(criteria);
         return ResponseEntity.ok().body(entityList);
     }
 
-
+    /**
+    * {@code GET  /im-timesheets/count} : count all the imTimesheets.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping("/im-timesheets/count")
+    public ResponseEntity<Long> countImTimesheets(ImTimesheetCriteria criteria) {
+        log.debug("REST request to count ImTimesheets by criteria: {}", criteria);
+        return ResponseEntity.ok().body(imTimesheetQueryService.countByCriteria(criteria));
+    }
 
     /**
      * {@code GET  /im-timesheets/:id} : get the "id" imTimesheet.

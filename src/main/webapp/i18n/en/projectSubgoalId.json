@@ -1,0 +1,23 @@
+{
+  "App": {
+    "projectSubgoalId": {
+      "home": {
+        "title": "Project Subgoal Ids",
+        "createLabel": "Create a new Project Subgoal Id",
+        "createOrEditLabel": "Create or edit a Project Subgoal Id"
+      },
+      "created": "A new Project Subgoal Id is created with identifier {{ param }}",
+      "updated": "A Project Subgoal Id is updated with identifier {{ param }}",
+      "deleted": "A Project Subgoal Id is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Project Subgoal Id {{ id }}?"
+      },
+      "detail": {
+        "title": "Project Subgoal Id"
+      },
+      "code": "Code",
+      "name": "Name",
+      "description": "Description"
+    }
+  }
+}

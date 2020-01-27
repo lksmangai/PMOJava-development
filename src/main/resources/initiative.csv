@@ -1,0 +1,26 @@
+category_id;category;description;category_type;category_gif;enabled_p;parent_only_p;aux_int1;aux_int2;aux_string1;aux_string2;sort_order;visible_tcl
+88333;Customer Satisfaction;Customer Satisfaction;Initiative;category;t;f;;;;;0;
+88328;Cloud;Cloud;Initiative;category;t;f;;;;;0;
+88329;Compliance;Compliance;Initiative;category;t;f;;;;;0;
+88330;Cost ;Cost ;Initiative;category;t;f;;;;;0;
+88334;Interface;Interface;Initiative;category;t;f;;;;;0;
+88335;MACRA MIPS ;MACRA MIPS ;Initiative;category;t;f;;;;;0;
+88411;India Accounts;India Accounts;Initiative;category;t;f;;;;;0;
+88412;Finance;Finance;Initiative;category;t;f;;;;;0;
+88339;Performance and Efficiency Management;Performance and Efficiency Management;Initiative;category;t;f;;;;;0;
+88338;Patient Portal;Patient Portal;Initiative;category;t;f;;;;;0;
+88317;BPCI advanced Program;BPCI advanced Program;Initiative;category;t;f;;;;;0;
+88340;Replace TS Print;Replace TS Print;Initiative;category;t;f;;;;;0;
+88337;Operations;Operations;Initiative;category;t;f;;;;;0;
+88316;RCM;RCM;Initiative;category;t;f;;;;;0;
+88413;HR & Admin;HR & Admin;Initiative;category;t;f;;;;;0;
+88331;CRM Dynamics;CRM Dynamics;Initiative;category;t;f;;;;;0;
+88342;Surescripts Compliance;Surescripts Compliance;Initiative;category;t;f;;;;;0;
+88336;MyQOne;MyQOne;Initiative;category;t;f;;;;;0;
+88414;US Accounts;US Accounts;Initiative;category;t;f;;;;;0;
+88332;Customer Support;Customer Support;Initiative;category;t;f;;;;;0;
+88325;Account Setup;Account Setup;Initiative;category;t;f;;;;;0;
+88326;BDO Audit;BDO Audit;Initiative;category;t;f;;;;;0;
+88327;Chat Support;Chat Support;Initiative;category;t;f;;;;;0;
+88422;WebSuite;WebSuite;Initiative;category;t;f;;;;;0;
+88341;Technology;Technology;Initiative;category;t;f;;;;;0;

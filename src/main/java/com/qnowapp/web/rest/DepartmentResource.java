@@ -1,10 +1,11 @@
 package com.qnowapp.web.rest;
 
 import com.qnowapp.domain.Department;
-
 import com.qnowapp.service.DepartmentService;
 import com.qnowapp.web.rest.errors.BadRequestAlertException;
 import com.qnowapp.service.dto.DepartmentCriteria;
+import com.qnowapp.service.DepartmentQueryService;
+
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -36,11 +37,11 @@ public class DepartmentResource {
 
     private final DepartmentService departmentService;
 
+    private final DepartmentQueryService departmentQueryService;
 
-
-    public DepartmentResource(DepartmentService departmentService) {
+    public DepartmentResource(DepartmentService departmentService, DepartmentQueryService departmentQueryService) {
         this.departmentService = departmentService;
-       
+        this.departmentQueryService = departmentQueryService;
     }
 
     /**
@@ -93,12 +94,24 @@ public class DepartmentResource {
      */
     @CrossOrigin
     @GetMapping("/departments")
-    public ResponseEntity<List<Department>> getAllDepartments( ) {
-        log.debug("REST request to get Departments by criteria: {}" );
-        List<Department> entityList = departmentService.findAll();
+    public ResponseEntity<List<Department>> getAllDepartments(DepartmentCriteria criteria) {
+        log.debug("REST request to get Departments by criteria: {}", criteria);
+        List<Department> entityList = departmentQueryService.findByCriteria(criteria);
         return ResponseEntity.ok().body(entityList);
     }
 
+    /**
+    * {@code GET  /departments/count} : count all the departments.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @CrossOrigin
+    @GetMapping("/departments/count")
+    public ResponseEntity<Long> countDepartments(DepartmentCriteria criteria) {
+        log.debug("REST request to count Departments by criteria: {}", criteria);
+        return ResponseEntity.ok().body(departmentQueryService.countByCriteria(criteria));
+    }
 
     /**
      * {@code GET  /departments/:id} : get the "id" department.
